@@ -14,3 +14,4 @@ if ($mysqli->ping()) {
 }
 
 $mysqli->close();
+?>
