@@ -7,12 +7,10 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-/* comprobar si el servidor sigue vivo */
 if ($mysqli->ping()) {
     printf("¡La conexión está bien!\n");
 } else {
     printf("Error: %s\n", $mysqli->error);
 }
 
-/* cerrar conexión */
 $mysqli->close();
