@@ -1,6 +1,4 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "Itca123!", "bdtecnicascontables");
-
 define('HOST', "localhost");
 define('USER', "root");
 define('PASS', "Itca123!");
