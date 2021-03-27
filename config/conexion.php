@@ -1,17 +1,20 @@
 <?php
 $mysqli = new mysqli("localhost", "root", "Itca123!", "bdtecnicascontables");
 
-/* comprobar conexión */
-if (mysqli_connect_errno()) {
-    printf("Conexión fallida: %s\n", mysqli_connect_error());
-    exit();
-}
+define('HOST', "localhost");
+define('USER', "root");
+define('PASS', "Itca123!");
+define('BD', "bdtecnicascontables");
 
-if ($mysqli->ping()) {
-    printf("¡La conexión está bien!\n");
-} else {
-    printf("Error: %s\n", $mysqli->error);
-}
+	    function conectar()
+		{
+			$con = new mysqli(HOST, USER, PASS, BD);
+			$con->set_charset('utf8');
+			if ($con->connect_errno){
+				echo "<h1><b><center>ERROR EN LA CONEXIÓN</center></b></h1>";
+				die();
+			}
 
-$mysqli->close();
+			return $con;
+		}
 ?>
