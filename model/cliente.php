@@ -1,5 +1,5 @@
 <?php
-require_once ('./config/conexion.php');
+require_once('./config/conexion.php');
 class Cliente
 {
     private $id;
@@ -11,13 +11,13 @@ class Cliente
     private $razon_social;
     private $giro;
     private $telefono;
-    
+
 
     public function __construct()
     {
         $this->db = conectar();
     }
-    
+
 
     /**
      * Get the value of id
