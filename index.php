@@ -17,7 +17,7 @@
        <?php include("nav.php"); ?>  
 
 
-        <section id="content">
+        <section id="content" class="ex1">
           <section class="vbox">         
               <h1><b><center>¡BIENVENIDO ACÁ IRÁ EL NOMBRE DEL USUARIO XD</center></b></h1>
               <h4><center>La fecha y hora de hoy es: <?php $fecha=date("d/m/Y h:i a", strtotime("now")); echo $fecha; ?></center></h4>
