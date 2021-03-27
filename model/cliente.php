@@ -1,4 +1,5 @@
 <?php
+require_once ('./config/conexion.php');
 class Cliente
 {
     private $id;
@@ -12,17 +13,9 @@ class Cliente
     private $telefono;
     
 
-    public function __construct($id, $nombre, $clasificacion, $direccion, $nit, $nrc, $razon_social, $giro, $telefono)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->clasificacion = $clasificacion;
-        $this->direccion = $direccion;
-        $this->nit = $nit;
-        $this->nrc = $nrc;
-        $this->razon_social = $razon_social;
-        $this->giro = $giro;
-        $this->telefono = $telefono;
+        $this->db = conectar();
     }
     
 
