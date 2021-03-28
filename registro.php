@@ -29,7 +29,7 @@
        <link rel="stylesheet" type="text/css" href="css/css.css">
 
 
-        <section id="content">
+        <section id="content" class="ex1">
           <section class="vbox">
 
           <!------------------------------------------------FORMULARIO------------------------------------------------------------------->
@@ -704,7 +704,7 @@
                   </form>
                 </div>
               </section>
-          
+
 
           <!----------------------------------------------FIN FORMULARIO----------------------------------------------------------------->       
               
