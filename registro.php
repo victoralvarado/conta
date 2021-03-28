@@ -179,6 +179,8 @@
                       </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
+                    <center><b><a href="login.php">Regresar</a></b></center>
+                    <div class="line line-dashed line-lg pull-in"></div>
                   </form>
                 </div>
               </section>
