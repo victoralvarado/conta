@@ -65,7 +65,7 @@
                     <center>
                       <div class="form-column col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group">
-                          <b><a href="registro.php">O si no tienes una cuenta registrate aquí</a><b>
+                          <b><a href="registro.php">O si no tienes una cuenta registrate aquí</a></b>
                         </div>
                         <span id="resultado"></span>
                       </div>
