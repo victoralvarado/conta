@@ -26,8 +26,6 @@ class Documento
         $this->db = conectar();
     }
 
-    
-
 
     /**
      * Get the value of id
