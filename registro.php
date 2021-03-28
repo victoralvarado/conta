@@ -29,7 +29,7 @@
        <link rel="stylesheet" type="text/css" href="css/css.css">
 
 
-        <section id="content" class="ex1">
+        <section id="content">
           <section class="vbox">
 
           <!-------------------------------------------------FORMULARIO------------------------------------------------------------------->
@@ -39,7 +39,7 @@
                 <header class="panel-heading font-bold">
                   Form elements
                 </header>
-                <div class="panel-body">
+                <div class="panel-body" class="ex1">
                   <form class="form-horizontal" method="get">
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Rounded</label>
