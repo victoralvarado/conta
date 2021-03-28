@@ -22,6 +22,16 @@
       </div>
                  
     </header>
+    <style>
+      .wall
+      {
+        background: url(images/wallpapertip_accounting-wallpaper_2451419.jpg) top left no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+    </style>
 
     <section>
       <section class="hbox stretch">
@@ -29,17 +39,17 @@
        <link rel="stylesheet" type="text/css" href="css/css.css">
 
 
-        <section id="content">
+        <section id="content" class="wall">
           <section class="vbox">
 
           <!-------------------------------------------------FORMULARIO------------------------------------------------------------------->
 
-
-          <section class="panel panel-default">
+          <br><br>
+          <center><section class="panel panel-default" style="width: 800px;">
                 <header class="panel-heading font-bold">
                   Formulario de registro
                 </header>
-                <div class="panel-body ex1">
+                <div class="panel-body">
                   <form class="form-horizontal" method="POST">
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Nombre completo</label>
@@ -183,7 +193,7 @@
                     <div class="line line-dashed line-lg pull-in"></div>
                   </form>
                 </div>
-              </section>
+              </section></center>
 
 
           <!----------------------------------------------FIN FORMULARIO----------------------------------------------------------------->       
