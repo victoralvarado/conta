@@ -4,7 +4,7 @@ class Cliente
 {
     private $id;
     private $nombre;
-    private $classificacion;
+    private $clasificacion;
     private $direccion;
     private $nit;
     private $nrc;
@@ -60,21 +60,21 @@ class Cliente
     }
 
     /**
-     * Get the value of classificacion
+     * Get the value of clasificacion
      */
-    public function getClassificacion()
+    public function getClasificacion()
     {
-        return $this->classificacion;
+        return $this->clasificacion;
     }
 
     /**
-     * Set the value of classificacion
+     * Set the value of clasificacion
      *
      * @return  self
      */
-    public function setClassificacion($classificacion)
+    public function setClasificacion($clasificacion)
     {
-        $this->classificacion = $classificacion;
+        $this->clasificacion = $clasificacion;
 
         return $this;
     }
