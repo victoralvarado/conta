@@ -64,7 +64,7 @@
                                                 <div class="form-group">
                                                     <label class="col-md-4 control-label">Imagen</label>
                                                     <div class="col-md-8 inputGroupContainer">
-                                                        <div class="input-group"><input id="imagen" name="imagen" class="form-control" accept="image/png" required="true" value="" type="file"></div>
+                                                        <div class="input-group"><input id="imagen" name="imagen" class="form-control" accept="image/*" required="true" value="" type="file"></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -97,6 +97,7 @@
                                     <th scope="col">Descripcion</th>
                                     <th scope="col">Codigo</th>
                                     <th scope="col">Imagen</th>
+                                    <th scope="col">Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,18 +106,25 @@
                                 $data = $objP->getAllProducto();
                                 if ($data) {
                                     foreach ($data as $value) {
-                                        echo "<tr>
-                          <td>" . $value['nombre'] . "</td>
-                          <td>" . $value['existencias'] . "</td>
-                          <td>" . $value['precio'] . "</td>
-                          <td>" . $value['costo'] . "</td>
-                          <td>" . $value['descripcion'] . "</td>
-                          <td>" . $value['codigo'] . "</td>
-                          <td><img src='data:image/png;base64," . base64_encode($value['imagen']) . "' width='150' /></td>
-                          <td>
-                            <input type='button' class='btn-danger btn-sm' id='" . $value['id'] . "' value='Eliminar'>
-                          </td>
-                      </tr>";
+                                ?>
+                                        <tr>
+                                            <td><?php echo $value['nombre']; ?></td>
+                                            <td><?php echo $value['existencias']; ?></td>
+                                            <td><?php echo $value['precio']; ?></td>
+                                            <td><?php echo $value['costo']; ?></td>
+                                            <td><?php echo $value['descripcion']; ?></td>
+                                            <td><?php echo $value['codigo']; ?></td>
+                                            <td><img src="<?php echo $value['imagen']; ?>" width="150" alt="<?php echo $value['nombre']; ?>" /></td>
+                                            <td>
+                                            <form method="POST" action="controller/productocontroller.php">
+                                            <input type="hidden" name="idD" id="idD" value="<?php echo $value['id']; ?>">
+                                            <button type="submit" class="btn btn-danger" >Eliminar</button>
+                                            </form>
+                                                <a class="btn btn-primary" data-toggle="modal" href="#edit_<?php echo $value['id']; ?>">Editar</a>
+                                            </td>
+                                        </tr>
+                                <?php
+                                include("updatePr.php");
                                     }
                                 }
                                 ?>
