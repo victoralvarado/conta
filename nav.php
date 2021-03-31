@@ -145,11 +145,11 @@
                       </ul>
                     </li>-->
                     <li>
-                      <a href="#"  >
+                      <a href="producto.php"  >
                         <i class="fa fa-envelope-o icon">
                           <b class="bg-success"></b>
                         </i>
-                        <span>Item 3</span>
+                        <span>Producto</span>
                       </a>
                     </li>
                     <li >
