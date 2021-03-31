@@ -1,4 +1,4 @@
-<?php require_once("./model/producto.php"); ?>
+<?php require_once('model/producto.php'); ?>
 <!DOCTYPE html>
 <html lang="en" class="app">
 
@@ -25,7 +25,7 @@
                                 <tr>
                                     <td colspan="1">
 
-                                        <form class="well form-horizontal" method="POST" action="./controller/productocontroller.php" enctype="multipart/form-data">
+                                        <form class="well form-horizontal" method="POST" action="controller/productocontroller.php" enctype="multipart/form-data">
 
                                             <fieldset class="form-group p-3">
                                                 <center>
@@ -64,7 +64,7 @@
                                                 <div class="form-group">
                                                     <label class="col-md-4 control-label">Imagen</label>
                                                     <div class="col-md-8 inputGroupContainer">
-                                                        <div class="input-group"><input id="imagen" name="imagen" class="form-control" accept="image/*" required="true" value="" type="file"></div>
+                                                        <div class="input-group"><input id="imagen" name="imagen" class="form-control" accept="image/png" required="true" value="" type="file"></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -87,8 +87,7 @@
                                 </tr>
                             </tbody>
                         </table>
-
-                        <table class="table table-bordered">
+                        <table class="table table-responsive table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col">Nombre</th>
@@ -113,7 +112,7 @@
                           <td>" . $value['costo'] . "</td>
                           <td>" . $value['descripcion'] . "</td>
                           <td>" . $value['codigo'] . "</td>
-                          <td><img src='data:image/jpeg;base64," . base64_encode($value['imagen']) . "' width='150' /></td>
+                          <td><img src='data:image/png;base64," . base64_encode($value['imagen']) . "' width='150' /></td>
                           <td>
                             <input type='button' class='btn-danger btn-sm' id='" . $value['id'] . "' value='Eliminar'>
                           </td>
@@ -123,9 +122,9 @@
                                 ?>
                             </tbody>
                         </table>
+                        </div>
                     </section>
                     <aside class="bg-light lter b-l aside-md hide" id="notes">
-                        <div class="wrapper">Notification</div>
                     </aside>
                 </section>
             </section>
