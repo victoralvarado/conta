@@ -118,9 +118,9 @@
                                             <td>
                                             <form method="POST" action="controller/productocontroller.php">
                                             <input type="hidden" name="idD" id="idD" value="<?php echo $value['id']; ?>">
-                                            <button type="submit" class="btn btn-danger" >Eliminar</button>
+                                            <button type="submit" class="btn btn-danger" ><em class="fa fa-trash-o"> Eliminar</em></button>
+                                            <a class="btn btn-primary" data-toggle="modal" href="#edit_<?php echo $value['id']; ?>"><em class="fa fa-pencil"> Editar</em></a>
                                             </form>
-                                                <a class="btn btn-primary" data-toggle="modal" href="#edit_<?php echo $value['id']; ?>">Editar</a>
                                             </td>
                                         </tr>
                                 <?php
