@@ -1,5 +1,5 @@
 <?php
-require_once("../model/producto.php");
+require_once('../model/producto.php');
 
 if (isset($_POST['agregarProducto'])) {
     insertProducto();
