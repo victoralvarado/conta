@@ -1,5 +1,5 @@
 <?php
-require_once ("./config/conexion.php");
+require_once("./config/conexion.php");
 
 class Producto
 {
@@ -11,16 +11,17 @@ class Producto
     private $descripcion;
     private $imagen;
     private $codigo;
+    public $db;
 
     public function __construct()
     {
-        $this->db = conectar();   
+        $this->db = conectar();
     }
-    
+
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -30,7 +31,7 @@ class Producto
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -40,7 +41,7 @@ class Producto
 
     /**
      * Get the value of nombre
-     */ 
+     */
     public function getNombre()
     {
         return $this->nombre;
@@ -50,7 +51,7 @@ class Producto
      * Set the value of nombre
      *
      * @return  self
-     */ 
+     */
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
@@ -60,7 +61,7 @@ class Producto
 
     /**
      * Get the value of existencias
-     */ 
+     */
     public function getExistencias()
     {
         return $this->existencias;
@@ -70,7 +71,7 @@ class Producto
      * Set the value of existencias
      *
      * @return  self
-     */ 
+     */
     public function setExistencias($existencias)
     {
         $this->existencias = $existencias;
@@ -80,7 +81,7 @@ class Producto
 
     /**
      * Get the value of precio
-     */ 
+     */
     public function getPrecio()
     {
         return $this->precio;
@@ -90,7 +91,7 @@ class Producto
      * Set the value of precio
      *
      * @return  self
-     */ 
+     */
     public function setPrecio($precio)
     {
         $this->precio = $precio;
@@ -100,7 +101,7 @@ class Producto
 
     /**
      * Get the value of costo
-     */ 
+     */
     public function getCosto()
     {
         return $this->costo;
@@ -110,7 +111,7 @@ class Producto
      * Set the value of costo
      *
      * @return  self
-     */ 
+     */
     public function setCosto($costo)
     {
         $this->costo = $costo;
@@ -120,7 +121,7 @@ class Producto
 
     /**
      * Get the value of descripcion
-     */ 
+     */
     public function getDescripcion()
     {
         return $this->descripcion;
@@ -130,7 +131,7 @@ class Producto
      * Set the value of descripcion
      *
      * @return  self
-     */ 
+     */
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
@@ -140,7 +141,7 @@ class Producto
 
     /**
      * Get the value of imagen
-     */ 
+     */
     public function getImagen()
     {
         return $this->imagen;
@@ -150,7 +151,7 @@ class Producto
      * Set the value of imagen
      *
      * @return  self
-     */ 
+     */
     public function setImagen($imagen)
     {
         $this->imagen = $imagen;
@@ -160,7 +161,7 @@ class Producto
 
     /**
      * Get the value of codigo
-     */ 
+     */
     public function getCodigo()
     {
         return $this->codigo;
@@ -170,11 +171,41 @@ class Producto
      * Set the value of codigo
      *
      * @return  self
-     */ 
+     */
     public function setCodigo($codigo)
     {
         $this->codigo = $codigo;
 
         return $this;
+    }
+
+    public function getAllProducto()
+    {
+        $sqlAll = "SELECT * FROM Producto;";
+        $info = $this->db->query($sqlAll);
+        if ($info->num_rows > 0) {
+
+            $dato = $info;
+        } else {
+
+            $dato = false;
+        }
+        return $dato;
+    }
+
+    public function saveProducto()
+    {
+        $sql = "INSERT INTO Producto(nombre,existencias,precio,costo,descripcion,imagen,codigo) values ('" . $this->nombre . "','" . $this->existencias . "'," . $this->precio . "," . $this->costo . ",'" . $this->descripcion . "','" . $this->imagen . "','" . $this->codigo . "');";
+        $res = $this->db->query($sql);
+        $data = array();
+        if ($res) {
+            $data['estado'] = true;
+            $data['descripcion'] = 'Datos ingresado exitosamente';
+        } else {
+            $data['estado'] = false;
+            $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
+        }
+
+        return $data;
     }
 }
