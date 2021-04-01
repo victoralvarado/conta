@@ -184,8 +184,8 @@
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                       <div class="col-sm-4 col-sm-offset-4">
-                        <button type="submit" class="btn btn-default">Limpiar</button>
-                        <button type="submit" class="btn btn-primary">Registrarse</button>
+                        <button type="submit" class="btn btn-default" id="limpiarUser" name="limpiarUser">Limpiar</button>
+                        <button type="submit" class="btn btn-primary" id="agregarUser" name="agregarUser">Registrarse</button>
                       </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>

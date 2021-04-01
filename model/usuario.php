@@ -1,5 +1,5 @@
 <?php
-require_once("./config/conexion.php");
+require_once("Conexion.php");
 
 class Usuario
 {
@@ -9,6 +9,7 @@ class Usuario
     private $contra;
     private $inentos;
     private $estado;
+    public $db;
 
     public function __construct()
     {
@@ -133,5 +134,24 @@ class Usuario
         $this->estado = $estado;
 
         return $this;
+    }
+
+    public function saveUser()
+    {
+        $sql="INSERT INTO usuario values (0,'".$this->nombre."','".$this->usuario."','".$this->contra."',5,1);";
+            $res=$this->db->query($sql);
+            $data=array();
+            if($res)
+            {
+                $data['estado']=true;
+                $data['descripcion']='Datos ingresado exitosamente';
+            }
+            else
+            {
+                $data['estado']=false;
+                $data['descripcion']=$sql."\nOcurrio un error en la inserción: ".$this->db->error;
+            }
+
+            return $data;
     }
 }

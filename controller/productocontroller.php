@@ -1,5 +1,5 @@
 <?php
-require_once('../model/producto.php');
+require_once('../model/Producto.php');
 
 if (isset($_POST['agregarProducto'])) {
     insertProducto();
@@ -35,12 +35,12 @@ function insertProducto()
     if ($res['estado']) {
         echo '
 		<script type="text/javascript">
-				location.assign("http://localhost/conta/producto.php");
+				location.assign("../producto.php");
 		</script>';
     } else {
         echo '
 		<script type="text/javascript">
-				location.assign("http://localhost/conta/producto.php");
+				location.assign("../producto.php");
 		</script>';
     }
 }
@@ -61,12 +61,12 @@ function editProducto()
         if ($res['estado']) {
             echo '
             <script type="text/javascript">
-                    location.assign("http://localhost/conta/producto.php");
+                    location.assign("../producto.php");
             </script>';
         } else {
             echo '
             <script type="text/javascript">
-                    location.assign("http://localhost/conta/producto.php");
+                    location.assign("../producto.php");
             </script>';
         }
     } else{
@@ -109,7 +109,7 @@ function eraseProducto($id)
 	$objP->deleteProducto();
     echo '
 		<script type="text/javascript">
-				location.assign("http://localhost/conta/producto.php");
+				location.assign("../producto.php");
 		</script>';
 	//echo json_encode($res);
 }
