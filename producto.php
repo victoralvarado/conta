@@ -17,124 +17,125 @@
             <section class="hbox stretch">
 
                 <?php include("nav.php"); ?>
-                <section id="content">
-                    <section class="vbox">
+                <div class="ex1">
+                    <section id="content" class="container-fluid">
+                        <section class="vbox">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="1">
 
-                        <table class="table table-striped">
-                            <tbody>
-                                <tr>
-                                    <td colspan="1">
+                                            <form class="well form-horizontal" method="POST" action="controller/productoController.php" enctype="multipart/form-data">
 
-                                        <form class="well form-horizontal" method="POST" action="controller/productocontroller.php" enctype="multipart/form-data">
+                                                <fieldset class="form-group">
+                                                    <legend class="w-auto">Producto</legend>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Nombre:</label>
+                                                        <div class="col-md-7 inputGroupContainer">
+                                                            <input id="nombre" name="nombre" placeholder="Nombre del producto" class="form-control" required="true" value="" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Existencias:</label>
+                                                        <div class="col-md-7 inputGroupContainer">
+                                                            <input id="existencias" name="existencias" placeholder="Existencias" min="1" class="form-control" required="true" value="" type="number">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Precio:</label>
+                                                        <div class="col-md-7 inputGroupContainer">
+                                                            <input id="precio" name="precio" placeholder="Precio" min="1.00" step="any" class="form-control" required="true" value="" type="number">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Costo:</label>
+                                                        <div class="col-md-7 inputGroupContainer">
+                                                            <input id="costo" name="costo" placeholder="Costo" min="1.00" step="any" class="form-control" required="true" value="" type="number">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Descripción:</label>
+                                                        <div class="col-md-7 inputGroupContainer">
+                                                            <textarea id="descripcion" name="descripcion" placeholder="Descripción" class="form-control" value="" rows="2"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Imagen:</label>
+                                                        <div class="col-md-7 inputGroupContainer">
+                                                            <input id="imagen" name="imagen" class="form-control" accept="image/*" required="true" value="" type="file">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Codigo:</label>
+                                                        <div class="col-md-7 inputGroupContainer">
+                                                            <input id="codigo" name="codigo" placeholder="Codigo del producto" class="form-control" required="true" value="" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <center>
+                                                            <button type="submit" id="agregarProducto" name="agregarProducto" class="btn btn-primary">Agregar</button>
+                                                            <button type="reset" class="btn btn-warning">Cancelar</button>
+                                                        </center>
+                                                    </div>
+                                                </fieldset>
 
-                                            <fieldset class="form-group p-3">
-                                                <center>
-                                                    <legend class="w-auto px-2">Producto</legend>
-                                                </center>
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label">Nombre</label>
-                                                    <div class="col-md-8 inputGroupContainer">
-                                                        <div class="input-group"><input id="nombre" name="nombre" placeholder="Nombre del producto" class="form-control" required="true" value="" type="text"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label">Existencias</label>
-                                                    <div class="col-md-8 inputGroupContainer">
-                                                        <div class="input-group"><input id="existencias" name="existencias" placeholder="Existencias" min="1" class="form-control" required="true" value="" type="number"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label">Precio</label>
-                                                    <div class="col-md-8 inputGroupContainer">
-                                                        <div class="input-group"><input id="precio" name="precio" placeholder="Precio" min="1.00" step="any" class="form-control" required="true" value="" type="number"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label">Costo</label>
-                                                    <div class="col-md-8 inputGroupContainer">
-                                                        <div class="input-group"><input id="costo" name="costo" placeholder="Costo" min="1.00" step="any" class="form-control" required="true" value="" type="number"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label">Descripción</label>
-                                                    <div class="col-md-8 inputGroupContainer">
-                                                        <div class="input-group"><textarea id="descripcion" name="descripcion" placeholder="Descripción" class="form-control" value="" rows="2"></textarea></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label">Imagen</label>
-                                                    <div class="col-md-8 inputGroupContainer">
-                                                        <div class="input-group"><input id="imagen" name="imagen" class="form-control" accept="image/*" required="true" value="" type="file"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label">Codigo</label>
-                                                    <div class="col-md-8 inputGroupContainer">
-                                                        <div class="input-group"><input id="codigo" name="codigo" placeholder="Codigo del producto" class="form-control" required="true" value="" type="text"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <center>
-                                                        <button type="submit" id="agregarProducto" name="agregarProducto" class="btn btn-primary">Agregar</button>
-                                                        <button type="reset" class="btn btn-warning">Cancelar</button>
-                                                    </center>
-                                                </div>
-                                            </fieldset>
-
-                                        </form>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="table table-responsive table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Existencias</th>
-                                    <th scope="col">Precio</th>
-                                    <th scope="col">Costo</th>
-                                    <th scope="col">Descripcion</th>
-                                    <th scope="col">Codigo</th>
-                                    <th scope="col">Imagen</th>
-                                    <th scope="col">Accion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $objP = new Producto();
-                                $data = $objP->getAllProducto();
-                                if ($data) {
-                                    foreach ($data as $value) {
-                                ?>
-                                        <tr>
-                                            <td><?php echo $value['nombre']; ?></td>
-                                            <td><?php echo $value['existencias']; ?></td>
-                                            <td><?php echo $value['precio']; ?></td>
-                                            <td><?php echo $value['costo']; ?></td>
-                                            <td><?php echo $value['descripcion']; ?></td>
-                                            <td><?php echo $value['codigo']; ?></td>
-                                            <td><img src="<?php echo $value['imagen']; ?>" width="150" alt="<?php echo $value['nombre']; ?>" /></td>
-                                            <td>
-                                            <form method="POST" action="controller/productocontroller.php">
-                                            <input type="hidden" name="idD" id="idD" value="<?php echo $value['id']; ?>">
-                                            <button type="submit" class="btn btn-danger" ><em class="fa fa-trash-o"> Eliminar</em></button>
-                                            <a class="btn btn-primary" data-toggle="modal" href="#edit_<?php echo $value['id']; ?>"><em class="fa fa-pencil"> Editar</em></a>
                                             </form>
-                                            </td>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Existencias</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Costo</th>
+                                            <th scope="col">Descripcion</th>
+                                            <th scope="col">Codigo</th>
+                                            <th scope="col">Imagen</th>
+                                            <th scope="col">Accion</th>
                                         </tr>
-                                <?php
-                                include("updatePr.php");
-                                    }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $objP = new Producto();
+                                        $data = $objP->getAllProducto();
+                                        if ($data) {
+                                            foreach ($data as $value) {
+                                        ?>
+                                                <tr>
+                                                    <td><?php echo $value['nombre']; ?></td>
+                                                    <td><?php echo $value['existencias']; ?></td>
+                                                    <td><?php echo $value['precio']; ?></td>
+                                                    <td><?php echo $value['costo']; ?></td>
+                                                    <td><?php echo $value['descripcion']; ?></td>
+                                                    <td><?php echo $value['codigo']; ?></td>
+                                                    <td><img src="<?php echo $value['imagen']; ?>" width="150" alt="<?php echo $value['nombre']; ?>" /></td>
+                                                    <td>
+                                                        <form class="well" method="POST" action="controller/productoController.php">
+                                                            <input type="hidden" name="idD" id="idD" value="<?php echo $value['id']; ?>">
+                                                                <button type="submit" class="btn btn-danger"><em class="fa fa-trash-o"></em> Eliminar</button>
+                                                            <br>
+                                                            <br>
+                                                                <a class="btn btn-primary" data-toggle="modal" href="#edit_<?php echo $value['id']; ?>"><em class="fa fa-pencil"></em> Editar</a>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                        <?php
+                                                include("updatePr.php");
+                                            }
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                        </section>
+                        <aside class="bg-light lter b-l aside-md hide" id="notes">
+                        </aside>
                     </section>
-                    <aside class="bg-light lter b-l aside-md hide" id="notes">
-                    </aside>
-                </section>
+                </div>
             </section>
         </section>
 </body>
