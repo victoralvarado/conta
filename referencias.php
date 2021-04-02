@@ -15,6 +15,7 @@
   <!-- Bootstrap -->
   <script src="js/bootstrap.js"></script>
   <!-- App -->
+  <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
   <script src="js/app.js"></script>
   <script src="js/app.plugin.js"></script>
   <script src="js/slimscroll/jquery.slimscroll.min.js"></script>
