@@ -1,5 +1,5 @@
 <?php
-require_once ("./config/conexion.php");
+require_once ("Conexion.php");
 class Proveedor
 {
     private $id;
@@ -217,5 +217,57 @@ class Proveedor
         return $this;
     }
 
-    
+    public function getAllProveedor()
+    {
+        $sqlAll = "SELECT * FROM Proveedor WHERE estado = 1;";
+        $info = $this->db->query($sqlAll);
+        if ($info->num_rows > 0) {
+
+            $dato = $info;
+        } else {
+
+            $dato = false;
+        }
+        return $dato;
+    }
+
+    public function saveProveedor()
+    {
+        $estado = 1;
+        $sql = $this->db->prepare("INSERT INTO Proveedor(tipo,clasificacion,nit,nrc,nombre,razon_social,direccion,telefono) values (?,?,?,?,?,?,?,?,?);");
+        $res = $sql->bind_param('iissssssi',$this->tipo,$this->clasificacion,$this->nit,$this->nrc,$this->razon_social,$this->direccion,$this->telefono,$estado);
+        $sql->execute();
+        $data = array();
+        if ($res) {
+            $data['estado'] = true;
+            $data['descripcion'] = 'Datos ingresado exitosamente';
+        } else {
+            $data['estado'] = false;
+            $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
+        }
+        $sql->close();
+        $this->db->close();
+        return $data;
+    }
+
+    public function deleteProveedor()
+	{
+            $sql = $this->db->prepare("UPDATE Proveedor SET estado = 0 where id =?;");
+	        $res = $sql->bind_param('i',$this->id);
+            $sql->execute();
+	        $data=array();
+	        if($res)
+	        {
+	            $data['estado']=true;
+	            $data['descripcion']='Datos eliminados exitosamente';
+	        }
+	        else
+	        {
+	            $data['estado']=false;
+	            $data['descripcion']='Ocurrio un error en la eliminación '.$this->db->error;
+	        }
+            $sql->close();
+            $this->db->close();
+	        return $data;
+	}
 }
