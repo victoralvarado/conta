@@ -11,6 +11,7 @@ class Proveedor
     private $razon_social;
     private $direccion;
     private $telefono;
+    private $db;
 
     public function __construct() {
         $this->db = conectar();
@@ -195,4 +196,26 @@ class Proveedor
 
         return $this;
     }
+
+    /**
+     * Get the value of db
+     */ 
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    /**
+     * Set the value of db
+     *
+     * @return  self
+     */ 
+    public function setDb($db)
+    {
+        $this->db = $db;
+
+        return $this;
+    }
+
+    
 }
