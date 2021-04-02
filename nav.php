@@ -146,18 +146,18 @@
                     </li>-->
                     <li>
                       <a href="producto.php"  >
-                        <i class="fa fa-envelope-o icon">
+                        <i class="fa fa-barcode icon">
                           <b class="bg-success"></b>
                         </i>
                         <span>Producto</span>
                       </a>
                     </li>
                     <li >
-                      <a href="#"  >
-                        <i class="fa fa-columns icon">
+                      <a href="proveedor.php"  >
+                        <i class="fa fa-truck icon">
                           <b class="bg-success"></b>
                         </i>
-                        <span>Item 4</span>
+                        <span>Proveedor</span>
                       </a>
                     </li>
                     <li >
