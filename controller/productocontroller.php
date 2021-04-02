@@ -17,7 +17,7 @@ if (isset($_POST['idD'])) {
 function insertProducto()
 {
     $objP = new Producto();
-    $nombreDoc = $_FILES['imagen']['name'];
+    $nombreDoc = $_POST['codigo']."-".$_FILES['imagen']['name'];
 	$archivoDoc = $_FILES['imagen']['tmp_name'];
     $rutaDocServer = "../img";
     $rutaDocDB = 'img';
@@ -71,10 +71,11 @@ function editProducto()
         }
     } else{
         unlink("../".$_POST['img']);
-        $nombreDoc = $_FILES['imagen']['name'];
+        $nombreDoc = $_POST['codigo']."-".$_FILES['imagen']['name'];
         $archivoDoc = $_FILES['imagen']['tmp_name'];
         $rutaDocServer = "../img";
         $rutaDocDB = 'img';
+        
         $rutaDocServer = $rutaDocServer . "/" . $nombreDoc;
         $rutaDocDB = $rutaDocDB . "/" . $nombreDoc;
         move_uploaded_file($archivoDoc, $rutaDocServer);
