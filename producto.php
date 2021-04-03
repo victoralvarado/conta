@@ -79,7 +79,7 @@
                                                     <div class="form-group">
                                                         <center>
                                                             <button type="submit" id="agregarProducto" name="agregarProducto" class="btn btn-primary"><em class="fa fa-plus"></em> Agregar</button>
-                                                            <button type="reset" class="btn btn-warning"><em class="fa fa-eraser"></em> Cancelar</button>
+                                                            <button type="reset" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Limpiar cajas de texto"><em class="fa fa-eraser"></em> Limpiar</button>
                                                         </center>
                                                     </div>
                                                 </fieldset>
@@ -135,7 +135,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h6 class="modal-title"><strong>Editar Producto</strong></h6>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <button type="button" class="close" data-dismiss="modal" onclick="location.reload()" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
@@ -189,8 +189,8 @@
                                                         <div class="modal-footer">
                                                             <input id="img" name="img" class="form-control" required="true" value="<?php echo $value['imagen']; ?>" type="hidden">
                                                             <input id="id" name="id" min="1" class="form-control" required="true" value="<?php echo $value['id']; ?>" type="hidden">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="submit" id="editarProducto" name="editarProducto" class="btn btn-primary"">Editar</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()"><i class="fa fa-times"></i> Cancelar</button>
+                                                            <button type="submit" id="editarProducto" name="editarProducto" class="btn btn-primary""><i class="fa fa-pencil-square-o"></i> Editar</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
