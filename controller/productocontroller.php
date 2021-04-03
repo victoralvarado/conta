@@ -70,7 +70,10 @@ function editProducto()
             </script>';
         }
     } else{
+        //elimina la imagen anterior
         unlink("../".$_POST['img']);
+        //el nombre de la imagen tendra el id del usurio codigo del producto y el nombre de la imagen original
+        //$nombreDoc = $_POST['idUsuario']."-".$_POST['codigo']."-".$_FILES['imagen']['name'];
         $nombreDoc = $_POST['codigo']."-".$_FILES['imagen']['name'];
         $archivoDoc = $_FILES['imagen']['tmp_name'];
         $rutaDocServer = "../img";
