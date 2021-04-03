@@ -8,8 +8,8 @@
                 <!-- nav -->
                 <nav class="nav-primary hidden-xs">
                   <ul class="nav">
-                    <li  class="<?php echo $iva?>">
-                      <a href="#"   class="active">
+                    <li  class="<?php echo $activeIva;?>">
+                      <a href="#">
                         <i class="fa fa-dashboard icon">
                           <b class="bg-danger"></b>
                         </i>
@@ -144,7 +144,7 @@
                         </li>   
                       </ul>
                     </li>-->
-                    <li class="<?php echo $producto;?>">
+                    <li class="<?php echo $activeProducto;?>">
                       <a href="producto.php"  >
                         <i class="fa fa-barcode icon">
                           <b class="bg-success"></b>
@@ -152,7 +152,7 @@
                         <span>Producto</span>
                       </a>
                     </li>
-                    <li class="<?php echo $proveedor;?>">
+                    <li class="<?php echo $activeProveedor;?>">
                       <a href="proveedor.php"  >
                         <i class="fa fa-truck icon">
                           <b class="bg-success"></b>
