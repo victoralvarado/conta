@@ -274,4 +274,24 @@ class Proveedor
             $this->db->close();
 	        return $data;
 	}
+
+    public function updateProveedor()
+    {
+        $sql = $this->db->prepare("UPDATE Proveedor SET tipo = ?, clasificacion = ?, nit = ?, nrc = ?, nombre = ?, razon_social = ?, direccion = ?, telefono = ? WHERE id = ?;");
+        $res = $sql->bind_param('iissssssi',$this->tipo, $this->clasificacion, $this->nit, $this->nrc, $this->nombre, $this->razon_social, $this->direccion, $this->telefono, $this->id);
+        $sql->execute();
+        $data = array();
+        if ($res) {
+            echo "<script> alert('save'); </script>";
+            $data['estado'] = true;
+            $data['descripcion'] = 'Datos ingresado exitosamente';
+        } else {
+            echo "<script> alert('error'); </script>";
+            $data['estado'] = false;
+            $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
+        }
+        $sql->close();
+        $this->db->close();
+        return $data;
+    }
 }
