@@ -233,15 +233,19 @@ class Proveedor
 
     public function saveProveedor()
     {
+        
+        
         $estado = 1;
-        $sql = $this->db->prepare("INSERT INTO Proveedor(tipo,clasificacion,nit,nrc,nombre,razon_social,direccion,telefono) values (?,?,?,?,?,?,?,?,?);");
-        $res = $sql->bind_param('iissssssi',$this->tipo,$this->clasificacion,$this->nit,$this->nrc,$this->razon_social,$this->direccion,$this->telefono,$estado);
+        $sql = $this->db->prepare("INSERT INTO Proveedor(tipo,clasificacion,nit,nrc,nombre,razon_social,direccion,telefono,estado) values (?,?,?,?,?,?,?,?,?);");
+        $res = $sql->bind_param('iissssssi',$this->tipo,$this->clasificacion,$this->nit,$this->nrc,$this->nombre,$this->razon_social,$this->direccion,$this->telefono,$estado);
         $sql->execute();
         $data = array();
         if ($res) {
+            echo "<script> alert('save'); </script>";
             $data['estado'] = true;
             $data['descripcion'] = 'Datos ingresado exitosamente';
         } else {
+            echo "<script> alert('error'); </script>";
             $data['estado'] = false;
             $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
         }
