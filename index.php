@@ -16,7 +16,7 @@
     <section>
       <section class="hbox stretch">
 
-        <?php include("nav.php"); ?>
+        <?php $iva = "active"; include("nav.php"); ?>
 
         <div class="ex1">
           <section id="content" class="container-fluid">
