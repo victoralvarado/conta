@@ -241,11 +241,9 @@ class Proveedor
         $sql->execute();
         $data = array();
         if ($res) {
-            echo "<script> alert('save'); </script>";
             $data['estado'] = true;
             $data['descripcion'] = 'Datos ingresado exitosamente';
         } else {
-            echo "<script> alert('error'); </script>";
             $data['estado'] = false;
             $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
         }
@@ -282,11 +280,9 @@ class Proveedor
         $sql->execute();
         $data = array();
         if ($res) {
-            echo "<script> alert('save'); </script>";
             $data['estado'] = true;
             $data['descripcion'] = 'Datos ingresado exitosamente';
         } else {
-            echo "<script> alert('error'); </script>";
             $data['estado'] = false;
             $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
         }
