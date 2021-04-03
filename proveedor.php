@@ -10,10 +10,8 @@
     <?php include("referencias.php"); ?>
     <script>
         jQuery(function($) {
-            $('#nit').mask('9999-999999-999-9');
-            $('#nrc').mask('999999-9');
-            $('#nitEdit').mask('9999-999999-999-9');
-            $('#nrcEdit').mask('999999-9');
+            $('input[name=nit]').mask('9999-999999-999-9');
+            $('input[name =nrc]').mask('999999-9');
         });
     </script>
 </head>
@@ -95,7 +93,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <center>
-                                                            <button type="submit" id="agregarProducto" name="agregarProducto" class="btn btn-primary"><em class="fa fa-plus"></em> Agregar</button>
+                                                            <button type="submit" id="agregarProveedor" name="agregarProveedor" class="btn btn-primary"><em class="fa fa-plus"></em> Agregar</button>
                                                             <button type="reset" class="btn btn-warning"><em class="fa fa-eraser"></em> Cancelar</button>
                                                         </center>
                                                     </div>
