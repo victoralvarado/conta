@@ -12,11 +12,16 @@
 
 <body>
     <section class="vbox">
-        <?php include("header.php"); ?>
+        <?php 
+            $activeProducto = "active";
+            $activeIva = "";
+            $activeProveedor = ""; 
+            include("header.php"); 
+        ?>
         <section>
             <section class="hbox stretch">
 
-                <?php $producto ="active"; include("nav.php"); ?>
+                <?php $active ="active"; include("nav.php"); ?>
                 <div class="ex1">
                     <section id="content" class="container-fluid">
                         <section class="vbox">
