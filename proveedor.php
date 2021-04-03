@@ -22,7 +22,12 @@
         <section>
             <section class="hbox stretch">
 
-                <?php $proveedor = "active"; include("nav.php"); ?>
+                <?php
+                    $activeProducto = "";
+                    $activeIva = "";
+                    $activeProveedor = "active"; 
+                    include("nav.php"); 
+                 ?>
                 <div class="ex1">
                     <section id="content" class="container-fluid">
                         <section class="vbox">
