@@ -218,6 +218,7 @@ class Producto
     {
         $estado = 1;
         $sql = $this->db->prepare("INSERT INTO Producto(nombre,existencias,precio,costo,descripcion,imagen,codigo,estado) values (?,?,?,?,?,?,?,?);");
+        # s = string; i = int; d = decimal
         $res = $sql->bind_param('siddsssi',$this->nombre,$this->existencias,$this->precio,$this->costo,$this->descripcion,$this->imagen,$this->codigo,$estado);
         $sql->execute();
         $data = array();

@@ -44,7 +44,9 @@ function editProveedor()
     $objP = new Proveedor();
     $objP->setTipo($_POST['tipo']);
     $objP->setClasificacion($_POST['clasificacion']);
+    #Asignar sin guion el nit
     $objP->setNit(str_replace("-","",$_POST['nit']));
+    #Asignar sin guion el nrc
     $objP->setNrc(str_replace("-","",$_POST['nrc']));
     $objP->setNombre($_POST['nombre']);
     $objP->setRazon_social($_POST['razonsocial']);
