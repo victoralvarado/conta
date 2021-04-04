@@ -233,10 +233,9 @@ class Proveedor
 
     public function saveProveedor()
     {
-        
-        
         $estado = 1;
         $sql = $this->db->prepare("INSERT INTO Proveedor(tipo,clasificacion,nit,nrc,nombre,razon_social,direccion,telefono,estado) values (?,?,?,?,?,?,?,?,?);");
+        # s = string; i = int; d = decimal
         $res = $sql->bind_param('iissssssi',$this->tipo,$this->clasificacion,$this->nit,$this->nrc,$this->nombre,$this->razon_social,$this->direccion,$this->telefono,$estado);
         $sql->execute();
         $data = array();

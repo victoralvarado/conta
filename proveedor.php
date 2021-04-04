@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <?php include("referencias.php"); ?>
     <script>
+    //Mascara para NIT y NRC
         jQuery(function($) {
             $('input[name=nit]').mask('9999-999999-999-9');
             $('input[name =nrc]').mask('999999-9');
@@ -135,10 +136,14 @@
                                                     <td><?php echo ucwords(strtolower($value['clasificacion'])); ?></td>
                                                     <td>
                                                         <?php echo substr($value['nit'], 0, 4) . "-" . substr($value['nit'], 4, 6) . "-"
-                                                            . substr($value['nit'], 10, 3) . "-" . substr($value['nit'], 13, 1); ?>
+                                                            . substr($value['nit'], 10, 3) . "-" . substr($value['nit'], 13, 1); 
+                                                            #Mostrando nit con guiones
+                                                            ?>
                                                     </td>
                                                     <td>
-                                                        <?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); ?>
+                                                        <?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); 
+                                                        #Mostrando nrc con guion
+                                                        ?>
                                                     </td>
                                                     <td><?php echo ucwords(strtolower($value['nombre'])); ?></td>
                                                     <td><?php echo ucwords(strtolower($value['razon_social'])); ?></td>
