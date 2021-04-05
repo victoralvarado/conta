@@ -157,18 +157,83 @@ class Usuario
 
     public function login()
     {
-        $sql = "SELECT id, nombre, usuario FROM usuario WHERE usuario='".$this->usuario."'  AND contra='".sha1($this->contra)."' AND estado='activo';";
+        $sql = "SELECT id, nombre, usuario, intentos, estado FROM usuario WHERE usuario='".$this->usuario."'  AND contra='".sha1($this->contra)."';";
         $info = $this->db->query($sql);
         if ($info->num_rows>0) {
             $data = $info->fetch_assoc();
-            session_start();
-            $_SESSION['ID']=$data['id'];
-            $_SESSION['USER']=$data['usuario'];
-            $_SESSION['NOMBRE']=$data['nombre'];
+            $estado = $data['estado'];
+            if($estado=='activo')
+            {
+                session_start();
+                $_SESSION['ID']=$data['id'];
+                $_SESSION['USER']=$data['usuario'];
+                $_SESSION['NOMBRE']=$data['nombre'];
+                if($data['intentos']>0)
+                {
+                    $sql2="UPDATE usuario SET intentos=5 WHERE usuario = '".$this->usuario."' ;";
+                    $res2=$this->db->query($sql2);
+                }
+            }
+            else if($estado=='bloqueado')
+            {
+                    $data['estado']=true;
+                    $data['descripcion']='baneado';
+                    session_destroy();
+            }
         }else{
 
             $data = false;
         }
+        return $data;
+    }
+
+    public function errorLogin()
+    {
+        $sqlNum = "SELECT intentos FROM usuario WHERE usuario='".$this->usuario."' ";
+        $info = $this->db->query($sqlNum);
+        if ($info->num_rows>0) {
+            $data = $info->fetch_assoc();
+            $numint=$data['intentos'];
+            if($numint < 1)
+            {
+                $data['estado']=true;
+                $data['descripcion']='baneado';
+            }
+            else
+            {
+                $numint=$numint-1;
+                $sql="UPDATE usuario SET intentos=".$numint." WHERE usuario = '".$this->usuario."' ;";
+                $res=$this->db->query($sql);
+                    if($numint == 0)
+                    {
+                        $sql2="UPDATE usuario SET estado='bloqueado' WHERE usuario = '".$this->usuario."' ;";
+                        $res2=$this->db->query($sql2);
+                    }
+                $data=array();
+                if($res)
+                {
+                    if($numint == 0)
+                    {
+                        $data['estado']=true;
+                        $data['descripcion']='baneado';
+                    }
+                    else
+                    {
+                        $data['estado']=true;
+                        $data['descripcion']='Datos actualizados exitosamente';
+                    }
+                }
+                else
+                {
+                    $data['estado']=false;
+                    $data['descripcion']=$sql."\nOcurrio un error en la actualización: ".$this->db->error;
+                }
+            }   
+        }else{
+
+            $data = false;
+        }
+
         return $data;
     }
 }

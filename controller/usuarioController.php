@@ -49,10 +49,21 @@ function inises()
 	}
 	else
 	{
-		echo '<script type="text/javascript">
+		$ban = $objUsuario->errorLogin();
+		if($ban['descripcion']=='baneado')
+		{
+			echo '<script type="text/javascript">
+			alert("Usuario bloqueado");
+			location.assign("../login.php");
+			</script>';
+		}
+		else
+		{
+			echo '<script type="text/javascript">
 			alert("Error al iniciar sesión");
 			location.assign("../login.php");
-		</script>';
+			</script>';
+		}
 	}
 }
 
