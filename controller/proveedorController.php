@@ -5,7 +5,7 @@ if (isset($_POST['agregarProveedor'])) {
     insertProveedor();
 }
 
-if (isset($_POST['editarProveedor'])) {
+if (isset($_POST['idEdit'])) {
     editProveedor();
 }
 
@@ -52,7 +52,7 @@ function editProveedor()
     $objP->setRazon_social($_POST['razonsocial']);
     $objP->setDireccion($_POST['direccion']);
     $objP->setTelefono($_POST['telefono']);
-    $objP->setId($_POST['id']);
+    $objP->setId($_POST['idEdit']);
     $res = $objP->updateProveedor();
     if ($res['estado']) {
         echo '
