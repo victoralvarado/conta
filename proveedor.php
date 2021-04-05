@@ -9,13 +9,7 @@
     <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <?php include("referencias.php"); ?>
-    <script>
-    //Mascara para NIT y NRC
-        jQuery(function($) {
-            $('input[name=nit]').mask('9999-999999-999-9');
-            $('input[name =nrc]').mask('999999-9');
-        });
-    </script>
+    <script type="text/javascript" src="resources/proveedor.js"></script>
 </head>
 
 <body>
@@ -151,9 +145,9 @@
                                                     <td><?php echo ucwords(strtolower($value['direccion'])); ?></td>
                                                     <td><?php echo $value['telefono']; ?></td>
                                                     <td>
-                                                        <form class="well" method="POST" action="controller/proveedorController.php">
+                                                        <form id="eliEdi" class="well" method="POST" action="controller/proveedorController.php">
                                                             <input type="hidden" name="idD" id="idD" value="<?php echo $value['id']; ?>">
-                                                            <button type="submit" class="btn btn-danger"><em class="fa fa-trash-o"></em> Eliminar</button>
+                                                            <button type="button" id="eliminar" class="btn btn-danger"><em class="fa fa-trash-o"></em> Eliminar</button>
                                                             <br>
                                                             <br>
                                                             <a class="btn btn-primary" data-toggle="modal" href="#edit_<?php echo $value['id']; ?>"><em class="fa fa-pencil"></em> Editar</a>
@@ -171,12 +165,12 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" action="controller/proveedorController.php" enctype="multipart/form-data">
+                                                    <form method="POST" id="editar" action="controller/proveedorController.php" enctype="multipart/form-data">
 
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Tipo</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <select required id="tipoEdit" name="tipo" class="form-control" aria-label="Default select">
+                                                                <select required id="tipoEdit" name="tipo" class="form-control edit" aria-label="Default select">
 
                                                                     <?php
                                                                     switch ($value['tipo']) {
@@ -209,7 +203,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Clasificacion:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <select required="true" id="clasificacionEdit" name="clasificacion" class="form-control" aria-label="Default select">
+                                                                <select required="true" id="clasificacionEdit" name="clasificacion" class="form-control edit" aria-label="Default select">
                                                                     <?php
                                                                     switch ($value['clasificacion']) {
                                                                         case 'ninguno':
@@ -265,43 +259,43 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">NIT:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="nitEdit" name="nit" placeholder="Número de Identificación Tributaria" class="form-control" required="true" value="<?php echo $value['nit']; ?>" type="text">
+                                                                <input id="nitEdit" name="nit" placeholder="Número de Identificación Tributaria" class="form-control edit" required="true" value="<?php echo $value['nit']; ?>" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">NRC:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="nrcEdit" name="nrc" placeholder="Número de Registro de Contribuyente" class="form-control" value="<?php echo $value['nrc']; ?>" type="text">
+                                                                <input id="nrcEdit" name="nrc" placeholder="Número de Registro de Contribuyente" class="form-control edit" value="<?php echo $value['nrc']; ?>" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Nombre:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="nombreEdit" name="nombre" placeholder="Nombre" class="form-control" value="<?php echo $value['nombre']; ?>" type="text">
+                                                                <input id="nombreEdit" name="nombre" placeholder="Nombre" class="form-control edit" value="<?php echo $value['nombre']; ?>" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Razon Social:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="razonsocialEdit" name="razonsocial" placeholder="Razon Social" class="form-control" value="<?php echo $value['razon_social']; ?>" type="text">
+                                                                <input id="razonsocialEdit" name="razonsocial" placeholder="Razon Social" class="form-control edit" value="<?php echo $value['razon_social']; ?>" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Dirección:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <textarea id="direccionEdit" name="direccion" placeholder="Dirección" class="form-control" rows="2"><?php echo $value['direccion']; ?></textarea>
+                                                                <textarea id="direccionEdit" name="direccion" placeholder="Dirección" class="form-control edit" rows="2"><?php echo $value['direccion']; ?></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Teléfono:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="telefonoEdit" name="telefono" placeholder="Teléfono" class="form-control" maxlength="12" required="true" value="<?php echo $value['telefono']; ?>" type="text">
+                                                                <input id="telefonoEdit" name="telefono" placeholder="Teléfono" class="form-control edit" maxlength="12" required="true" value="<?php echo $value['telefono']; ?>" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <input id="id" name="id" min="1" class="form-control" required="true" value="<?php echo $value['id']; ?>" type="hidden">
+                                                            <input id="idEdit" name="idEdit" min="1" class="form-control" required="true" value="<?php echo $value['id']; ?>" type="hidden">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()"><i class="fa fa-times"></i> Cancelar</button>
-                                                            <button type="submit" id="editarProveedor" name="editarProveedor" class="btn btn-primary""><i class="fa fa-pencil-square-o"></i> Editar</button>
+                                                            <button type="button" id="editarProveedor" name="editarProveedor" class="btn btn-primary""><i class="fa fa-pencil-square-o"></i> Editar</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
