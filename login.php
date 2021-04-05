@@ -42,7 +42,7 @@
           <section class="vbox">        
               <div class="jumbotron boxlogin">
                   <center><h3><b>INGRESO SISTEMA CONTABILIDAD</b></h3></center> <br>
-                  <form method="POST" action="#">
+                  <form method="POST" action="controller/usuarioController.php">
                     <div class="form-column col-md-12 col-sm-12 col-xs-12">
                       <div class="form-group">
                         <label for="usuario" class="control-label">Nombre de usuario: </label>

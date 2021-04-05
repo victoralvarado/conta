@@ -7,6 +7,7 @@
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
   <?php include("referencias.php"); ?> 
+  <script type="text/javascript" src="resources/usuario.js"></script>
 </head>
 <body>
   <section class="vbox">
@@ -50,11 +51,11 @@
                   Formulario de registro
                 </header>
                 <div class="panel-body">
-                  <form class="form-horizontal" method="POST">
+                  <form class="form-horizontal" method="POST" action="controller/usuarioController.php">
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Nombre completo</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control rounded" id="nombre" name="nombre">                        
+                        <input type="text" class="form-control rounded" id="nombre" name="nombre" required>                        
                       </div>
                     </div>
 
@@ -62,7 +63,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Nombre de usuario (Username)</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control rounded" id="user" name="user">                        
+                        <input type="text" class="form-control rounded" id="user" name="user" required>                        
                       </div>
                     </div>
 
@@ -85,7 +86,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Contraseña</label>
                       <div class="col-sm-10">
-                        <input type="password" class="form-control" id="pass" name="pass">
+                        <input type="password" class="form-control" id="pass" name="pass" required>
                       </div>
                     </div>
 
@@ -93,7 +94,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Repetir contraseña</label>
                       <div class="col-sm-10">
-                        <input type="password" class="form-control" id="repass" name="repass">
+                        <input type="password" class="form-control" id="repass" name="repass" required>
                       </div>
                     </div>
                     <!--<div class="line line-dashed line-lg pull-in"></div>

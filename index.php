@@ -1,4 +1,4 @@
-<?php /*require_once '../app/validacionAdmin.php';*/ ?>
+<?php require_once 'app/validacionGeneral.php'; ?>
 <!DOCTYPE html>
 <html lang="en" class="app">
 
@@ -26,7 +26,7 @@
           <section id="content" class="container-fluid">
             <section class="vbox">
               <h1><b>
-                  <center>¡BIENVENIDO ACÁ IRÁ EL NOMBRE DEL USUARIO XD</center>
+                  <center>¡BIENVENIDO <?php echo $_SESSION['NOMBRE'] ?>!</center>
                 </b></h1>
               <h4>
                 <center>

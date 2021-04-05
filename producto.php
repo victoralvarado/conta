@@ -1,3 +1,4 @@
+<?php require_once 'app/validacionGeneral.php'; ?>
 <?php require_once('model/producto.php'); ?>
 <!DOCTYPE html>
 <html lang="en" class="app">

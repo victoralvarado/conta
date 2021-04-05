@@ -1,9 +1,10 @@
+<?php require_once 'app/validacionGeneral.php'; ?>
 <header class="bg-dark dk header navbar navbar-fixed-top-xs">
       <div class="navbar-header aside-md">
         <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
           <i class="fa fa-bars"></i>
         </a>
-        <a href="#" class="navbar-brand" data-toggle="fullscreen"><img src="images/logo.png" class="m-r-sm">HOME</a>
+        <a href="index.php" class="navbar-brand" data-toggle="fullscreen"><img src="images/logo.png" class="m-r-sm">HOME</a>
         <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user">
           <i class="fa fa-cog"></i>
         </a>
@@ -16,7 +17,9 @@
             <span class="thumb-sm avatar pull-left">
               <img src="images/admin.jpg">
             </span>
-            USUARIO<b class="caret"></b>
+            <?php 
+            echo $_SESSION['USER'];
+             ?><b class="caret"></b>
           </a>
           <ul class="dropdown-menu animated fadeInRight">
             <span class="arrow top"></span>
@@ -25,7 +28,7 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a href="#" >Cerrar sesión</a>
+              <a href="app/logout.php" >Cerrar sesión</a>
             </li>
           </ul>
         </li>

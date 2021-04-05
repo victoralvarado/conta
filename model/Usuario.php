@@ -154,4 +154,21 @@ class Usuario
 
             return $data;
     }
+
+    public function login()
+    {
+        $sql = "SELECT id, nombre, usuario FROM usuario WHERE usuario='".$this->usuario."'  AND contra='".sha1($this->contra)."' AND estado='activo';";
+        $info = $this->db->query($sql);
+        if ($info->num_rows>0) {
+            $data = $info->fetch_assoc();
+            session_start();
+            $_SESSION['ID']=$data['id'];
+            $_SESSION['USER']=$data['usuario'];
+            $_SESSION['NOMBRE']=$data['nombre'];
+        }else{
+
+            $data = false;
+        }
+        return $data;
+    }
 }
