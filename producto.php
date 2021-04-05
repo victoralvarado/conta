@@ -9,6 +9,7 @@
     <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <?php include("referencias.php"); ?>
+    <script type="text/javascript" src="resources/producto.js"></script>
 </head>
 
 <body>
@@ -20,8 +21,8 @@
                 <?php
                 $activeProducto = "active";
                 $activeIva = "";
-                $activeProveedor = "";  
-                include("nav.php"); 
+                $activeProveedor = "";
+                include("nav.php");
                 ?>
                 <div class="ex1">
                     <section id="content" class="container-fluid">
@@ -121,9 +122,9 @@
                                                     <td><?php echo $value['codigo']; ?></td>
                                                     <td><img src="<?php echo $value['imagen']; ?>" width="150" alt="<?php echo $value['nombre']; ?>" /></td>
                                                     <td>
-                                                        <form class="well" method="POST" action="controller/productoController.php">
+                                                        <form id="eliEdi" class="well" method="POST" action="controller/productoController.php">
                                                             <input type="hidden" name="idD" id="idD" value="<?php echo $value['id']; ?>">
-                                                            <button type="submit" class="btn btn-danger"><em class="fa fa-trash-o"></em> Eliminar</button>
+                                                            <button type="button" id="eliminar" class="btn btn-danger" ><em class="fa fa-trash-o"></em> Eliminar</button>
                                                             <br>
                                                             <br>
                                                             <a class="btn btn-primary" data-toggle="modal" href="#edit_<?php echo $value['id']; ?>"><em class="fa fa-pencil"></em> Editar</a>
@@ -141,35 +142,35 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" action="controller/productoController.php" enctype="multipart/form-data">
+                                                    <form method="POST" id="editar" action="controller/productoController.php" enctype="multipart/form-data">
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Nombre:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="nombreEdit" name="nombre" placeholder="Nombre del producto" class="form-control" required="true" value="<?php echo $value['nombre']; ?>" type="text">
+                                                                <input id="nombreEdit" name="nombre" placeholder="Nombre del producto" class="form-control edit" required="true" value="<?php echo $value['nombre']; ?>" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Existencias:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="existenciasEdit" name="existencias" placeholder="Existencias" min="1" class="form-control" required="true" value="<?php echo $value['existencias']; ?>" type="number">
+                                                                <input id="existenciasEdit" name="existencias" placeholder="Existencias" min="1" class="form-control edit" required="true" value="<?php echo $value['existencias']; ?>" type="number">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Precio:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="precioEdit" name="precio" placeholder="Precio" min="1.00" step="any" class="form-control" required="true" value="<?php echo $value['precio']; ?>" type="number">
+                                                                <input id="precioEdit" name="precio" placeholder="Precio" min="1.00" step="any" class="form-control edit" required="true" value="<?php echo $value['precio']; ?>" type="number">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Costo:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="costoEdit" name="costo" placeholder="Costo" min="1.00" step="any" class="form-control" required="true" value="<?php echo $value['costo']; ?>" type="number">
+                                                                <input id="costoEdit" name="costo" placeholder="Costo" min="1.00" step="any" class="form-control edit" required="true" value="<?php echo $value['costo']; ?>" type="number">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Descripción:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <textarea id="descripcionEdit" name="descripcion" placeholder="Descripción" class="form-control" rows="2"><?php echo $value['descripcion']; ?></textarea>
+                                                                <textarea id="descripcionEdit" name="descripcion" placeholder="Descripción" class="form-control edit" rows="2"><?php echo $value['descripcion']; ?></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -184,31 +185,31 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Codigo:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="codigoEdit" name="codigo" placeholder="Codigo del producto" class="form-control" required="true" value="<?php echo $value['codigo']; ?>" type="text">
+                                                                <input id="codigoEdit" name="codigo" placeholder="Codigo del producto" class="form-control edit" required="true" value="<?php echo $value['codigo']; ?>" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <input id="img" name="img" class="form-control" required="true" value="<?php echo $value['imagen']; ?>" type="hidden">
-                                                            <input id="id" name="id" min="1" class="form-control" required="true" value="<?php echo $value['id']; ?>" type="hidden">
-                                                            <input type="hidden" name="user" value="<?php echo $_SESSION['USER'];?>">
+                                                            <input id="idEdit" name="idEdit" min="1" class="form-control" required="true" value="<?php echo $value['id']; ?>" type="hidden">
+                                                            <input type="hidden" name="user" value="<?php echo $_SESSION['USER']; ?>">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()"><i class="fa fa-times"></i> Cancelar</button>
-                                                            <button type="submit" id="editarProducto" name="editarProducto" class="btn btn-primary""><i class="fa fa-pencil-square-o"></i> Editar</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
+                                                            <button type="button" id="editarPro" name="editarProducto" class="btn btn-primary"><i class=" fa fa-pencil-square-o"></i> Editar</button>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
-                                        <?php
+                                            </div>
+                                        </div>
+                                    </div>
+                            <?php
 
                                             }
                                         }
-                                        ?>      
+                            ?>
                                 </table>
                             </div>
                         </section>
                         <aside class=" bg-light lter b-l aside-md hide" id="notes"></aside>
-                        </section>
+                    </section>
                 </div>
             </section>
         </section>
