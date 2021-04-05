@@ -17,29 +17,30 @@ if (isset($_POST['idD'])) {
 function insertProducto()
 {
     $objP = new Producto();
-    //el nombre de la imagen tendra el id del usurio y codigo del producto para evitar 
+    //El nombre de la imagen tendra el id del usurio y codigo del producto para evitar 
     //conflicto con imagenes que tengan el mismo nombre
-    //$newName = $rutaDocServer.''.$_POST['idUsuario'].'-'.$_POST['codigo'].'.'.$type;
+    //$newName = $rutaDocServer.''.$idUser.'-'.$_POST['codigo'].'.'.$type;
+    $idUser = $objP->idUser($_POST['user']);
     #Extencion de la imagen
     $type = str_replace('image/','',$_FILES['imagen']['type']);
     #Nombre original de la imagen
     $nombreDoc = $_FILES['imagen']['name'];
     #Nombre temporal de la imagen
     $archivoDoc = $_FILES['imagen']['tmp_name'];
-    #Ruta donde se guandan las imagenes temporalmente
+    #Ruta donde se guardan las imagenes temporalmente
     $rutaDocServerTemp = '../temp/';
-    #Ruta donde se gurdran las imagenes
+    #Ruta donde se guardan las imagenes
     $rutaDocServer = '../img/';
-    #Ruta donde se guandan las images + el nombre original de la imagen
+    #Ruta donde se guardan las images + el nombre original de la imagen
     $rutaDocServerImg = $rutaDocServerTemp.''.$nombreDoc;
-    #Mover la imagen al servidor
+    #Mover la imagen al servidor temporalmente
     move_uploaded_file($archivoDoc, $rutaDocServerImg);
     #Asignar un nuevo nombre a la imagen
-    $newName = $rutaDocServer.''.$_POST['codigo'].'.'.$type;
+    $newName = $rutaDocServer.''.$idUser.'-'.$_POST['codigo'].'.'.$type;
     #Reemplazar el nombre original de la imagen por el nuevo
     rename($rutaDocServerTemp.''.$_FILES['imagen']['name'],$newName);
     #Ruta de la imagen con el nuevo nombre
-    $nameBD = 'img/'.$_POST['codigo'].'.'.$type;
+    $nameBD = 'img/'.$idUser.'-'.$_POST['codigo'].'.'.$type;
     $objP->setNombre($_POST['nombre']);
     $objP->setExistencias($_POST['existencias']);
     $objP->setPrecio($_POST['precio']);
@@ -88,29 +89,30 @@ function editProducto()
     } else{
         //elimina la imagen anterior
         unlink("../".$_POST['img']);
-        //el nombre de la imagen tendra el id del usurio y codigo del producto para evitar 
+        //El nombre de la imagen tendra el id del usurio y codigo del producto para evitar 
         //conflicto con imagenes que tengan el mismo nombre
-        //$newName = $rutaDocServer.''.$_POST['idUsuario'].'-'.$_POST['codigo'].'.'.$type;
+        //$newName = $rutaDocServer.''.$idUser.'-'.$_POST['codigo'].'.'.$type;
+        $idUser = $objP->idUser($_POST['user']);
         #Extencion de la imagen
         $type = str_replace('image/','',$_FILES['imagen']['type']);
         #Nombre original de la imagen
         $nombreDoc = $_FILES['imagen']['name'];
         #Nombre temporal de la imagen
         $archivoDoc = $_FILES['imagen']['tmp_name'];
-        #Ruta donde se guandan las imagenes temporalmente
+        #Ruta donde se guardan las imagenes temporalmente
         $rutaDocServerTemp = '../temp/';
-        #Ruta donde se gurdaran las imagenes
+        #Ruta donde se guardan las imagenes
         $rutaDocServer = '../img/';
-        #Ruta donde se guandan las images + el nombre original de la imagen
+        #Ruta donde se guardan las images + el nombre original de la imagen
         $rutaDocServerImg = $rutaDocServerTemp.''.$nombreDoc;
-        #Mover la imagen al servidor
+        #Mover la imagen al servidor temporalmente
         move_uploaded_file($archivoDoc, $rutaDocServerImg);
         #Asignar un nuevo nombre a la imagen
-        $newName = $rutaDocServer.''.$_POST['codigo'].'.'.$type;
+        $newName = $rutaDocServer.''.$idUser.'-'.$_POST['codigo'].'.'.$type;
         #Reemplazar el nombre original de la imagen por el nuevo
         rename($rutaDocServerTemp.''.$_FILES['imagen']['name'],$newName);
         #Ruta de la imagen con el nuevo nombre
-        $nameBD = 'img/'.$_POST['codigo'].'.'.$type;
+        $nameBD = 'img/'.$idUser.'-'.$_POST['codigo'].'.'.$type;
         $objP->setNombre($_POST['nombre']);
         $objP->setExistencias($_POST['existencias']);
         $objP->setPrecio($_POST['precio']);

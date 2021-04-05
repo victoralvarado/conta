@@ -199,6 +199,14 @@ class Producto
         return $this;
     }
 
+    public function idUser($user)
+    {
+        $sql = $this->db->prepare("SELECT id FROM Usuario WHERE usuario = ?;");
+        $res = $sql->bind_param('s',$user);
+        $sql->execute();
+        return $res;
+    }
+
 
     public function getAllProducto()
     {
@@ -268,7 +276,7 @@ class Producto
                 $data['descripcion'] = 'Datos eliminados exitosamente';
             } else {
                 $data['estado'] = false;
-                $data['descripcion'] = 'Ocurrio un error en la eliminación ' . $this->db->error;
+                $data['descripcion'] = 'Ocurrio un error en la modificacion ' . $this->db->error;
             }
             $sql->close();
             $this->db->close();
@@ -282,7 +290,7 @@ class Producto
                 $data['descripcion'] = 'Datos eliminados exitosamente';
             } else {
                 $data['estado'] = false;
-                $data['descripcion'] = 'Ocurrio un error en la eliminación ' . $this->db->error;
+                $data['descripcion'] = 'Ocurrio un error en la modificacion ' . $this->db->error;
             }
             $sql->close();
             $this->db->close();

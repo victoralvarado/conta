@@ -13,16 +13,16 @@
 
 <body>
     <section class="vbox">
-        <?php 
-            $activeProducto = "active";
-            $activeIva = "";
-            $activeProveedor = ""; 
-            include("header.php"); 
-        ?>
+        <?php include("header.php"); ?>
         <section>
             <section class="hbox stretch">
 
-                <?php $active ="active"; include("nav.php"); ?>
+                <?php
+                $activeProducto = "active";
+                $activeIva = "";
+                $activeProveedor = "";  
+                include("nav.php"); 
+                ?>
                 <div class="ex1">
                     <section id="content" class="container-fluid">
                         <section class="vbox">
@@ -190,6 +190,7 @@
                                                         <div class="modal-footer">
                                                             <input id="img" name="img" class="form-control" required="true" value="<?php echo $value['imagen']; ?>" type="hidden">
                                                             <input id="id" name="id" min="1" class="form-control" required="true" value="<?php echo $value['id']; ?>" type="hidden">
+                                                            <input type="hidden" name="user" value="<?php echo $_SESSION['USER'];?>">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()"><i class="fa fa-times"></i> Cancelar</button>
                                                             <button type="submit" id="editarProducto" name="editarProducto" class="btn btn-primary""><i class="fa fa-pencil-square-o"></i> Editar</button>
                                                                     </div>
