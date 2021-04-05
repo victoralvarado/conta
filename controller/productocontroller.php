@@ -5,12 +5,12 @@ if (isset($_POST['agregarProducto'])) {
     insertProducto();
 }
 
-if (isset($_POST['editarProducto'])) {
+if (isset($_POST['idEdit'])) {
     editProducto();
 }
 
 if (isset($_POST['idD'])) {
-    $id = $_POST["idD"];
+    $id = $_POST['idD'];
     eraseProducto($id);
 }
 
@@ -64,6 +64,7 @@ function insertProducto()
 
 function editProducto()
 {
+    
     $objP = new Producto();
     if ($_FILES['imagen']['name']==null) {
         $objP->setNombre($_POST['nombre']);
@@ -73,7 +74,7 @@ function editProducto()
         $objP->setDescripcion($_POST['descripcion']);
         $objP->setImagen('');
         $objP->setCodigo($_POST['codigo']);
-        $objP->setId($_POST['id']);
+        $objP->setId($_POST['idEdit']);
         $res = $objP->updateProducto();
         if ($res['estado']) {
             echo '
@@ -120,17 +121,17 @@ function editProducto()
         $objP->setDescripcion($_POST['descripcion']);
         $objP->setImagen($nameBD);
         $objP->setCodigo($_POST['codigo']);
-        $objP->setId($_POST['id']);
+        $objP->setId($_POST['idEdit']);
         $res = $objP->updateProducto();
         if ($res['estado']) {
             echo '
             <script type="text/javascript">
-                    location.assign("http://localhost/conta/producto.php");
+                    location.assign("../producto.php");
             </script>';
         } else {
             echo '
             <script type="text/javascript">
-                    location.assign("http://localhost/conta/producto.php");
+                    location.assign("../producto.php");
             </script>';
         }
     }
