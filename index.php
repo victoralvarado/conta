@@ -19,7 +19,8 @@
         <?php
           $activeProducto = "";
           $activeIva = "active";
-          $activeProveedor = ""; 
+          $activeProveedor = "";
+          $activeCompra = "";
           include("nav.php"); 
           ?>
         <div class="ex1">

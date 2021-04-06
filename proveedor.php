@@ -21,6 +21,7 @@
                 <?php
                     $activeProducto = "";
                     $activeIva = "";
+                    $activeCompra = "";
                     $activeProveedor = "active"; 
                     include("nav.php"); 
                  ?>

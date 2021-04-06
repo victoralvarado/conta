@@ -160,12 +160,12 @@
                         <span>Proveedor</span>
                       </a>
                     </li>
-                    <li >
-                      <a href="#"  >
+                    <li class="<?php echo $activeCompra;?>" >
+                      <a href="compra.php"  >
                         <i class="fa fa-pencil icon">
                           <b class="bg-primary"></b>
                         </i>
-                        <span>Item 5</span>
+                        <span>Libro de compras</span>
                       </a>
                       
                     </li>
@@ -208,12 +208,12 @@
                         </li>
                       </ul>
                     </li>-->
-                    <li >
+                    <li>
                       <a href="#"  >
                         <i class="fa fa-file-text icon">
                           <b class="bg-info"></b>
                         </i>
-                        <span>Item 3</span>
+                        <span>Item 5</span>
                       </a>
                     </li>
                   </ul>
