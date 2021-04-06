@@ -56,8 +56,6 @@ $(document).ready(function(){
         var vacio = $(this ).prop( 'value' ).trim() == '';
         boton.prop('disabled', vacio);
     });
-    jQuery(function($) {
-        $('input[name=nit]').mask('9999-999999-999-9');
-        $('input[name =nrc]').mask('999999-9');
-    });
+    $('input[name=nit]').mask('9999-999999-999-9');
+    $('input[name =nrc]').mask('999999-9');
 });
