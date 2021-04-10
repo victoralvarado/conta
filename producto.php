@@ -46,7 +46,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Existencias:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="existencias" name="existencias" placeholder="Existencias" min="1" class="form-control" required="true" value="" type="number">
+                                                            <input id="existencias" name="existencias" placeholder="Existencias" min="0" class="form-control" required="true" value="" type="number">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -153,7 +153,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Existencias:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="existenciasEdit" name="existencias" placeholder="Existencias" min="1" class="form-control edit" required="true" value="<?php echo $value['existencias']; ?>" type="number">
+                                                                <input id="existenciasEdit" name="existencias" placeholder="Existencias" min="0" class="form-control edit" required="true" value="<?php echo $value['existencias']; ?>" type="number">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
