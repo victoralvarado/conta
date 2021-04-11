@@ -58,16 +58,21 @@
                                         <input type="number" class="form-control" name="" id="" required="true">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Nombre del contribuyente</label>
                                         <select class="form-control" required="true">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
+                                            <option>Lorem ipsum</option>
+                                            <option>dolor sit amet consectetur</option>
+                                            <option>adipiscing elit condimentum</option>
+                                            <option>turpis morbi molestie</option>
                                         </select>
                                     </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Clasificacion</label>
+                                    <input type="text" class="form-control" value="pequeño" name="" id="clasificacion" required="true" disabled>
                                 </div>
                             </fieldset>
                             <fieldset class="form-group">
@@ -80,13 +85,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Importacion</label>
-                                        <input type="number" class="form-control exentas" name="exentas" id="importacionE" required="true">
+                                        <input type="number" class="form-control com" name="exentas" id="importacionE" required="true">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Internas</label>
-                                        <input type="number" class="form-control exentas" name="exentas" id="internasE" required="true">
+                                        <input type="number" class="form-control com" name="exentas" id="internasE" required="true">
                                     </div>
                                 </div>
                             </fieldset>
@@ -100,13 +105,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Importacion</label>
-                                        <input type="number" class="form-control gravadas" name="gravadas" id="importacionG" required="true">
+                                        <input type="number" class="form-control com gravadas" name="gravadas" id="importacionG" required="true">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Internas</label>
-                                        <input type="number" class="form-control gravadas" name="gravadas" id="internasG" required="true">
+                                        <input type="number" class="form-control com gravadas" name="gravadas" id="internasG" required="true">
                                     </div>
                                 </div>
                             </fieldset>
