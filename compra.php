@@ -61,8 +61,8 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Nombre del contribuyente</label>
-                                        <select class="form-control" id="contribuyente" name="contribuyente" required="true">
+                                        <label>Nombre del Proveedor</label>
+                                        <select class="form-control" id="proveedor" name="proveedor" required="true">
                                         <option value="" >Seleccionar</option>
                                             <?php
                                             $objP = new Proveedor();
@@ -71,8 +71,6 @@
                                                 foreach ($data as $value) {
                                             ?>
                                                     <option id="<?php echo $value['id'];?>" value="<?php echo $value['nombre'];?>"><?php echo $value['nombre'];?></option>
-                                                    
-                                                    
                                             <?php
                                             
                                                 }
@@ -173,7 +171,7 @@
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">Fecha</th>
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">No. Comprobante</th>
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">No. Registro</th>
-                                        <th style="vertical-align: middle;" scope="col" rowspan="2">Nombre Contribuyente</th>
+                                        <th style="vertical-align: middle;" scope="col" rowspan="2">Nombre proveedor</th>
                                         <th style="vertical-align: middle;" scope="col" colspan="2">Compras Exentas</th>
                                         <th style="vertical-align: middle;" scope="col" colspan="2">Compras Exentas</th>
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">IVA(Credito Fiscal)</th>
