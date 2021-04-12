@@ -217,6 +217,17 @@ class Proveedor
         return $this;
     }
 
+    public function getCProveedor($id)
+    {
+        $sql = $this->db->prepare("SELECT clasificacion FROM Proveedor WHERE id = ?;");
+        mysqli_stmt_bind_param($sql,'i',$id);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $cl);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
+        return $cl;
+    }
+
     public function getAllProveedor()
     {
         $sqlAll = "SELECT * FROM Proveedor WHERE estado = 1;";

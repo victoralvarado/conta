@@ -1,4 +1,5 @@
-<?php /*require_once '../app/validacionAdmin.php';*/ ?>
+<?php require_once 'app/validacionGeneral.php'; ?>
+<?php require_once('model/Proveedor.php'); ?>
 <!DOCTYPE html>
 <html lang="en" class="app">
 
@@ -32,8 +33,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Fecha</label>
-                                        <?php $fechaActual = date('Y-m-d');?>
-                                        <input type="date" class="form-control" value="<?php echo $fechaActual;?>"  required="true">
+                                        <?php $fechaActual = date('Y-m-d'); ?>
+                                        <input type="date" class="form-control" value="<?php echo $fechaActual; ?>" required="true">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -61,19 +62,30 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Nombre del contribuyente</label>
-                                        <select class="form-control" required="true">
-                                            <option>Lorem ipsum</option>
-                                            <option>dolor sit amet consectetur</option>
-                                            <option>adipiscing elit condimentum</option>
-                                            <option>turpis morbi molestie</option>
+                                        <select class="form-control" id="contribuyente" name="contribuyente" required="true">
+                                        <option value="" >Seleccionar</option>
+                                            <?php
+                                            $objP = new Proveedor();
+                                            $data = $objP->getAllProveedor();
+                                            if ($data) {
+                                                foreach ($data as $value) {
+                                            ?>
+                                                    <option id="<?php echo $value['id'];?>" value="<?php echo $value['nombre'];?>"><?php echo $value['nombre'];?></option>
+                                                    
+                                                    
+                                            <?php
+                                            
+                                                }
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Clasificacion</label>
-                                    <input type="text" class="form-control" value="pequeño" name="" id="clasificacion" required="true" disabled>
-                                </div>
+                                        <input type="text" class="form-control" value="" name="" id="clasificacion" required="true" disabled>
+                                    </div>
                             </fieldset>
                             <fieldset class="form-group">
                                 <legend class="w-auto">
@@ -85,13 +97,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Importacion</label>
-                                        <input type="number" class="form-control com" name="exentas" id="importacionE" required="true">
+                                        <input type="number" min="0" class="form-control com" value="0" name="exentas" id="importacionE" required="true">
+                                    <span class="alert" style="color:red"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Internas</label>
-                                        <input type="number" class="form-control com" name="exentas" id="internasE" required="true">
+                                        <input type="number" min="0" class="form-control com" value="0" name="exentas" id="internasE" required="true">
+                                    <span class="alert" style="color:red"></span>
                                     </div>
                                 </div>
                             </fieldset>
@@ -105,13 +119,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Importacion</label>
-                                        <input type="number" class="form-control com gravadas" name="gravadas" id="importacionG" required="true">
+                                        <input type="number" min="0" class="form-control com gravadas" value="0" name="gravadas" id="importacionG" required="true">
+                                    <span class="alert" style="color:red"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Internas</label>
-                                        <input type="number" class="form-control com gravadas" name="gravadas" id="internasG" required="true">
+                                        <input type="number" min="0" class="form-control com gravadas" value="0" name="gravadas" id="internasG" required="true">
+                                    <span class="alert" style="color:red"></span>
                                     </div>
                                 </div>
                             </fieldset>
@@ -144,11 +160,11 @@
                                     </div>
                                 </div>
                             </fieldset>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Agregar Compra</button>
-                                    </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Agregar Compra</button>
                                 </div>
+                            </div>
                         </form>
                         <div class="table-responsive">
                             <table class="table table-bordered table-condensed">
@@ -157,19 +173,19 @@
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">Fecha</th>
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">No. Comprobante</th>
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">No. Registro</th>
-                                        <th style="vertical-align: middle;"scope="col" rowspan="2">Nombre Contribuyente</th>
-                                        <th style="vertical-align: middle;"scope="col" colspan="2">Compras Exentas</th>
-                                        <th style="vertical-align: middle;"scope="col" colspan="2">Compras Exentas</th>
-                                        <th style="vertical-align: middle;"scope="col" rowspan="2">IVA(Credito Fiscal)</th>
-                                        <th style="vertical-align: middle;"scope="col" rowspan="2">IVA-Percibido</th>
-                                        <th style="vertical-align: middle;"scope="col" rowspan="2">Total Compras</th>
-                                        <th style="vertical-align: middle;"scope="col" rowspan="2">Compra a sujeto excluido</th>
+                                        <th style="vertical-align: middle;" scope="col" rowspan="2">Nombre Contribuyente</th>
+                                        <th style="vertical-align: middle;" scope="col" colspan="2">Compras Exentas</th>
+                                        <th style="vertical-align: middle;" scope="col" colspan="2">Compras Exentas</th>
+                                        <th style="vertical-align: middle;" scope="col" rowspan="2">IVA(Credito Fiscal)</th>
+                                        <th style="vertical-align: middle;" scope="col" rowspan="2">IVA-Percibido</th>
+                                        <th style="vertical-align: middle;" scope="col" rowspan="2">Total Compras</th>
+                                        <th style="vertical-align: middle;" scope="col" rowspan="2">Compra a sujeto excluido</th>
                                     </tr>
                                     <tr>
-                                        <th style="vertical-align: middle;"scope="col">Importacion</th>
-                                        <th style="vertical-align: middle;"scope="col">Internas</th>
-                                        <th style="vertical-align: middle;"scope="col">Importacion</th>
-                                        <th style="vertical-align: middle;"scope="col">Internas</th>
+                                        <th style="vertical-align: middle;" scope="col">Importacion</th>
+                                        <th style="vertical-align: middle;" scope="col">Internas</th>
+                                        <th style="vertical-align: middle;" scope="col">Importacion</th>
+                                        <th style="vertical-align: middle;" scope="col">Internas</th>
                                     </tr>
 
                                 </thead>

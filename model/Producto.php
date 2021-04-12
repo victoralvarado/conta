@@ -202,8 +202,11 @@ class Producto
     public function idUser($user)
     {
         $sql = $this->db->prepare("SELECT id FROM Usuario WHERE usuario = ?;");
-        $res = $sql->bind_param('s',$user);
-        $sql->execute();
+        mysqli_stmt_bind_param($sql,'s',$user);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $res);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
         return $res;
     }
 
