@@ -14,6 +14,12 @@ if (isset($_POST['idD'])) {
     eraseProveedor($id);
 }
 
+if (isset($_POST['text'])) {
+    $objPr = new Proveedor();
+    $clasi = $objPr->getCProveedor($_POST['text']);
+    echo ucwords(strtolower($clasi));
+}
+
 function insertProveedor()
 {
     $objP = new Proveedor();
