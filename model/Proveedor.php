@@ -217,10 +217,10 @@ class Proveedor
         return $this;
     }
 
-    public function getCProveedor($id)
+    public function getCProveedor($nrc)
     {
-        $sql = $this->db->prepare("SELECT clasificacion FROM Proveedor WHERE id = ?;");
-        mysqli_stmt_bind_param($sql,'i',$id);
+        $sql = $this->db->prepare("SELECT clasificacion FROM Proveedor WHERE nrc = ?;");
+        mysqli_stmt_bind_param($sql,'s',$nrc);
         mysqli_stmt_execute($sql);
         mysqli_stmt_bind_result($sql, $cl);
         mysqli_stmt_fetch($sql);

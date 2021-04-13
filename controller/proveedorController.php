@@ -16,7 +16,7 @@ if (isset($_POST['idD'])) {
 
 if (isset($_POST['text'])) {
     $objPr = new Proveedor();
-    $clasi = $objPr->getCProveedor($_POST['text']);
+    $clasi = $objPr->getCProveedor(str_replace("-","",$_POST['text']));
     echo ucwords(strtolower($clasi));
 }
 
