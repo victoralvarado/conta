@@ -40,29 +40,29 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Numero de Comprobante</label>
-                                        <input type="number" class="form-control" name="" id="" required="true">
+                                        <input type="number" class="form-control" name=""  required="true">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Tipo</label>
                                         <select class="form-control" required="true">
-                                            <option>Seleccionar</option>
-                                            <option>CCF</option>
-                                            <option>NC</option>
+                                            <option value="">Seleccionar</option>
+                                            <option value="ccf" title="Comprobante de credixto fiscal">CCF</option>
+                                            <option value="nc" title="Nota de credito">NC</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Numero de Registro</label>
-                                        <input type="number" class="form-control" name="" id="" required="true">
+                                        <input type="number" class="form-control" name=""  required="true">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Nombre del Proveedor</label>
-                                        <select class="form-control" id="proveedor" name="proveedor" required="true">
+                                        <label>Nombre del contribuyente</label>
+                                        <select class="form-control" id="contribuyente" name="contribuyente" required="true">
                                         <option value="" >Seleccionar</option>
                                             <?php
                                             $objP = new Proveedor();
@@ -70,7 +70,9 @@
                                             if ($data) {
                                                 foreach ($data as $value) {
                                             ?>
-                                                    <option id="<?php echo $value['id'];?>" value="<?php echo $value['nombre'];?>"><?php echo $value['nombre'];?></option>
+                                                    <option id="<?php echo $value['id'];?>" value="<?php echo $value['nombre'];?>" title="<?php echo $value['nombre'];?>" ><?php echo $value['nombre'];?></option>
+                                                    
+                                                    
                                             <?php
                                             
                                                 }
@@ -154,7 +156,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Compra a sujeto excluido</label>
-                                        <input type="number" class="form-control" name="" id="">
+                                        <input type="number" class="form-control" name="">
                                     </div>
                                 </div>
                             </fieldset>
@@ -164,14 +166,15 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-condensed">
+                        <div class="col-md-12">
+                            <table id="tblCompras" class="table table-striped table-bordered dt-responsive" style="width:100%">
+                            <caption>Libro de compras</caption>
                                 <thead>
                                     <tr>
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">Fecha</th>
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">No. Comprobante</th>
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">No. Registro</th>
-                                        <th style="vertical-align: middle;" scope="col" rowspan="2">Nombre proveedor</th>
+                                        <th style="vertical-align: middle;" scope="col" rowspan="2">Nombre Contribuyente</th>
                                         <th style="vertical-align: middle;" scope="col" colspan="2">Compras Exentas</th>
                                         <th style="vertical-align: middle;" scope="col" colspan="2">Compras Exentas</th>
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">IVA(Credito Fiscal)</th>
@@ -204,6 +207,7 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
                     </section>
                     <aside class="bg-light lter b-l aside-md hide" id="notes">
                         <div class="wrapper">Notification</div>

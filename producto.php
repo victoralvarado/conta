@@ -95,6 +95,7 @@
                             </table>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-condensed">
+                                <caption>Productos</caption>
                                     <thead>
                                         <tr>
                                             <th scope="col">Nombre</th>
