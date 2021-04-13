@@ -107,6 +107,7 @@
                             </table>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-condensed">
+                                <caption>Proveedores</caption>
                                     <thead>
                                         <tr>
                                             <th scope="col">Tipo</th>

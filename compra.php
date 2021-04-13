@@ -168,6 +168,7 @@
                         </form>
                         <div class="col-md-12">
                             <table id="tblCompras" class="table table-striped table-bordered dt-responsive" style="width:100%">
+                            <caption>Libro de compras</caption>
                                 <thead>
                                     <tr>
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">Fecha</th>
