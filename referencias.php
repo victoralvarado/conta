@@ -5,6 +5,8 @@
   <link rel="stylesheet" href="css/font.css" type="text/css" />
   <link rel="stylesheet" href="js/calendar/bootstrap_calendar.css" type="text/css" />
   <link rel="stylesheet" href="css/app.css" type="text/css" />
+  <link rel="stylesheet" href="pluggins/dataTable/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="css/responsive.bootstrap4.min.css">
   <!--[if lt IE 9]>
     <script src="js/ie/html5shiv.js"></script>
     <script src="js/ie/respond.min.js"></script>
@@ -32,9 +34,11 @@
 
   <script src="js/sortable/jquery.sortable.js"></script>
   <link rel="stylesheet" type="text/css" href="pluggins/dataTable/material.min.css">
-<link rel="stylesheet" type="text/css" href="pluggins/dataTable/dataTables.material.min.css">
+  <link rel="stylesheet" type="text/css" href="pluggins/dataTable/dataTables.material.min.css">
   <script type="text/javascript" src="pluggins/dataTable/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="pluggins/dataTable/dataTables.material.min.js"></script>
+  <script type="text/javascript" src="pluggins/dataTable/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="js/responsive.bootstrap4.min.js"></script>
   <link rel="stylesheet" type="text/css" href="pluggins/sweetalert-master/dist/sweetalert.css">
   <script type="text/javascript" src="pluggins/sweetalert-master/dist/sweetalert.min.js"></script>
   <style type="text/css">

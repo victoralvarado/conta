@@ -1,7 +1,8 @@
 $(document).ready(function () {
+    $('#tblCompras').DataTable();
     $(document).on("input", ".com", function () {
         if ($("#clasificacion").val().trim() == '') {
-            $('.alert').text('Seleccione un proveedor');
+            $('.alert').text('Seleccione un contribuyente');
         } else {
             $('.alert').text('');
         }
@@ -57,16 +58,16 @@ $(document).ready(function () {
             $('#totalCom').val(sum);
         }
     });
-    $(document).on('change', '#proveedor ', function() {
-        if ($("#proveedor ").val() != '') {
+    $(document).on('change', '#contribuyente ', function() {
+        if ($("#contribuyente ").val() != '') {
               $.ajax({
                 url: './controller/proveedorController.php',
                 type: 'post',
-                data: { text: $("#proveedor ").children(":selected").attr("id")},
+                data: { text: $("#contribuyente ").children(":selected").attr("id")},
                 success: function(response) { $('#clasificacion').val(response); $('.alert').text('');}
             });
         } else {
-            $('.alert').text('Seleccione un proveedor');
+            $('.alert').text('Seleccione un contribuyente');
             $('#clasificacion').val('');
         }
             
