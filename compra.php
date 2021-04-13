@@ -40,7 +40,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Numero de Comprobante</label>
-                                        <input type="number" class="form-control" name=""  required="true">
+                                        <input type="number" class="form-control" name="" required="true">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -56,25 +56,24 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Numero de Registro</label>
-                                        <input type="number" class="form-control" name=""  required="true">
+                                        <input type="number" class="form-control" name="" required="true">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Nombre del contribuyente</label>
                                         <select class="form-control" id="contribuyente" name="contribuyente" required="true">
-                                        <option value="" >Seleccionar</option>
+                                            <option value="">Seleccionar</option>
                                             <?php
                                             $objP = new Proveedor();
                                             $data = $objP->getAllProveedor();
                                             if ($data) {
                                                 foreach ($data as $value) {
                                             ?>
-                                                    <option id="<?php echo $value['id'];?>" value="<?php echo $value['nombre'];?>" title="<?php echo $value['nombre'];?>" ><?php echo $value['nombre'];?></option>
-                                                    
-                                                    
+                                                    <option id="<?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); ?>" value="<?php echo ucwords(strtolower($value['nombre'])); ?>" title="<?php echo ucwords(strtolower($value['nombre'])); ?>"><?php echo ucwords(strtolower($value['nombre'])); ?></option>
+
                                             <?php
-                                            
+
                                                 }
                                             }
                                             ?>
@@ -98,14 +97,14 @@
                                     <div class="form-group">
                                         <label>Importacion</label>
                                         <input type="number" min="0" class="form-control com" value="0" name="exentas" id="importacionE" required="true">
-                                    <span class="alert" style="color:red"></span>
+                                        <span class="alert" style="color:red"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Internas</label>
                                         <input type="number" min="0" class="form-control com" value="0" name="exentas" id="internasE" required="true">
-                                    <span class="alert" style="color:red"></span>
+                                        <span class="alert" style="color:red"></span>
                                     </div>
                                 </div>
                             </fieldset>
@@ -120,14 +119,14 @@
                                     <div class="form-group">
                                         <label>Importacion</label>
                                         <input type="number" min="0" class="form-control com gravadas" value="0" name="gravadas" id="importacionG" required="true">
-                                    <span class="alert" style="color:red"></span>
+                                        <span class="alert" style="color:red"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Internas</label>
                                         <input type="number" min="0" class="form-control com gravadas" value="0" name="gravadas" id="internasG" required="true">
-                                    <span class="alert" style="color:red"></span>
+                                        <span class="alert" style="color:red"></span>
                                     </div>
                                 </div>
                             </fieldset>
@@ -168,7 +167,7 @@
                         </form>
                         <div class="col-md-12">
                             <table id="tblCompras" class="table table-striped table-bordered dt-responsive" style="width:100%">
-                            <caption>Libro de compras</caption>
+                                <caption>Libro de compras</caption>
                                 <thead>
                                     <tr>
                                         <th style="vertical-align: middle;" scope="col" rowspan="2">Fecha</th>

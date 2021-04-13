@@ -61,12 +61,14 @@
                                                         <label class="col-md-3 control-label">NIT:</label>
                                                         <div class="col-md-7 inputGroupContainer">
                                                             <input id="nit" name="nit" placeholder="Número de Identificación Tributaria" class="form-control" required="true" value="" type="text">
+                                                            <span id="existeNit" style="color:red"></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">NRC:</label>
                                                         <div class="col-md-7 inputGroupContainer">
                                                             <input id="nrc" name="nrc" placeholder="Número de Registro de Contribuyente" class="form-control" value="" type="text">
+                                                            <span id="existe" style="color:red"></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -262,12 +264,18 @@
                                                             <label class="col-md-4 control-label">NIT:</label>
                                                             <div class="col-md-8 inputGroupContainer">
                                                                 <input id="nitEdit" name="nit" placeholder="Número de Identificación Tributaria" class="form-control edit" required="true" value="<?php echo $value['nit']; ?>" type="text">
+                                                                <input id="nitActual" name="nitActual" value="<?php echo substr($value['nit'], 0, 4) . "-" . substr($value['nit'], 4, 6) . "-". substr($value['nit'], 10, 3) . "-" . substr($value['nit'], 13, 1); ?>" type="hidden">
+                                                                <span id="existeEditNit" style="color:red"></span>
+                                                                <span id="existeActualNit" style="color:green"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">NRC:</label>
                                                             <div class="col-md-8 inputGroupContainer">
                                                                 <input id="nrcEdit" name="nrc" placeholder="Número de Registro de Contribuyente" class="form-control edit" value="<?php echo $value['nrc']; ?>" type="text">
+                                                                <input id="nrcActual" name="nrcActual" value="<?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); ?>" type="hidden">
+                                                                <span id="existeEdit" style="color:red"></span>
+                                                                <span id="existeActual" style="color:green"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">

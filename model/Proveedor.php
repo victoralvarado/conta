@@ -228,6 +228,27 @@ class Proveedor
         return $cl;
     }
 
+    public function getNrcProveedor($nrc)
+    {
+        $sql = $this->db->prepare("SELECT nrc FROM Proveedor WHERE nrc = ?;");
+        mysqli_stmt_bind_param($sql,'s',$nrc);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $res);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
+        return $res;
+    }
+    public function getNitProveedor($nit)
+    {
+        $sql = $this->db->prepare("SELECT nit FROM Proveedor WHERE nit = ?;");
+        mysqli_stmt_bind_param($sql,'s',$nit);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $res);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
+        return $res;
+    }
+
     public function getAllProveedor()
     {
         $sqlAll = "SELECT * FROM Proveedor WHERE estado = 1;";
