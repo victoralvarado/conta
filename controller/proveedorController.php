@@ -16,8 +16,21 @@ if (isset($_POST['idD'])) {
 
 if (isset($_POST['text'])) {
     $objPr = new Proveedor();
-    $clasi = $objPr->getCProveedor($_POST['text']);
+    $clasi = $objPr->getCProveedor(str_replace("-","",$_POST['text']));
     echo ucwords(strtolower($clasi));
+}
+
+if (isset($_POST['nrcsql'])) {
+    $objPr = new Proveedor();
+    $nrc = $objPr->getNrcProveedor(str_replace("-","",$_POST['nrcsql']));
+    echo substr($nrc, 0, 6) . "-" . substr($nrc, 6, 1);
+}
+
+if (isset($_POST['nitsql'])) {
+    $objPr = new Proveedor();
+    $nit = $objPr->getNitProveedor(str_replace("-","",$_POST['nitsql']));
+    echo substr($nit, 0, 4) . "-" . substr($nit, 4, 6) . "-"
+    . substr($nit, 10, 3) . "-" . substr($nit, 13, 1);
 }
 
 function insertProveedor()
