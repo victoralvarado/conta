@@ -194,8 +194,8 @@
                                                             <input id="img" name="img" class="form-control" required="true" value="<?php echo $value['imagen']; ?>" type="hidden">
                                                             <input id="idEdit" name="idEdit" min="1" class="form-control" required="true" value="<?php echo $value['id']; ?>" type="hidden">
                                                             <input type="hidden" name="user" value="<?php echo $_SESSION['USER']; ?>">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()"><i class="fa fa-times"></i> Cancelar</button>
-                                                            <button type="button" id="editarPro" name="editarProducto" class="btn btn-primary"><i class=" fa fa-pencil-square-o"></i> Editar</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()"><em class="fa fa-times"></em> Cancelar</button>
+                                                            <button type="button" id="editarPro" name="editarProducto" class="btn btn-primary editarProducto"><em class=" fa fa-pencil-square-o"></em> Editar</button>
                                                         </div>
                                                     </form>
                                                 </div>
