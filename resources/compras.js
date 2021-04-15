@@ -6,6 +6,8 @@ $(document).ready(function () {
         } else {
             $('.alert').text('');
         }
+        const iva = 0.13;
+        const retencion = 0.01;
         var sum = 0;
         var ivaCF = 0;
         var ivaP = 0;
@@ -40,14 +42,14 @@ $(document).ready(function () {
         }
         if (isNaN(parseFloat($(".com").val()))) {
             ivaCF = 0;
-            $('#internasE').val(ivaCF);
+            $('#ivaCF').val(ivaCF);
         } else {
-            ivaCF = (inG + imG) * 0.13;
+            ivaCF = (inG + imG) * iva;
             //dependiendo de la clasificacion del proveedor se aplicara la retencion
             var clasificacion = $("#clasificacion").val();
             if (clasificacion != 'Gran Contribuyente' && clasificacion != 'Ninguno') {
                 if ((inG + imG) > 100) {
-                    ivaP = (inG + imG) * 0.01;
+                    ivaP = (inG + imG) * retencion;
                 } else {
                     ivaP = 0;
                 }
@@ -58,18 +60,64 @@ $(document).ready(function () {
             $('#totalCom').val(sum);
         }
     });
-    $(document).on('change', '#contribuyente ', function() {
+    $(document).on('change', '#contribuyente', function () {
         if ($("#contribuyente ").val() != '') {
-              $.ajax({
+            $.ajax({
                 url: './controller/proveedorController.php',
                 type: 'post',
-                data: { text: $("#contribuyente ").children(":selected").attr("id")},
-                success: function(response) { $('#clasificacion').val(response); $('.alert').text('');}
+                data: { text: $("#contribuyente").children(":selected").attr("id") },
+                success: function (response) {
+                    $('#clasificacion').val(response);
+                    $('.alert').text('');
+                    var id = $("#contribuyente").children(":selected").attr("id");
+                    if (id == '-') {
+                        $('#nrcProveedor').val('');
+                    } else {
+                        $('#nrcProveedor').val(id);
+                    }
+                }
             });
         } else {
             $('.alert').text('Seleccione un contribuyente');
+            $('#nrcProveedor').val('');
             $('#clasificacion').val('');
         }
-            
-   });
+
+        if ($("#contribuyente ").val() != '') {
+            $.ajax({
+                url: './controller/proveedorController.php',
+                type: 'post',
+                data: { nitP: $("#contribuyente").children(":selected").attr("id") },
+                success: function (response) {
+                    $('#nitProveedor').val(response);
+                }
+            });
+        } else {
+            $('#nitProveedor').val('');
+        }
+    });
+    $(document).on("input", ".mul", function () {
+        var mul = 0;
+        var cantidad = parseFloat($('#cantidad').val());
+        var precio = parseFloat($('#precio').val());
+        if (isNaN(cantidad)) {
+            cantidad = 0;
+            $('#cantidad').val(cantidad);
+        } else {
+            cantidad = parseFloat($('#cantidad').val());
+            $('#cantidad').val(cantidad);
+        } if (isNaN(precio)) {
+            precio = 0;
+            $('#precio').val(precio);
+        } else {
+            precio = parseFloat($('#precio').val());
+            $('#precio').val(precio);
+        } if (isNaN($('.mul').val())) {
+            mul = 0;
+            $('#cp').val(mul);
+        } else {
+            mul = precio * cantidad;
+            $('#cp').val(mul);
+        }
+    });
 });

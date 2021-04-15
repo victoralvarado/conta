@@ -140,8 +140,13 @@
                                                             ?>
                                                     </td>
                                                     <td>
-                                                        <?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); 
-                                                        #Mostrando nrc con guion
+                                                        <?php
+                                                        if ($value['nrc'] == '') {
+                                                            $value['nrc'];
+                                                        } else {
+                                                            echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); 
+                                                            #Mostrando nrc con guion
+                                                        }
                                                         ?>
                                                     </td>
                                                     <td><?php echo ucwords(strtolower($value['nombre'])); ?></td>

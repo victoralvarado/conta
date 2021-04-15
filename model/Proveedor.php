@@ -248,6 +248,16 @@ class Proveedor
         mysqli_stmt_close($sql);
         return $res;
     }
+    public function getNitP($nrc)
+    {
+        $sql = $this->db->prepare("SELECT nit FROM Proveedor WHERE nrc = ?;");
+        mysqli_stmt_bind_param($sql,'s',$nrc);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $res);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
+        return $res;
+    }
 
     public function getAllProveedor()
     {

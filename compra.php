@@ -1,5 +1,6 @@
 <?php require_once 'app/validacionGeneral.php'; ?>
 <?php require_once('model/Proveedor.php'); ?>
+<?php require_once('model/Producto.php'); ?>
 <!DOCTYPE html>
 <html lang="en" class="app">
 
@@ -53,13 +54,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Numero de Registro</label>
-                                        <input type="number" class="form-control" name="" required="true">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Nombre del contribuyente</label>
                                         <select class="form-control" id="contribuyente" name="contribuyente" required="true">
@@ -80,60 +75,101 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>NRC</label>
+                                        <input type="text" id="nrcProveedor" class="form-control" name="nrcProveedor" required="true" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>NIT</label>
+                                        <input type="text" class="form-control" value="" name="" id="nitProveedor" required="true" disabled>
+                                    </div>
+                                </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Clasificacion</label>
                                         <input type="text" class="form-control" value="" name="" id="clasificacion" required="true" disabled>
                                     </div>
-                            </fieldset>
-                            <fieldset class="form-group">
-                                <legend class="w-auto">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Producto</label>
+                                        <select class="form-control" id="producto" name="producto" required="true">
+                                            <option value="">Seleccionar</option>
+                                            <?php
+                                            $objProd = new Producto();
+                                            $data = $objProd->getAllProducto();
+                                            if ($data) {
+                                                foreach ($data as $value) {
+                                            ?>
+                                                    <option id="<?php echo $value['codigo'];?>" value="<?php echo ucwords(strtolower($value['nombre'])); ?>" ><?php echo ucwords(strtolower($value['nombre'])); ?></option>
+
+                                            <?php
+
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Cantidad</label>
+                                        <input type="number" min="0" value="0" id="cantidad" class="form-control mul" name="cantidad" required="true">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Precio</label>
+                                        <input type="number" min="0" value="0" class="form-control mul" name="precio" id="precio" required="true">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Cantidad × Precio</label>
+                                        <input type="number" class="form-control"  name="cp" id="cp" required="true" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
                                     <h6 style="text-align: center;">
-                                        <hr style="height:1px;border-width:0;background-color:#AAA8A8;">
                                         Compras Exentas
                                     </h6>
-                                </legend>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Importacion</label>
-                                        <input type="number" min="0" class="form-control com" value="0" name="exentas" id="importacionE" required="true">
-                                        <span class="alert" style="color:red"></span>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Importacion</label>
+                                            <input type="number" min="0" class="form-control com" value="0" name="exentas" id="importacionE" required="true">
+                                            <span class="alert" style="color:red"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Internas</label>
+                                            <input type="number" min="0" class="form-control com" value="0" name="exentas" id="internasE" required="true">
+                                            <span class="alert" style="color:red"></span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Internas</label>
-                                        <input type="number" min="0" class="form-control com" value="0" name="exentas" id="internasE" required="true">
-                                        <span class="alert" style="color:red"></span>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <fieldset class="form-group">
-                                <legend class="w-auto">
                                     <h6 style="text-align: center;">
-                                        <hr style="height:1px;border-width:0;background-color:#AAA8A8;">
                                         Compras Gravadas
                                     </h6>
-                                </legend>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Importacion</label>
-                                        <input type="number" min="0" class="form-control com gravadas" value="0" name="gravadas" id="importacionG" required="true">
-                                        <span class="alert" style="color:red"></span>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Importacion</label>
+                                            <input type="number" min="0" class="form-control com gravadas" value="0" name="gravadas" id="importacionG" required="true">
+                                            <span class="alert" style="color:red"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Internas</label>
+                                            <input type="number" min="0" class="form-control com gravadas" value="0" name="gravadas" id="internasG" required="true">
+                                            <span class="alert" style="color:red"></span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Internas</label>
-                                        <input type="number" min="0" class="form-control com gravadas" value="0" name="gravadas" id="internasG" required="true">
-                                        <span class="alert" style="color:red"></span>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <fieldset class="form-group">
-                                <legend class="w-auto">
-                                    <hr style="height:1px;border-width:0;background-color:#AAA8A8 ;">
-                                </legend>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>IVA(Credito Fiscal)</label>
@@ -158,12 +194,13 @@
                                         <input type="number" class="form-control" name="">
                                     </div>
                                 </div>
-                            </fieldset>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Agregar Compra</button>
+                                <div class="col-md-12">
+                                    <div class="form-group" style="text-align: center;">
+                                        <button type="submit" class="btn btn-primary"><em class="fa fa-plus"></em> Agregar Compra</button>
+                                        <button type="reset" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Limpiar cajas de texto"><em class="fa fa-eraser"></em> Limpiar</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </fieldset>
                         </form>
                         <div class="col-md-12">
                             <table id="tblCompras" class="table table-striped table-bordered dt-responsive" style="width:100%">

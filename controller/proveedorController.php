@@ -33,6 +33,13 @@ if (isset($_POST['nitsql'])) {
     . substr($nit, 10, 3) . "-" . substr($nit, 13, 1);
 }
 
+if (isset($_POST['nitP'])) {
+    $objPr = new Proveedor();
+    $nit = $objPr->getNitP(str_replace("-","",$_POST['nitP']));
+    echo substr($nit, 0, 4) . "-" . substr($nit, 4, 6) . "-"
+    . substr($nit, 10, 3) . "-" . substr($nit, 13, 1);
+}
+
 function insertProveedor()
 {
     $objP = new Proveedor();
