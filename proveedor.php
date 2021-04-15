@@ -318,11 +318,9 @@
                                                     </div>
                                                 </div>
                                         <?php
-
                                             }
                                         }
                                         ?>
-                                </table>
                             </div>
                         </section>
                         <aside class=" bg-light lter b-l aside-md hide" id="notes"></aside>
