@@ -8,60 +8,66 @@ $(document).ready(function () {
         }
         const iva = 0.13;
         const retencion = 0.01;
-        var sum = 0;
-        var ivaCF = 0;
-        var ivaP = 0;
+        var sum = 0.00;
+        var ivaCF = 0.00;
+        var ivaR = 0.00;
         var imG = parseFloat($("#importacionG").val());
         var inG = parseFloat($("#internasG").val());
         var imE = parseFloat($("#importacionE").val());
         var inE = parseFloat($("#internasE").val());
         if (isNaN(imG)) {
-            imG = 0;
+            imG = 0.00;
             $('#importacionG').val(imG);
         } else {
             imG = parseFloat($("#importacionG").val());
             $('#importacionG').val(imG);
         } if (isNaN(inG)) {
-            inG = 0;
+            inG = 0.00;
             $('#internasG').val(inG);
         } else {
             inG = parseFloat($("#internasG").val());
             $('#internasG').val(inG);
         } if (isNaN(imE)) {
-            imE = 0;
+            imE = 0.00;
             $('#importacionE').val(imE);
         } else {
             imE = parseFloat($("#importacionE").val());
             $('#importacionE').val(imE);
         } if (isNaN(inE)) {
-            inE = 0;
+            inE = 0.00;
             $('#internasE').val(inE);
         } else {
             inE = parseFloat($("#internasE").val());
             $('#internasE').val(inE);
         }
         if (isNaN(parseFloat($(".com").val()))) {
-            ivaCF = 0;
+            ivaCF = 0.00;
             $('#ivaCF').val(ivaCF);
         } else {
             ivaCF = (inG + imG) * iva;
             //dependiendo de la clasificacion del proveedor se aplicara la retencion
             var clasificacion = $("#clasificacion").val();
-            if (clasificacion != 'Gran Contribuyente' && clasificacion != 'Ninguno') {
+            if (clasificacion != 'Gran Contribuyente') {
                 if ((inG + imG) > 100) {
-                    ivaP = (inG + imG) * retencion;
+                    ivaR = (inG + imG) * retencion;
                 } else {
-                    ivaP = 0;
+                    ivaR = 0.00;
                 }
+            } if (clasificacion == '') {
+                $('.com').attr('disabled', true);
+                $('.com').val(0);
+            } else {
+
+                sum = (inG + imG + imE + inE + ivaCF) - ivaR;
+                $('#ivaCF').val(ivaCF.toFixed(2));
+                $('#ivaR').val(ivaR.toFixed(2));
+                $('#totalCom').val(sum.toFixed(2));
             }
-            sum = (inG + imG + imE + inE + ivaCF) + ivaP;
-            $('#ivaCF').val(ivaCF);
-            $('#ivaP').val(ivaP);
-            $('#totalCom').val(sum);
         }
     });
     $(document).on('change', '#contribuyente', function () {
         if ($("#contribuyente ").val() != '') {
+            $('.com').attr('disabled', false);
             $.ajax({
                 url: './controller/proveedorController.php',
                 type: 'post',
@@ -78,6 +84,11 @@ $(document).ready(function () {
                 }
             });
         } else {
+            $('.com').attr('disabled', true);
+            $('.com').val(0);
+            $('#ivaCF').val(0.00);
+            $('#ivaR').val(0.00);
+            $('#totalCom').val(0.00);
             $('.alert').text('Seleccione un contribuyente');
             $('#nrcProveedor').val('');
             $('#clasificacion').val('');
@@ -117,7 +128,7 @@ $(document).ready(function () {
             $('#cp').val(mul);
         } else {
             mul = precio * cantidad;
-            $('#cp').val(mul);
+            $('#cp').val(mul.toFixed(2));
         }
     });
 });

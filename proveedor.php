@@ -277,7 +277,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">NRC:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="nrcEdit" name="nrc" placeholder="Número de Registro de Contribuyente" class="form-control edit" value="<?php echo $value['nrc']; ?>" type="text">
+                                                                <input id="nrcEdit" name="nrc" placeholder="Número de Registro de Contribuyente" class="form-control" value="<?php echo $value['nrc']; ?>" type="text">
                                                                 <input id="nrcActual" name="nrcActual" value="<?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); ?>" type="hidden">
                                                                 <span id="existeEdit" style="color:red"></span>
                                                                 <span id="existeActual" style="color:green"></span>
@@ -292,7 +292,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Razon Social:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="razonsocialEdit" name="razonsocial" placeholder="Razon Social" class="form-control edit" value="<?php echo $value['razon_social']; ?>" type="text">
+                                                                <input id="razonsocialEdit" name="razonsocial" placeholder="Razon Social" class="form-control" value="<?php echo $value['razon_social']; ?>" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -309,8 +309,8 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <input id="idEdit" name="idEdit" min="1" class="form-control" required="true" value="<?php echo $value['id']; ?>" type="hidden">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()"><i class="fa fa-times"></i> Cancelar</button>
-                                                            <button type="button" id="editarProveedor" name="editarProveedor" class="btn btn-primary""><i class="fa fa-pencil-square-o"></i> Editar</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()"><em class="fa fa-times"></em> Cancelar</button>
+                                                            <button type="button" name="editarProveedor" class="btn btn-primary editarProveedor"><em class="fa fa-pencil-square-o"></em> Editar</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -318,11 +318,9 @@
                                                     </div>
                                                 </div>
                                         <?php
-
                                             }
                                         }
                                         ?>
-                                </table>
                             </div>
                         </section>
                         <aside class=" bg-light lter b-l aside-md hide" id="notes"></aside>

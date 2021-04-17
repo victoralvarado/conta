@@ -41,7 +41,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Numero de Comprobante</label>
-                                        <input type="number" class="form-control" name="" required="true">
+                                        <input type="number" class="form-control" placeholder="Numero de comprobante" name="comprobante" aria-describedby="inputGroupPrepend" required="true">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -78,19 +78,19 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>NRC</label>
-                                        <input type="text" id="nrcProveedor" class="form-control" name="nrcProveedor" required="true" disabled>
+                                        <input type="text" id="nrcProveedor" placeholder="NRC" class="form-control" name="nrcProveedor" required="true" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>NIT</label>
-                                        <input type="text" class="form-control" value="" name="" id="nitProveedor" required="true" disabled>
+                                        <input type="text" class="form-control" placeholder="NIT" value="" name="" id="nitProveedor" required="true" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Clasificacion</label>
-                                        <input type="text" class="form-control" value="" name="" id="clasificacion" required="true" disabled>
+                                        <input type="text" class="form-control" placeholder="Clasificacion" value="" name="" id="clasificacion" required="true" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -129,7 +129,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Cantidad × Precio</label>
-                                        <input type="number" class="form-control"  name="cp" id="cp" required="true" disabled>
+                                        <input type="number" class="form-control" placeholder="Total" name="cp" id="cp" required="true" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -173,19 +173,19 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>IVA(Credito Fiscal)</label>
-                                        <input type="number" class="form-control" name="" id="ivaCF" disabled>
+                                        <input type="number" class="form-control" placeholder="(+)IVA Credito Fiscal" name="" id="ivaCF" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>IVA-Percibido</label>
-                                        <input type="number" class="form-control" name="" id="ivaP" disabled>
+                                        <input type="number" class="form-control" placeholder="(-)IVA Percibido" name="" id="ivaR" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Total Compras</label>
-                                        <input type="number" class="form-control" name="" id="totalCom" disabled>
+                                        <input type="number" class="form-control" placeholder="Total Compras" name="" id="totalCom" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

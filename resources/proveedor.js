@@ -25,7 +25,7 @@ $(document).ready(function () {
                 }
             });
     });
-    $(document).on("click", "#editarProveedor", function () {
+    $(document).on("click", ".editarProveedor", function () {
         swal({
             title: "Editar",
             text: "¿Estás seguro que desea editar el proveedor?",
@@ -52,7 +52,7 @@ $(document).ready(function () {
             });
     });
     $(document).on("input", ".edit", function () {
-        var boton = $("#editarProveedor");
+        var boton = $(".editarProveedor");
         var vacio = $(this).prop('value').trim() == '';
         boton.prop('disabled', vacio);
     });
@@ -81,9 +81,13 @@ $(document).ready(function () {
             success: function (response) {
                 if (response == $("#nrcEdit").val() && response != $("#nrcActual").val()) {
                     $('#existeEdit').text('El NRC ya esta en uso');
+                    $('#existeActual').text('');
+                    
                 } else if (response == $("#nrcActual").val()) {
                     $('#existeActual').text('Es su NRC actual');
+                    $('#existeEdit').text('');
                 } else {
+                    
                     $('#existeEdit').text('');
                     $('#existeActual').text('');
                 }
@@ -113,8 +117,10 @@ $(document).ready(function () {
             success: function (response) {
                 if (response == $("#nitEdit").val() && response != $("#nitActual").val()) {
                     $('#existeEditNit').text('El NIT ya esta en uso');
+                    $('#existeActualNit').text('');
                 } else if (response == $("#nitActual").val()) {
                     $('#existeActualNit').text('Es su NIT actual');
+                    $('#existeEditNit').text('');
                 } else {
                     $('#existeEditNit').text('');
                     $('#existeActualNit').text('');

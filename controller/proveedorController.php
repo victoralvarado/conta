@@ -40,6 +40,7 @@ if (isset($_POST['nitP'])) {
     . substr($nit, 10, 3) . "-" . substr($nit, 13, 1);
 }
 
+
 function insertProveedor()
 {
     $objP = new Proveedor();
