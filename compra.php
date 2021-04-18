@@ -212,7 +212,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Compra a sujeto excluido</label>
-                                            <input type="number" class="form-control" name="">
+                                            <input type="number" id="excluido" class="form-control" name="excluido" disabled>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
