@@ -1,44 +1,72 @@
 $(document).ready(function () {
     $('#tblCompras').DataTable();
-    $(document).on("input", ".com", function () {
-        if ($("#clasificacion").val().trim() == '') {
-            $('.alert').text('Seleccione un contribuyente');
+    $(document).on("change", "#tCompra", function () {
+        if ($("#tCompra").val().trim() == '') {
+            $("#internasG").val(0.00);
+            $("#importacionE").val(0.00);
+            $("#internasE").val(0.00);
+            $("#importacionG").val(0.00);
+            $('#ivaCF').val(0.00);
+            $('#ivaR').val(0.00);
+            $('#totalCom').val(0.00);
+            $('.alert').text('Seleccione un tipo de compra');
         } else {
             $('.alert').text('');
-        }
+        
         const iva = 0.13;
         const retencion = 0.01;
         var sum = 0.00;
         var ivaCF = 0.00;
         var ivaR = 0.00;
-        var imG = parseFloat($("#importacionG").val());
-        var inG = parseFloat($("#internasG").val());
-        var imE = parseFloat($("#importacionE").val());
-        var inE = parseFloat($("#internasE").val());
-        if (isNaN(imG)) {
-            imG = 0.00;
-            $('#importacionG').val(imG);
-        } else {
-            imG = parseFloat($("#importacionG").val());
-            $('#importacionG').val(imG);
-        } if (isNaN(inG)) {
-            inG = 0.00;
-            $('#internasG').val(inG);
-        } else {
-            inG = parseFloat($("#internasG").val());
-            $('#internasG').val(inG);
-        } if (isNaN(imE)) {
-            imE = 0.00;
-            $('#importacionE').val(imE);
-        } else {
-            imE = parseFloat($("#importacionE").val());
-            $('#importacionE').val(imE);
-        } if (isNaN(inE)) {
-            inE = 0.00;
-            $('#internasE').val(inE);
-        } else {
-            inE = parseFloat($("#internasE").val());
-            $('#internasE').val(inE);
+        var imE = 0.00;
+        var inE = 0.00;
+        var imG = 0.00;
+        var inG = 0.00;
+        var idC =  $("#tCompra").children(":selected").attr("id");
+        if (idC == 'c1') {
+            imE = parseFloat($("#cp").val());
+            if (isNaN(imE)) {
+                imE = 0.00;
+                $('#importacionE').val(imE);
+            } else {
+                $("#importacionE").val(imE.toFixed(2));
+                $("#internasE").val(0.00);
+                $("#importacionG").val(0.00);
+                $("#internasG").val(0.00);
+            }
+        }if (idC == 'c2') {
+            inE = parseFloat($("#cp").val());
+            if (isNaN(inE)) {
+                inE = 0.00;
+                $('#internasE').val(inE);
+            } else {
+                $("#internasE").val(inE.toFixed(2));
+                $("#importacionE").val(0.00);
+                $("#importacionG").val(0.00);
+                $("#internasG").val(0.00);
+            }
+        }if (idC == 'c3') {
+            imG = parseFloat($("#cp").val());
+            if (isNaN(imG)) {
+                inG = 0.00;
+                $('#importacionG').val(imG);
+            } else {
+                $("#importacionG").val(imG.toFixed(2));
+                $("#importacionE").val(0.00);
+                $("#internasE").val(0.00);
+                $("#internasG").val(0.00);
+            }
+        }if (idC == 'c4') {
+            inG = parseFloat($("#cp").val());
+            if (isNaN(imG)) {
+                inG = 0.00;
+                $('#internasG').val(inG);
+            } else {
+                $("#internasG").val(inG.toFixed(2));
+                $("#importacionE").val(0.00);
+                $("#internasE").val(0.00);
+                $("#importacionG").val(0.00);
+            }
         }
         if (isNaN(parseFloat($(".com").val()))) {
             ivaCF = 0.00;
@@ -54,27 +82,29 @@ $(document).ready(function () {
                     ivaR = 0.00;
                 }
             } if (clasificacion == '') {
-                $('.com').attr('disabled', true);
-                $('.com').val(0);
+                $('.alert').text('Seleccione un contribuyente');
             } else {
-
+                $('.alert').text('');
                 sum = (inG + imG + imE + inE + ivaCF) - ivaR;
                 $('#ivaCF').val(ivaCF.toFixed(2));
                 $('#ivaR').val(ivaR.toFixed(2));
                 $('#totalCom').val(sum.toFixed(2));
             }
         }
+        
+    }
     });
     $(document).on('change', '#contribuyente', function () {
         if ($("#contribuyente ").val() != '') {
-            $('.com').attr('disabled', false);
+            $("#tCompra").val('');
             $.ajax({
                 url: './controller/proveedorController.php',
                 type: 'post',
                 data: { text: $("#contribuyente").children(":selected").attr("id") },
                 success: function (response) {
+                    $('#tCompra').attr('disabled', false);
                     $('#clasificacion').val(response);
-                    $('.alert').text('');
+                    $('#spTipo').text('');
                     var id = $("#contribuyente").children(":selected").attr("id");
                     if (id == '-') {
                         $('#nrcProveedor').val('');
@@ -84,12 +114,12 @@ $(document).ready(function () {
                 }
             });
         } else {
-            $('.com').attr('disabled', true);
-            $('.com').val(0);
+            $('#tCompra').attr('disabled', true);
+            $('.com').val(0.00);
             $('#ivaCF').val(0.00);
             $('#ivaR').val(0.00);
             $('#totalCom').val(0.00);
-            $('.alert').text('Seleccione un contribuyente');
+            $('#spTipo').text('Seleccione un contribuyente');
             $('#nrcProveedor').val('');
             $('#clasificacion').val('');
         }
@@ -108,6 +138,14 @@ $(document).ready(function () {
         }
     });
     $(document).on("input", ".mul", function () {
+        $("#tCompra").val('');
+        $("#internasG").val(0.00);
+        $("#importacionE").val(0.00);
+        $("#internasE").val(0.00);
+        $("#importacionG").val(0.00);
+        $('#ivaCF').val(0.00);
+        $('#ivaR').val(0.00);
+        $('#totalCom').val(0.00);
         var mul = 0;
         var cantidad = parseFloat($('#cantidad').val());
         var precio = parseFloat($('#precio').val());
