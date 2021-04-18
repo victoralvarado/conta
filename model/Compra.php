@@ -1,5 +1,5 @@
 <?php
-require_once ("./config/conexion.php");
+require_once ("Conexion.php");
 class Compra
 {
     private $id;
@@ -10,6 +10,7 @@ class Compra
     private $fecha;
     private $registrado_por;
     private $condiciones;
+    public $db;
 
     public function __construct() {
         $this->db = conectar();
@@ -173,5 +174,36 @@ class Compra
         $this->condiciones = $condiciones;
 
         return $this;
+    }
+
+    /**
+     * Get the value of db
+     */ 
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    /**
+     * Set the value of db
+     *
+     * @return  self
+     */ 
+    public function setDb($db)
+    {
+        $this->db = $db;
+
+        return $this;
+    }
+
+    public function getNombreUser($username)        
+    {
+        $sql = $this->db->prepare("SELECT nombre FROM Usuario WHERE usuario = ?;");
+        mysqli_stmt_bind_param($sql,'s',$user);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $res);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
+        return $res;
     }
 }
