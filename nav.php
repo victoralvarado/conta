@@ -10,7 +10,7 @@
                   <ul class="nav">
                     <li  class="<?php echo $activeIva;?>">
                       <a href="#">
-                        <i class="fa fa-dashboard icon">
+                        <i class="fa fa-tachometer icon">
                           <b class="bg-danger"></b>
                         </i>
                         <span>Cálculo de IVA</span>
@@ -146,7 +146,7 @@
                     </li>-->
                     <li class="<?php echo $activeProducto;?>">
                       <a href="producto.php"  >
-                        <i class="fa fa-barcode icon">
+                        <i class="fas fa-barcode-alt icon">
                           <b class="bg-success"></b>
                         </i>
                         <span>Producto</span>
@@ -162,7 +162,7 @@
                     </li>
                     <li class="<?php echo $activeCompra;?>" >
                       <a href="compra.php"  >
-                        <i class="fa fa-pencil icon">
+                        <i class="fa fa-th-list icon">
                           <b class="bg-primary"></b>
                         </i>
                         <span>Libro de compras</span>
@@ -210,7 +210,7 @@
                     </li>-->
                     <li>
                       <a href="#"  >
-                        <i class="fa fa-file-text icon">
+                        <i class="fas fa-file-alt icon">
                           <b class="bg-info"></b>
                         </i>
                         <span>Item 5</span>

@@ -181,7 +181,7 @@ class Producto
 
     /**
      * Get the value of db
-     */ 
+     */
     public function getDb()
     {
         return $this->db;
@@ -191,7 +191,7 @@ class Producto
      * Set the value of db
      *
      * @return  self
-     */ 
+     */
     public function setDb($db)
     {
         $this->db = $db;
@@ -202,7 +202,7 @@ class Producto
     public function idUser($user)
     {
         $sql = $this->db->prepare("SELECT id FROM Usuario WHERE usuario = ?;");
-        mysqli_stmt_bind_param($sql,'s',$user);
+        mysqli_stmt_bind_param($sql, 's', $user);
         mysqli_stmt_execute($sql);
         mysqli_stmt_bind_result($sql, $res);
         mysqli_stmt_fetch($sql);
@@ -230,7 +230,7 @@ class Producto
         $estado = 1;
         $sql = $this->db->prepare("INSERT INTO Producto(nombre,existencias,precio,costo,descripcion,imagen,codigo,estado) values (?,?,?,?,?,?,?,?);");
         # s = string; i = int; d = decimal
-        $res = $sql->bind_param('siddsssi',$this->nombre,$this->existencias,$this->precio,$this->costo,$this->descripcion,$this->imagen,$this->codigo,$estado);
+        $res = $sql->bind_param('siddsssi', $this->nombre, $this->existencias, $this->precio, $this->costo, $this->descripcion, $this->imagen, $this->codigo, $estado);
         $sql->execute();
         $data = array();
         if ($res) {
@@ -246,25 +246,22 @@ class Producto
     }
 
     public function deleteProducto()
-	{
-            $sql = $this->db->prepare("UPDATE Producto SET estado = 0 where id =?;");
-	        $res = $sql->bind_param('i',$this->id);
-            $sql->execute();
-	        $data=array();
-	        if($res)
-	        {
-	            $data['estado']=true;
-	            $data['descripcion']='Datos eliminados exitosamente';
-	        }
-	        else
-	        {
-	            $data['estado']=false;
-	            $data['descripcion']='Ocurrio un error en la eliminación '.$this->db->error;
-	        }
-            $sql->close();
-            $this->db->close();
-	        return $data;
-	}
+    {
+        $sql = $this->db->prepare("UPDATE Producto SET estado = 0 where id =?;");
+        $res = $sql->bind_param('i', $this->id);
+        $sql->execute();
+        $data = array();
+        if ($res) {
+            $data['estado'] = true;
+            $data['descripcion'] = 'Datos eliminados exitosamente';
+        } else {
+            $data['estado'] = false;
+            $data['descripcion'] = 'Ocurrio un error en la eliminación ' . $this->db->error;
+        }
+        $sql->close();
+        $this->db->close();
+        return $data;
+    }
 
 
     public function updateProducto()
@@ -301,5 +298,4 @@ class Producto
 
         return $data;
     }
-
 }
