@@ -19,12 +19,12 @@
             <section class="hbox stretch">
 
                 <?php
-                    $activeProducto = "";
-                    $activeIva = "";
-                    $activeCompra = "";
-                    $activeProveedor = "active"; 
-                    include("nav.php"); 
-                 ?>
+                $activeProducto = "";
+                $activeIva = "";
+                $activeCompra = "";
+                $activeProveedor = "active";
+                include("nav.php");
+                ?>
                 <div class="ex1">
                     <section id="content" class="container-fluid">
                         <section class="vbox">
@@ -109,7 +109,7 @@
                             </table>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-condensed">
-                                <caption>Proveedores</caption>
+                                    <caption>Proveedores</caption>
                                     <thead>
                                         <tr>
                                             <th scope="col">Tipo</th>
@@ -135,16 +135,16 @@
                                                     <td><?php echo ucwords(strtolower($value['clasificacion'])); ?></td>
                                                     <td>
                                                         <?php echo substr($value['nit'], 0, 4) . "-" . substr($value['nit'], 4, 6) . "-"
-                                                            . substr($value['nit'], 10, 3) . "-" . substr($value['nit'], 13, 1); 
-                                                            #Mostrando nit con guiones
-                                                            ?>
+                                                            . substr($value['nit'], 10, 3) . "-" . substr($value['nit'], 13, 1);
+                                                        #Mostrando nit con guiones
+                                                        ?>
                                                     </td>
                                                     <td>
                                                         <?php
                                                         if ($value['nrc'] == '') {
                                                             $value['nrc'];
                                                         } else {
-                                                            echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); 
+                                                            echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1);
                                                             #Mostrando nrc con guion
                                                         }
                                                         ?>
@@ -269,7 +269,7 @@
                                                             <label class="col-md-4 control-label">NIT:</label>
                                                             <div class="col-md-8 inputGroupContainer">
                                                                 <input id="nitEdit" name="nit" placeholder="Número de Identificación Tributaria" class="form-control edit" required="true" value="<?php echo $value['nit']; ?>" type="text">
-                                                                <input id="nitActual" name="nitActual" value="<?php echo substr($value['nit'], 0, 4) . "-" . substr($value['nit'], 4, 6) . "-". substr($value['nit'], 10, 3) . "-" . substr($value['nit'], 13, 1); ?>" type="hidden">
+                                                                <input id="nitActual" name="nitActual" value="<?php echo substr($value['nit'], 0, 4) . "-" . substr($value['nit'], 4, 6) . "-" . substr($value['nit'], 10, 3) . "-" . substr($value['nit'], 13, 1); ?>" type="hidden">
                                                                 <span id="existeEditNit" style="color:red"></span>
                                                                 <span id="existeActualNit" style="color:green"></span>
                                                             </div>
@@ -311,20 +311,20 @@
                                                             <input id="idEdit" name="idEdit" min="1" class="form-control" required="true" value="<?php echo $value['id']; ?>" type="hidden">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()"><em class="fa fa-times"></em> Cancelar</button>
                                                             <button type="button" name="editarProveedor" class="btn btn-primary editarProveedor"><em class="fa fa-pencil-square-o"></em> Editar</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
-                                        <?php
+                                            </div>
+                                        </div>
+                                    </div>
+                            <?php
                                             }
                                         }
-                                        ?>
+                            ?>
                             </div>
                         </section>
                         <aside class=" bg-light lter b-l aside-md hide" id="notes"></aside>
-                        </section>
+                    </section>
                 </div>
             </section>
         </section>

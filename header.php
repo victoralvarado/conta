@@ -6,7 +6,7 @@
         </a>
         <a href="index.php" class="navbar-brand" data-toggle="fullscreen"><img src="images/logo.png" class="m-r-sm">HOME</a>
         <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user">
-          <i class="fa fa-cog"></i>
+        <i class="fas fa-user-cog"></i>
         </a>
       </div>
             

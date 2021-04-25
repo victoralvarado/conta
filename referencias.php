@@ -1,7 +1,6 @@
 <?php date_default_timezone_set('America/El_Salvador'); ?>
 <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="css/animate.css" type="text/css" />
-  <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
   <link rel="stylesheet" href="css/font.css" type="text/css" />
   <link rel="stylesheet" href="js/calendar/bootstrap_calendar.css" type="text/css" />
   <link rel="stylesheet" href="css/app.css" type="text/css" />
@@ -41,6 +40,8 @@
   <script type="text/javascript" src="js/responsive.bootstrap4.min.js"></script>
   <link rel="stylesheet" type="text/css" href="pluggins/sweetalert-master/dist/sweetalert.css">
   <script type="text/javascript" src="pluggins/sweetalert-master/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="pluggins/fontawesome5/css/all.css">
+  <script type="text/javascript" src="pluggins/fontawesome5/js/pro.js"></script>
   <style type="text/css">
     div.ex1 {
       width: 100%;

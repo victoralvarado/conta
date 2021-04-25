@@ -95,7 +95,7 @@
                             </table>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-condensed">
-                                <caption>Productos</caption>
+                                    <caption>Productos</caption>
                                     <thead>
                                         <tr>
                                             <th scope="col">Nombre</th>
@@ -126,7 +126,7 @@
                                                     <td>
                                                         <form id="eliEdi" class="well" method="POST" action="controller/productoController.php">
                                                             <input type="hidden" name="idD" id="idD" value="<?php echo $value['id']; ?>">
-                                                            <button type="button" id="eliminar" class="btn btn-danger" ><em class="fa fa-trash-o"></em> Eliminar</button>
+                                                            <button type="button" id="eliminar" class="btn btn-danger"><em class="fa fa-trash-o"></em> Eliminar</button>
                                                             <br>
                                                             <br>
                                                             <a class="btn btn-primary" data-toggle="modal" href="#edit_<?php echo $value['id']; ?>"><em class="fa fa-pencil"></em> Editar</a>

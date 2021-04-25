@@ -82,12 +82,12 @@ $(document).ready(function () {
                 if (response == $("#nrcEdit").val() && response != $("#nrcActual").val()) {
                     $('#existeEdit').text('El NRC ya esta en uso');
                     $('#existeActual').text('');
-                    
+
                 } else if (response == $("#nrcActual").val()) {
                     $('#existeActual').text('Es su NRC actual');
                     $('#existeEdit').text('');
                 } else {
-                    
+
                     $('#existeEdit').text('');
                     $('#existeActual').text('');
                 }
