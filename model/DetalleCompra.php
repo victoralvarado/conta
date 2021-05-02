@@ -1,5 +1,5 @@
 <?php
-require_once ("./config/conexion.php");
+require_once("Conexion.php");
 class DetalleCompra
 {
     private $id;
@@ -7,6 +7,8 @@ class DetalleCompra
     private $producto;
     private $cant;
     private $price;
+    private $estado;
+    private $db;
 
     public function __construct() {
         $this->db = conectar();
@@ -110,5 +112,73 @@ class DetalleCompra
         $this->price = $price;
 
         return $this;
+    }
+
+    /**
+     * Get the value of db
+     */ 
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    /**
+     * Set the value of db
+     *
+     * @return  self
+     */ 
+    public function setDb($db)
+    {
+        $this->db = $db;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of estado
+     */ 
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set the value of estado
+     *
+     * @return  self
+     */ 
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    public function saveDetalleCompra()
+    {
+        $id =0;
+        $sql = $this->db->prepare("INSERT INTO detalle_compra VALUES(?,?,?,?,?,?);");
+        # s = string; i = int; d = decimal
+        $res = $sql->bind_param(
+            'iiiidi',
+            $id,
+            $this->compra,
+            $this->producto,
+            $this->cant,
+            $this->price,
+            $this->estado
+        );
+        $sql->execute();
+        $data = array();
+        if ($res) {
+            $data['estado'] = true;
+            $data['descripcion'] = 'Datos ingresado exitosamente';
+        } else {
+            $data['estado'] = false;
+            $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
+        }
+        $sql->close();
+        $this->db->close();
+        return $data;
     }
 }

@@ -31,14 +31,16 @@
                 <div class="ex1">
                     <section id="content" class="container-fluid">
                         <div class="row">
-                            <form class="well form" method="POST" action="controller/productoController.php" enctype="multipart/form-data">
+                            <form class="well form" method="POST" action="controller/compraController.php" >
                                 <fieldset class="form-group">
                                     <legend class="w-auto">Libro de compras</legend>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Fecha</label>
-                                            <?php $fechaActual = date('Y-m-d'); $horaActual = date('h:i'); $fh = $fechaActual."T".$horaActual;?>
-                                            <input type="datetime-local" class="form-control" value="<?php echo $fh; ?>" required="true">
+                                            <?php $fechaActual = date('Y-m-d');
+                                            $horaActual = date('h:i');
+                                            $fh = $fechaActual . "T" . $horaActual; ?>
+                                            <input name="fecha" type="datetime-local" class="form-control" value="<?php echo $fh; ?>" required="true">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -50,10 +52,10 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label>Tipo</label>
-                                            <select class="form-control" required="true">
+                                            <select name="tipo" class="form-control" required="true">
                                                 <option value="">Seleccionar</option>
-                                                <option value="ccf" title="Comprobante de credixto fiscal">CCF</option>
-                                                <option value="nc" title="Nota de credito">NC</option>
+                                                <option value="1" title="Comprobante de credixto fiscal">CCF</option>
+                                                <option value="0" title="Nota de credito">NC</option>
                                             </select>
                                         </div>
                                     </div>
@@ -68,7 +70,7 @@
                                                 if ($data) {
                                                     foreach ($data as $value) {
                                                 ?>
-                                                        <option id="<?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); ?>" value="<?php echo ucwords(strtolower($value['nombre'])); ?>" title="<?php echo ucwords(strtolower($value['nombre'])); ?>"><?php echo ucwords(strtolower($value['nombre'])); ?></option>
+                                                        <option id="<?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); ?>" value="<?php echo ucwords(strtolower($value['id'])); ?>" title="<?php echo ucwords(strtolower($value['nombre'])); ?>"><?php echo ucwords(strtolower($value['nombre'])); ?></option>
 
                                                 <?php
 
@@ -81,19 +83,19 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label>NRC</label>
-                                            <input type="text" id="nrcProveedor" placeholder="NRC" class="form-control" name="nrcProveedor" required="true" disabled>
+                                            <input type="text" id="nrcProveedor" placeholder="NRC" class="form-control" name="nrcProveedor" required="true" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>NIT</label>
-                                            <input type="text" class="form-control" placeholder="NIT" value="" name="" id="nitProveedor" required="true" disabled>
+                                            <input type="text" class="form-control" placeholder="NIT" value="" name="nitProveedor" id="nitProveedor" required="true" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Clasificacion</label>
-                                            <input type="text" class="form-control" placeholder="Clasificacion" value="" name="" id="clasificacion" required="true" disabled>
+                                            <input type="text" class="form-control" placeholder="Clasificacion" value="" name="clasificacion" id="clasificacion" required="true" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -107,7 +109,7 @@
                                                 if ($data) {
                                                     foreach ($data as $value) {
                                                 ?>
-                                                        <option id="<?php echo $value['codigo']; ?>" value="<?php echo ucwords(strtolower($value['nombre'])); ?>"><?php echo ucwords(strtolower($value['nombre'])); ?></option>
+                                                        <option id="<?php echo $value['codigo']; ?>" value="<?php echo $value['id']; ?>"><?php echo ucwords(strtolower($value['nombre'])); ?></option>
 
                                                 <?php
 
@@ -126,20 +128,28 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Precio</label>
-                                            <input type="number" min="0" value="0" class="form-control mul" name="precio" id="precio" required="true">
+                                            <input type="number" min="1.00" step="any" value="0"  class="form-control mul" name="precio" id="precio" required="true">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Cantidad × Precio</label>
-                                            <input type="number" class="form-control" placeholder="Total" name="cp" id="cp" required="true" disabled>
+                                            <input type="number" class="form-control" value="" placeholder="Total" name="cp" id="cp" required="true" readonly>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <div class="col-md-3"">
+                                    <div class="col-md-2"">
                                         </div>
-                                        <div class=" col-md-6" style="text-align: center;">
+                                        <div class="col-md-3"">
+                                        <label>Condicion de pago</label>
+                                            <select name="condicion" id="condicion" class="form-control" required="true">
+                                                <option id="condi0" value="">Seleccionar</option>
+                                                <option id="condi1" value="1">Contado</option>
+                                                <option id="condi2" value="2">Credito</option>
+                                            </select> 
+                                        </div>
+                                        <div class=" col-md-5" style="text-align: center;">
                                             <label>Tipo de compra</label>
                                             <select name="tCompra" id="tCompra" class="form-control" required="true" disabled="true">
                                                 <option id="c0" value="">Seleccionar</option>
@@ -150,7 +160,7 @@
                                             </select>
                                             <span id="spTipo" style="color:red">Seleccione un contribuyente</span>
                                         </div>
-                                        <div class="col-md-3"">
+                                        <div class="col-md-2"">
                                         </div>
                                     </div>
                                     <div class=" col-md-6">
@@ -160,14 +170,14 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Importacion</label>
-                                                    <input type="number" min="0" class="form-control com" value="0" name="exentas" id="importacionE" disabled required="true">
+                                                    <input type="number" min="0" class="form-control com" value="0" name="exentasIm" id="importacionE" readonly required="true">
                                                     <span class="alert" style="color:red"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Internas</label>
-                                                    <input type="number" min="0" class="form-control com" value="0" name="exentas" id="internasE" disabled required="true">
+                                                    <input type="number" min="0" class="form-control com" value="0" name="exentasIn" id="internasE" readonly required="true">
                                                     <span class="alert" style="color:red"></span>
                                                 </div>
                                             </div>
@@ -179,14 +189,14 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Importacion</label>
-                                                    <input type="number" min="0" class="form-control com gravadas" value="0" name="gravadas" id="importacionG" disabled required="true">
+                                                    <input type="number" min="0" class="form-control com gravadas" value="0" name="gravadasIm" id="importacionG" readonly required="true">
                                                     <span class="alert" style="color:red"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Internas</label>
-                                                    <input type="number" min="0" class="form-control com gravadas" value="0" name="gravadas" id="internasG" disabled required="true">
+                                                    <input type="number" min="0" class="form-control com gravadas" value="0" name="gravadasIn" id="internasG" readonly required="true">
                                                     <span class="alert" style="color:red"></span>
                                                 </div>
                                             </div>
@@ -194,31 +204,31 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>IVA(Credito Fiscal)</label>
-                                                <input type="number" class="form-control" placeholder="(+)IVA Credito Fiscal" name="" id="ivaCF" disabled>
+                                                <input type="number" class="form-control" placeholder="(+)IVA Credito Fiscal" name="ivaCF" id="ivaCF" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>IVA-Percibido</label>
-                                                <input type="number" class="form-control" placeholder="(-)IVA Percibido" name="" id="ivaR" disabled>
+                                                <input type="number" class="form-control" placeholder="(-)IVA Percibido" name="ivaR" id="ivaR" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Total Compras</label>
-                                                <input type="number" class="form-control" placeholder="Total Compras" name="" id="totalCom" disabled>
+                                                <input type="number" class="form-control" placeholder="Total Compras" name="totalCom" id="totalCom" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Compra a sujeto excluido</label>
-                                                <input type="number" id="excluido" class="form-control" name="excluido" disabled>
+                                                <input type="number" id="excluido" class="form-control" name="excluido" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group" style="text-align: center;">
                                                 <input type="hidden" name="user" value="<?php echo $_SESSION['USER']; ?>">
-                                                <button type="submit" id="agregarCompra" class="btn btn-primary"><em class="fa fa-plus"></em> Agregar Compra</button>
+                                                <button type="submit" id="agregarCompra" name="agregarCompra" class="btn btn-primary"><em class="fa fa-plus"></em> Agregar Compra</button>
                                                 <button type="reset" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Limpiar cajas de texto"><em class="fa fa-eraser"></em> Limpiar</button>
                                             </div>
                                         </div>
@@ -256,30 +266,50 @@
                                     $objC = new Compra();
                                     $data = $objC->getAllCompras();
                                     if ($data) {
+                                        
                                         foreach ($data as $value) {
                                     ?>
                                             <tr>
 
                                                 <td><?php echo $value['fecha']; ?></td>
-                                                <td><?php echo $value['tipo']; ?><?php echo $value['numero_comprobante']; ?></td>
-                                                <td><?php echo $value['nrc']; ?></td>
-                                                <td><?php echo $value['nit']; ?></td>
-                                                <td><?php echo $value['proveedor']; ?></td>
-                                                <td><?php echo $value['exentas_importacion']; ?></td>
-                                                <td><?php echo $value['exentas_internas']; ?></td>
-                                                <td><?php echo $value['gravadas_importacion']; ?></td>
-                                                <td><?php echo $value['gravadas_internas']; ?></td>
-                                                <td><?php echo $value['iva']; ?></td>
-                                                <td><?php echo $value['retencion']; ?></td>
-                                                <td><?php echo $value['sujeto_excluido']; ?></td>
+                                                <td><?php echo strtoupper($value['tipo'])."".$value['numero_comprobante']; ?></td>
                                                 <td>
-                                                <form action="">
-                                                    <button type="submit" name="editarCompra"><em class="fa fa-pencil"></em> Editar</button>
-                                                </form>
+                                                <?php
+                                                        if ($value['nrc'] == '') {
+                                                            $value['nrc'];
+                                                        } else {
+                                                            echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1);
+                                                            #Mostrando nrc con guion
+                                                        }
+                                                        ?>
+                                                </td>
+                                                <td><?php if($value['nit']==''){
+                                                 $value['nit'];   
+                                                } else {
+                                                    echo substr($value['nit'], 0, 4) . "-" . substr($value['nit'], 4, 6) . "-"
+                                                            . substr($value['nit'], 10, 3) . "-" . substr($value['nit'], 13, 1);
+                                                        
+                                                } ?></td>
+                                                <td><?php echo $value['nombre']; ?></td>
+                                                <td>$<?php echo $value['exentas_importacion']; ?></td>
+                                                <td>$<?php echo $value['exentas_internas']; ?></td>
+                                                <td>$<?php echo $value['gravadas_importacion']; ?></td>
+                                                <td>$<?php echo $value['gravadas_internas']; ?></td>
+                                                <td>$<?php echo $value['iva']; ?></td>
+                                                <td>$<?php echo $value['retencion']; ?></td>
+                                                <td>$<?php echo $value['totalCompras']; ?></td>
+                                                <td>$<?php echo $value['sujeto_excluido']; ?></td>
+                                                <td>
+                                                    <form action="">
+                                                        <button type="submit" name="editarCompra" class="btn btn-primary"><em class="fa fa-pencil"></em> Editar</button>
+                                                    </form>
+                                                    <br>
                                                 </td>
                                             </tr>
                                     <?php
                                         }
+                                    } else {
+                                        echo "NADA";
                                     }
                                     ?>
                                 </tbody>
