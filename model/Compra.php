@@ -208,20 +208,6 @@ class Compra
         return $this;
     }
 
-    public function getAllCompras()
-    {
-        $sqlAll = $this->db->prepare("SELECT c.*, dc.* FROM Compra c INNER JOIN Detalle_Compra dc ON c.id = dc.compra;");
-        $info = $this->db->query($sqlAll);
-        if ($info->num_rows > 0) {
-
-            $dato = $info;
-        } else {
-
-            $dato = false;
-        }
-        return $dato;
-    }
-
     /**
      * Get the value of sujeto_excluido
      */
@@ -452,13 +438,14 @@ class Compra
         mysqli_stmt_close($sql);
         return $res;
     }
-    public function saveProducto()
+    public function saveCompra()
     {
-        $sql = $this->db->prepare("INSERT INTO Compra(afectas,iva,retencion,proveedor,fecha,registrado_por,condiciones,estado,tipo,numero_comprobante
-        nit,nrc,exentas_importacion,exentas_internas,gravadas_importacion,gravadas_internas,sujeto_excluido,totalCompras) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+        $id =0;
+        $sql = $this->db->prepare("INSERT INTO Compra VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
         # s = string; i = int; d = decimal
         $res = $sql->bind_param(
-            'dddsssiissssdddddd',
+            'idddissiiissdsddddd',
+            $id,
             $this->afectas,
             $this->iva,
             $this->retencion,
@@ -470,12 +457,12 @@ class Compra
             $this->tipo,
             $this->numero_comprobante,
             $this->nit,
+            $this->sujeto_excluido,
             $this->nrc,
             $this->exentas_importacion,
             $this->exentas_internas,
             $this->gravadas_importacion,
             $this->gravadas_internas,
-            $this->sujeto_excluido,
             $this->totalCompras
         );
         $sql->execute();
@@ -487,8 +474,29 @@ class Compra
             $data['estado'] = false;
             $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
         }
-        $sql->close();
-        $this->db->close();
         return $data;
+    }
+
+    public function ultmimoId()
+    {
+        $info = $this->db->prepare("SELECT MAX(id) FROM compra;");
+        $info->execute();
+        $resultado = $info->get_result();
+        $fila = $resultado->fetch_assoc();
+        return $fila['MAX(id)'];
+    }
+
+    public function getAllCompras()
+    {
+        $sqlAll = "SELECT c.*, dc.*,p.nombre FROM compra c INNER JOIN detalle_compra dc ON c.id = dc.compra INNER JOIN proveedor p ON c.proveedor=p.id;";
+        $info = $this->db->query($sqlAll);
+        if ($info->num_rows > 0) {
+
+            $dato = $info;
+        } else {
+
+            $dato = false;
+        }
+        return $dato;
     }
 }

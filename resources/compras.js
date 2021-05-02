@@ -184,7 +184,7 @@ $(document).ready(function () {
             $('#cp').val(mul);
         } else {
             mul = precio * cantidad;
-            $('#cp').val(mul.toFixed(2));
+            $('#cp').prop('value',mul.toFixed(2));
             var clasificacion = $("#clasificacion").val();
             if (clasificacion == 'Ninguno') {
                 $('#excluido').val(mul.toFixed(2));
