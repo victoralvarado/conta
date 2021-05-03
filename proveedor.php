@@ -149,7 +149,7 @@
                                                         }
                                                         ?>
                                                     </td>
-                                                    <td><?php echo ucwords(strtolower($value['nombre'])); ?></td>
+                                                    <td><?php echo strtoupper($value['nombre']); ?></td>
                                                     <td><?php echo ucwords(strtolower($value['razon_social'])); ?></td>
                                                     <td><?php echo ucwords(strtolower($value['direccion'])); ?></td>
                                                     <td><?php echo $value['telefono']; ?></td>

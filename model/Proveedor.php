@@ -331,4 +331,18 @@ class Proveedor
         $this->db->close();
         return $data;
     }
+
+    public function getOneProveedor($id)
+    {
+        $sqlOne = "SELECT * FROM Proveedor WHERE id=".$id.";";
+        $info = $this->db->query($sqlOne);
+        if ($info->num_rows > 0) {
+
+            $dato = $info;
+        } else {
+
+            $dato = false;
+        }
+        return $dato;
+    }
 }

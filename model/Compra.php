@@ -499,4 +499,17 @@ class Compra
         }
         return $dato;
     }
+    public function getOneCompra($id)
+    {
+        $sqlAll = "SELECT c.*, dc.*, p.tipo as 'tipoP',p.clasificacion,p.nit,p.nrc,p.nombre,p.razon_social,p.direccion,p.telefono, pr.nombre as 'nombrep' FROM compra c INNER JOIN detalle_compra dc ON c.id = dc.compra INNER JOIN proveedor p ON c.proveedor=p.id INNER JOIN producto pr ON pr.id = dc.producto where c.id =".$id.";";
+        $info = $this->db->query($sqlAll);
+        if ($info->num_rows > 0) {
+
+            $dato = $info;
+        } else {
+
+            $dato = false;
+        }
+        return $dato;
+    }
 }
