@@ -10,13 +10,14 @@ class DetalleCompra
     private $estado;
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = conectar();
     }
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -26,7 +27,7 @@ class DetalleCompra
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -36,7 +37,7 @@ class DetalleCompra
 
     /**
      * Get the value of compra
-     */ 
+     */
     public function getCompra()
     {
         return $this->compra;
@@ -46,7 +47,7 @@ class DetalleCompra
      * Set the value of compra
      *
      * @return  self
-     */ 
+     */
     public function setCompra($compra)
     {
         $this->compra = $compra;
@@ -56,7 +57,7 @@ class DetalleCompra
 
     /**
      * Get the value of producto
-     */ 
+     */
     public function getProducto()
     {
         return $this->producto;
@@ -66,7 +67,7 @@ class DetalleCompra
      * Set the value of producto
      *
      * @return  self
-     */ 
+     */
     public function setProducto($producto)
     {
         $this->producto = $producto;
@@ -76,7 +77,7 @@ class DetalleCompra
 
     /**
      * Get the value of cant
-     */ 
+     */
     public function getCant()
     {
         return $this->cant;
@@ -86,7 +87,7 @@ class DetalleCompra
      * Set the value of cant
      *
      * @return  self
-     */ 
+     */
     public function setCant($cant)
     {
         $this->cant = $cant;
@@ -96,7 +97,7 @@ class DetalleCompra
 
     /**
      * Get the value of price
-     */ 
+     */
     public function getPrice()
     {
         return $this->price;
@@ -106,7 +107,7 @@ class DetalleCompra
      * Set the value of price
      *
      * @return  self
-     */ 
+     */
     public function setPrice($price)
     {
         $this->price = $price;
@@ -116,7 +117,7 @@ class DetalleCompra
 
     /**
      * Get the value of db
-     */ 
+     */
     public function getDb()
     {
         return $this->db;
@@ -126,7 +127,7 @@ class DetalleCompra
      * Set the value of db
      *
      * @return  self
-     */ 
+     */
     public function setDb($db)
     {
         $this->db = $db;
@@ -136,7 +137,7 @@ class DetalleCompra
 
     /**
      * Get the value of estado
-     */ 
+     */
     public function getEstado()
     {
         return $this->estado;
@@ -146,7 +147,7 @@ class DetalleCompra
      * Set the value of estado
      *
      * @return  self
-     */ 
+     */
     public function setEstado($estado)
     {
         $this->estado = $estado;
@@ -156,7 +157,7 @@ class DetalleCompra
 
     public function saveDetalleCompra()
     {
-        $id =0;
+        $id = 0;
         $sql = $this->db->prepare("INSERT INTO detalle_compra VALUES(?,?,?,?,?,?);");
         # s = string; i = int; d = decimal
         $res = $sql->bind_param(
@@ -185,12 +186,14 @@ class DetalleCompra
     public function updateDetalleCompra()
     {
         $sql = $this->db->prepare("UPDATE detalle_compra SET producto = ?, cant = ?, price = ?, estado = ? WHERE compra = ?;");
-        $res = $sql->bind_param('iidii',
-        $this->producto,
-        $this->cant,
-        $this->price,
-        $this->estado, 
-        $this->compra);
+        $res = $sql->bind_param(
+            'iidii',
+            $this->producto,
+            $this->cant,
+            $this->price,
+            $this->estado,
+            $this->compra
+        );
         $sql->execute();
         $data = array();
         if ($res) {

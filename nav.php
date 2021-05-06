@@ -147,25 +147,25 @@
                     <li class="<?php echo $activeProducto;?>">
                       <a href="producto.php"  >
                         <i class="fas fa-barcode-alt icon">
-                          <b class="bg-success"></b>
+                          <b class="bg-info"></b>
                         </i>
                         <span>Producto</span>
                       </a>
                     </li>
                     <li class="<?php echo $activeProveedor;?>">
                       <a href="proveedor.php"  >
-                      <i class="fas fa-store"></i>
-                          <b class="bg-success"></b>
+                      <i class="fas fa-store icon">
+                          <b class="bg-info"></b>
                         </i>
                         <span>Proveedor</span>
                       </a>
                     </li>
                     <li class="<?php echo $activeCompra;?>" >
                       <a href="compra.php"  >
-                      <i class="fas fa-dolly-flatbed-alt"></i>
-                          <b class="bg-primary"></b>
+                      <i class="fas fa-dolly-flatbed-alt icon">
+                          <b class="bg-info"></b>
                         </i>
-                        <span>Compras</span>
+                        <span>Compra</span>
                       </a>
                       
                     </li>
@@ -208,12 +208,12 @@
                         </li>
                       </ul>
                     </li>-->
-                    <li>
-                      <a href="#"  >
-                        <i class="fas fa-file-alt icon">
+                    <li class="<?php echo $activeVenta;?>">
+                      <a href="venta.php"  >
+                      <i class="fas fa-badge-dollar">
                           <b class="bg-info"></b>
                         </i>
-                        <span>Item 5</span>
+                        <span>Venta</span>
                       </a>
                     </li>
                   </ul>

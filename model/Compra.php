@@ -440,7 +440,7 @@ class Compra
     }
     public function saveCompra()
     {
-        $id =0;
+        $id = 0;
         $sql = $this->db->prepare("INSERT INTO Compra VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
         # s = string; i = int; d = decimal
         $res = $sql->bind_param(
@@ -501,7 +501,7 @@ class Compra
     }
     public function getOneCompra($id)
     {
-        $sqlAll = "SELECT c.id as 'idcompra',c.*, dc.*, p.tipo as 'tipoP',p.clasificacion,p.nit,p.nrc,p.nombre,p.razon_social,p.direccion,p.telefono, pr.nombre as 'nombrep' FROM compra c INNER JOIN detalle_compra dc ON c.id = dc.compra INNER JOIN proveedor p ON c.proveedor=p.id INNER JOIN producto pr ON pr.id = dc.producto where c.id =".$id.";";
+        $sqlAll = "SELECT c.id as 'idcompra',c.*, dc.*, p.tipo as 'tipoP',p.clasificacion,p.nit,p.nrc,p.nombre,p.razon_social,p.direccion,p.telefono, pr.nombre as 'nombrep' FROM compra c INNER JOIN detalle_compra dc ON c.id = dc.compra INNER JOIN proveedor p ON c.proveedor=p.id INNER JOIN producto pr ON pr.id = dc.producto where c.id =" . $id . ";";
         $info = $this->db->query($sqlAll);
         if ($info->num_rows > 0) {
 
@@ -516,26 +516,28 @@ class Compra
     public function updateCompra()
     {
         $sql = $this->db->prepare("UPDATE Compra SET afectas = ?, iva = ?, retencion = ?, proveedor = ?, fecha = ?, registrado_por = ?, condiciones = ?, estado = ?, tipo = ?, numero_comprobante = ?, nit = ?, sujeto_excluido = ?, nrc = ?, exentas_importacion = ?, exentas_internas = ?, gravadas_importacion = ?, gravadas_internas = ?, totalCompras = ? WHERE id = ?;");
-        $res = $sql->bind_param('dddissiiissdsdddddi',
-        $this->afectas,
-        $this->iva,
-        $this->retencion,
-        $this->proveedor,
-        $this->fecha,
-        $this->registrado_por,
-        $this->condiciones,
-        $this->estado,
-        $this->tipo,
-        $this->numero_comprobante,
-        $this->nit,
-        $this->sujeto_excluido,
-        $this->nrc,
-        $this->exentas_importacion,
-        $this->exentas_internas,
-        $this->gravadas_importacion,
-        $this->gravadas_internas,
-        $this->totalCompras, 
-        $this->id);
+        $res = $sql->bind_param(
+            'dddissiiissdsdddddi',
+            $this->afectas,
+            $this->iva,
+            $this->retencion,
+            $this->proveedor,
+            $this->fecha,
+            $this->registrado_por,
+            $this->condiciones,
+            $this->estado,
+            $this->tipo,
+            $this->numero_comprobante,
+            $this->nit,
+            $this->sujeto_excluido,
+            $this->nrc,
+            $this->exentas_importacion,
+            $this->exentas_internas,
+            $this->gravadas_importacion,
+            $this->gravadas_internas,
+            $this->totalCompras,
+            $this->id
+        );
         $sql->execute();
         $data = array();
         if ($res) {

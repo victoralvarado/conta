@@ -42,7 +42,7 @@
                             ?>
                                         <form class="well form" method="POST" id="modificar" action="controller/compraController.php">
                                             <fieldset class="form-group">
-                                                <legend class="w-auto">Modificar libro de compras</legend>
+                                                <legend class="w-auto">Modificar compra</legend>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Fecha</label>
@@ -320,7 +320,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Compra a sujeto excluido</label>
-                                                            <input type="number" id="excluido" step="any"  min="0.00" value="0.00" class="form-control" name="excluido" readonly>
+                                                            <input type="number" id="excluido" step="any" min="0.00" value="0.00" class="form-control" name="excluido" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
