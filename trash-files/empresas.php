@@ -83,8 +83,8 @@
                             <input type='button' class='btn-success btn-sm editarEmp' id='".$value['id']."' value='Editar'>
                             <input type='button' class='btn-primary btn-sm clEmp' id='".$value['id']."' value='Cambiar logo'>
                             <input type='button' class='btn-primary btn-sm cbEmp' id='".$value['id']."' value='Cambiar banner'>
-                            <input type='button' class='btn-danger btn-sm eliminarEmp' id='".$value['id']."' value='Desactivar'>
-                            <input type='button' class='btn-success btn-sm reacEmp' id='".$value['id']."' value='Activar'>
+                            <input type='button' class='btn-danger btn-sm eliminarEmp' id='".$value['id']."' value='DesactivaR'>
+                            <input type='button' class='btn-success btn-sm reacEmp' id='".$value['id']."' value='ActivaR'>
                           </td>
                       </tr>";
 					  }

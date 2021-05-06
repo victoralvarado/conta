@@ -33,7 +33,7 @@
                         <div class="row">
                             <form class="well form" method="POST" action="controller/compraController.php">
                                 <fieldset class="form-group">
-                                    <legend class="w-auto">Libro de compras</legend>
+                                    <legend class="w-auto">Compras</legend>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Fecha</label>
@@ -204,13 +204,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>IVA(Credito Fiscal)</label>
-                                                <input type="number" value="0.00" class="form-control" placeholder="(+)IVA Credito Fiscal" name="ivaCF" id="ivaCF" readonly>
+                                                <input type="number" value="0.00" class="form-control" placeholder="IVA Credito Fiscal" name="ivaCF" id="ivaCF" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>IVA-Retención</label>
-                                                <input type="number" value="0.00" class="form-control" placeholder="(-)IVA Retención" name="ivaR" id="ivaR" readonly>
+                                                <label>IVA-Retenido</label>
+                                                <input type="number" value="0.00" class="form-control" placeholder="IVA Retenido" name="ivaR" id="ivaR" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">

@@ -85,7 +85,7 @@ $(document).ready(function () {
                     $('.alert').text('Seleccione un contribuyente');
                 } else {
                     $('.alert').text('');
-                    sum = (inG + imG + imE + inE + ivaCF) - ivaR;
+                    sum = (inG + imG + imE + inE + ivaCF) + ivaR;
                     $('#ivaCF').val(ivaCF.toFixed(2));
                     $('#ivaR').val(ivaR.toFixed(2));
                     $('#totalCom').val(sum.toFixed(2));

@@ -154,7 +154,7 @@
                     </li>
                     <li class="<?php echo $activeProveedor;?>">
                       <a href="proveedor.php"  >
-                        <i class="fa fa-truck icon">
+                      <i class="fas fa-store"></i>
                           <b class="bg-success"></b>
                         </i>
                         <span>Proveedor</span>
@@ -162,10 +162,10 @@
                     </li>
                     <li class="<?php echo $activeCompra;?>" >
                       <a href="compra.php"  >
-                        <i class="fa fa-th-list icon">
+                      <i class="fas fa-dolly-flatbed-alt"></i>
                           <b class="bg-primary"></b>
                         </i>
-                        <span>Libro de compras</span>
+                        <span>Compras</span>
                       </a>
                       
                     </li>

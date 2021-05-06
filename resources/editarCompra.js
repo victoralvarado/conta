@@ -90,4 +90,31 @@ $(document).ready(function(){
         $('#ivaR').val($('#ivaRTemp').val());
         $('#ivaCF').val($('#ivaCFTemp').val());
         $('#totalCom').val($('#totalComTemp').val());
+
+        $(document).on("click", "#modificarCompra", function () {
+            swal({
+                title: "Modificar",
+                text: "¿Estás seguro que desea modificar la compra?",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Continuar",
+                closeOnConfirm: false
+            },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        swal({
+                            title: "Modificado",
+                            text: "Modificaste la compra!",
+                            type: "success",
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        });
+                        setTimeout(function () {
+                            $("#modificar").submit();
+                        }, 1100);
+                    }
+                });
+        });
 });
