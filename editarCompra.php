@@ -40,7 +40,7 @@
                                 if ($data) {
                                     foreach ($data as $value) {
                             ?>
-                                        <form class="well form" method="POST" action="controller/compraController.php">
+                                        <form class="well form" method="POST" id="modificar" action="controller/compraController.php">
                                             <fieldset class="form-group">
                                                 <legend class="w-auto">Modificar libro de compras</legend>
                                                 <div class="col-md-6">
@@ -52,7 +52,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Numero de Comprobante</label>
-                                                        <input type="number" class="form-control" placeholder="Numero de comprobante" value="<?php echo $value['numero_comprobante']; ?>" name="comprobante" readonly required="true">
+                                                        <input type="number" class="form-control" placeholder="Numero de comprobante" value="<?php echo $value['numero_comprobante']; ?>" name="comprobante" required="true">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
@@ -187,7 +187,7 @@
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Cantidad × Precio</label>
-                                                        <input type="number" class="form-control" value="<?php echo ($value['price'] * $value['cant']); ?>" placeholder="Total" name="cp" id="cp" required="true" readonly>
+                                                        <input type="number" class="form-control" step="any" value="<?php echo ($value['price'] * $value['cant']); ?>" placeholder="Total" name="cp" id="cp" required="true" readonly>
                                                     </div>
                                                 </div>
 
@@ -265,14 +265,14 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>Importacion</label>
-                                                                <input type="number" min="0" class="form-control com" value="0.00" name="exentasIm" id="importacionE" readonly required="true">
+                                                                <input type="number" min="0.00" step="any" class="form-control com" value="0.00" name="exentasIm" id="importacionE" readonly required="true">
                                                                 <span class="alert" style="color:red"></span>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>Internas</label>
-                                                                <input type="number" min="0" class="form-control com" value="0.00" name="exentasIn" id="internasE" readonly required="true">
+                                                                <input type="number" min="0.00" step="any" class="form-control com" value="0.00" name="exentasIn" id="internasE" readonly required="true">
                                                                 <span class="alert" style="color:red"></span>
                                                             </div>
                                                         </div>
@@ -284,14 +284,14 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>Importacion</label>
-                                                                <input type="number" min="0" class="form-control com gravadas" value="0.00" name="gravadasIm" id="importacionG" readonly required="true">
+                                                                <input type="number" min="0.00" step="any" class="form-control com gravadas" value="0.00" name="gravadasIm" id="importacionG" readonly required="true">
                                                                 <span class="alert" style="color:red"></span>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>Internas</label>
-                                                                <input type="number" min="0" class="form-control com gravadas" value="0.00" name="gravadasIn" id="internasG" readonly required="true">
+                                                                <input type="number" min="0.00" step="any" class="form-control com gravadas" value="0.00" name="gravadasIn" id="internasG" readonly required="true">
                                                                 <span class="alert" style="color:red"></span>
                                                             </div>
                                                         </div>
@@ -299,34 +299,35 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>IVA(Credito Fiscal)</label>
-                                                            <input type="hidden" id="ivaCFTemp" value="<?php echo $value['iva']; ?>">
-                                                            <input type="number" class="form-control" value="0.00" placeholder="(+)IVA Credito Fiscal" name="ivaCF" id="ivaCF" readonly>
+                                                            <input type="hidden" id="ivaCFTemp" step="any" min="0.00" value="<?php echo $value['iva']; ?>">
+                                                            <input type="number" class="form-control" step="any" min="0.00" value="0.00" placeholder="IVA Credito Fiscal" name="ivaCF" id="ivaCF" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>IVA-Retención</label>
-                                                            <input type="hidden" id="ivaRTemp" value="<?php echo $value['retencion']; ?>">
-                                                            <input type="number" class="form-control" value="0.00" placeholder="(-)IVA Retención" name="ivaR" id="ivaR" readonly>
+                                                            <label>IVA-Retenido</label>
+                                                            <input type="hidden" id="ivaRTemp" step="any" min="0.00" value="<?php echo $value['retencion']; ?>">
+                                                            <input type="number" class="form-control" step="any" min="0.00" value="0.00" placeholder="IVA Retenido" name="ivaR" id="ivaR" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Total Compras</label>
-                                                            <input type="hidden" id="totalComTemp" value="<?php echo $value['totalCompras']; ?>">
-                                                            <input type="number" class="form-control" value="0.00" placeholder="Total Compras" name="totalCom" id="totalCom" readonly>
+                                                            <input type="hidden" id="totalComTemp" step="any" min="0.00" value="<?php echo $value['totalCompras']; ?>">
+                                                            <input type="number" class="form-control" step="any" min="0.00" value="0.00" placeholder="Total Compras" name="totalCom" id="totalCom" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Compra a sujeto excluido</label>
-                                                            <input type="number" id="excluido" value="0.00" class="form-control" name="excluido" readonly>
+                                                            <input type="number" id="excluido" step="any"  min="0.00" value="0.00" class="form-control" name="excluido" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group" style="text-align: center;">
                                                             <input type="hidden" name="user" value="<?php echo $_SESSION['USER']; ?>">
-                                                            <button type="submit" id="agregarCompra" name="modificarCompra" class="btn btn-primary"><i class="fas fa-file-edit"></i> Modificar Compra</button>
+                                                            <input type="hidden" name="idCompra" value="<?php echo $value['idcompra']; ?>">
+                                                            <button type="button" id="modificarCompra" name="modificarCompra" class="btn btn-primary"><i class="fas fa-file-edit"></i> Modificar Compra</button>
                                                             <a href="compra.php" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Volver al libro de compras"><i class="fas fa-reply-all"></i> Cancelar</a>
                                                         </div>
                                                     </div>

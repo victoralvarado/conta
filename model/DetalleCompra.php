@@ -181,4 +181,27 @@ class DetalleCompra
         $this->db->close();
         return $data;
     }
+
+    public function updateDetalleCompra()
+    {
+        $sql = $this->db->prepare("UPDATE detalle_compra SET producto = ?, cant = ?, price = ?, estado = ? WHERE compra = ?;");
+        $res = $sql->bind_param('iidii',
+        $this->producto,
+        $this->cant,
+        $this->price,
+        $this->estado, 
+        $this->compra);
+        $sql->execute();
+        $data = array();
+        if ($res) {
+            $data['estado'] = true;
+            $data['descripcion'] = 'Datos ingresado exitosamente';
+        } else {
+            $data['estado'] = false;
+            $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
+        }
+        $sql->close();
+        $this->db->close();
+        return $data;
+    }
 }
