@@ -23,6 +23,7 @@
                 $activeIva = "";
                 $activeCompra = "";
                 $activeProveedor = "";
+                $activeVenta = "";
                 include("nav.php");
                 ?>
                 <div class="ex1">
