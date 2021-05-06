@@ -15,7 +15,7 @@ function insertCompra()
     $objC->setIva($_POST['ivaCF']);
     $objC->setretencion($_POST['ivaR']);
     $objC->setProveedor($_POST['contribuyente']);
-    $objC->setFecha(str_replace("T", " ",$_POST['fecha'].':00'));
+    $objC->setFecha(str_replace("T", " ", $_POST['fecha'] . ':00'));
     $objC->setRegistrado_por($nombreUser);
     $objC->setCondiciones($_POST['condicion']);
     $objC->setEstado(1);
@@ -59,7 +59,7 @@ function editCompra()
     $objC->setIva($_POST['ivaCF']);
     $objC->setretencion($_POST['ivaR']);
     $objC->setProveedor($_POST['contribuyente']);
-    $objC->setFecha(str_replace("T", " ",$_POST['fecha'].':00'));
+    $objC->setFecha(str_replace("T", " ", $_POST['fecha'] . ':00'));
     $objC->setRegistrado_por($nombreUser);
     $objC->setCondiciones($_POST['condicion']);
     $objC->setEstado(1);

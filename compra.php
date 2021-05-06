@@ -33,7 +33,7 @@
                         <div class="row">
                             <form class="well form" method="POST" action="controller/compraController.php">
                                 <fieldset class="form-group">
-                                    <legend class="w-auto">Compras</legend>
+                                    <legend class="w-auto">Compra</legend>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Fecha</label>
