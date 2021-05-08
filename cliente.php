@@ -19,8 +19,8 @@
        $activeIva = "";
        $activeProveedor = "";
        $activeCompra = "";
-       $activeVenta = "active";
-       $activeCliente = "";
+       $activeVenta = "";
+       $activeCliente = "active";
        $activelc = "";
        $activev = "";
        $activevc = "";

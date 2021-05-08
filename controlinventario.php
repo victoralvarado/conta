@@ -19,13 +19,13 @@
        $activeIva = "";
        $activeProveedor = "";
        $activeCompra = "";
-       $activeVenta = "active";
+       $activeVenta = "";
        $activeCliente = "";
        $activelc = "";
        $activev = "";
        $activevc = "";
        $activeiva = "";
-       $activeControl = "";
+       $activeControl = "active";
        include("nav.php"); ?>  
         <div class="ex1">
            <section id="content" class="container-fluid">

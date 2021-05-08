@@ -94,7 +94,7 @@ $(document).ready(function () {
     $(document).on("click", "#modificarCompra", function () {
         swal({
             title: "Modificar",
-            text: "¿Estás seguro que desea modificar la compra?",
+            text: "¿Estás seguro que deseas modificar la compra?",
             type: "warning",
             showCancelButton: true,
             cancelButtonText: "Cancelar",

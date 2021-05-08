@@ -24,6 +24,12 @@
                 $activeCompra = "";
                 $activeProveedor = "active";
                 $activeVenta = "";
+                $activeCliente = "";
+                $activelc = "";
+                $activev = "";
+                $activevc = "";
+                $activeiva = "";
+                $activeControl = "";
                 include("nav.php");
                 ?>
                 <div class="ex1">
@@ -162,7 +168,7 @@
                                                                 $(document).on("click", "#eliminar<?php echo $value['id']; ?>", function() {
                                                                     swal({
                                                                             title: "Eliminar",
-                                                                            text: "¿Estás seguro que desea eliminar el proveedor?",
+                                                                            text: "¿Estás seguro que deseas eliminar el proveedor?",
                                                                             type: "warning",
                                                                             showCancelButton: true,
                                                                             cancelButtonText: "Cancelar",
@@ -345,7 +351,7 @@
                                                             $(document).on("click", "#editarProv<?php echo $value['id']; ?>", function() {
                                                                 swal({
                                                                         title: "Editar",
-                                                                        text: "¿Estás seguro que desea editar el proveedor?",
+                                                                        text: "¿Estás seguro que deseas editar el proveedor?",
                                                                         type: "warning",
                                                                         showCancelButton: true,
                                                                         cancelButtonText: "Cancelar",

@@ -22,7 +22,13 @@
           $activeProveedor = "";
           $activeCompra = "";
           $activeVenta = "";
-          include("nav.php"); 
+          $activeCliente = "";
+          $activelc = "";
+          $activev = "";
+          $activevc = "";
+          $activeiva = "";
+          $activeControl = "";
+          include("nav.php");
           ?>
         <div class="ex1">
           <section id="content" class="container-fluid">

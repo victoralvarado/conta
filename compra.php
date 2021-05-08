@@ -27,6 +27,12 @@
                 $activeProveedor = "";
                 $activeCompra = "active";
                 $activeVenta = "";
+                $activeCliente = "";
+                $activelc = "";
+                $activev = "";
+                $activevc = "";
+                $activeiva = "";
+                $activeControl = "";
                 include("nav.php");
                 ?>
                 <div class="ex1">

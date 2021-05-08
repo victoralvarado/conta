@@ -24,6 +24,12 @@
                 $activeCompra = "";
                 $activeProveedor = "";
                 $activeVenta = "";
+                $activeCliente = "";
+                $activelc = "";
+                $activev = "";
+                $activevc = "";
+                $activeiva = "";
+                $activeControl = "";
                 include("nav.php");
                 ?>
                 <div class="ex1">
@@ -202,7 +208,7 @@
                                                             $(document).on("click", "#eliminar<?php echo $value['id']; ?>", function() {
                                                                 swal({
                                                                         title: "Eliminar",
-                                                                        text: "¿Estás seguro que desea eliminar el producto?",
+                                                                        text: "¿Estás seguro que deseas eliminar el producto?",
                                                                         type: "warning",
                                                                         showCancelButton: true,
                                                                         cancelButtonText: "Cancelar",
@@ -228,7 +234,7 @@
                                                             $(document).on("click", "#editarPro<?php echo $value['id']; ?>", function() {
                                                                 swal({
                                                                         title: "Editar",
-                                                                        text: "¿Estás seguro que desea editar el producto?",
+                                                                        text: "¿Estás seguro que deseas editar el producto?",
                                                                         type: "warning",
                                                                         showCancelButton: true,
                                                                         cancelButtonText: "Cancelar",
