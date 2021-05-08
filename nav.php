@@ -4,26 +4,6 @@
 
      <section class="w-f scrollable">
        <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333">
-         <script>
-           $(document).ready(function() {
-
-             $("#hoverlc").click(function() {
-               $("#changelc").attr("class", "fas fa-book-open icon");
-               $("#changev").attr("class", "fas fa-book icon");
-               $("#changevc").attr("class", "fas fa-book icon");
-             });
-             $("#hoverv").click(function() {
-               $("#changelc").attr("class", "fas fa-book icon");
-               $("#changev").attr("class", "fas fa-book-open icon");
-               $("#changevc").attr("class", "fas fa-book icon");
-             });
-             $("#hovervc").click(function() {
-               $("#changelc").attr("class", "fas fa-book icon");
-               $("#changev").attr("class", "fas fa-book icon");
-               $("#changevc").attr("class", "fas fa-book-open icon");
-             });
-           });
-         </script>
          <!-- nav -->
          <nav class="nav-primary hidden-xs">
            <ul class="nav">
@@ -186,7 +166,14 @@
                  </i>
                  <span>Compra</span>
                </a>
-
+             </li>
+             <li class="<?php echo $activeCliente; ?>">
+               <a href="cliente.php">
+                 <i class="fas fa-users icon">
+                   <b class="bg-info"></b>
+                 </i>
+                 <span>Cliente</span>
+               </a>
              </li>
              <li class="<?php echo $activeVenta; ?>">
                <a href="venta.php">
@@ -196,7 +183,7 @@
                  <span>Venta</span>
                </a>
              </li>
-             <li>
+             <li class="<?php echo $activeiva; ?>">
                <a href="#">
                  <i class="fas fa-books">
                    <b class="bg-primary dker"></b>
@@ -208,28 +195,28 @@
                  <span>Libros IVA</span>
                </a>
                <ul class="nav lt">
-                 <li id="hoverlc">
-                   <a href="#">
+                 <li id="hoverlc" class="<?php echo $activelc; ?>">
+                   <a href="librocompras.php">
                      <i id="changelc" class="fas fa-book icon"></i>
                      <span>Libro de compras</span>
                    </a>
                  </li>
-                 <li id="hoverv">
-                   <a href="#">
+                 <li id="hoverv" class="<?php echo $activev; ?>">
+                   <a href="ventascontribuyente.php">
                      <i id="changev" class="fas fa-book icon"></i>
                      <span>Ventas a contribuyentes</span>
                    </a>
                  </li>
-                 <li id="hovervc">
-                   <a href="#">
+                 <li id="hovervc" class="<?php echo $activevc; ?>">
+                   <a href="ventasconsumidor.php">
                      <i id="changevc" class="fas fa-book icon"></i>
                      <span>Ventas consumidor</span>
                    </a>
                  </li>
                </ul>
              </li>
-             <li>
-               <a href="#">
+             <li class="<?php echo $activeControl; ?>">
+               <a href="controlinventario.php">
                  <i class="fas fa-clipboard-list">
                    <b class="bg-info"></b>
                  </i>
