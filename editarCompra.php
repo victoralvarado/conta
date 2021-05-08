@@ -47,7 +47,12 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Fecha</label>
-                                                        <input name="fecha" type="datetime-local" class="form-control" value="<?php echo substr(str_replace(" ", "T", $value['fecha']), 0, 16); ?>" required="true">
+                                                        <?php
+                                                        $fechaActual = date('Y-m-d');
+                                                        $max = $fechaActual . "T23:59";
+                                                        $min = strtotime('-60 day', strtotime($fechaActual));
+                                                        $min = date('Y-m-d', $min); ?>
+                                                        <input name="fecha" max="<?php echo $max; ?>" min="<?php echo $min . "T00:00"; ?>" type="datetime-local" class="form-control" value="<?php echo substr(str_replace(" ", "T", $value['fecha']), 0, 16); ?>" required="true">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -329,7 +334,7 @@
                                                             <input type="hidden" name="user" value="<?php echo $_SESSION['USER']; ?>">
                                                             <input type="hidden" name="idCompra" value="<?php echo $value['idcompra']; ?>">
                                                             <button type="button" id="modificarCompra" name="modificarCompra" class="btn btn-primary"><i class="fas fa-file-edit"></i> Modificar Compra</button>
-                                                            <a href="compra.php" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Volver al libro de compras"><i class="fas fa-reply-all"></i> Cancelar</a>
+                                                            <a href="javascript:history.back()" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Volver a pagina anterior"><i class="fas fa-reply-all"></i> Cancelar</a>
                                                         </div>
                                                     </div>
                                             </fieldset>
