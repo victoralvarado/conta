@@ -125,9 +125,9 @@
                                                     <td><?php echo $value['codigo']; ?></td>
                                                     <td><img src="<?php echo $value['imagen']; ?>" width="150" alt="<?php echo $value['nombre']; ?>" /></td>
                                                     <td>
-                                                        <form id="eliEdi" class="well" method="POST" action="controller/productoController.php">
+                                                        <form id="eliEdi<?php echo $value['id']; ?>" class="well eliEdi" method="POST" action="controller/productoController.php">
                                                             <input type="hidden" name="idD" id="idD" value="<?php echo $value['id']; ?>">
-                                                            <button type="button" id="eliminar" class="btn btn-danger"><em class="fa fa-trash-o"></em> Eliminar</button>
+                                                            <button type="button" id="eliminar<?php echo $value['id']; ?>" class="btn btn-danger eliminar"><em class="fa fa-trash-o"></em> Eliminar</button>
                                                             <br>
                                                             <br>
                                                             <a class="btn btn-primary" data-toggle="modal" href="#edit_<?php echo $value['id']; ?>"><em class="fa fa-pencil"></em> Editar</a>
@@ -145,7 +145,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" id="editar" action="controller/productoController.php" enctype="multipart/form-data">
+                                                    <form method="POST" id="editar<?php echo $value['id']; ?>" class="well editar" action="controller/productoController.php" enctype="multipart/form-data">
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Nombre:</label>
                                                             <div class="col-md-8 inputGroupContainer">
@@ -196,8 +196,62 @@
                                                             <input id="idEdit" name="idEdit" min="1" class="form-control" required="true" value="<?php echo $value['id']; ?>" type="hidden">
                                                             <input type="hidden" name="user" value="<?php echo $_SESSION['USER']; ?>">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()"><em class="fa fa-times"></em> Cancelar</button>
-                                                            <button type="button" id="editarPro" name="editarProducto" class="btn btn-primary editarProducto"><em class=" fa fa-pencil-square-o"></em> Editar</button>
+                                                            <button type="button" id="editarPro<?php echo $value['id']; ?>" name="editarProducto" class="btn btn-primary editarProducto editarPro"><em class=" fa fa-pencil-square-o"></em> Editar</button>
                                                         </div>
+                                                        <script>
+                                                            $(document).on("click", "#eliminar<?php echo $value['id']; ?>", function() {
+                                                                swal({
+                                                                        title: "Eliminar",
+                                                                        text: "¿Estás seguro que desea eliminar el producto?",
+                                                                        type: "warning",
+                                                                        showCancelButton: true,
+                                                                        cancelButtonText: "Cancelar",
+                                                                        confirmButtonColor: "#DD6B55",
+                                                                        confirmButtonText: "Continuar",
+                                                                        closeOnConfirm: false
+                                                                    },
+                                                                    function(isConfirm) {
+                                                                        if (isConfirm) {
+                                                                            swal({
+                                                                                title: "Eliminado",
+                                                                                text: "Eliminaste el registro!",
+                                                                                type: "success",
+                                                                                showCancelButton: false,
+                                                                                showConfirmButton: false
+                                                                            });
+                                                                            setTimeout(function() {
+                                                                                $("#eliEdi<?php echo $value['id']; ?>").submit();
+                                                                            }, 1100);
+                                                                        }
+                                                                    });
+                                                            });
+                                                            $(document).on("click", "#editarPro<?php echo $value['id']; ?>", function() {
+                                                                swal({
+                                                                        title: "Editar",
+                                                                        text: "¿Estás seguro que desea editar el producto?",
+                                                                        type: "warning",
+                                                                        showCancelButton: true,
+                                                                        cancelButtonText: "Cancelar",
+                                                                        confirmButtonColor: "#DD6B55",
+                                                                        confirmButtonText: "Continuar",
+                                                                        closeOnConfirm: false
+                                                                    },
+                                                                    function(isConfirm) {
+                                                                        if (isConfirm) {
+                                                                            swal({
+                                                                                title: "Modificado",
+                                                                                text: "Modificaste el registro!",
+                                                                                type: "success",
+                                                                                showCancelButton: false,
+                                                                                showConfirmButton: false
+                                                                            });
+                                                                            setTimeout(function() {
+                                                                                $("#editar<?php echo $value['id']; ?>").submit();
+                                                                            }, 1100);
+                                                                        }
+                                                                    });
+                                                            });
+                                                        </script>
                                                     </form>
                                                 </div>
                                             </div>

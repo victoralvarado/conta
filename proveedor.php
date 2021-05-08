@@ -155,9 +155,37 @@
                                                     <td><?php echo ucwords(strtolower($value['direccion'])); ?></td>
                                                     <td><?php echo $value['telefono']; ?></td>
                                                     <td>
-                                                        <form id="eliEdi" class="well" method="POST" action="controller/proveedorController.php">
+                                                        <form id="eliEdi<?php echo $value['id']; ?>" class="well eliEdi" method="POST" action="controller/proveedorController.php">
                                                             <input type="hidden" name="idD" id="idD" value="<?php echo $value['id']; ?>">
-                                                            <button type="button" id="eliminar" class="btn btn-danger"><em class="fa fa-trash-o"></em> Eliminar</button>
+                                                            <button type="button" id="eliminar<?php echo $value['id']; ?>" class="btn btn-danger eliminar"><em class="fa fa-trash-o"></em> Eliminar</button>
+                                                            <script>
+                                                                $(document).on("click", "#eliminar<?php echo $value['id']; ?>", function() {
+                                                                    swal({
+                                                                            title: "Eliminar",
+                                                                            text: "¿Estás seguro que desea eliminar el proveedor?",
+                                                                            type: "warning",
+                                                                            showCancelButton: true,
+                                                                            cancelButtonText: "Cancelar",
+                                                                            confirmButtonColor: "#DD6B55",
+                                                                            confirmButtonText: "Continuar",
+                                                                            closeOnConfirm: false
+                                                                        },
+                                                                        function(isConfirm) {
+                                                                            if (isConfirm) {
+                                                                                swal({
+                                                                                    title: "Eliminado",
+                                                                                    text: "Eliminaste el registro!",
+                                                                                    type: "success",
+                                                                                    showCancelButton: false,
+                                                                                    showConfirmButton: false
+                                                                                });
+                                                                                setTimeout(function() {
+                                                                                    $("#eliEdi<?php echo $value['id']; ?>").submit();
+                                                                                }, 1100);
+                                                                            }
+                                                                        });
+                                                                });
+                                                            </script>
                                                             <br>
                                                             <br>
                                                             <a class="btn btn-primary" data-toggle="modal" href="#edit_<?php echo $value['id']; ?>"><em class="fa fa-pencil"></em> Editar</a>
@@ -175,7 +203,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" id="editar" action="controller/proveedorController.php" enctype="multipart/form-data">
+                                                    <form method="POST" id="editar<?php echo $value['id']; ?>" class="well editar" action="controller/proveedorController.php" enctype="multipart/form-data">
 
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Tipo</label>
@@ -269,19 +297,19 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">NIT:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="nitEdit" name="nit" placeholder="Número de Identificación Tributaria" class="form-control edit" required="true" value="<?php echo $value['nit']; ?>" type="text">
-                                                                <input id="nitActual" name="nitActual" value="<?php echo substr($value['nit'], 0, 4) . "-" . substr($value['nit'], 4, 6) . "-" . substr($value['nit'], 10, 3) . "-" . substr($value['nit'], 13, 1); ?>" type="hidden">
-                                                                <span id="existeEditNit" style="color:red"></span>
-                                                                <span id="existeActualNit" style="color:green"></span>
+                                                                <input id="nitEdit<?php echo $value['id']; ?>" name="nit" placeholder="Número de Identificación Tributaria" class="form-control edit" required="true" value="<?php echo $value['nit']; ?>" type="text">
+                                                                <input id="nitActual<?php echo $value['id']; ?>" name="nitActual" value="<?php echo substr($value['nit'], 0, 4) . "-" . substr($value['nit'], 4, 6) . "-" . substr($value['nit'], 10, 3) . "-" . substr($value['nit'], 13, 1); ?>" type="hidden">
+                                                                <span id="existeEditNit<?php echo $value['id']; ?>" style="color:red"></span>
+                                                                <span id="existeActualNit<?php echo $value['id']; ?>" style="color:green"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">NRC:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="nrcEdit" name="nrc" placeholder="Número de Registro de Contribuyente" class="form-control" value="<?php echo $value['nrc']; ?>" type="text">
-                                                                <input id="nrcActual" name="nrcActual" value="<?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); ?>" type="hidden">
-                                                                <span id="existeEdit" style="color:red"></span>
-                                                                <span id="existeActual" style="color:green"></span>
+                                                                <input id="nrcEdit<?php echo $value['id']; ?>" name="nrc" placeholder="Número de Registro de Contribuyente" class="form-control" value="<?php echo $value['nrc']; ?>" type="text">
+                                                                <input id="nrcActual<?php echo $value['id']; ?>" name="nrcActual" value="<?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); ?>" type="hidden">
+                                                                <span id="existeEdit<?php echo $value['id']; ?>" style="color:red"></span>
+                                                                <span id="existeActual<?php echo $value['id']; ?>" style="color:green"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -311,8 +339,84 @@
                                                         <div class="modal-footer">
                                                             <input id="idEdit" name="idEdit" min="1" class="form-control" required="true" value="<?php echo $value['id']; ?>" type="hidden">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()"><em class="fa fa-times"></em> Cancelar</button>
-                                                            <button type="button" name="editarProveedor" class="btn btn-primary editarProveedor"><em class="fa fa-pencil-square-o"></em> Editar</button>
+                                                            <button type="button" id="editarProv<?php echo $value['id']; ?>" name="editarProveedor" class="btn btn-primary editarProveedor editarProv"><em class="fa fa-pencil-square-o"></em> Editar</button>
                                                         </div>
+                                                        <script>
+                                                            $(document).on("click", "#editarProv<?php echo $value['id']; ?>", function() {
+                                                                swal({
+                                                                        title: "Editar",
+                                                                        text: "¿Estás seguro que desea editar el proveedor?",
+                                                                        type: "warning",
+                                                                        showCancelButton: true,
+                                                                        cancelButtonText: "Cancelar",
+                                                                        confirmButtonColor: "#DD6B55",
+                                                                        confirmButtonText: "Continuar",
+                                                                        closeOnConfirm: false
+                                                                    },
+                                                                    function(isConfirm) {
+                                                                        if (isConfirm) {
+                                                                            swal({
+                                                                                title: "Modificado",
+                                                                                text: "Modificaste el registro!",
+                                                                                type: "success",
+                                                                                showCancelButton: false,
+                                                                                showConfirmButton: false
+                                                                            });
+                                                                            setTimeout(function() {
+                                                                                $("#editar<?php echo $value['id']; ?>").submit();
+                                                                            }, 1100);
+                                                                        }
+                                                                    });
+                                                            });
+                                                            $(document).ready(function () {
+                                                            $('#nrcEdit<?php echo $value['id']; ?>').keyup(function() {
+                                                                $.ajax({
+                                                                    url: './controller/proveedorController.php',
+                                                                    type: 'post',
+                                                                    data: {
+                                                                        nrcsql: $("#nrcEdit<?php echo $value['id']; ?>").val()
+                                                                    },
+                                                                    success: function(response) {
+                                                                        if (response == $("#nrcEdit<?php echo $value['id']; ?>").val() && response != $("#nrcActual<?php echo $value['id']; ?>").val()) {
+                                                                            $('#existeEdit<?php echo $value['id']; ?>').text('El NRC ya esta en uso');
+                                                                            $('#existeActual<?php echo $value['id']; ?>').text('');
+
+                                                                        } else if (response == $("#nrcActual<?php echo $value['id']; ?>").val()) {
+                                                                            $('#existeActual<?php echo $value['id']; ?>').text('Es su NRC actual');
+                                                                            $('#existeEdit<?php echo $value['id']; ?>').text('');
+                                                                        } else {
+
+                                                                            $('#existeEdit<?php echo $value['id']; ?>').text('');
+                                                                            $('#existeActual<?php echo $value['id']; ?>').text('');
+                                                                        }
+                                                                    }
+                                                                });
+                                                            });
+
+                                                            $('#nitEdit<?php echo $value['id']; ?>').keyup(function() {
+                                                                $.ajax({
+                                                                    url: './controller/proveedorController.php',
+                                                                    type: 'post',
+                                                                    data: {
+                                                                        nitsql: $("#nitEdit<?php echo $value['id']; ?>").val()
+                                                                    },
+                                                                    success: function(response) {
+                                                                        if (response == $("#nitEdit<?php echo $value['id']; ?>").val() && response != $("#nitActual<?php echo $value['id']; ?>").val()) {
+                                                                            $('#existeEditNit<?php echo $value['id']; ?>').text('El NIT ya esta en uso');
+                                                                            $('#existeActualNit<?php echo $value['id']; ?>').text('');
+                                                                        } else if (response == $("#nitActual<?php echo $value['id']; ?>").val()) {
+                                                                            $('#existeActualNit<?php echo $value['id']; ?>').text('Es su NIT actual');
+                                                                            $('#existeEditNit<?php echo $value['id']; ?>').text('');
+                                                                        } else {
+                                                                            $('#existeEditNit<?php echo $value['id']; ?>').text('');
+                                                                            $('#existeActualNit<?php echo $value['id']; ?>').text('');
+                                                                        }
+                                                                    }
+
+                                                                });
+                                                            });
+                                                        });
+                                                        </script>
                                                     </form>
                                                 </div>
                                             </div>
