@@ -133,7 +133,7 @@
                                                     <td>
                                                         <form id="eliEdi<?php echo $value['id']; ?>" class="well eliEdi" method="POST" action="controller/productoController.php">
                                                             <input type="hidden" name="idD" id="idD" value="<?php echo $value['id']; ?>">
-                                                            <button type="button" id="eliminar<?php echo $value['id']; ?>" class="btn btn-danger eliminar"><em class="fa fa-trash-o"></em> Eliminar</button>
+                                                            <button type="button" id="eliminar<?php echo $value['id']; ?>" class="btn btn-danger eliminar"><em class="fas fa-trash"></em> Eliminar</button>
                                                             <br>
                                                             <br>
                                                             <a class="btn btn-primary" data-toggle="modal" href="#edit_<?php echo $value['id']; ?>"><em class="fa fa-pencil"></em> Editar</a>
