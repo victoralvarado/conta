@@ -501,8 +501,21 @@ class Compra
     }
     public function getOneCompra($id)
     {
-        $sqlAll = "SELECT c.id as 'idcompra',c.*, dc.*, p.tipo as 'tipoP',p.clasificacion,p.nit,p.nrc,p.nombre,p.razon_social,p.direccion,p.telefono, pr.nombre as 'nombrep' FROM compra c INNER JOIN detalle_compra dc ON c.id = dc.compra INNER JOIN proveedor p ON c.proveedor=p.id INNER JOIN producto pr ON pr.id = dc.producto where c.id =" . $id . ";";
-        $info = $this->db->query($sqlAll);
+        $sqlOne = "SELECT c.id as 'idcompra',c.*, dc.*, p.tipo as 'tipoP',p.clasificacion,p.nit,p.nrc,p.nombre,p.razon_social,p.direccion,p.telefono, pr.nombre as 'nombrep' FROM compra c INNER JOIN detalle_compra dc ON c.id = dc.compra INNER JOIN proveedor p ON c.proveedor=p.id INNER JOIN producto pr ON pr.id = dc.producto where c.id =" . $id . ";";
+        $info = $this->db->query($sqlOne);
+        if ($info->num_rows > 0) {
+
+            $dato = $info;
+        } else {
+
+            $dato = false;
+        }
+        return $dato;
+    }
+    public function getOneCompraMas($id)
+    {
+        $sqlMas = "SELECT c.numero_comprobante AS'numcomp', pr.nombre AS'nomprod',pr.codigo,dc.cant AS'cantidad',dc.price AS'precio',p.clasificacion AS'clasiprov',c.registrado_por AS'registradopor' FROM compra c INNER JOIN detalle_compra dc ON c.id = dc.compra INNER JOIN proveedor p ON c.proveedor=p.id INNER JOIN producto pr ON pr.id = dc.producto WHERE c.id =" . $id . ";";
+        $info = $this->db->query($sqlMas);
         if ($info->num_rows > 0) {
 
             $dato = $info;

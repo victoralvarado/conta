@@ -39,9 +39,13 @@
                                         <div class="form-group">
                                             <label>Fecha</label>
                                             <?php $fechaActual = date('Y-m-d');
+
                                             $horaActual = date('h:i');
-                                            $fh = $fechaActual . "T" . $horaActual; ?>
-                                            <input name="fecha" type="datetime-local" class="form-control" value="<?php echo $fh; ?>" required="true">
+                                            $fh = $fechaActual . "T" . $horaActual;
+                                            $max = $fechaActual . "T23:59";
+                                            $min = strtotime('-60 day', strtotime($fechaActual));
+                                            $min = date('Y-m-d', $min); ?>
+                                            <input name="fecha" type="datetime-local" class="form-control" min="<?php echo $min . "T00:00"; ?>" max="<?php echo $max; ?>" value="<?php echo $fh; ?>" required="true">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -303,16 +307,86 @@
                                                     <form action="editarCompra.php" method="POST" enctype="multipart/form-data">
                                                         <input type="hidden" name="idCompra" value="<?php echo $value['id']; ?>">
                                                         <button type="submit" name="editarCompra" class="btn btn-primary"><em class="fa fa-pencil"></em> Editar</button>
+                                                        <a class="btn btn-info" data-toggle="modal" href="#ver_<?php echo $value['id']; ?>" title="Ver más detalles"><i class="fas fa-eye"></i></a>
                                                     </form>
+
                                                     <br>
                                                 </td>
                                             </tr>
-                                    <?php
+                                            <div class="modal fade" id="ver_<?php echo $value['id']; ?>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Detalle Compra</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <?php
+                                                            $objComp = new Compra();
+                                                            $dat = $objComp->getOneCompraMas($value['id']);
+                                                            if ($dat) {
+
+                                                                foreach ($dat as $val) {
+                                                            ?><div class="form-group row">
+                                                                        <label class="col-md-4 control-label">No. Comprobante:</label>
+                                                                        <div class="col-md-8 inputGroupContainer">
+                                                                            <p><?php echo $val['numcomp'] ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-md-4 control-label">Producto:</label>
+                                                                        <div class="col-md-8 inputGroupContainer">
+                                                                            <p><?php echo $val['nomprod'] ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-md-4 control-label">Codigo:</label>
+                                                                        <div class="col-md-8 inputGroupContainer">
+                                                                            <p><?php echo $val['codigo'] ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-md-4 control-label">Cantidad:</label>
+                                                                        <div class="col-md-8 inputGroupContainer">
+                                                                            <p><?php echo $val['cantidad'] ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-md-4 control-label">Precio Unitario:</label>
+                                                                        <div class="col-md-8 inputGroupContainer">
+                                                                            <p>$<?php echo $val['precio'] ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-md-4 control-label">Calsificación Proveedor:</label>
+                                                                        <div class="col-md-7 inputGroupContainer">
+                                                                            <p><?php echo ucwords(strtolower($val['clasiprov'])) ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-md-4 control-label">Registrado por:</label>
+                                                                        <div class="col-md-7 inputGroupContainer">
+                                                                            <p><?php echo $val['registradopor'] ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                            <?php }
+                                                            } ?>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        <?php
+
                                         }
-                                    } else {
-                                        echo "NADA";
                                     }
-                                    ?>
+                                        ?>
+
                                 </tbody>
                             </table>
                         </div>
