@@ -186,7 +186,9 @@
                         <label>TOTAL:</label>
                         <input type="number" min="0.00" step="any" value="0.00" class="form-control" name="totalf" id="totalf" readonly>
                     </div>
+                    
                     <div class="col-md-12">
+                    <hr>
                         <div class="form-group" style="text-align: center;">
                             <span id="valtodo" style="color: red;"></span>
                         </div>
