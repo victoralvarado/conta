@@ -28,7 +28,7 @@ function insertCompra()
 {
     $objC = new Compra();
     $nombreUser = $objC->getNombreUser($_POST['user']);
-    $objC->setAfectas($_POST['cp']);
+    $objC->setAfectas($_POST['total']);
     $objC->setIva($_POST['ivaCF']);
     $objC->setretencion($_POST['ivaR']);
     $objC->setProveedor($_POST['contribuyente']);

@@ -49,6 +49,45 @@ $(document).ready(function () {
                 $('#retencion').val((0).toFixed(2));
             }
             $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+            if ($("#tipo ").val() == 'ccf') {
+                var clasificacion = $("#clasificacion").val();
+                if (clasificacion != 'Gran Contribuyente') {
+                    if (Number($('#total').val()) >= 100) {
+                        $('#retencion').val((Number($('#total').val()) * Number(retencion)).toFixed(2));
+                    } else {
+                        $('#retencion').val((0).toFixed(2));
+                    }
+                    $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                } if (clasificacion == 'Gran Contribuyente') {
+                    $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                    $('#retencion').val((0).toFixed(2));
+                } if (clasificacion == 'Ninguno' || clasificacion == "") {
+                    $('#iva').val((0).toFixed(2));
+                    $('#retencion').val((0).toFixed(2));
+                }
+                $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+            } else if ($('#tipo').val() == 'fcf') {
+                $('#iva').val((0).toFixed(2));
+                $('#retencion').val((0).toFixed(2));
+                $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+            } else {
+                var clasificacion = $("#clasificacion").val();
+                if (clasificacion != 'Gran Contribuyente') {
+                    if (Number($('#total').val()) >= 100) {
+                        $('#retencion').val((Number($('#total').val()) * Number(retencion)).toFixed(2));
+                    } else {
+                        $('#retencion').val((0).toFixed(2));
+                    }
+                    $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                } if (clasificacion == 'Gran Contribuyente') {
+                    $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                    $('#retencion').val((0).toFixed(2));
+                } if (clasificacion == 'Ninguno' || clasificacion == "") {
+                    $('#iva').val((0).toFixed(2));
+                    $('#retencion').val((0).toFixed(2));
+                }
+                $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+            }
         }
         $('#valtodo').text('');
 
@@ -84,6 +123,45 @@ $(document).ready(function () {
             $('#retencion').val((0).toFixed(2));
         }
         $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+        if ($("#tipo ").val() == 'ccf') {
+            var clasificacion = $("#clasificacion").val();
+            if (clasificacion != 'Gran Contribuyente') {
+                if (Number($('#total').val()) >= 100) {
+                    $('#retencion').val((Number($('#total').val()) * Number(retencion)).toFixed(2));
+                } else {
+                    $('#retencion').val((0).toFixed(2));
+                }
+                $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+            } if (clasificacion == 'Gran Contribuyente') {
+                $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                $('#retencion').val((0).toFixed(2));
+            } if (clasificacion == 'Ninguno' || clasificacion == "") {
+                $('#iva').val((0).toFixed(2));
+                $('#retencion').val((0).toFixed(2));
+            }
+            $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+        } else if ($('#tipo').val() == 'fcf') {
+            $('#iva').val((0).toFixed(2));
+            $('#retencion').val((0).toFixed(2));
+            $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+        } else {
+            var clasificacion = $("#clasificacion").val();
+            if (clasificacion != 'Gran Contribuyente') {
+                if (Number($('#total').val()) >= 100) {
+                    $('#retencion').val((Number($('#total').val()) * Number(retencion)).toFixed(2));
+                } else {
+                    $('#retencion').val((0).toFixed(2));
+                }
+                $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+            } if (clasificacion == 'Gran Contribuyente') {
+                $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                $('#retencion').val((0).toFixed(2));
+            } if (clasificacion == 'Ninguno' || clasificacion == "") {
+                $('#iva').val((0).toFixed(2));
+                $('#retencion').val((0).toFixed(2));
+            }
+            $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+        }
     });
     $(document).on('change', '#contribuyente', function () {
         if ($("#contribuyente ").val() != '') {
@@ -108,6 +186,45 @@ $(document).ready(function () {
                         $('#retencion').val((0).toFixed(2));
                     }
                     $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+                    if ($("#tipo ").val() == 'ccf') {
+                        var clasificacion = $("#clasificacion").val();
+                        if (clasificacion != 'Gran Contribuyente') {
+                            if (Number($('#total').val()) >= 100) {
+                                $('#retencion').val((Number($('#total').val()) * Number(retencion)).toFixed(2));
+                            } else {
+                                $('#retencion').val((0).toFixed(2));
+                            }
+                            $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                        } if (clasificacion == 'Gran Contribuyente') {
+                            $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                            $('#retencion').val((0).toFixed(2));
+                        } if (clasificacion == 'Ninguno' || clasificacion == "") {
+                            $('#iva').val((0).toFixed(2));
+                            $('#retencion').val((0).toFixed(2));
+                        }
+                        $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+                    } else if ($('#tipo').val() == 'fcf') {
+                        $('#iva').val((0).toFixed(2));
+                        $('#retencion').val((0).toFixed(2));
+                        $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+                    } else {
+                        var clasificacion = $("#clasificacion").val();
+                        if (clasificacion != 'Gran Contribuyente') {
+                            if (Number($('#total').val()) >= 100) {
+                                $('#retencion').val((Number($('#total').val()) * Number(retencion)).toFixed(2));
+                            } else {
+                                $('#retencion').val((0).toFixed(2));
+                            }
+                            $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                        } if (clasificacion == 'Gran Contribuyente') {
+                            $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                            $('#retencion').val((0).toFixed(2));
+                        } if (clasificacion == 'Ninguno' || clasificacion == "") {
+                            $('#iva').val((0).toFixed(2));
+                            $('#retencion').val((0).toFixed(2));
+                        }
+                        $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+                    }
                     var id = $("#contribuyente").children(":selected").attr("id");
                     if (id == '-') {
                         $('#nrcProveedor').val('');
@@ -132,6 +249,49 @@ $(document).ready(function () {
         }
 
     });
+
+    $(document).on('change', '#tipo', function () {
+        if ($("#tipo ").val() == 'ccf') {
+            var clasificacion = $("#clasificacion").val();
+            if (clasificacion != 'Gran Contribuyente') {
+                if (Number($('#total').val()) >= 100) {
+                    $('#retencion').val((Number($('#total').val()) * Number(retencion)).toFixed(2));
+                } else {
+                    $('#retencion').val((0).toFixed(2));
+                }
+                $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+            } if (clasificacion == 'Gran Contribuyente') {
+                $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                $('#retencion').val((0).toFixed(2));
+            } if (clasificacion == 'Ninguno' || clasificacion == "") {
+                $('#iva').val((0).toFixed(2));
+                $('#retencion').val((0).toFixed(2));
+            }
+            $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+        } else if ($('#tipo').val() == 'fcf') {
+            $('#iva').val((0).toFixed(2));
+            $('#retencion').val((0).toFixed(2));
+            $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+        } else {
+            var clasificacion = $("#clasificacion").val();
+            if (clasificacion != 'Gran Contribuyente') {
+                if (Number($('#total').val()) >= 100) {
+                    $('#retencion').val((Number($('#total').val()) * Number(retencion)).toFixed(2));
+                } else {
+                    $('#retencion').val((0).toFixed(2));
+                }
+                $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+            } if (clasificacion == 'Gran Contribuyente') {
+                $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                $('#retencion').val((0).toFixed(2));
+            } if (clasificacion == 'Ninguno' || clasificacion == "") {
+                $('#iva').val((0).toFixed(2));
+                $('#retencion').val((0).toFixed(2));
+            }
+            $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+        }
+    });
+
     $(document).on("input", ".mul", function () {
         var mul = 0;
         var cantidad = parseFloat($('#cantidad').val());
@@ -167,7 +327,7 @@ $(document).ready(function () {
                     url: './controller/compraController.php',
                     type: 'post',
                     data: {
-                        user: $('#user').val(), cp: $('#cp').val(), ivaCF: $('#iva').val(),
+                        user: $('#user').val(), total: $('#total').val(), ivaCF: $('#iva').val(),
                         ivaR: $('#retencion').val(), contribuyente: $('#contribuyente').val(),
                         fecha: $('#fecha').val(), condicion: $('#condicion').val(),
                         document_type: $('#tipo').val(), document_num: $('#numfactura').val()
@@ -209,7 +369,7 @@ $(document).ready(function () {
                         });
                         setTimeout(function () {
                             location.assign("./compra.php");
-                        }, 1100);
+                        }, 1500);
                     }
                 });
 
