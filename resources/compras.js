@@ -1,126 +1,113 @@
 $(document).ready(function () {
+    var i = 1;
+    const iva = 0.13;
+    const retencion = 0.01;
     $('#tblCompras').DataTable();
-    $(document).on("change", "#tCompra", function () {
-        if ($("#tCompra").val().trim() == '') {
-            $("#internasG").val(0.00);
-            $("#importacionE").val(0.00);
-            $("#internasE").val(0.00);
-            $("#importacionG").val(0.00);
-            $('#ivaCF').val(0.00);
-            $('#ivaR').val(0.00);
-            $('#totalCom').val(0.00);
-            $('.alert').text('Seleccione un tipo de compra');
+    $('#adicionar').click(function () {
+        if ($("#producto").val() == '' || $("#cantidad").val() == 0 || $("#precio").val() == 0 || $("#cp").val() == '') {
+            $('#valp').text('Complete todos los campos del producto');
+            $('#valp').attr('style', 'color:red;');
         } else {
-            $('.alert').text('');
+            $("#valp").text('');
+            var codigo = $("#producto").children(":selected").attr("id");
+            var nombre = $("#producto").val();
+            var cantidad = $("#cantidad").val();
+            var precio = $("#precio").val();
+            var subtotal = $("#cp").val();
+            var fila = '<tr id="row' + i + '"><td>' + codigo + '</td><td>' + nombre + '</td><td>' + cantidad + '</td> <td>' + precio + '</td><td class="stotal">' + subtotal + '</td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove"><i class="fas fa-trash"></i>  Quitar</button></td></tr>';
+            i++;
+            $('#mytable tr:first').after(fila);
+            $("#adicionados").val(""); //esta instruccion limpia el div adicioandos para que no se vayan acumulando
+            var nFilas = $("#mytable tr").length;
+            $("#adicionados").val(nFilas - 1);
+            $("#producto").val("");
+            $("#cantidad").val(0);
+            $("#precio").val(0);
+            $("#cp").val("");
+            var sum = 0;
+            $(".stotal").each(function () {
 
-            const iva = 0.13;
-            const retencion = 0.01;
-            var sum = 0.00;
-            var ivaCF = 0.00;
-            var ivaR = 0.00;
-            var imE = 0.00;
-            var inE = 0.00;
-            var imG = 0.00;
-            var inG = 0.00;
-            var idC = $("#tCompra").children(":selected").attr("id");
-            if (idC == 'c1') {
-                imE = parseFloat($("#cp").val());
-                if (isNaN(imE)) {
-                    imE = 0.00;
-                    $('#importacionE').val(imE);
-                } else {
-                    $("#importacionE").val(imE.toFixed(2));
-                    $("#internasE").val(0.00);
-                    $("#importacionG").val(0.00);
-                    $("#internasG").val(0.00);
+                var value = $(this).text();
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
                 }
-            } if (idC == 'c2') {
-                inE = parseFloat($("#cp").val());
-                if (isNaN(inE)) {
-                    inE = 0.00;
-                    $('#internasE').val(inE);
+            });
+            $('#total').val(sum.toFixed(2));
+            var clasificacion = $("#clasificacion").val();
+            if (clasificacion != 'Gran Contribuyente') {
+                if (Number($('#total').val()) >= 100) {
+                    $('#retencion').val((Number($('#total').val()) * Number(retencion)).toFixed(2));
                 } else {
-                    $("#internasE").val(inE.toFixed(2));
-                    $("#importacionE").val(0.00);
-                    $("#importacionG").val(0.00);
-                    $("#internasG").val(0.00);
+                    $('#retencion').val((0).toFixed(2));
                 }
-            } if (idC == 'c3') {
-                imG = parseFloat($("#cp").val());
-                if (isNaN(imG)) {
-                    inG = 0.00;
-                    $('#importacionG').val(imG);
-                } else {
-                    $("#importacionG").val(imG.toFixed(2));
-                    $("#importacionE").val(0.00);
-                    $("#internasE").val(0.00);
-                    $("#internasG").val(0.00);
-                }
-            } if (idC == 'c4') {
-                inG = parseFloat($("#cp").val());
-                if (isNaN(imG)) {
-                    inG = 0.00;
-                    $('#internasG').val(inG);
-                } else {
-                    $("#internasG").val(inG.toFixed(2));
-                    $("#importacionE").val(0.00);
-                    $("#internasE").val(0.00);
-                    $("#importacionG").val(0.00);
-                }
+                $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+            } if (clasificacion == 'Gran Contribuyente') {
+                $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                $('#retencion').val((0).toFixed(2));
+            } if (clasificacion == 'Ninguno' || clasificacion == "") {
+                $('#iva').val((0).toFixed(2));
+                $('#retencion').val((0).toFixed(2));
             }
-            if (isNaN(parseFloat($(".com").val()))) {
-                ivaCF = 0.00;
-                $('#ivaCF').val(ivaCF);
-            } else {
-                ivaCF = (inG + imG) * iva;
-                //dependiendo de la clasificacion del proveedor se aplicara la retencion
-                var clasificacion = $("#clasificacion").val();
-                if (clasificacion != 'Gran Contribuyente') {
-                    if ((inG + imG) > 100) {
-                        ivaR = (inG + imG) * retencion;
-                    } else {
-                        ivaR = 0.00;
-                    }
-                } if (clasificacion == '') {
-                    $('.alert').text('Seleccione un contribuyente');
-                } else {
-                    $('.alert').text('');
-                    sum = (inG + imG + imE + inE + ivaCF) + ivaR;
-                    $('#ivaCF').val(ivaCF.toFixed(2));
-                    $('#ivaR').val(ivaR.toFixed(2));
-                    $('#totalCom').val(sum.toFixed(2));
-                }
-            }
-
+            $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
         }
+        $('#valtodo').text('');
+
+    });
+    $(document).on('click', '.btn_remove', function () {
+        var button_id = $(this).attr("id");
+        $('#row' + button_id + '').remove();
+        var sum = 0;
+        $(".stotal").each(function () {
+
+            var value = $(this).text();
+            if (!isNaN(value) && value.length != 0) {
+                sum += parseFloat(value);
+            }
+        });
+        $("#adicionados").val("");
+        var nFilas = $("#mytable tr").length;
+        $("#adicionados").val(nFilas - 1);
+        $('#total').val(sum.toFixed(2));
+        var clasificacion = $("#clasificacion").val();
+        if (clasificacion != 'Gran Contribuyente') {
+            if (Number($('#total').val()) >= 100) {
+                $('#retencion').val((Number($('#total').val()) * Number(retencion)).toFixed(2));
+            } else {
+                $('#retencion').val((0).toFixed(2));
+            }
+            $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+        } if (clasificacion == 'Gran Contribuyente') {
+            $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+            $('#retencion').val((0).toFixed(2));
+        } if (clasificacion == 'Ninguno' || clasificacion == "") {
+            $('#iva').val((0).toFixed(2));
+            $('#retencion').val((0).toFixed(2));
+        }
+        $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
     });
     $(document).on('change', '#contribuyente', function () {
-        $("#internasG").val(0.00);
-        $("#importacionE").val(0.00);
-        $("#internasE").val(0.00);
-        $("#importacionG").val(0.00);
-        $('#ivaCF').val(0.00);
-        $('#ivaR').val(0.00);
-        $('#totalCom').val(0.00);
         if ($("#contribuyente ").val() != '') {
-            $("#tCompra").val('');
             $.ajax({
                 url: './controller/proveedorController.php',
                 type: 'post',
                 data: { text: $("#contribuyente").children(":selected").attr("id") },
                 success: function (response) {
-                    if (response == 'Ninguno') {
-                        $('#excluido').val($('#cp').val());
-                        $('#tCompra').attr('disabled', true);
-                        $('#spTipo').text('Compra a sujeto excluido');
-                        $('#spTipo').attr('style', 'color:green;');
-                    } else {
-                        $('#excluido').val(0.00);
-                        $('#tCompra').attr('disabled', false);
-                        $('#spTipo').text('');
-                    }
-
                     $('#clasificacion').val(response);
+                    if (response != 'Gran Contribuyente') {
+                        if (Number($('#total').val()) >= 100) {
+                            $('#retencion').val((Number($('#total').val()) * Number(retencion)).toFixed(2));
+                        } else {
+                            $('#retencion').val((0).toFixed(2));
+                        }
+                        $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                    } if (response == 'Gran Contribuyente') {
+                        $('#iva').val((Number($('#total').val()) * (iva)).toFixed(2));
+                        $('#retencion').val((0).toFixed(2));
+                    } if (response == 'Ninguno' || clasificacion == "") {
+                        $('#iva').val(0.00);
+                        $('#retencion').val((0).toFixed(2));
+                    }
+                    $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
                     var id = $("#contribuyente").children(":selected").attr("id");
                     if (id == '-') {
                         $('#nrcProveedor').val('');
@@ -129,17 +116,6 @@ $(document).ready(function () {
                     }
                 }
             });
-        } else {
-            $('#spTipo').attr('style', 'color:red;');
-            $('#tCompra').attr('disabled', true);
-            $('.com').val(0.00);
-            $('#ivaCF').val(0.00);
-            $('#ivaR').val(0.00);
-            $('#totalCom').val(0.00);
-            $('excluido').val(0.00);
-            $('#spTipo').text('Seleccione un contribuyente');
-            $('#nrcProveedor').val('');
-            $('#clasificacion').val('');
         }
 
         if ($("#contribuyente ").val() != '') {
@@ -154,16 +130,9 @@ $(document).ready(function () {
         } else {
             $('#nitProveedor').val('');
         }
+
     });
     $(document).on("input", ".mul", function () {
-        $("#tCompra").val('');
-        $("#internasG").val(0.00);
-        $("#importacionE").val(0.00);
-        $("#internasE").val(0.00);
-        $("#importacionG").val(0.00);
-        $('#ivaCF').val(0.00);
-        $('#ivaR').val(0.00);
-        $('#totalCom').val(0.00);
         var mul = 0;
         var cantidad = parseFloat($('#cantidad').val());
         var precio = parseFloat($('#precio').val());
@@ -184,14 +153,67 @@ $(document).ready(function () {
             $('#cp').val(mul);
         } else {
             mul = precio * cantidad;
-            $('#cp').prop('value',mul.toFixed(2));
-            var clasificacion = $("#clasificacion").val();
-            if (clasificacion == 'Ninguno') {
-                $('#excluido').val(mul.toFixed(2));
+            $('#cp').prop('value', mul.toFixed(2));
+        }
+    });
+    $('#guardar').on('click', function () {
+        if ($("#adicionados").val() == 0 || $("#adicionados").val() == '') {
+            $('#valtodo').text('No hay productos agregados');
+        } else {
+            if ($('#contribuyente').val() == '' || $('#numfactura').val() == '' || $('#tipo').val() == '') {
+                $('#valtodo').text('Complete los campos Proveedor/Compra');
             } else {
-                $('#excluido').val(0.00);
+                $.ajax({
+                    url: './controller/compraController.php',
+                    type: 'post',
+                    data: {
+                        user: $('#user').val(), cp: $('#cp').val(), ivaCF: $('#iva').val(),
+                        ivaR: $('#retencion').val(), contribuyente: $('#contribuyente').val(),
+                        fecha: $('#fecha').val(), condicion: $('#condicion').val(),
+                        document_type: $('#tipo').val(), document_num: $('#numfactura').val()
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+                var filas = [];
+                $('#mytable tbody tr').each(function () {
+                    var codigo = $(this).find('td').eq(0).text();
+                    var nombre = $(this).find('td').eq(1).text();
+                    var cantidad = $(this).find('td').eq(2).text();
+                    var precio = $(this).find('td').eq(3).text();
+                    var subtotal = $(this).find('td').eq(4).text();
+
+                    var fila = {
+                        codigo,
+                        nombre,
+                        cantidad,
+                        precio,
+                        subtotal
+                    };
+                    filas.push(fila);
+                });
+                filas.shift();
+                $.ajax({
+                    url: './controller/compraController.php',
+                    type: 'post',
+                    data: { valores: JSON.stringify(filas) },
+                    success: function (data) {
+                        console.log(data);
+                        swal({
+                            title: "Guardado",
+                            text: "Compra agregada correctamente!",
+                            type: "success",
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        });
+                        setTimeout(function () {
+                            location.assign("./compra.php");
+                        }, 1100);
+                    }
+                });
+
             }
         }
-
     });
 });

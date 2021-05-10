@@ -199,10 +199,10 @@ class Producto
         return $this;
     }
 
-    public function idUser($user)
+    public function getIdProducto($codigo)
     {
-        $sql = $this->db->prepare("SELECT id FROM Usuario WHERE usuario = ?;");
-        mysqli_stmt_bind_param($sql, 's', $user);
+        $sql = $this->db->prepare("SELECT id FROM Producto WHERE codigo = ?;");
+        mysqli_stmt_bind_param($sql, 's', $codigo);
         mysqli_stmt_execute($sql);
         mysqli_stmt_bind_result($sql, $res);
         mysqli_stmt_fetch($sql);
@@ -240,8 +240,6 @@ class Producto
             $data['estado'] = false;
             $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
         }
-        $sql->close();
-        $this->db->close();
         return $data;
     }
 

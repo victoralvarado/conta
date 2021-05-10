@@ -83,7 +83,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Codigo:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="codigo" name="codigo" placeholder="Codigo del producto" class="form-control" required="true" value="" type="text">
+                                                            <input id="codigo" name="codigo" max="15" placeholder="Codigo del producto" class="form-control" required="true" value="" type="text">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">

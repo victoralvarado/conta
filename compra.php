@@ -38,39 +38,10 @@
                 <div class="ex1">
                     <section id="content" class="container-fluid">
                         <div class="row">
-                            <form class="well form" method="POST" action="controller/compraController.php">
+                            <form id="compra" class="well form" method="POST" action="controller/compController.php">
                                 <fieldset class="form-group">
-                                    <legend class="w-auto">Compra</legend>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Fecha</label>
-                                            <?php $fechaActual = date('Y-m-d');
-
-                                            $horaActual = date('h:i');
-                                            $fh = $fechaActual . "T" . $horaActual;
-                                            $max = $fechaActual . "T23:59";
-                                            $min = strtotime('-60 day', strtotime($fechaActual));
-                                            $min = date('Y-m-d', $min); ?>
-                                            <input name="fecha" type="datetime-local" class="form-control" min="<?php echo $min . "T00:00"; ?>" max="<?php echo $max; ?>" value="<?php echo $fh; ?>" required="true">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Numero de Comprobante</label>
-                                            <input type="number" class="form-control" placeholder="Numero de comprobante" name="comprobante" aria-describedby="inputGroupPrepend" required="true">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>Tipo</label>
-                                            <select name="tipo" class="form-control" required="true">
-                                                <option value="">Seleccionar</option>
-                                                <option value="1" title="Comprobante de credixto fiscal">CCF</option>
-                                                <option value="0" title="Nota de credito">NC</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
+                                    <legend class="w-auto">Proveedor/Compra</legend>
+                                    <div class="col-md-5">
                                         <div class="form-group">
                                             <label>Nombre del contribuyente</label>
                                             <select class="form-control" id="contribuyente" name="contribuyente" required="true">
@@ -81,7 +52,7 @@
                                                 if ($data) {
                                                     foreach ($data as $value) {
                                                 ?>
-                                                        <option id="<?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); ?>" value="<?php echo ucwords(strtolower($value['id'])); ?>" title="<?php echo ucwords(strtolower($value['nombre'])); ?>"><?php echo ucwords(strtolower($value['nombre'])); ?></option>
+                                                        <option id="<?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); ?>" value="<?php echo ucwords(strtolower($value['id'])); ?>" title="<?php echo strtoupper($value['nombre']); ?>"><?php echo strtoupper($value['nombre']); ?></option>
 
                                                 <?php
 
@@ -91,318 +62,147 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>NRC</label>
-                                            <input type="text" id="nrcProveedor" placeholder="NRC" class="form-control" name="nrcProveedor" required="true" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>NIT</label>
-                                            <input type="text" class="form-control" placeholder="NIT" value="" name="nitProveedor" id="nitProveedor" required="true" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Clasificacion</label>
                                             <input type="text" class="form-control" placeholder="Clasificacion" value="" name="clasificacion" id="clasificacion" required="true" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Producto</label>
-                                            <select class="form-control" id="producto" name="producto" required="true">
-                                                <option value="">Seleccionar</option>
-                                                <?php
-                                                $objProd = new Producto();
-                                                $data = $objProd->getAllProducto();
-                                                if ($data) {
-                                                    foreach ($data as $value) {
-                                                ?>
-                                                        <option id="<?php echo $value['codigo']; ?>" value="<?php echo $value['id']; ?>"><?php echo ucwords(strtolower($value['nombre'])); ?></option>
-
-                                                <?php
-
-                                                    }
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
+                                    <div class=" col-md-3"">
+                                    <div class=" form-group">
+                                        <label>Dias de credito</label>
+                                        <input type="number" min="0" class="form-control" placeholder="Dias de credito" value="0" name="condicion" id="condicion" required="true">
                                     </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>Cantidad</label>
-                                            <input type="number" min="0" value="0" id="cantidad" class="form-control mul" name="cantidad" required="true">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Precio</label>
-                                            <input type="number" min="1.00" step="any" value="0" class="form-control mul" name="precio" id="precio" required="true">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Cantidad × Precio</label>
-                                            <input type="number" class="form-control" value="" placeholder="Total" name="cp" id="cp" required="true" readonly>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="col-md-2"">
-                                        </div>
-                                        <div class=" col-md-3"">
-                                            <label>Condicion de pago</label>
-                                            <select name="condicion" id="condicion" class="form-control" required="true">
-                                                <option id="condi0" value="">Seleccionar</option>
-                                                <option id="condi1" value="1">Contado</option>
-                                                <option id="condi2" value="2">Credito</option>
-                                            </select>
-                                        </div>
-                                        <div class=" col-md-5" style="text-align: center;">
-                                            <label>Tipo de compra</label>
-                                            <select name="tCompra" id="tCompra" class="form-control" required="true" disabled="true">
-                                                <option id="c0" value="">Seleccionar</option>
-                                                <option id="c1" value="c1">Compra Exenta Importacion</option>
-                                                <option id="c2" value="c2">Compra Exenta Interna</option>
-                                                <option id="c3" value="c3">Compra Gravada Importacion</option>
-                                                <option id="c4" value="c4">Compra Gravada Interna</option>
-                                            </select>
-                                            <span id="spTipo" style="color:red">Seleccione un contribuyente</span>
-                                        </div>
-                                        <div class="col-md-2"">
-                                        </div>
-                                    </div>
-                                    <div class=" col-md-6">
-                                            <h6 style="text-align: center;">
-                                                Compras Exentas
-                                            </h6>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Importacion</label>
-                                                    <input type="number" min="0" class="form-control com" value="0.00" name="exentasIm" id="importacionE" readonly required="true">
-                                                    <span class="alert" style="color:red"></span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Internas</label>
-                                                    <input type="number" min="0" class="form-control com" value="0.00" name="exentasIn" id="internasE" readonly required="true">
-                                                    <span class="alert" style="color:red"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h6 style="text-align: center;">
-                                                Compras Gravadas
-                                            </h6>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Importacion</label>
-                                                    <input type="number" min="0" class="form-control com gravadas" value="0.00" name="gravadasIm" id="importacionG" readonly required="true">
-                                                    <span class="alert" style="color:red"></span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Internas</label>
-                                                    <input type="number" min="0" class="form-control com gravadas" value="0.00" name="gravadasIn" id="internasG" readonly required="true">
-                                                    <span class="alert" style="color:red"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>IVA(Credito Fiscal)</label>
-                                                <input type="number" value="0.00" class="form-control" placeholder="IVA Credito Fiscal" name="ivaCF" id="ivaCF" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>IVA-Retenido</label>
-                                                <input type="number" value="0.00" class="form-control" placeholder="IVA Retenido" name="ivaR" id="ivaR" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Total Compras</label>
-                                                <input type="number" value="0.00" class="form-control" placeholder="Total Compras" name="totalCom" id="totalCom" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Compra a sujeto excluido</label>
-                                                <input type="number" value="0.00" id="excluido" class="form-control" name="excluido" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group" style="text-align: center;">
-                                                <input type="hidden" name="user" value="<?php echo $_SESSION['USER']; ?>">
-                                                <button type="submit" id="agregarCompra" name="agregarCompra" class="btn btn-primary"><em class="fa fa-plus"></em> Agregar Compra</button>
-                                                <button type="reset" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Limpiar cajas de texto"><em class="fa fa-eraser"></em> Limpiar</button>
-                                            </div>
-                                        </div>
-                                </fieldset>
-                            </form>
                         </div>
-                        <div class="col-md-12">
-                            <table id="tblCompras" class="table table-striped table-bordered dt-responsive" style="width:100%">
-                                <caption>Libro de compras</caption>
-                                <thead>
-                                    <tr>
-                                        <th style="vertical-align: middle;" scope="col" rowspan="2">Fecha</th>
-                                        <th style="vertical-align: middle;" scope="col" rowspan="2">No. Comprobante</th>
-                                        <th style="vertical-align: middle;" scope="col" rowspan="2">NRC</th>
-                                        <th style="vertical-align: middle;" scope="col" rowspan="2">NIT</th>
-                                        <th style="vertical-align: middle;" scope="col" rowspan="2">Nombre Contribuyente</th>
-                                        <th style="vertical-align: middle;" scope="col" colspan="2">Compras Exentas</th>
-                                        <th style="vertical-align: middle;" scope="col" colspan="2">Compras Gravadas</th>
-                                        <th style="vertical-align: middle;" scope="col" rowspan="2">IVA(Credito Fiscal)</th>
-                                        <th style="vertical-align: middle;" scope="col" rowspan="2">IVA-Retención</th>
-                                        <th style="vertical-align: middle;" scope="col" rowspan="2">Total Compras</th>
-                                        <th style="vertical-align: middle;" scope="col" rowspan="2">Compra a sujeto excluido</th>
-                                        <th style="vertical-align: middle;" scope="col" rowspan="2">Accion</th>
-                                    </tr>
-                                    <tr>
-                                        <th style="vertical-align: middle;" scope="col">Importacion</th>
-                                        <th style="vertical-align: middle;" scope="col">Internas</th>
-                                        <th style="vertical-align: middle;" scope="col">Importacion</th>
-                                        <th style="vertical-align: middle;" scope="col">Internas</th>
-                                    </tr>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Fecha de la Factura</label>
+                                <?php $fechaActual = date('Y-m-d');
 
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $objC = new Compra();
-                                    $data = $objC->getAllCompras();
-                                    if ($data) {
+                                $horaActual = date('h:i');
+                                $fh = $fechaActual . "T" . $horaActual;
+                                $max = $fechaActual . "T23:59";
+                                $min = strtotime('-60 day', strtotime($fechaActual));
+                                $min = date('Y-m-d', $min); ?>
+                                <input name="fecha" id="fecha" type="datetime-local" class="form-control" min="<?php echo $min . "T00:00"; ?>" max="<?php echo $max; ?>" value="<?php echo $fh; ?>" required="true">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Numero de Factura</label>
+                                <input type="number" class="form-control" id="numfactura" placeholder="Numero de comprobante" name="numfactura" aria-describedby="inputGroupPrepend" required="true">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Tipo de Documento</label>
+                                <select name="tipo" id="tipo" class="form-control" required="true">
+                                    <option value="">Seleccionar</option>
+                                    <option value="ccf" title="Comprobante de credixto fiscal">CCF</option>
+                                    <option value="fcf" title="">FACTURA</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" name="user" id="user" value="<?php echo $_SESSION['USER']; ?>">
+                        </fieldset>
+                        </form>
+                </div>
+                <div class="row">
+                    <form class="well form" method="POST">
+                        <fieldset class="form-group">
+                            <legend class="w-auto">Producto</legend>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Producto</label>
+                                    <select class="form-control" id="producto" name="producto" required="true">
+                                        <option value="">Seleccionar</option>
+                                        <?php
+                                        $objProd = new Producto();
+                                        $data = $objProd->getAllProducto();
+                                        if ($data) {
+                                            foreach ($data as $value) {
+                                        ?>
+                                                <option id="<?php echo $value['codigo']; ?>" value="<?php echo strtoupper($value['nombre']); ?>"><?php echo strtoupper($value['nombre']); ?></option>
 
-                                        foreach ($data as $value) {
-                                    ?>
-                                            <tr>
-
-                                                <td><?php echo $value['fecha']; ?></td>
-                                                <td><?php echo strtoupper($value['tipo']) . "" . $value['numero_comprobante']; ?></td>
-                                                <td>
-                                                    <?php
-                                                    if ($value['nrc'] == '') {
-                                                        $value['nrc'];
-                                                    } else {
-                                                        echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1);
-                                                        #Mostrando nrc con guion
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <td><?php if ($value['nit'] == '') {
-                                                        $value['nit'];
-                                                    } else {
-                                                        echo substr($value['nit'], 0, 4) . "-" . substr($value['nit'], 4, 6) . "-"
-                                                            . substr($value['nit'], 10, 3) . "-" . substr($value['nit'], 13, 1);
-                                                    } ?></td>
-                                                <td><?php echo strtoupper($value['nombre']); ?></td>
-                                                <td>$<?php echo $value['exentas_importacion']; ?></td>
-                                                <td>$<?php echo $value['exentas_internas']; ?></td>
-                                                <td>$<?php echo $value['gravadas_importacion']; ?></td>
-                                                <td>$<?php echo $value['gravadas_internas']; ?></td>
-                                                <td>$<?php echo $value['iva']; ?></td>
-                                                <td>$<?php echo $value['retencion']; ?></td>
-                                                <td>$<?php echo $value['totalCompras']; ?></td>
-                                                <td>$<?php echo $value['sujeto_excluido']; ?></td>
-                                                <td>
-                                                    <form action="editarCompra.php" method="POST" enctype="multipart/form-data">
-                                                        <input type="hidden" name="idCompra" value="<?php echo $value['id']; ?>">
-                                                        <button type="submit" name="editarCompra" class="btn btn-primary"><em class="fa fa-pencil"></em> Editar</button>
-                                                        <a class="btn btn-info" data-toggle="modal" href="#ver_<?php echo $value['id']; ?>" title="Ver más detalles"><i class="fas fa-eye"></i></a>
-                                                    </form>
-
-                                                    <br>
-                                                </td>
-                                            </tr>
-                                            <div class="modal fade" id="ver_<?php echo $value['id']; ?>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Detalle Compra</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-
-                                                            <?php
-                                                            $objComp = new Compra();
-                                                            $dat = $objComp->getOneCompraMas($value['id']);
-                                                            if ($dat) {
-
-                                                                foreach ($dat as $val) {
-                                                            ?><div class="form-group row">
-                                                                        <label class="col-md-4 control-label">No. Comprobante:</label>
-                                                                        <div class="col-md-8 inputGroupContainer">
-                                                                            <p><?php echo $val['numcomp'] ?></p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-md-4 control-label">Producto:</label>
-                                                                        <div class="col-md-8 inputGroupContainer">
-                                                                            <p><?php echo $val['nomprod'] ?></p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-md-4 control-label">Codigo:</label>
-                                                                        <div class="col-md-8 inputGroupContainer">
-                                                                            <p><?php echo $val['codigo'] ?></p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-md-4 control-label">Cantidad:</label>
-                                                                        <div class="col-md-8 inputGroupContainer">
-                                                                            <p><?php echo $val['cantidad'] ?></p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-md-4 control-label">Precio Unitario:</label>
-                                                                        <div class="col-md-8 inputGroupContainer">
-                                                                            <p>$<?php echo $val['precio'] ?></p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-md-4 control-label">Calsificación Proveedor:</label>
-                                                                        <div class="col-md-7 inputGroupContainer">
-                                                                            <p><?php echo ucwords(strtolower($val['clasiprov'])) ?></p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-md-4 control-label">Registrado por:</label>
-                                                                        <div class="col-md-7 inputGroupContainer">
-                                                                            <p><?php echo $val['registradopor'] ?></p>
-                                                                        </div>
-                                                                    </div>
-                                                            <?php }
-                                                            } ?>
-
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                         <?php
 
+                                            }
                                         }
-                                    }
                                         ?>
-
-                                </tbody>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Cantidad</label>
+                                    <input type="number" min="0" value="0" id="cantidad" class="form-control mul" name="cantidad" required="true">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Precio</label>
+                                    <input type="number" min="1.00" step="any" value="0" class="form-control mul" name="precio" id="precio" required="true">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Cantidad × Precio</label>
+                                    <input type="number" class="form-control" value="" placeholder="Total" name="cp" id="cp" required="true" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group" style="text-align: center;">
+                                    <button id="adicionar" class="btn btn-success" type="button">Agregar Producto</button>
+                                </div>
+                                <div class="form-group" style="text-align: center;">
+                                    <span id="valp" style="color: red;"></span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <div class="col-md-9">
+                        <input type="hidden" name="adicionados" id="adicionados">
+                        <div class="table-responsive">
+                            <table id="mytable" class="table table-bordered table-hover ">
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>SubTotal</th>
+                                    <th>Quitar</th>
+                                </tr>
                             </table>
                         </div>
-                    </section>
-                    <aside class="bg-light lter b-l aside-md hide" id="notes">
-                        <div class="wrapper">Notification</div>
-                    </aside>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Subtotal:</label>
+                        <input type="number" min="0.00" step="any" value="0.00" class="form-control" name="total" id="total" readonly>
+                        <label>IVA:</label>
+                        <input type="number" min="0.00" step="any" value="0.00" class="form-control" name="iva" id="iva" readonly>
+                        <label>Retencion:</label>
+                        <input type="number" min="0.00" step="any" value="0.00" class="form-control" name="retencion" id="retencion" readonly>
+                        <label>TOTAL:</label>
+                        <input type="number" min="0.00" step="any" value="0.00" class="form-control" name="totalf" id="totalf" readonly>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group" style="text-align: center;">
+                            <span id="valtodo" style="color: red;"></span>
+                        </div>
+                        <div class="form-group" style="text-align: center;">
+                            <button id="guardar" class="btn btn-success" type="button">Guardar</button>
+                        </div>
+
+                    </div>
+                </div>
             </section>
-            </div>
+            <aside class="bg-light lter b-l aside-md hide" id="notes">
+                <div class="wrapper">Notification</div>
+            </aside>
         </section>
+        </div>
+    </section>
     </section>
 </body>
 

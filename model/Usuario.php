@@ -136,6 +136,17 @@ class Usuario
         return $this;
     }
 
+    public function idUser($user)
+    {
+        $sql = $this->db->prepare("SELECT id FROM Usuario WHERE usuario = ?;");
+        mysqli_stmt_bind_param($sql, 's', $user);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $res);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
+        return $res;
+    }
+
     public function saveUser()
     {
         $sql="INSERT INTO usuario values (0,'".$this->nombre."','".$this->usuario."','".$this->contra."',5,1);";
