@@ -11,16 +11,8 @@ class Compra
     private $registrado_por;
     private $condiciones;
     private $estado;
-    private $tipo;
-    private $numero_comprobante;
-    private $nit;
-    private $nrc;
-    private $exentas_importacion;
-    private $exentas_internas;
-    private $gravadas_importacion;
-    private $gravadas_internas;
-    private $sujeto_excluido;
-    private $totalCompras;
+    private $document_type;
+    private $document_number;
     public $db;
 
     public function __construct()
@@ -30,7 +22,7 @@ class Compra
 
     /**
      * Get the value of id
-     */
+     */ 
     public function getId()
     {
         return $this->id;
@@ -40,7 +32,7 @@ class Compra
      * Set the value of id
      *
      * @return  self
-     */
+     */ 
     public function setId($id)
     {
         $this->id = $id;
@@ -50,7 +42,7 @@ class Compra
 
     /**
      * Get the value of afectas
-     */
+     */ 
     public function getAfectas()
     {
         return $this->afectas;
@@ -60,7 +52,7 @@ class Compra
      * Set the value of afectas
      *
      * @return  self
-     */
+     */ 
     public function setAfectas($afectas)
     {
         $this->afectas = $afectas;
@@ -70,7 +62,7 @@ class Compra
 
     /**
      * Get the value of iva
-     */
+     */ 
     public function getIva()
     {
         return $this->iva;
@@ -80,7 +72,7 @@ class Compra
      * Set the value of iva
      *
      * @return  self
-     */
+     */ 
     public function setIva($iva)
     {
         $this->iva = $iva;
@@ -90,8 +82,8 @@ class Compra
 
     /**
      * Get the value of retencion
-     */
-    public function getretencion()
+     */ 
+    public function getRetencion()
     {
         return $this->retencion;
     }
@@ -100,8 +92,8 @@ class Compra
      * Set the value of retencion
      *
      * @return  self
-     */
-    public function setretencion($retencion)
+     */ 
+    public function setRetencion($retencion)
     {
         $this->retencion = $retencion;
 
@@ -110,7 +102,7 @@ class Compra
 
     /**
      * Get the value of proveedor
-     */
+     */ 
     public function getProveedor()
     {
         return $this->proveedor;
@@ -120,7 +112,7 @@ class Compra
      * Set the value of proveedor
      *
      * @return  self
-     */
+     */ 
     public function setProveedor($proveedor)
     {
         $this->proveedor = $proveedor;
@@ -130,7 +122,7 @@ class Compra
 
     /**
      * Get the value of fecha
-     */
+     */ 
     public function getFecha()
     {
         return $this->fecha;
@@ -140,7 +132,7 @@ class Compra
      * Set the value of fecha
      *
      * @return  self
-     */
+     */ 
     public function setFecha($fecha)
     {
         $this->fecha = $fecha;
@@ -150,7 +142,7 @@ class Compra
 
     /**
      * Get the value of registrado_por
-     */
+     */ 
     public function getRegistrado_por()
     {
         return $this->registrado_por;
@@ -160,7 +152,7 @@ class Compra
      * Set the value of registrado_por
      *
      * @return  self
-     */
+     */ 
     public function setRegistrado_por($registrado_por)
     {
         $this->registrado_por = $registrado_por;
@@ -170,7 +162,7 @@ class Compra
 
     /**
      * Get the value of condiciones
-     */
+     */ 
     public function getCondiciones()
     {
         return $this->condiciones;
@@ -180,7 +172,7 @@ class Compra
      * Set the value of condiciones
      *
      * @return  self
-     */
+     */ 
     public function setCondiciones($condiciones)
     {
         $this->condiciones = $condiciones;
@@ -189,208 +181,8 @@ class Compra
     }
 
     /**
-     * Get the value of db
-     */
-    public function getDb()
-    {
-        return $this->db;
-    }
-
-    /**
-     * Set the value of db
-     *
-     * @return  self
-     */
-    public function setDb($db)
-    {
-        $this->db = $db;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of sujeto_excluido
-     */
-    public function getSujeto_excluido()
-    {
-        return $this->sujeto_excluido;
-    }
-
-    /**
-     * Set the value of sujeto_excluido
-     *
-     * @return  self
-     */
-    public function setSujeto_excluido($sujeto_excluido)
-    {
-        $this->sujeto_excluido = $sujeto_excluido;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of gravadas_internas
-     */
-    public function getGravadas_internas()
-    {
-        return $this->gravadas_internas;
-    }
-
-    /**
-     * Set the value of gravadas_internas
-     *
-     * @return  self
-     */
-    public function setGravadas_internas($gravadas_internas)
-    {
-        $this->gravadas_internas = $gravadas_internas;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of gravadas_importacion
-     */
-    public function getGravadas_importacion()
-    {
-        return $this->gravadas_importacion;
-    }
-
-    /**
-     * Set the value of gravadas_importacion
-     *
-     * @return  self
-     */
-    public function setGravadas_importacion($gravadas_importacion)
-    {
-        $this->gravadas_importacion = $gravadas_importacion;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of exentas_internas
-     */
-    public function getExentas_internas()
-    {
-        return $this->exentas_internas;
-    }
-
-    /**
-     * Set the value of exentas_internas
-     *
-     * @return  self
-     */
-    public function setExentas_internas($exentas_internas)
-    {
-        $this->exentas_internas = $exentas_internas;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of exentas_importacion
-     */
-    public function getExentas_importacion()
-    {
-        return $this->exentas_importacion;
-    }
-
-    /**
-     * Set the value of exentas_importacion
-     *
-     * @return  self
-     */
-    public function setExentas_importacion($exentas_importacion)
-    {
-        $this->exentas_importacion = $exentas_importacion;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of nrc
-     */
-    public function getNrc()
-    {
-        return $this->nrc;
-    }
-
-    /**
-     * Set the value of nrc
-     *
-     * @return  self
-     */
-    public function setNrc($nrc)
-    {
-        $this->nrc = $nrc;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of nit
-     */
-    public function getNit()
-    {
-        return $this->nit;
-    }
-
-    /**
-     * Set the value of nit
-     *
-     * @return  self
-     */
-    public function setNit($nit)
-    {
-        $this->nit = $nit;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of numero_comprobante
-     */
-    public function getNumero_comprobante()
-    {
-        return $this->numero_comprobante;
-    }
-
-    /**
-     * Set the value of numero_comprobante
-     *
-     * @return  self
-     */
-    public function setNumero_comprobante($numero_comprobante)
-    {
-        $this->numero_comprobante = $numero_comprobante;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of tipo
-     */
-    public function getTipo()
-    {
-        return $this->tipo;
-    }
-
-    /**
-     * Set the value of tipo
-     *
-     * @return  self
-     */
-    public function setTipo($tipo)
-    {
-        $this->tipo = $tipo;
-
-        return $this;
-    }
-
-    /**
      * Get the value of estado
-     */
+     */ 
     public function getEstado()
     {
         return $this->estado;
@@ -400,7 +192,7 @@ class Compra
      * Set the value of estado
      *
      * @return  self
-     */
+     */ 
     public function setEstado($estado)
     {
         $this->estado = $estado;
@@ -409,21 +201,61 @@ class Compra
     }
 
     /**
-     * Get the value of totalCompras
-     */
-    public function getTotalCompras()
+     * Get the value of document_type
+     */ 
+    public function getDocument_type()
     {
-        return $this->totalCompras;
+        return $this->document_type;
     }
 
     /**
-     * Set the value of totalCompras
+     * Set the value of document_type
      *
      * @return  self
-     */
-    public function setTotalCompras($totalCompras)
+     */ 
+    public function setDocument_type($document_type)
     {
-        $this->totalCompras = $totalCompras;
+        $this->document_type = $document_type;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of document_number
+     */ 
+    public function getDocument_number()
+    {
+        return $this->document_number;
+    }
+
+    /**
+     * Set the value of document_number
+     *
+     * @return  self
+     */ 
+    public function setDocument_number($document_number)
+    {
+        $this->document_number = $document_number;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of db
+     */ 
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    /**
+     * Set the value of db
+     *
+     * @return  self
+     */ 
+    public function setDb($db)
+    {
+        $this->db = $db;
 
         return $this;
     }
@@ -438,13 +270,14 @@ class Compra
         mysqli_stmt_close($sql);
         return $res;
     }
+
     public function saveCompra()
     {
         $id = 0;
-        $sql = $this->db->prepare("INSERT INTO Compra VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+        $sql = $this->db->prepare("INSERT INTO Compra VALUES(?,?,?,?,?,?,?,?,?,?,?);");
         # s = string; i = int; d = decimal
         $res = $sql->bind_param(
-            'idddissiiissdsddddd',
+            'idddissiiss',
             $id,
             $this->afectas,
             $this->iva,
@@ -454,16 +287,9 @@ class Compra
             $this->registrado_por,
             $this->condiciones,
             $this->estado,
-            $this->tipo,
-            $this->numero_comprobante,
-            $this->nit,
-            $this->sujeto_excluido,
-            $this->nrc,
-            $this->exentas_importacion,
-            $this->exentas_internas,
-            $this->gravadas_importacion,
-            $this->gravadas_internas,
-            $this->totalCompras
+            $this->document_type,
+            $this->document_number
+            
         );
         $sql->execute();
         $data = array();

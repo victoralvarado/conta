@@ -133,7 +133,7 @@
                                                         $(document).on("click", "#eliminar", function() {
                                                             swal({
                                                                     title: "Eliminar",
-                                                                    text: "¿Estás seguro que deseas eliminar el proveedor?",
+                                                                    text: "¿Estás seguro que deseas eliminar el cliente?",
                                                                     type: "warning",
                                                                     showCancelButton: true,
                                                                     cancelButtonText: "Cancelar",
