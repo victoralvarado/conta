@@ -59,7 +59,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Precio:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="precio" name="precio" placeholder="Precio" min="0.00" value="0.00" step="any" class="form-control" readonly required="true" value="" type="number">
+                                                            <input id="precio" name="precio" placeholder="Precio" min="0.00" value="0.00" step="any" class="form-control" required="true" value="" type="number">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">

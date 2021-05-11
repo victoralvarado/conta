@@ -335,8 +335,8 @@ $(document).ready(function () {
                         fecha: $('#fecha').val(), condicion: $('#condicion').val(),
                         document_type: $('#tipo').val(), document_num: $('#numfactura').val()
                     },
-                    success: function (data) {
-                        console.log(data);
+                    success: function (response) {
+                        console.log(response);
                     }
                 });
                 var filas = [];
@@ -364,13 +364,12 @@ $(document).ready(function () {
                         console.log(data);
                         swal({
                             title: "Guardado",
-                            text: "Compra agregada correctamente!",
+                            text: "Compra guardada!",
                             type: "success",
                             showCancelButton: false,
                             showConfirmButton: false
                         });
-                        
-                        setTimeout(function () {
+                        setTimeout(function() {
                             location.assign("./compra.php");
                         }, 1500);
                     }

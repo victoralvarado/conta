@@ -4,6 +4,7 @@ require_once('../model/DetalleCompra.php');
 require_once('../model/Producto.php');
 require_once('../model/Movimiento.php');
 
+
 if (isset($_POST['idCompra'])) {
     editCompra();
 }
@@ -21,26 +22,41 @@ foreach ($filas as $fila) {
     $objDC->setPrice($fila['precio']);
     $objDC->setEstado(1);
     $objDC->saveDetalleCompra();
+    $idP = $objDC->ultmimoIdP();
+    $objM->setProducto($idP);
+    $objM->setCantidad($fila['cantidad']);
+    $ue = $objP->getUltimaExistencia($fila['codigo']);
+    $objM->setUltima_existencia($ue);
+    $objM->setprecio($fila['precio']);
+    $uc = $objP->getUltimoCosto($fila['codigo']);
+    $objM->setCosto($uc);
+    $descripcionmov = $objM->desMovimiento($compra);
+    $objM->setDescripcion($descripcionmov);
+    $objM->saveMovimiento();
+    $objP->setExistencias($ue+$fila['cantidad']);
+    $ncosto = (($ue * $uc) + ($fila['cantidad'] * $fila['precio'])/($ue+$fila['cantidad']));
+    $objP->setCosto($ncosto);
+    $objP->updateProductoCE();
 }
 
 if (isset($_POST['user'])) {
-    insertCompra();
-}
-function insertCompra()
-{
-    $objC = new Compra();
-    $nombreUser = $objC->getNombreUser($_POST['user']);
-    $objC->setAfectas($_POST['total']);
-    $objC->setIva($_POST['ivaCF']);
-    $objC->setretencion($_POST['ivaR']);
-    $objC->setProveedor($_POST['contribuyente']);
-    $objC->setFecha(str_replace("T", " ", $_POST['fecha'] . ':00'));
-    $objC->setRegistrado_por($nombreUser);
-    $objC->setCondiciones($_POST['condicion']);
-    $objC->setEstado(1);
-    $objC->setDocument_type($_POST['document_type']);
-    $objC->setDocument_number($_POST['document_num']);
-    $objC->saveCompra();
+    try {
+        $objC = new Compra();
+        $nombreUser = $objC->getNombreUser($_POST['user']);
+        $objC->setAfectas($_POST['total']);
+        $objC->setIva($_POST['ivaCF']);
+        $objC->setretencion($_POST['ivaR']);
+        $objC->setProveedor($_POST['contribuyente']);
+        $objC->setFecha(str_replace("T", " ", $_POST['fecha'] . ':00'));
+        $objC->setRegistrado_por($nombreUser);
+        $objC->setCondiciones($_POST['condicion']);
+        $objC->setEstado(1);
+        $objC->setDocument_type($_POST['document_type']);
+        $objC->setDocument_number($_POST['document_num']);
+        $objC->saveCompra();
+    } catch (Exception $e) {
+        echo $e;
+    }
 }
 
 //falta modificar editCompra
