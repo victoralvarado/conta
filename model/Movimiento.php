@@ -1,27 +1,27 @@
 <?php
-require_once ("./config/conexion.php");
+require_once("./config/conexion.php");
 class Movimiento
 {
     private $id;
     private $producto;
     private $cantidad;
-    private $ultima_eistencia;
+    private $ultima_existencia;
     private $precio;
     private $costo;
-    private $ultimo_consto;
+    private $ultimo_costo;
     private $descripcion;
     private $estado;
     private $db;
 
     public function __construct()
     {
-      $this->db = conectar();   
+        $this->db = conectar();
     }
 
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -31,7 +31,7 @@ class Movimiento
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -41,7 +41,7 @@ class Movimiento
 
     /**
      * Get the value of producto
-     */ 
+     */
     public function getProducto()
     {
         return $this->producto;
@@ -51,7 +51,7 @@ class Movimiento
      * Set the value of producto
      *
      * @return  self
-     */ 
+     */
     public function setProducto($producto)
     {
         $this->producto = $producto;
@@ -61,7 +61,7 @@ class Movimiento
 
     /**
      * Get the value of cantidad
-     */ 
+     */
     public function getCantidad()
     {
         return $this->cantidad;
@@ -71,7 +71,7 @@ class Movimiento
      * Set the value of cantidad
      *
      * @return  self
-     */ 
+     */
     public function setCantidad($cantidad)
     {
         $this->cantidad = $cantidad;
@@ -80,28 +80,28 @@ class Movimiento
     }
 
     /**
-     * Get the value of ultima_eistencia
-     */ 
-    public function getUltima_eistencia()
+     * Get the value of ultima_existencia
+     */
+    public function getUltima_existencia()
     {
-        return $this->ultima_eistencia;
+        return $this->ultima_existencia;
     }
 
     /**
-     * Set the value of ultima_eistencia
+     * Set the value of ultima_existencia
      *
      * @return  self
-     */ 
-    public function setUltima_eistencia($ultima_eistencia)
+     */
+    public function setUltima_existencia($ultima_existencia)
     {
-        $this->ultima_eistencia = $ultima_eistencia;
+        $this->ultima_existencia = $ultima_existencia;
 
         return $this;
     }
 
     /**
      * Get the value of precio
-     */ 
+     */
     public function getPrecio()
     {
         return $this->precio;
@@ -111,7 +111,7 @@ class Movimiento
      * Set the value of precio
      *
      * @return  self
-     */ 
+     */
     public function setPrecio($precio)
     {
         $this->precio = $precio;
@@ -121,7 +121,7 @@ class Movimiento
 
     /**
      * Get the value of costo
-     */ 
+     */
     public function getCosto()
     {
         return $this->costo;
@@ -131,7 +131,7 @@ class Movimiento
      * Set the value of costo
      *
      * @return  self
-     */ 
+     */
     public function setCosto($costo)
     {
         $this->costo = $costo;
@@ -140,28 +140,28 @@ class Movimiento
     }
 
     /**
-     * Get the value of ultimo_consto
-     */ 
-    public function getUltimo_consto()
+     * Get the value of ultimo_costo
+     */
+    public function getUltimo_costo()
     {
-        return $this->ultimo_consto;
+        return $this->ultimo_costo;
     }
 
     /**
-     * Set the value of ultimo_consto
+     * Set the value of ultimo_costo
      *
      * @return  self
-     */ 
-    public function setUltimo_consto($ultimo_consto)
+     */
+    public function setUltimo_costo($ultimo_costo)
     {
-        $this->ultimo_consto = $ultimo_consto;
+        $this->ultimo_costo = $ultimo_costo;
 
         return $this;
     }
 
     /**
      * Get the value of descripcion
-     */ 
+     */
     public function getDescripcion()
     {
         return $this->descripcion;
@@ -171,7 +171,7 @@ class Movimiento
      * Set the value of descripcion
      *
      * @return  self
-     */ 
+     */
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
@@ -181,7 +181,7 @@ class Movimiento
 
     /**
      * Get the value of estado
-     */ 
+     */
     public function getEstado()
     {
         return $this->estado;
@@ -191,7 +191,7 @@ class Movimiento
      * Set the value of estado
      *
      * @return  self
-     */ 
+     */
     public function setEstado($estado)
     {
         $this->estado = $estado;
@@ -201,7 +201,7 @@ class Movimiento
 
     /**
      * Get the value of db
-     */ 
+     */
     public function getDb()
     {
         return $this->db;
@@ -211,7 +211,7 @@ class Movimiento
      * Set the value of db
      *
      * @return  self
-     */ 
+     */
     public function setDb($db)
     {
         $this->db = $db;
@@ -221,6 +221,40 @@ class Movimiento
 
     public function saveMovimiento()
     {
-        
+        $sql = $this->db->prepare("INSERT INTO Movimiento values (?,?,?,?,?,?,?,?,?);");
+        # s = string; i = int; d = decimal
+        $res = $sql->bind_param(
+            'iiiidddsi',
+            $this->id,
+            $this->producto,
+            $this->cantidad,
+            $this->ultima_existencia,
+            $this->precio,
+            $this->costo,
+            $this->ultimo_costo,
+            $this->descripcion,
+            $this->estado
+        );
+        $sql->execute();
+        $data = array();
+        if ($res) {
+            $data['estado'] = true;
+            $data['descripcion'] = 'Datos ingresado exitosamente';
+        } else {
+            $data['estado'] = false;
+            $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
+        }
+        return $data;
+    }
+
+    public function desMovimiento($id)
+    {
+        $sql = $this->db->prepare("SELECT concat('Compra a ',if(p.clasificacion = 'ninguno', 'Sujeto Excluido', ''),if(p.clasificacion = 'mediano', 'Mediano Contribuyente', ''),if(p.clasificacion = 'peqeño', 'Peqeño Contribuyente', ''),if(p.clasificacion = 'gran contribuyente', 'Gran Contribuyente', ''),' con ',c.document_type,' #',c.document_number) as 'descripcion' from compra c inner join proveedor p on c.proveedor = p.id inner join detalle_compra dc on dc.compra = c.id where c.id = ? limit 1;");
+        mysqli_stmt_bind_param($sql, 'i', $id);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $res);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
+        return $res;
     }
 }

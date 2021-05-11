@@ -207,4 +207,13 @@ class DetalleCompra
         $this->db->close();
         return $data;
     }
+
+    public function ultmimoIdP()
+    {
+        $info = $this->db->prepare("SELECT MAX(id) FROM detalle_compra;");
+        $info->execute();
+        $resultado = $info->get_result();
+        $fila = $resultado->fetch_assoc();
+        return $fila['MAX(id)'];
+    }
 }

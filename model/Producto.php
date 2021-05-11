@@ -198,7 +198,7 @@ class Producto
 
         return $this;
     }
-
+    
     public function getIdProducto($codigo)
     {
         $sql = $this->db->prepare("SELECT id FROM Producto WHERE codigo = ?;");
@@ -209,7 +209,6 @@ class Producto
         mysqli_stmt_close($sql);
         return $res;
     }
-
 
     public function getAllProducto()
     {
@@ -327,6 +326,21 @@ class Producto
             $this->db->close();
         }
 
+        return $data;
+    }
+    public function updateProductoCE()
+    {
+            $sql = $this->db->prepare("UPDATE Producto SET existencias = ?, costo = ? where codigo =?;");
+            $res = $sql->bind_param('idi', $this->existencias, $this->costo, $this->codigo);
+            $sql->execute();
+            $data = array();
+            if ($res) {
+                $data['estado'] = true;
+                $data['descripcion'] = 'Datos eliminados exitosamente';
+            } else {
+                $data['estado'] = false;
+                $data['descripcion'] = 'Ocurrio un error en la modificacion ' . $this->db->error;
+            }
         return $data;
     }
 }
