@@ -53,19 +53,19 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Existencias:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="existencias" name="existencias" placeholder="Existencias" min="0" class="form-control" required="true" value="" type="number">
+                                                            <input id="existencias" name="existencias" placeholder="Existencias" min="0" readonly value="0" class="form-control" required="true" value="" type="number">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Precio:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="precio" name="precio" placeholder="Precio" min="1.00" step="any" class="form-control" required="true" value="" type="number">
+                                                            <input id="precio" name="precio" placeholder="Precio" min="0.00" value="0.00" step="any" class="form-control" readonly required="true" value="" type="number">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Costo:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="costo" name="costo" placeholder="Costo" min="1.00" step="any" class="form-control" required="true" value="" type="number">
+                                                            <input id="costo" name="costo" placeholder="Costo" min="0.00" value="0.00" step="any" class="form-control" readonly required="true" value="" type="number">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -83,7 +83,8 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Codigo:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="codigo" name="codigo" max="15" placeholder="Codigo del producto" class="form-control" required="true" value="" type="text">
+                                                            <input id="codigo" autocomplete="off" name="codigo" max="15" placeholder="Codigo del producto" class="form-control" required="true" value="" type="text">
+                                                            <span id="existecodigo" style="color: red;"></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -161,19 +162,19 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Existencias:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="existenciasEdit" name="existencias" placeholder="Existencias" min="0" class="form-control edit" required="true" value="<?php echo $value['existencias']; ?>" type="number">
+                                                                <input id="existenciasEdit" name="existencias" placeholder="Existencias" min="0" class="form-control edit"  value="<?php echo $value['existencias']; ?>" type="number">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Precio:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="precioEdit" name="precio" placeholder="Precio" min="1.00" step="any" class="form-control edit" required="true" value="<?php echo $value['precio']; ?>" type="number">
+                                                                <input id="precioEdit" name="precio" placeholder="Precio" min="0.00" step="any" class="form-control edit"  value="<?php echo $value['precio']; ?>" type="number">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Costo:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="costoEdit" name="costo" placeholder="Costo" min="1.00" step="any" class="form-control edit" required="true" value="<?php echo $value['costo']; ?>" type="number">
+                                                                <input id="costoEdit" name="costo" placeholder="Costo" min="0.00" step="any" class="form-control edit"  value="<?php echo $value['costo']; ?>" type="number">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">

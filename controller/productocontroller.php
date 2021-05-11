@@ -1,5 +1,6 @@
 <?php
 require_once('../model/Producto.php');
+require_once('../model/Usuario.php');
 
 if (isset($_POST['agregarProducto'])) {
     insertProducto();
@@ -9,6 +10,12 @@ if (isset($_POST['idEdit'])) {
     editProducto();
 }
 
+if (isset($_POST['codigop'])) {
+    $objP = new Producto();
+    $codigo = $objP->getCodProducto($_POST['codigop']);
+    echo $codigo;
+}
+
 if (isset($_POST['idD'])) {
     $id = $_POST['idD'];
     eraseProducto($id);
@@ -16,11 +23,12 @@ if (isset($_POST['idD'])) {
 
 function insertProducto()
 {
+    $objU = new Usuario();
     $objP = new Producto();
     //El nombre de la imagen tendra el id del usurio y codigo del producto para evitar 
     //conflicto con imagenes que tengan el mismo nombre
     //$newName = $rutaDocServer.''.$idUser.'-'.$_POST['codigo'].'.'.$type;
-    $idUser = $objP->idUser($_POST['user']);
+    $idUser = $objU->idUser($_POST['user']);
     #Extencion de la imagen
     $type = str_replace('image/', '', $_FILES['imagen']['type']);
     #Nombre original de la imagen
@@ -65,6 +73,7 @@ function insertProducto()
 function editProducto()
 {
 
+    $objU = new Usuario();
     $objP = new Producto();
     if ($_FILES['imagen']['name'] == null) {
         $objP->setNombre($_POST['nombre']);
@@ -93,7 +102,7 @@ function editProducto()
         //El nombre de la imagen tendra el id del usurio y codigo del producto para evitar 
         //conflicto con imagenes que tengan el mismo nombre
         //$newName = $rutaDocServer.''.$idUser.'-'.$_POST['codigo'].'.'.$type;
-        $idUser = $objP->idUser($_POST['user']);
+        $idUser = $objU->idUser($_POST['user']);
         #Extencion de la imagen
         $type = str_replace('image/', '', $_FILES['imagen']['type']);
         #Nombre original de la imagen
