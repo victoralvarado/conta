@@ -2,6 +2,7 @@
 require_once('../model/Compra.php');
 require_once('../model/DetalleCompra.php');
 require_once('../model/Producto.php');
+require_once('../model/Movimiento.php');
 
 if (isset($_POST['idCompra'])) {
     editCompra();
@@ -11,6 +12,7 @@ foreach ($filas as $fila) {
     $objDC = new DetalleCompra();
     $objCo = new Compra();
     $objP = new Producto();
+    $objM = new Movimiento();
     $compra = $objCo->ultmimoId();
     $id = $objP->getIdProducto($fila['codigo']);
     $objDC->setCompra($compra);

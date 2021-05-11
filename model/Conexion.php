@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 define('HOST', "localhost");
 define('USER', "root");
 define('PASS', "Itca123!");
