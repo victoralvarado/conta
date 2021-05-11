@@ -14,12 +14,16 @@ $(document).ready(function () {
             var cantidad = $("#cantidad").val();
             var precio = $("#precio").val();
             var subtotal = $("#cp").val();
-            var fila = '<tr id="row' + i + '"><td>' + codigo + '</td><td>' + nombre + '</td><td>' + cantidad + '</td> <td>' + precio + '</td><td class="stotal">' + subtotal + '</td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove"><i class="fas fa-trash"></i>  Quitar</button></td></tr>';
+            var fila = '<tr id="row' + i + '"><td>' + codigo + '</td><td>' + nombre + '</td><td>' + cantidad + '</td><td>' + precio + '</td><td class="stotal">' + subtotal + '</td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove"><i class="fas fa-trash"></i>  Quitar</button></td></tr>';
             i++;
-            $('#mytable tr:first').after(fila);
-            $("#adicionados").val(""); //esta instruccion limpia el div adicioandos para que no se vayan acumulando
-            var nFilas = $("#mytable tr").length;
-            $("#adicionados").val(nFilas - 1);
+            if ($("#adicionados").val()=='') {
+                $('#mytable').find('tbody').append(fila);
+            } 
+            if ($("#adicionados").val()>=1) {
+                $('#tbody tr:last').after(fila);
+            }
+            var nFilas = $("#tbody tr").length;
+            $("#adicionados").val(nFilas);
             $("#producto").val("");
             $("#cantidad").val(0);
             $("#precio").val(0);
@@ -103,9 +107,8 @@ $(document).ready(function () {
                 sum += parseFloat(value);
             }
         });
-        $("#adicionados").val("");
-        var nFilas = $("#mytable tr").length;
-        $("#adicionados").val(nFilas - 1);
+        var nFilas = $("#tbody tr").length;
+        $("#adicionados").val(nFilas);
         $('#total').val(sum.toFixed(2));
         var clasificacion = $("#clasificacion").val();
         if (clasificacion != 'Gran Contribuyente') {
@@ -353,7 +356,6 @@ $(document).ready(function () {
                     };
                     filas.push(fila);
                 });
-                filas.shift();
                 $.ajax({
                     url: './controller/compraController.php',
                     type: 'post',
@@ -367,6 +369,7 @@ $(document).ready(function () {
                             showCancelButton: false,
                             showConfirmButton: false
                         });
+                        
                         setTimeout(function () {
                             location.assign("./compra.php");
                         }, 1500);

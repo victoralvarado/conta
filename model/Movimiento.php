@@ -10,11 +10,14 @@ class Movimiento
     private $costo;
     private $ultimo_consto;
     private $descripcion;
+    private $estado;
+    private $db;
 
     public function __construct()
     {
       $this->db = conectar();   
     }
+
 
     /**
      * Get the value of id
@@ -174,5 +177,50 @@ class Movimiento
         $this->descripcion = $descripcion;
 
         return $this;
+    }
+
+    /**
+     * Get the value of estado
+     */ 
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set the value of estado
+     *
+     * @return  self
+     */ 
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of db
+     */ 
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    /**
+     * Set the value of db
+     *
+     * @return  self
+     */ 
+    public function setDb($db)
+    {
+        $this->db = $db;
+
+        return $this;
+    }
+
+    public function saveMovimiento()
+    {
+        
     }
 }

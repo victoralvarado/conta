@@ -100,7 +100,7 @@
                                     <option value="">Seleccionar</option>
                                     <option value="ccf" title="Comprobante de credixto fiscal">CCF</option>
                                     <option value="fcf" title="">FACTURA</option>
-                                    
+
                                 </select>
                             </div>
                         </div>
@@ -165,14 +165,18 @@
                         <input type="hidden" name="adicionados" id="adicionados">
                         <div class="table-responsive">
                             <table id="mytable" class="table table-bordered table-hover ">
-                                <tr>
-                                    <th>Codigo</th>
-                                    <th>Nombre</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio</th>
-                                    <th>SubTotal</th>
-                                    <th>Quitar</th>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Nombre</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>SubTotal</th>
+                                        <th>Quitar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -186,9 +190,9 @@
                         <label>TOTAL:</label>
                         <input type="number" min="0.00" step="any" value="0.00" class="form-control" name="totalf" id="totalf" readonly>
                     </div>
-                    
+
                     <div class="col-md-12">
-                    <hr>
+                        <hr>
                         <div class="form-group" style="text-align: center;">
                             <span id="valtodo" style="color: red;"></span>
                         </div>
