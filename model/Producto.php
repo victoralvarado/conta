@@ -261,6 +261,17 @@ class Producto
         return $data;
     }
 
+    public function getCodProducto($codigo)
+    {
+        $sql = $this->db->prepare("SELECT codigo FROM producto WHERE codigo = ?;");
+        mysqli_stmt_bind_param($sql,'s',$codigo);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $res);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
+        return $res;
+    }
+
 
     public function updateProducto()
     {

@@ -14,8 +14,10 @@ $(document).ready(function () {
             success: function (response) {
                 if (response == $("#nrc").val()) {
                     $('#existe').text('El NRC ya esta en uso');
+                    $('#agregarProveedor').prop('disabled',true);
                 } else {
                     $('#existe').text('');
+                    $('#agregarProveedor').prop('disabled',false);
                 }
             }
         });
@@ -29,8 +31,10 @@ $(document).ready(function () {
             success: function (response) {
                 if (response == $("#nit").val()) {
                     $('#existeNit').text('El NIT ya esta en uso');
+                    $('#agregarProveedor').prop('disabled',true);
                 } else {
                     $('#existeNit').text('');
+                    $('#agregarProveedor').prop('disabled',false);
                 }
             }
         });
