@@ -1,16 +1,16 @@
 <?php
-require_once("./config/conexion.php");
+require_once("Conexion.php");
 class Movimiento
 {
     private $id;
-    private $producto;
+    private $productoM;
     private $cantidad;
     private $ultima_existencia;
     private $precio;
     private $costo;
     private $ultimo_costo;
     private $descripcion;
-    private $estado;
+    private $estadoM;
     private $db;
 
     public function __construct()
@@ -40,21 +40,21 @@ class Movimiento
     }
 
     /**
-     * Get the value of producto
+     * Get the value of productoM
      */
-    public function getProducto()
+    public function getProductoM()
     {
-        return $this->producto;
+        return $this->productoM;
     }
 
     /**
-     * Set the value of producto
+     * Set the value of productoM
      *
      * @return  self
      */
-    public function setProducto($producto)
+    public function setProductoM($productoM)
     {
-        $this->producto = $producto;
+        $this->productoM = $productoM;
 
         return $this;
     }
@@ -180,21 +180,21 @@ class Movimiento
     }
 
     /**
-     * Get the value of estado
+     * Get the value of estadoM
      */
-    public function getEstado()
+    public function getEstadoM()
     {
-        return $this->estado;
+        return $this->estadoM;
     }
 
     /**
-     * Set the value of estado
+     * Set the value of estadoM
      *
      * @return  self
      */
-    public function setEstado($estado)
+    public function setEstadoM($estadoM)
     {
-        $this->estado = $estado;
+        $this->estadoM = $estadoM;
 
         return $this;
     }
@@ -226,14 +226,14 @@ class Movimiento
         $res = $sql->bind_param(
             'iiiidddsi',
             $this->id,
-            $this->producto,
+            $this->productoM,
             $this->cantidad,
             $this->ultima_existencia,
             $this->precio,
             $this->costo,
             $this->ultimo_costo,
             $this->descripcion,
-            $this->estado
+            $this->estadoM
         );
         $sql->execute();
         $data = array();
