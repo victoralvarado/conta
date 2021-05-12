@@ -7,7 +7,7 @@ class DetalleCompra
     private $producto;
     private $cant;
     private $price;
-    private $estado;
+    private $estadoDC;
     private $db;
 
     public function __construct()
@@ -136,21 +136,21 @@ class DetalleCompra
     }
 
     /**
-     * Get the value of estado
+     * Get the value of estadoDC
      */
-    public function getEstado()
+    public function getEstadoDC()
     {
-        return $this->estado;
+        return $this->estadoDC;
     }
 
     /**
-     * Set the value of estado
+     * Set the value of estadoDC
      *
      * @return  self
      */
-    public function setEstado($estado)
+    public function setEstadoDC($estadoDC)
     {
-        $this->estado = $estado;
+        $this->estadoDC = $estadoDC;
 
         return $this;
     }
@@ -167,7 +167,7 @@ class DetalleCompra
             $this->producto,
             $this->cant,
             $this->price,
-            $this->estado
+            $this->estadoDC
         );
         $sql->execute();
         $data = array();
@@ -178,8 +178,6 @@ class DetalleCompra
             $data['estado'] = false;
             $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
         }
-        $sql->close();
-        $this->db->close();
         return $data;
     }
 
@@ -191,7 +189,7 @@ class DetalleCompra
             $this->producto,
             $this->cant,
             $this->price,
-            $this->estado,
+            $this->estadoDC,
             $this->compra
         );
         $sql->execute();
@@ -208,12 +206,14 @@ class DetalleCompra
         return $data;
     }
 
-    public function ultmimoIdP()
+    public function ultmimoIdP($codigo)
     {
-        $info = $this->db->prepare("SELECT MAX(id) FROM detalle_compra;");
-        $info->execute();
-        $resultado = $info->get_result();
-        $fila = $resultado->fetch_assoc();
-        return $fila['MAX(id)'];
+        $sql = $this->db->prepare("SELECT id FROM producto where codigo = ?");
+        mysqli_stmt_bind_param($sql,'s',$codigo);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $res);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
+        return $res;
     }
 }

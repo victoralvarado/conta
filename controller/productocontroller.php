@@ -52,7 +52,7 @@ function insertProducto()
     $objP->setNombre($_POST['nombre']);
     $objP->setExistencias($_POST['existencias']);
     $objP->setPrecio($_POST['precio']);
-    $objP->setCosto($_POST['costo']);
+    $objP->setCostoP($_POST['costo']);
     $objP->setDescripcion($_POST['descripcion']);
     $objP->setImagen($nameBD);
     $objP->setCodigo($_POST['codigo']);
@@ -79,7 +79,7 @@ function editProducto()
         $objP->setNombre($_POST['nombre']);
         $objP->setExistencias($_POST['existencias']);
         $objP->setPrecio($_POST['precio']);
-        $objP->setCosto($_POST['costo']);
+        $objP->setCostoP($_POST['costo']);
         $objP->setDescripcion($_POST['descripcion']);
         $objP->setImagen('');
         $objP->setCodigo($_POST['codigo']);
@@ -126,7 +126,7 @@ function editProducto()
         $objP->setNombre($_POST['nombre']);
         $objP->setExistencias($_POST['existencias']);
         $objP->setPrecio($_POST['precio']);
-        $objP->setCosto($_POST['costo']);
+        $objP->setCostoP($_POST['costo']);
         $objP->setDescripcion($_POST['descripcion']);
         $objP->setImagen($nameBD);
         $objP->setCodigo($_POST['codigo']);

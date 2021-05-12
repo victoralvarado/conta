@@ -38,7 +38,7 @@
                 <div class="ex1">
                     <section id="content" class="container-fluid">
                         <div class="row">
-                            <form id="compra" class="well form" method="POST" action="controller/compController.php">
+                            <form id="compras" class="well form" method="post" >
                                 <fieldset class="form-group">
                                     <legend class="w-auto">Proveedor/Compra</legend>
                                     <div class="col-md-5">
@@ -109,7 +109,7 @@
                         </form>
                 </div>
                 <div class="row">
-                    <form class="well form" method="POST">
+                    <form class="well form" method="post">
                         <fieldset class="form-group">
                             <legend class="w-auto">Producto</legend>
                             <div class="col-md-4">

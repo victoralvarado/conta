@@ -10,10 +10,10 @@ class Compra
     private $fecha;
     private $registrado_por;
     private $condiciones;
-    private $estado;
+    private $estadoC;
     private $document_type;
     private $document_number;
-    public $db;
+    private $db;
 
     public function __construct()
     {
@@ -181,21 +181,21 @@ class Compra
     }
 
     /**
-     * Get the value of estado
+     * Get the value of estadoC
      */ 
-    public function getEstado()
+    public function getEstadoC()
     {
-        return $this->estado;
+        return $this->estadoC;
     }
 
     /**
-     * Set the value of estado
+     * Set the value of estadoC
      *
      * @return  self
      */ 
-    public function setEstado($estado)
+    public function setEstadoC($estadoC)
     {
-        $this->estado = $estado;
+        $this->estadoC = $estadoC;
 
         return $this;
     }
@@ -262,7 +262,7 @@ class Compra
 
     public function getNombreUser($username)
     {
-        $sql = $this->db->prepare("SELECT nombre FROM Usuario WHERE usuario = ?;");
+        $sql = $this->db->prepare("SELECT nombre FROM usuario WHERE usuario.usuario = ?;");
         mysqli_stmt_bind_param($sql, 's', $username);
         mysqli_stmt_execute($sql);
         mysqli_stmt_bind_result($sql, $res);
@@ -273,34 +273,9 @@ class Compra
 
     public function saveCompra()
     {
-        $id = 0;
-        $sql = $this->db->prepare("INSERT INTO Compra VALUES(?,?,?,?,?,?,?,?,?,?,?);");
-        # s = string; i = int; d = decimal
-        $res = $sql->bind_param(
-            'idddissiiss',
-            $id,
-            $this->afectas,
-            $this->iva,
-            $this->retencion,
-            $this->proveedor,
-            $this->fecha,
-            $this->registrado_por,
-            $this->condiciones,
-            $this->estado,
-            $this->document_type,
-            $this->document_number
-            
-        );
+        $sql = $this->db->prepare("INSERT INTO compra(afectas, iva, retencion, proveedor, fecha, registrado_por, condiciones, estado, document_type, document_number) VALUES(?,?,?,?,?,?,?,?,?,?);");
+            $sql->bind_param('dddissiiss',$this->afectas,$this->iva,$this->retencion,$this->proveedor,$this->fecha,$this->registrado_por,$this->condiciones,$this->estadoC,$this->document_type,$this->document_number);
         $sql->execute();
-        $data = array();
-        if ($res) {
-            $data['estado'] = true;
-            $data['descripcion'] = 'Datos ingresado exitosamente';
-        } else {
-            $data['estado'] = false;
-            $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
-        }
-        return $data;
     }
 
     public function ultmimoId()
@@ -354,7 +329,7 @@ class Compra
 
     public function updateCompra()
     {
-        $sql = $this->db->prepare("UPDATE Compra SET afectas = ?, iva = ?, retencion = ?, proveedor = ?, fecha = ?, registrado_por = ?, condiciones = ?, estado = ?, tipo = ?, numero_comprobante = ?, nit = ?, sujeto_excluido = ?, nrc = ?, exentas_importacion = ?, exentas_internas = ?, gravadas_importacion = ?, gravadas_internas = ?, totalCompras = ? WHERE id = ?;");
+        $sql = $this->db->prepare("UPDATE Compra SET afectas = ?, iva = ?, retencion = ?, proveedor = ?, fecha = ?, registrado_por = ?, condiciones = ?, estadoC = ?, tipo = ?, numero_comprobante = ?, nit = ?, sujeto_excluido = ?, nrc = ?, exentas_importacion = ?, exentas_internas = ?, gravadas_importacion = ?, gravadas_internas = ?, totalCompras = ? WHERE id = ?;");
         $res = $sql->bind_param(
             'dddissiiissdsdddddi',
             $this->afectas,
@@ -364,7 +339,7 @@ class Compra
             $this->fecha,
             $this->registrado_por,
             $this->condiciones,
-            $this->estado,
+            $this->estadoC,
             $this->tipo,
             $this->numero_comprobante,
             $this->nit,
@@ -390,4 +365,5 @@ class Compra
         $this->db->close();
         return $data;
     }
+
 }

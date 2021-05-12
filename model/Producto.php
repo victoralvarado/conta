@@ -7,7 +7,7 @@ class Producto
     private $nombre;
     private $existencias;
     private $precio;
-    private $costo;
+    private $costoP;
     private $descripcion;
     private $imagen;
     private $codigo;
@@ -100,21 +100,21 @@ class Producto
     }
 
     /**
-     * Get the value of costo
+     * Get the value of costoP
      */
-    public function getCosto()
+    public function getCostoP()
     {
-        return $this->costo;
+        return $this->costoP;
     }
 
     /**
-     * Set the value of costo
+     * Set the value of costoP
      *
      * @return  self
      */
-    public function setCosto($costo)
+    public function setCostoP($costoP)
     {
-        $this->costo = $costo;
+        $this->costoP = $costoP;
 
         return $this;
     }
@@ -229,7 +229,7 @@ class Producto
         $estado = 1;
         $sql = $this->db->prepare("INSERT INTO Producto(nombre,existencias,precio,costo,descripcion,imagen,codigo,estado) values (?,?,?,?,?,?,?,?);");
         # s = string; i = int; d = decimal
-        $res = $sql->bind_param('siddsssi', $this->nombre, $this->existencias, $this->precio, $this->costo, $this->descripcion, $this->imagen, $this->codigo, $estado);
+        $res = $sql->bind_param('siddsssi', $this->nombre, $this->existencias, $this->precio, $this->costoP, $this->descripcion, $this->imagen, $this->codigo, $estado);
         $sql->execute();
         $data = array();
         if ($res) {
@@ -260,7 +260,7 @@ class Producto
         return $data;
     }
 
-    public function getUltimoCosto($codigo)
+    public function getUltimoCostoP($codigo)
     {
         $sql = $this->db->prepare("SELECT costo FROM producto WHERE codigo = ?;");
         mysqli_stmt_bind_param($sql,'s',$codigo);
@@ -271,7 +271,7 @@ class Producto
         return $res;
     }
 
-    public function getUltimaExistencia($codigo)
+    public function getUltimaExistenciaP($codigo)
     {
         $sql = $this->db->prepare("SELECT existencias FROM producto WHERE codigo = ?;");
         mysqli_stmt_bind_param($sql,'s',$codigo);
@@ -298,7 +298,7 @@ class Producto
     {
         if ($this->imagen == '') {
             $sql = $this->db->prepare("UPDATE Producto SET nombre = ?, existencias = ?, precio = ?, costo = ?, descripcion = ?, codigo = ? where id =?;");
-            $res = $sql->bind_param('siddssi', $this->nombre, $this->existencias, $this->precio, $this->costo, $this->descripcion, $this->codigo, $this->id);
+            $res = $sql->bind_param('siddssi', $this->nombre, $this->existencias, $this->precio, $this->costoP, $this->descripcion, $this->codigo, $this->id);
             $sql->execute();
             $data = array();
             if ($res) {
@@ -312,7 +312,7 @@ class Producto
             $this->db->close();
         } else {
             $sql = $this->db->prepare("UPDATE Producto SET nombre = ?, existencias = ?, precio = ?, costo = ?, descripcion = ?, imagen = ?, codigo = ? where id =?;");
-            $res = $sql->bind_param('siddsssi', $this->nombre, $this->existencias, $this->precio, $this->costo, $this->descripcion, $this->imagen, $this->codigo, $this->id);
+            $res = $sql->bind_param('siddsssi', $this->nombre, $this->existencias, $this->precio, $this->costoP, $this->descripcion, $this->imagen, $this->codigo, $this->id);
             $sql->execute();
             $data = array();
             if ($res) {
@@ -331,7 +331,7 @@ class Producto
     public function updateProductoCE()
     {
             $sql = $this->db->prepare("UPDATE Producto SET existencias = ?, costo = ? where codigo =?;");
-            $res = $sql->bind_param('idi', $this->existencias, $this->costo, $this->codigo);
+            $res = $sql->bind_param('idi', $this->existencias, $this->costoP, $this->codigo);
             $sql->execute();
             $data = array();
             if ($res) {

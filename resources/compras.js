@@ -2,6 +2,7 @@ $(document).ready(function () {
     var i = 1;
     const iva = 0.13;
     const retencion = 0.01;
+
     $('#tblCompras').DataTable();
     $('#adicionar').click(function () {
         if ($("#producto").val() == '' || $("#cantidad").val() == 0 || $("#precio").val() == 0 || $("#cp").val() == '') {
@@ -16,10 +17,10 @@ $(document).ready(function () {
             var subtotal = $("#cp").val();
             var fila = '<tr id="row' + i + '"><td>' + codigo + '</td><td>' + nombre + '</td><td>' + cantidad + '</td><td>' + precio + '</td><td class="stotal">' + subtotal + '</td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove"><i class="fas fa-trash"></i>  Quitar</button></td></tr>';
             i++;
-            if ($("#adicionados").val()=='') {
+            if ($("#adicionados").val() == '' || $("#adicionados").val() == 0) {
                 $('#mytable').find('tbody').append(fila);
-            } 
-            if ($("#adicionados").val()>=1) {
+            }
+            if ($("#adicionados").val() >= 1) {
                 $('#tbody tr:last').after(fila);
             }
             var nFilas = $("#tbody tr").length;
@@ -29,6 +30,7 @@ $(document).ready(function () {
             $("#precio").val(0);
             $("#cp").val("");
             var sum = 0;
+
             $(".stotal").each(function () {
 
                 var value = $(this).text();
@@ -37,6 +39,7 @@ $(document).ready(function () {
                 }
             });
             $('#total').val(sum.toFixed(2));
+
             var clasificacion = $("#clasificacion").val();
             if (clasificacion != 'Gran Contribuyente') {
                 if (Number($('#total').val()) >= 100) {
@@ -53,6 +56,7 @@ $(document).ready(function () {
                 $('#retencion').val((0).toFixed(2));
             }
             $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+
             if ($("#tipo ").val() == 'ccf') {
                 var clasificacion = $("#clasificacion").val();
                 if (clasificacion != 'Gran Contribuyente') {
@@ -96,6 +100,7 @@ $(document).ready(function () {
         $('#valtodo').text('');
 
     });
+
     $(document).on('click', '.btn_remove', function () {
         var button_id = $(this).attr("id");
         $('#row' + button_id + '').remove();
@@ -107,10 +112,12 @@ $(document).ready(function () {
                 sum += parseFloat(value);
             }
         });
+
         var nFilas = $("#tbody tr").length;
         $("#adicionados").val(nFilas);
         $('#total').val(sum.toFixed(2));
         var clasificacion = $("#clasificacion").val();
+
         if (clasificacion != 'Gran Contribuyente') {
             if (Number($('#total').val()) >= 100) {
                 $('#retencion').val((Number($('#total').val()) * Number(retencion)).toFixed(2));
@@ -126,6 +133,7 @@ $(document).ready(function () {
             $('#retencion').val((0).toFixed(2));
         }
         $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+
         if ($("#tipo ").val() == 'ccf') {
             var clasificacion = $("#clasificacion").val();
             if (clasificacion != 'Gran Contribuyente') {
@@ -166,6 +174,7 @@ $(document).ready(function () {
             $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
         }
     });
+
     $(document).on('change', '#contribuyente', function () {
         if ($("#contribuyente ").val() != '') {
             $.ajax({
@@ -189,6 +198,7 @@ $(document).ready(function () {
                         $('#retencion').val((0).toFixed(2));
                     }
                     $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
+
                     if ($("#tipo ").val() == 'ccf') {
                         var clasificacion = $("#clasificacion").val();
                         if (clasificacion != 'Gran Contribuyente') {
@@ -228,6 +238,7 @@ $(document).ready(function () {
                         }
                         $('#totalf').val(((Number($('#total').val()) + Number($('#iva').val())) + Number($('#retencion').val())).toFixed(2));
                     }
+
                     var id = $("#contribuyente").children(":selected").attr("id");
                     if (id == '-') {
                         $('#nrcProveedor').val('');
@@ -319,6 +330,7 @@ $(document).ready(function () {
             $('#cp').prop('value', mul.toFixed(2));
         }
     });
+
     $('#guardar').on('click', function () {
         if ($("#adicionados").val() == 0 || $("#adicionados").val() == '') {
             $('#valtodo').text('No hay productos agregados');
@@ -326,19 +338,38 @@ $(document).ready(function () {
             if ($('#contribuyente').val() == '' || $('#numfactura').val() == '' || $('#tipo').val() == '') {
                 $('#valtodo').text('Complete los campos Proveedor/Compra');
             } else {
+                var compra = [];
+                var user = $('#user').val();
+                var total = $('#total').val();
+                var ivaCF = $('#iva').val();
+                var ivaR = $('#retencion').val();
+                var contribuyente = $('#contribuyente').val();
+                var fecha = $('#fecha').val();
+                var condicion = $('#condicion').val();
+                var document_type = $('#tipo').val();
+                var document_num = $('#numfactura').val();
+                var com = {
+                    user,
+                    total,
+                    ivaCF,
+                    ivaR,
+                    contribuyente,
+                    fecha,
+                    condicion,
+                    document_type,
+                    document_num
+                };
+                compra.push(com);
+
                 $.ajax({
                     url: './controller/compraController.php',
                     type: 'post',
-                    data: {
-                        user: $('#user').val(), total: $('#total').val(), ivaCF: $('#iva').val(),
-                        ivaR: $('#retencion').val(), contribuyente: $('#contribuyente').val(),
-                        fecha: $('#fecha').val(), condicion: $('#condicion').val(),
-                        document_type: $('#tipo').val(), document_num: $('#numfactura').val()
-                    },
-                    success: function (response) {
-                        console.log(response);
+                    data: { datos: JSON.stringify(compra) },
+                    success: function (resp) {
+                        console.log('respuesta datos: ' + resp);
                     }
                 });
+
                 var filas = [];
                 $('#mytable tbody tr').each(function () {
                     var codigo = $(this).find('td').eq(0).text();
@@ -356,25 +387,25 @@ $(document).ready(function () {
                     };
                     filas.push(fila);
                 });
+
                 $.ajax({
                     url: './controller/compraController.php',
                     type: 'post',
                     data: { valores: JSON.stringify(filas) },
-                    success: function (data) {
-                        console.log(data);
+                    success: function (resp) {
+                        console.log('respuesta valores: ' + resp);
                         swal({
                             title: "Guardado",
-                            text: "Compra guardada!",
+                            text: "Se guardo la compra!",
                             type: "success",
                             showCancelButton: false,
                             showConfirmButton: false
                         });
-                        setTimeout(function() {
+                        setTimeout(function () {
                             location.assign("./compra.php");
                         }, 1500);
                     }
                 });
-
             }
         }
     });
