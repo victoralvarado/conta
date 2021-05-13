@@ -43,7 +43,7 @@
                                                         <label class="col-md-3 control-label">Clasificación:</label>
                                                         <div class="col-md-7 inputGroupContainer">
                                                             <select required="true" id="clasificacion" name="clasificacion" class="form-control" aria-label="Default select">
-                                                                <option value="">Seleccione una clasificacion</option>
+                                                                <option value="0">Seleccione una clasificacion</option>
                                                                 <option value="1">Ninguno</option>
                                                                 <option value="2">Pequeño</option>
                                                                 <option value="3">Mediano</option>
@@ -75,6 +75,12 @@
                                                         <label class="col-md-3 control-label">Razon Social:</label>
                                                         <div class="col-md-7 inputGroupContainer">
                                                             <input id="razonsocial" name="razonsocial" placeholder="Razon Social" class="form-control" value="" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Giro:</label>
+                                                        <div class="col-md-7 inputGroupContainer">
+                                                            <input id="giro" name="giro" placeholder="Giro" class="form-control" value="" type="text">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
