@@ -105,3 +105,5 @@ function eraseProveedor($id)
 		</script>';
     //echo json_encode($res);
 }
+
+?>

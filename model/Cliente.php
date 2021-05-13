@@ -1,5 +1,5 @@
 <?php
-require_once('./config/conexion.php');
+require_once('Conexion.php');
 class Cliente
 {
     private $id;
@@ -198,4 +198,42 @@ class Cliente
 
         return $this;
     }
+
+    public function saveCliente()
+    {
+        $sql="INSERT INTO cliente VALUES (0, '".$this->nombre."','".$this->clasificacion."', '".$this->direccion."', '".$this->nit."', '".$this->nrc."', '".$this->razon_social."', '".$this->giro."', '".$this->telefono."', 1);";
+        $res=$this->db->query($sql);
+        $data=array();
+        if($res)
+        {
+            $data['estado']=true;
+            $data['descripcion']='Datos ingresado exitosamente';
+        }
+        else
+        {
+            $data['estado']=false;
+            $data['descripcion']='Ocurrio un error en la inserción '.$this->db->error;
+        }
+
+        return $data;
+    }
+
+    public function getAllClientes()
+    {
+            $sql="SELECT * FROM cliente where estado = 1;";
+            $data= $this->db->query($sql);
+            if($data->num_rows>0)
+            {
+                $info=$data;
+            }
+            else
+            {
+                $info=null;
+            }
+        
+        return $info;
+    }
+
 }
+
+?>

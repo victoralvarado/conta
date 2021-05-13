@@ -1,4 +1,5 @@
-<?php /*require_once '../app/validacionAdmin.php';*/ ?>
+<?php require_once 'app/validacionGeneral.php'; ?>
+<?php require_once 'model/Cliente.php'; ?>
 <!DOCTYPE html>
 <html lang="en" class="app">
 
@@ -8,6 +9,14 @@
     <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <?php include("referencias.php"); ?>
+    <script type="text/javascript" src="resources/cliente.js"></script>
+    <script type="text/javascript" src="resources/jmask.js"></script>
+      <script>
+        $(document).ready(function($){
+            $("#nit").mask("9999-999999-999-9");
+            $("#nrc").mask("9999-999999-999-9");
+          });
+    </script>
 </head>
 
 <body>
@@ -36,7 +45,7 @@
                                 <tbody>
                                     <tr>
                                         <td colspan="1">
-                                            <form class="well form-horizontal" method="POST" action="controller/clienteController.php" enctype="multipart/form-data">
+                                        <div class="well form-horizontal">
                                                 <fieldset class="form-group">
                                                     <legend class="w-auto">Cliente</legend>
                                                     <div class="form-group">
@@ -97,12 +106,12 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <center>
-                                                            <button type="submit" id="agregarProveedor" name="agregarProveedor" class="btn btn-primary"><em class="fa fa-plus"></em> Agregar</button>
+                                                            <button type="submit" id="agregarCliente" name="agregarCliente" class="btn btn-primary"><em class="fa fa-plus"></em> Agregar</button>
                                                             <button type="reset" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Limpiar cajas de texto"><em class="fa fa-eraser"></em> Limpiar</button>
                                                         </center>
                                                     </div>
                                                 </fieldset>
-                                            </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -117,58 +126,38 @@
                                             <th scope="col">NRC</th>
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Razon Social</th>
+                                            <th scope="col">Giro</th>
                                             <th scope="col">Dirección</th>
                                             <th scope="col">Teléfono</th>
                                             <th scope="col">Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <form id="eliEdi" class="well eliEdi" method="POST" action="controller/proveedorController.php">
-                                                    <input type="hidden" name="idD" id="idD" value="">
-                                                    <button type="button" id="eliminar" class="btn btn-danger eliminar"><em class="fas fa-trash"></em> Eliminar</button>
-                                                    <script>
-                                                        $(document).on("click", "#eliminar", function() {
-                                                            swal({
-                                                                    title: "Eliminar",
-                                                                    text: "¿Estás seguro que deseas eliminar el cliente?",
-                                                                    type: "warning",
-                                                                    showCancelButton: true,
-                                                                    cancelButtonText: "Cancelar",
-                                                                    confirmButtonColor: "#DD6B55",
-                                                                    confirmButtonText: "Continuar",
-                                                                    closeOnConfirm: false
-                                                                },
-                                                                function(isConfirm) {
-                                                                    if (isConfirm) {
-                                                                        swal({
-                                                                            title: "Eliminado",
-                                                                            text: "Eliminaste el registro!",
-                                                                            type: "success",
-                                                                            showCancelButton: false,
-                                                                            showConfirmButton: false
-                                                                        });
-                                                                        setTimeout(function() {
-                                                                            $("#eliEdi").submit();
-                                                                        }, 1100);
-                                                                    }
-                                                                });
-                                                        });
-                                                    </script>
-                                                    <br>
-                                                    <br>
-                                                    <a class="btn btn-primary" data-toggle="modal" href="#edit_"><em class="fa fa-pencil"></em> Editar</a>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                        <?php 
+
+                                            $objCli = new Cliente();
+                                            $data= $objCli->getAllClientes();
+                                            if($data!=false)
+                                            {
+                                                foreach ($data as $value) {
+                                                    echo '<tr>
+                                                    <td>'.$value['clasificacion'].'</td>
+                                                    <td>'.$value['nit'].'</td>
+                                                    <td>'.$value['nrc'].'</td>
+                                                    <td>'.$value['nombre'].'</td>
+                                                    <td>'.$value['razon_social'].'</td>
+                                                    <td>'.$value['giro'].'</td>
+                                                    <td>'.$value['direccion'].'</td>
+                                                    <td>'.$value['telefono'].'</td>
+                                                    <td>
+                                                            <button type="button" id="'.$value['id'].'" class="btn btn-danger eliminar"><em class="fas fa-trash"></em> Eliminar</button><br><br> 
+                                                            <a class="btn btn-primary editar" id="'.$value['id'].'"><em class="fa fa-pencil"></em> Editar</a>
+                                                    </td>
+                                                </tr>';
+                                                }
+                                            }
+
+                                        ?>
                                     </tbody>
                                 </table>
                         </section>

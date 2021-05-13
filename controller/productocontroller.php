@@ -157,3 +157,5 @@ function eraseProducto($id)
 		</script>';
     //echo json_encode($res);
 }
+
+?>
