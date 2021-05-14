@@ -209,7 +209,7 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form method="POST" id="editar<?php echo $value['id']; ?>" class="well editar" action="controller/proveedorController.php" enctype="multipart/form-data">
+                                                                <form method="POST" id="editar<?php echo $value['id']; ?>" class="editar" action="controller/proveedorController.php" enctype="multipart/form-data">
 
                                                                     <div class="form-group row">
                                                                         <label class="col-md-4 control-label">Tipo</label>
