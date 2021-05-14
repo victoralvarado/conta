@@ -15,6 +15,8 @@
         $(document).ready(function($){
             $("#nit").mask("9999-999999-999-9");
             $("#nrc").mask("9999-999999-999-9");
+            $("#nitEdit").mask("9999-999999-999-9");
+            $("#nrcEdit").mask("9999-999999-999-9");
           });
     </script>
 </head>
@@ -171,3 +173,93 @@
 </body>
 
 </html>
+
+<!-- Modal de modificación de cliente -->
+<div class="modal fade modal" id="modalModCliente" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header " Style="height:45px;">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <span class="robo" style="font-size: 20px;">Modificar cliente</span>
+                </div>
+                <div class="modal-body" >
+                      <div class="row" id="infoClienteEdit">
+
+                        <div class="form-column col-md-4 col-sm-4 col-xs-4">
+                          <div class="form-group required">
+                                     <label for="clasificacionEdit" class="control-label">Clasificación</label>
+                                     <br>
+                                     <input type="hidden" id="idClienteEdit" name="idClienteEdit"> 
+                                <select required="true" id="clasificacionEdit" name="clasificacionEdit" class="form-control" aria-label="Default select">
+                                                                <option value="0">Seleccione una clasificacion</option>
+                                                                <option value="1">Ninguno</option>
+                                                                <option value="2">Pequeño</option>
+                                                                <option value="3">Mediano</option>
+                                                                <option value="4">Gran Contribuyente</option>
+                                </select>
+                        </div>
+                          </div>
+
+                          <div class="form-column col-md-4 col-sm-4 col-xs-4">
+                                 <div class="form-group required">
+                                     <label for="nitEdit" class="control-label">NIT</label>
+                                     <input id="nitEdit" name="nitEdit" placeholder="Número de Identificación Tributaria" class="form-control" required="true" value="" type="text">
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-4 col-sm-4 col-xs-4">
+                                 <div class="form-group required">
+                                     <label for="nrcEdit" class="control-label">NRC</label>
+                                     <input id="nrcEdit" name="nrcEdit" placeholder="Número de Registro de Contribuyente" class="form-control" value="" type="text">
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-4 col-sm-4 col-xs-4">
+                                 <div class="form-group required">
+                                     <label for="nombreEdit" class="control-label">Nombre</label>
+                                     <input id="nombreEdit" name="nombreEdit" placeholder="Nombre" class="form-control" value="" type="text">
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-4 col-sm-4 col-xs-4">
+                                 <div class="form-group required">
+                                     <label for="razonsocialEdit" class="control-label">Razón social</label>
+                                     <input id="razonsocialEdit" name="razonsocialEdit" placeholder="Razon Social" class="form-control" value="" type="text">
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-4 col-sm-4 col-xs-4">
+                                 <div class="form-group required">
+                                     <label for="giroEdit" class="control-label">Giro</label>
+                                     <input id="giroEdit" name="giroEdit" placeholder="Giro" class="form-control" value="" type="text">
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-4 col-sm-4 col-xs-4">
+                                 <div class="form-group required">
+                                     <label for="direccionEdit" class="control-label">Dirección</label>
+                                     <textarea name="direccionEdit" id="direccionEdit" placeholder="Dirección" class="form-control" rows="2"></textarea>
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-4 col-sm-4 col-xs-4">
+                                 <div class="form-group required">
+                                     <label for="telefonoEdit" class="control-label">Teléfono</label>
+                                     <input id="telefonoEdit" name="telefonoEdit" placeholder="Teléfono" maxlength="12" class="form-control" required="true" value="" type="text">
+                                 </div>
+                          </div>
+                           
+                          
+
+              </div>   
+              <div class="clearfix"></div>
+                    <div>
+                    <button class="btn btn-primary  btn-sm " id="modCliente" name="modCliente">Modificar</button>
+                  </div>     
+               <div class="modal-footer" id="modalFooter" >
+                  
+               </div>
+            </div>
+        </div> 
+    </div>   
+</div>

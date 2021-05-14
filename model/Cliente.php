@@ -234,6 +234,64 @@ class Cliente
         return $info;
     }
 
+    public function getOneCliente($id)
+    {
+        $sqlAll = "SELECT * FROM cliente WHERE id=".$id;
+        $info = $this->db->query($sqlAll);
+        $arreglo = array();
+        $data = $info->fetch_assoc();
+
+        $arreglo['id']=$data['id'];
+        $arreglo['clasificacion']=$data['clasificacion'];
+        $arreglo['nombre']=$data['nombre'];
+        $arreglo['nit']=$data['nit'];
+        $arreglo['nrc']=$data['nrc'];
+        $arreglo['direccion']=$data['direccion'];
+        $arreglo['razon_social']=$data['razon_social'];
+        $arreglo['giro']=$data['giro'];
+        $arreglo['telefono']=$data['telefono'];
+        $arreglo['estadoSen']=true;
+        return $arreglo;
+    }
+
+    public function updateCliente()
+    {
+        $sql="UPDATE cliente SET nombre='".$this->nombre."', clasificacion='".$this->clasificacion."', direccion='".$this->direccion."', nit='".$this->nit."', nrc='".$this->nrc."', razon_social='".$this->razon_social."', giro='".$this->giro."', telefono='".$this->telefono."' WHERE id=".$this->id.";";
+        $res=$this->db->query($sql);
+        $data=array();
+        if($res)
+        {
+            $data['estado']=true;
+            $data['descripcion']='Datos ingresado exitosamente';
+        }
+        else
+        {
+            $data['estado']=false;
+            $data['descripcion']='Ocurrio un error en la inserción '.$this->db->error;
+        }
+
+        return $data;
+    }
+
+    public function deleteCliente()
+    {
+        $sql="UPDATE cliente SET estado=0 WHERE id=".$this->id.";";
+        $res=$this->db->query($sql);
+        $data=array();
+        if($res)
+        {
+            $data['estado']=true;
+            $data['descripcion']='Datos eliminados exitosamente';
+        }
+        else
+        {
+            $data['estado']=false;
+            $data['descripcion']='Ocurrio un error en la eliminación '.$this->db->error;
+        }
+
+        return $data;
+    }
+
 }
 
 ?>
