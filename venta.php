@@ -32,6 +32,298 @@
           	<section class="vbox">         
              
 		<!--ACÁ PONER EL CÓDIGO A USAR-->
+
+                        <div class="form-column col-md-8 col-sm-8 col-xs-8">
+                          <br>
+                          <center><h3><b>Venta</b></h3></center>
+                            <div class="form-column col-md-8 col-sm-8 col-xs-8">
+                                 <div class="form-group required">
+                                     <label for="nombreCli" class="control-label">Cliente</label>
+                                     <input type="text" class="form-control requerido"  
+                                            placeholder="Nombre del cliente" name="nombreCli" id="nombreCli" required>
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-2 col-sm-2 col-xs-2">
+                            <div class="form-group required">
+                                      <label for="busqCli" class="control-label"></label><br>
+                                      <button name="busqCli" id="busqCli" class="btn btn-info">Buscar</button>
+                                 </div>
+                          </div>
+
+                           <div class="form-column col-md-2 col-sm-2 col-xs-2">
+                            <div class="form-group required">
+                              <label for="numfac" class="control-label">Número de factura</label>            
+                              <input type="number" name="numfac" id="numfac" min="1" value="1" class="form-control requerido">
+                            </div>
+
+                          </div>
+
+                          <div class="form-column col-md-8 col-sm-8 col-xs-8">
+                            <div class="form-group required">
+                              <label for="dirCli" class="control-label">Dirección</label>            
+                              <textarea id="dirCli" name="dirCli" cols="40" rows="3" class="form-control requerido"></textarea>
+                            </div>
+
+                          </div>
+                          <div class="form-column col-md-8 col-sm-8 col-xs-8">
+                            <div class="form-group required">
+                              <label for="regCli" class="control-label">Registro</label>            
+                              <input type="text" name="regCli" id="regCli" class="form-control requerido">
+                            </div>
+                          </div>
+
+                          <div class="form-column col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group required">
+                              <label for="condPag" class="control-label">Condición de pago</label>            
+                              <input type="number" name="condPag" id="condPag" min="1" value="1" class="form-control requerido">
+                            </div>
+
+                          </div>
+
+                          <div class="form-column col-md-8 col-sm-8 col-xs-8">
+                            <div class="form-group required">
+                              <label for="nitCli" class="control-label">NIT</label>            
+                              <input type="text" name="nitCli" id="nitCli" class="form-control requerido">
+                            </div>
+                          </div>
+
+                          <div class="form-column col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group required">
+                              <label for="fechaCompra" class="control-label">Fecha</label>            
+                              <input type="date" name="fechaCompra" id="fechaCompra" class="form-control requerido">
+                            </div>
+
+                          </div> 
+
+                          <div class="form-column col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group required">
+                              <table class="table table-bordered table-condensed">
+                                    <!--<caption>Proveedores</caption>-->
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Cantidad</th>
+                                            <th scope="col">Descripción</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Exentas</th>
+                                            <th scope="col">Afectadas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php 
+
+                                            /*$objCli = new Cliente();
+                                            $data= $objCli->getAllClientes();
+                                            if($data!=false)
+                                            {
+                                                foreach ($data as $value) {
+                                                    echo '<tr>
+                                                    <td>'.$value['clasificacion'].'</td>
+                                                    <td>'.$value['nit'].'</td>
+                                                    <td>'.$value['nrc'].'</td>
+                                                    <td>'.$value['nombre'].'</td>
+                                                    <td>'.$value['razon_social'].'</td>
+                                                    <td>'.$value['giro'].'</td>
+                                                    <td>'.$value['direccion'].'</td>
+                                                    <td>'.$value['telefono'].'</td>
+                                                    <td>
+                                                            <button type="button" id="'.$value['id'].'" class="btn btn-danger eliminar"><em class="fas fa-trash"></em> Eliminar</button><br><br> 
+                                                            <a class="btn btn-primary editar" id="'.$value['id'].'"><em class="fa fa-pencil"></em> Editar</a>
+                                                    </td>
+                                                </tr>';
+                                                }
+                                            }*/
+
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                      </div>
+
+                      <div class="form-column col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group required">
+                              
+                              <table class="table table-bordered table-condensed">
+                              <tr>
+                                <th colspan="2" rowspan="3" id="algomas" name="algomas">Algo más</th>
+                                <th>Sumas</th>
+                                <th><center><input type="text" name="sumas1" id="sumas1" readonly></center></th>
+                                <th><center><input type="text" name="sumas2" id="sumas2" readonly></center></th>
+                              </tr>
+                              <tr>
+                                <th>IVA</th>
+                                <th> </th>
+                                <th><center><input type="text" name="iva" id="iva" readonly></center></th>
+                              </tr>
+                              <tr>
+                               <th>Sub-total</th>
+                                <th> </th>
+                                <th><center><input type="text" name="st" id="st" readonly></center></th>
+                              </tr>
+                              <tr>
+                                <th>ENTREGADO POR:</th>
+                                <th>RECIBIDO POR:</th>
+                                <th>(-) Retención</th>
+                                <th> </th>
+                                <th><center><input type="text" name="rmenos" id="rmenos" readonly></center></th>
+                              </tr>
+                              <tr>
+                                <th>Nombre:</th>
+                                <th>Nombre:</th>
+                                <th>(+) Retención</th>
+                                <th> </th>
+                                <th><center><input type="text" name="rmas" id="rmas" readonly></center></th>
+                              </tr>
+                              <tr>
+                                <th>Firma:</th>
+                                <th>Firma:</th>
+                                <th>Ventas Exentas</th>
+                                <th> </th>
+                                <th><center><input type="text" name="vext" id="vext" readonly></center></th>
+                              </tr>
+                              <tr>
+                               <th>DUI:</th>
+                                <th>DUI:</th>
+                                <th>Ventas Total</th>
+                                <th> </th>
+                                <th><center><input type="text" name="vt" id="vt" readonly></center></th>
+                              </tr>
+                            </table>
+
+                            </div>
+                      </div>
+
+                      </div>
+
+                      <div class="form-column col-md-4 col-sm-4 col-xs-4">
+                        <br>
+                          <center><h3><b>Cliente</b></h3></center>
+
+                          <div class="form-column col-md-12 col-sm-12 col-xs-12">
+                            <center><div class="form-group required">
+                              <label class="control-label">¿Exento de IVA?</label><br>            
+                                <input type="checkbox" id="exivay" name="exivay" value="1">
+                                <label for="exivay">Sí</label>&nbsp;&nbsp;&nbsp;
+                                <input type="checkbox" id="exivan" name="exivan" value="2">
+                                <label for="exivan">No</label><br>
+                            </div></center>
+
+                          </div>
+
+                          <div class="form-column col-md-12 col-sm-12 col-xs-12">
+                            <center><div class="form-group required">
+                              <label class="control-label">¿Agente de retención?</label><br>            
+                                <input type="checkbox" id="ary" name="ary" value="1">
+                                <label for="ary">Sí</label>&nbsp;&nbsp;&nbsp;
+                                <input type="checkbox" id="arn" name="arn" value="2">
+                                <label for="arn">No</label><br>
+                            </div></center>
+                            </div>
+
+                            <div class="form-column col-md-12 col-sm-12 col-xs-12">
+                            <center><div class="form-group required">
+                              <label for="classCli" class="control-label">Clasificación</label>            
+                              <input type="text" name="classCli" id="classCli" class="form-control requerido">
+                            </div></center><br><br>
+
+                          </div>
+
+                          
+                          <center><h3><b>Productos</b></h3></center>
+
+                          <div class="form-column col-md-8 col-sm-8 col-xs-8">
+                                 <div class="form-group required">
+                                     <label for="codProd" class="control-label">Código</label>
+                                     <input type="text" class="form-control requerido"  
+                                            placeholder="Código del productos" name="codProd" id="codProd" required>
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-2 col-sm-2 col-xs-2">
+                            <div class="form-group required">
+                                      <label for="busqProd" class="control-label"></label><br>
+                                      <button name="busqProd" id="busqProd" class="btn btn-info">Buscar</button>
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group required">
+                              <label for="cantProd" class="control-label">Cantidad</label>            
+                              <input type="number" name="cantProd" id="cantProd" min="1" value="1" class="form-control requerido">
+                            </div>
+
+                          </div>
+
+                          <div class="form-column col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group required">
+                              <label for="preProd" class="control-label">Precio</label>            
+                              <input type="text" name="preProd" id="preProd" class="form-control requerido">
+                            </div>
+                          </div>
+
+                          <div class="form-column col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group required">
+                              <label for="tipoProd" class="control-label">Tipo</label>            
+                              <select id="tipoProd" name="tipoProd" class="form-control requerido">
+                                <option value="0">Seleccione opción</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="form-column col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group required">
+                              <label for="descProd" class="control-label">Descripción</label>            
+                              <textarea id="descProd" name="descProd" cols="40" rows="3" class="form-control requerido"></textarea>
+                            </div>
+
+                          </div>
+
+                          <div class="form-column col-md-3 col-sm-3 col-xs-3">
+                            <div class="form-group required">
+                                      <button name="btn1" id="btn1" class="btn btn-primary">✓</button>
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-3 col-sm-3 col-xs-3">
+                            <div class="form-group required">
+                                      <button name="btn2" id="btn2" class="btn btn-danger">X</button>
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-3 col-sm-3 col-xs-3">
+                            <div class="form-group required">
+                                      <button name="btn3" id="btn3" class="btn btn-info">↑</button>
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-3 col-sm-3 col-xs-3">
+                            <div class="form-group required">
+                                      <button name="btn4" id="btn4" class="btn btn-info">↓</button>
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group required"><br>
+                                      <center><button name="saveVen" id="saveVen" class="btn btn-success">Guardar</button></center>
+                                 </div>
+                          </div>
+
+                          <div class="form-column col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group required">
+                              <label for="totalPago" class="control-label">Total a pagar</label>            
+                              <input type="text" name="totalPago" id="totalPago" class="form-control requerido" readonly>
+                            </div>
+                          </div>
+
+                      </div>
+
+                    
+
+                      </div>
+
+
+    <!------------------------------>
  
         	</section>
         	    <aside class="bg-light lter b-l aside-md hide" id="notes">
