@@ -44,7 +44,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label>Nombre del contribuyente</label>
-                                            <select class="form-control" id="contribuyente" name="contribuyente" required="true">
+                                            <select class="form-control selectpicker" data-live-search="true" data-live-search-style="startsWith" id="contribuyente" name="contribuyente" required="true">
                                                 <option value="">Seleccionar</option>
                                                 <?php
                                                 $objP = new Proveedor();
@@ -115,7 +115,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Producto</label>
-                                    <select class="form-control" id="producto" name="producto" required="true">
+                                    <select class="form-control selectpicker" data-live-search="true" data-live-search-style="startsWith" id="producto" name="producto" required="true">
                                         <option value="">Seleccionar</option>
                                         <?php
                                         $objProd = new Producto();
