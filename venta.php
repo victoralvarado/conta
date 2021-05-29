@@ -1,4 +1,6 @@
-<?php /*require_once '../app/validacionAdmin.php';*/ ?>
+<?php require_once 'app/validacionGeneral.php'; ?>
+<?php require_once 'model/Cliente.php'; ?>
+<?php require_once 'model/Producto.php'; ?>
 <!DOCTYPE html>
 <html lang="en" class="app">
 <head>
@@ -7,6 +9,7 @@
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
   <?php include("referencias.php"); ?> 
+  <script type="text/javascript" src="resources/venta.js"></script>
 </head>
 <body>
   <section class="vbox">
@@ -39,22 +42,48 @@
                             <div class="form-column col-md-8 col-sm-8 col-xs-8">
                                  <div class="form-group required">
                                      <label for="nombreCli" class="control-label">Cliente</label>
-                                     <input type="text" class="form-control requerido"  
-                                            placeholder="Nombre del cliente" name="nombreCli" id="nombreCli" required>
+                                            <select class="form-control requerido" placeholder="Nombre del cliente" name="nombreCli" id="nombreCli" required>
+                                              <?php 
+
+                                               $objCli = new Cliente();
+                                               $data= $objCli->getAllClientes();
+                                                if ($data!=false) {
+                                                  foreach ($data as $value) {
+                                                    echo "<option value='".$value['id']."' name='".$value['clasificacion']."' class='".$value['nit']."' min='".$value['nrc']."' max='".$value['direccion']."'>".$value['nombre']."</option>";
+                                                  }
+
+                                                }
+
+                                                ?>
+                                            </select>
                                  </div>
                           </div>
 
-                          <div class="form-column col-md-2 col-sm-2 col-xs-2">
+                          <!--<div class="form-column col-md-1 col-sm-1 col-xs-1">
                             <div class="form-group required">
                                       <label for="busqCli" class="control-label"></label><br>
                                       <button name="busqCli" id="busqCli" class="btn btn-info">Buscar</button>
                                  </div>
-                          </div>
+                          </div>-->
 
-                           <div class="form-column col-md-2 col-sm-2 col-xs-2">
+                           <div class="form-column col-md-4 col-sm-4 col-xs-4">
                             <div class="form-group required">
-                              <label for="numfac" class="control-label">Número de factura</label>            
-                              <input type="number" name="numfac" id="numfac" min="1" value="1" class="form-control requerido">
+                              <div class="panel panel-info">
+                              <div class="panel-heading">Información factura</div>
+                              <div class="panel-body">
+                                
+                                <select id="tipoFac" name="tipoFac" class="form-control requerido">
+                                <!--<option value="0">Seleccionar</option>-->
+                                <option value="1">Comprobante de Crédito Fiscal</option>
+                                <option value="2">Factura Consumidor Final</option>
+                                <option value="3">Factura de exportación</option>
+                              </select><br>         
+                              <input type="number" name="numfac" id="numfac" min="1" value="1" class="form-control requerido"><br>
+                              <select id="numSerie" name="numSerie" class="form-control requerido">
+                              </select>
+
+                              </div>
+                            </div>    
                             </div>
 
                           </div>
@@ -62,14 +91,14 @@
                           <div class="form-column col-md-8 col-sm-8 col-xs-8">
                             <div class="form-group required">
                               <label for="dirCli" class="control-label">Dirección</label>            
-                              <textarea id="dirCli" name="dirCli" cols="40" rows="3" class="form-control requerido"></textarea>
+                              <textarea id="dirCli" name="dirCli" cols="40" rows="3" class="form-control requerido" readonly></textarea>
                             </div>
 
                           </div>
                           <div class="form-column col-md-8 col-sm-8 col-xs-8">
                             <div class="form-group required">
                               <label for="regCli" class="control-label">Registro</label>            
-                              <input type="text" name="regCli" id="regCli" class="form-control requerido">
+                              <input type="text" name="regCli" id="regCli" class="form-control requerido" readonly>
                             </div>
                           </div>
 
@@ -84,7 +113,7 @@
                           <div class="form-column col-md-8 col-sm-8 col-xs-8">
                             <div class="form-group required">
                               <label for="nitCli" class="control-label">NIT</label>            
-                              <input type="text" name="nitCli" id="nitCli" class="form-control requerido">
+                              <input type="text" name="nitCli" id="nitCli" class="form-control requerido" readonly>
                             </div>
                           </div>
 
@@ -203,9 +232,9 @@
                           <div class="form-column col-md-12 col-sm-12 col-xs-12">
                             <center><div class="form-group required">
                               <label class="control-label">¿Exento de IVA?</label><br>            
-                                <input type="checkbox" id="exivay" name="exivay" value="1">
+                                <input type="radio" id="exivay" name="exiva" value="1">
                                 <label for="exivay">Sí</label>&nbsp;&nbsp;&nbsp;
-                                <input type="checkbox" id="exivan" name="exivan" value="2">
+                                <input type="radio" id="exivan" name="exiva" value="2">
                                 <label for="exivan">No</label><br>
                             </div></center>
 
@@ -214,9 +243,9 @@
                           <div class="form-column col-md-12 col-sm-12 col-xs-12">
                             <center><div class="form-group required">
                               <label class="control-label">¿Agente de retención?</label><br>            
-                                <input type="checkbox" id="ary" name="ary" value="1">
+                                <input type="radio" id="ary" name="ar" value="1">
                                 <label for="ary">Sí</label>&nbsp;&nbsp;&nbsp;
-                                <input type="checkbox" id="arn" name="arn" value="2">
+                                <input type="radio" id="arn" name="ar" value="2">
                                 <label for="arn">No</label><br>
                             </div></center>
                             </div>
@@ -224,7 +253,7 @@
                             <div class="form-column col-md-12 col-sm-12 col-xs-12">
                             <center><div class="form-group required">
                               <label for="classCli" class="control-label">Clasificación</label>            
-                              <input type="text" name="classCli" id="classCli" class="form-control requerido">
+                              <input type="text" name="classCli" id="classCli" class="form-control requerido" readonly>
                             </div></center><br><br>
 
                           </div>
@@ -232,20 +261,32 @@
                           
                           <center><h3><b>Productos</b></h3></center>
 
-                          <div class="form-column col-md-8 col-sm-8 col-xs-8">
+                          <div class="form-column col-md-12 col-sm-12 col-xs-12">
                                  <div class="form-group required">
-                                     <label for="codProd" class="control-label">Código</label>
-                                     <input type="text" class="form-control requerido"  
-                                            placeholder="Código del productos" name="codProd" id="codProd" required>
+                                     <label for="codProd" class="control-label">Producto</label>
+                                     <select class="form-control requerido" placeholder="Nombre del cliente" name="nombreCli" id="nombreCli" required>
+                                              <?php 
+
+                                               $objProd = new Producto();
+                                               $data= $objProd->getAllProducto();
+                                                if ($data!=false) {
+                                                  foreach ($data as $value) {
+                                                    echo "<option value='".$value['id']."'>".$value['nombre']."</option>";
+                                                  }
+
+                                                }
+
+                                                ?>
+                                            </select>
                                  </div>
                           </div>
 
-                          <div class="form-column col-md-2 col-sm-2 col-xs-2">
+                          <!--<div class="form-column col-md-2 col-sm-2 col-xs-2">
                             <div class="form-group required">
                                       <label for="busqProd" class="control-label"></label><br>
                                       <button name="busqProd" id="busqProd" class="btn btn-info">Buscar</button>
                                  </div>
-                          </div>
+                          </div>-->
 
                           <div class="form-column col-md-6 col-sm-6 col-xs-6">
                             <div class="form-group required">
@@ -258,15 +299,15 @@
                           <div class="form-column col-md-6 col-sm-6 col-xs-6">
                             <div class="form-group required">
                               <label for="preProd" class="control-label">Precio</label>            
-                              <input type="text" name="preProd" id="preProd" class="form-control requerido">
+                              <input type="text" name="preProd" id="preProd" class="form-control requerido" readonly>
                             </div>
                           </div>
 
                           <div class="form-column col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group required">
                               <label for="tipoProd" class="control-label">Tipo</label>            
-                              <select id="tipoProd" name="tipoProd" class="form-control requerido">
-                                <option value="0">Seleccione opción</option>
+                              <select id="tipoProd" name="tipoProd" class="form-control requerido" readonly>
+                                <!--<option value="0">Seleccione opción</option>-->
                               </select>
                             </div>
                           </div>
@@ -274,7 +315,7 @@
                           <div class="form-column col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group required">
                               <label for="descProd" class="control-label">Descripción</label>            
-                              <textarea id="descProd" name="descProd" cols="40" rows="3" class="form-control requerido"></textarea>
+                              <textarea id="descProd" name="descProd" cols="40" rows="3" class="form-control requerido" readonly></textarea>
                             </div>
 
                           </div>
