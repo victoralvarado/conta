@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="css/app.css" type="text/css" />
   <link rel="stylesheet" href="pluggins/dataTable/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="css/bootstrap-select.css" />
+  <link rel="stylesheet" href="css/bootstrap-select.css" type="text/css">
   <!--[if lt IE 9]>
     <script src="js/ie/html5shiv.js"></script>
     <script src="js/ie/respond.min.js"></script>
@@ -43,7 +43,7 @@
   <script type="text/javascript" src="pluggins/sweetalert-master/dist/sweetalert.min.js"></script>
   <link rel="stylesheet" href="pluggins/fontawesome5/css/all.css">
   <script type="text/javascript" src="pluggins/fontawesome5/js/pro.js"></script>
-  <script src="js/bootstrap-select.js"></script>
+  <script src="Js/bootstrap-select.js"></script>
   <style type="text/css">
     div.ex1 {
       width: 100%;
