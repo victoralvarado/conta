@@ -175,14 +175,13 @@
                  <span>Cliente</span>
                </a>
              </li>
-             <?php 
+             <?php
 
-             if(!(isset($activeNS)))
-             {
-              $activeNS = "";
-             }
+              if (!(isset($activeNS))) {
+                $activeNS = "";
+              }
 
-            ?>
+              ?>
              <li class="<?php echo $activeNS; ?>">
                <a href="numeroserie.php">
                  <i class="fas fa-hashtag">
@@ -198,7 +197,7 @@
                  </i>
                  <span>Venta</span>
                </a>
-             </li> 
+             </li>
              <li class="<?php echo $activeiva; ?>">
                <a href="#">
                  <i class="fas fa-books">
@@ -240,6 +239,18 @@
                </a>
              </li>
            </ul>
+           <br>
+           <br>
+           <br>
+           <div class="footer" style="display: flex;
+    align-items: flex-end;">
+             <p>
+               Copyright © 
+               <script>
+                 document.write(new Date().getFullYear());
+               </script> All rights reserved <!-- | Created by <a href="https://github.com/victoralvarado" target="_blank">Victor Alvarado</a> & <a href="https://github.com/DiegoRosa98" target="_blank">Diego Rosa</a> -->
+             </p>
+           </div>
          </nav>
          <!-- / nav -->
        </div>
