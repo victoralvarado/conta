@@ -175,6 +175,22 @@
                  <span>Cliente</span>
                </a>
              </li>
+             <?php 
+
+             if(!(isset($activeNS)))
+             {
+              $activeNS = "";
+             }
+
+            ?>
+             <li class="<?php echo $activeNS; ?>">
+               <a href="numeroserie.php">
+                 <i class="fas fa-hashtag">
+                   <b class="bg-info"></b>
+                 </i>
+                 <span>Número de series</span>
+               </a>
+             </li>
              <li class="<?php echo $activeVenta; ?>">
                <a href="venta.php">
                  <i class="fas fa-badge-dollar">
@@ -182,11 +198,11 @@
                  </i>
                  <span>Venta</span>
                </a>
-             </li>
+             </li> 
              <li class="<?php echo $activeiva; ?>">
                <a href="#">
                  <i class="fas fa-books">
-                   <b class="bg-primary dker"></b>
+                   <b class="bg-info dker"></b>
                  </i>
                  <span class="pull-right">
                    <i class="fa fa-angle-down text"></i>

@@ -1,6 +1,7 @@
 <?php require_once 'app/validacionGeneral.php'; ?>
 <?php require_once 'model/Cliente.php'; ?>
 <?php require_once 'model/Producto.php'; ?>
+<?php require_once 'model/DocumentoSerie.php'; ?>
 <!DOCTYPE html>
 <html lang="en" class="app">
 <head>
@@ -74,12 +75,24 @@
                                 
                                 <select id="tipoFac" name="tipoFac" class="form-control requerido">
                                 <!--<option value="0">Seleccionar</option>-->
-                                <option value="1">Comprobante de Crédito Fiscal</option>
-                                <option value="2">Factura Consumidor Final</option>
-                                <option value="3">Factura de exportación</option>
+                                <option value="1" name="ccf">Comprobante de Crédito Fiscal</option>
+                                <option value="2" name="fcf">Factura Consumidor Final</option>
+                                <option value="3" name="fex">Factura de Exportación</option>
                               </select><br>         
-                              <input type="number" name="numfac" id="numfac" min="1" value="1" class="form-control requerido"><br>
+                              <input type="number" name="numfac" id="numfac" min="1" value="1" class="form-control requerido" style="color: red; text-align: right;"><br>
                               <select id="numSerie" name="numSerie" class="form-control requerido">
+                                <?php 
+
+                                               $objCli = new DocumentoSerie();
+                                               $data= $objCli->getAllDS();
+                                                if ($data!=false) {
+                                                  foreach ($data as $value) {
+                                                    echo "<option value='".$value['id']."' class='".$value['tipo']."'>".$value['serie']." (".$value['inicia_desde']." - ".$value['termina_en'].")</option>";
+                                                  }
+
+                                                }
+
+                                                ?>
                               </select>
 
                               </div>
@@ -105,7 +118,7 @@
                           <div class="form-column col-md-4 col-sm-4 col-xs-4">
                             <div class="form-group required">
                               <label for="condPag" class="control-label">Condición de pago</label>            
-                              <input type="number" name="condPag" id="condPag" min="1" value="1" class="form-control requerido">
+                              <input type="number" name="condPag" id="condPag" min="1" value="0" class="form-control requerido">
                             </div>
 
                           </div>
@@ -264,14 +277,17 @@
                           <div class="form-column col-md-12 col-sm-12 col-xs-12">
                                  <div class="form-group required">
                                      <label for="codProd" class="control-label">Producto</label>
-                                     <select class="form-control requerido" placeholder="Nombre del cliente" name="nombreCli" id="nombreCli" required>
+                                     <select class="form-control requerido" placeholder="Nombre del cliente" name="prods" id="prods" required>
                                               <?php 
 
                                                $objProd = new Producto();
                                                $data= $objProd->getAllProducto();
                                                 if ($data!=false) {
                                                   foreach ($data as $value) {
-                                                    echo "<option value='".$value['id']."'>".$value['nombre']."</option>";
+                                                    if($value['existencias']>0)
+                                                    {
+                                                      echo "<option value='".$value['id']."' min='".$value['descripcion']."' max='".$value['precio']."' name='".$value['codigo']."'>".$value['nombre']."</option>";
+                                                    }
                                                   }
 
                                                 }
@@ -306,8 +322,9 @@
                           <div class="form-column col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group required">
                               <label for="tipoProd" class="control-label">Tipo</label>            
-                              <select id="tipoProd" name="tipoProd" class="form-control requerido" readonly>
-                                <!--<option value="0">Seleccione opción</option>-->
+                              <select id="tipoProd" name="tipoProd" class="form-control requerido" disabled>
+                                <option value="0">Afectas</option>
+                                <option value="1">Exentas</option>
                               </select>
                             </div>
                           </div>

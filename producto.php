@@ -124,11 +124,11 @@
                                             foreach ($data as $value) {
                                         ?>
                                                 <tr>
-                                                    <td><?php echo ucwords(strtolower($value['nombre'])); ?></td>
+                                                    <td><?php echo $value['nombre']; ?></td>
                                                     <td><?php echo $value['existencias']; ?></td>
                                                     <td><?php echo $value['precio']; ?></td>
                                                     <td><?php echo $value['costo']; ?></td>
-                                                    <td><?php echo ucwords(strtolower($value['descripcion'])); ?></td>
+                                                    <td><?php echo $value['descripcion']; ?></td>
                                                     <td><?php echo $value['codigo']; ?></td>
                                                     <td><img src="<?php echo $value['imagen']; ?>" width="150" alt="<?php echo $value['nombre']; ?>" /></td>
                                                     <td>
