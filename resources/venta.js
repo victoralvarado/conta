@@ -1,5 +1,13 @@
 $(document).ready(function(){
 
+var cantidad = [];
+var descripcion = [];
+var precio = [];
+var exentas = [];
+var afectadas = [];
+var cantactprod = [];
+var table = [];
+
 $("#tipoFac").val(2);
 valChkCli();
 valRadios();
@@ -24,6 +32,26 @@ $('#tipoFac').on('change', function() {
 
 $('#prods').on('change', function() {
   valProds();
+});
+
+$('#btn1').click(function(){
+    save2table();
+});
+
+$(document).on("click",".btn2", function(){
+    var idProd = $(this).attr('id');
+    cantidad.splice(idProd, 1);
+    descripcion.splice(idProd, 1);
+    precio.splice(idProd, 1);
+    exentas.splice(idProd, 1);
+    afectadas.splice(idProd, 1);
+    cantactprod.splice(idProd, 1);
+    table.splice(idProd, 1);
+    $("#detalleCompra").empty();
+      table.forEach( function(valor, indice, array) {
+        $("#detalleCompra").append(valor);
+      });
+
 });
 
 function valProds()
@@ -99,6 +127,94 @@ function valChkCli()
   $("#classCli").val(clasi);
   $("#dirCli").val(dir);
   $("#regCli").val(nrc);
+}
+
+function save2table()
+{
+  var id = $("#prods").val();
+   if(typeof(cantidad[id]) == 'undefined' || cantidad[id] === null)
+   {
+        if(parseInt($("#cantProd").val()) > parseInt($("#prods").find('option:selected').attr("class")))
+        {
+          swal({
+              title: "Error",
+              text: "Ha superado la cantidad en existencia del producto.\nCantidad en existencia = "+$("#prods").find('option:selected').attr("class"),
+              timer: 1500,
+              type: 'error',
+              closeOnConfirm: true,
+              closeOnCancel: true,
+              allowOutsideClick: false
+              });
+        }
+        else
+        {
+          cantidad[id] = $("#cantProd").val();
+          descripcion[id] = $("#prods").find('option:selected').attr("min");
+          cantactprod[id]=parseInt($("#prods").find('option:selected').attr("class"))-parseInt($("#cantProd").val());
+          if($("#exivan").prop("checked") == true)
+          {
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))*1.13).toFixed(2);
+            exentas[id] = false;
+            afectadas[id] = (parseInt($("#cantProd").val())*precio[id]).toFixed(2);
+            table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th></th><th>"+String(afectadas[id])+"</th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
+          }
+          else
+          {
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))).toFixed(2);
+            exentas[id] = (parseInt($("#cantProd").val())*precio[id]).toFixed(2);
+            afectadas[id] = false;
+            table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th>"+String(exentas[id])+"</th><th></th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
+          }
+
+          $("#detalleCompra").empty();
+          table.forEach( function(valor, indice, array) {
+            $("#detalleCompra").append(valor);
+          });
+        }
+      
+   }
+   else
+   {
+
+      if(parseInt($("#cantProd").val()) > cantactprod[id])
+        {
+          swal({
+              title: "Error",
+              text: "Ha superado la cantidad en existencia del producto.\nCantidad en existencia = "+String(cantactprod[id]),
+              timer: 1500,
+              type: 'error',
+              closeOnConfirm: true,
+              closeOnCancel: true,
+              allowOutsideClick: false
+              });
+        }
+        else
+        {
+          cantidad[id] = parseInt(cantidad[id])+parseInt($("#cantProd").val());
+          descripcion[id] = $("#prods").find('option:selected').attr("min");
+          cantactprod[id]=cantactprod[id]-parseInt($("#cantProd").val());
+          if($("#exivan").prop("checked") == true)
+          {
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))*1.13).toFixed(2);
+            exentas[id] = false;
+            afectadas[id] = (parseInt(cantidad[id])*precio[id]).toFixed(2);
+            table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th></th><th>"+String(afectadas[id])+"</th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
+          }
+          else
+          {
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))).toFixed(2);
+            exentas[id] = (parseInt($("#cantProd").val())*precio[id]).toFixed(2);
+            afectadas[id] = false;
+            table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th>"+String(exentas[id])+"</th><th></th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
+          }
+
+          $("#detalleCompra").empty();
+          table.forEach( function(valor, indice, array) {
+            $("#detalleCompra").append(valor);
+          });
+        }
+
+   }
 }
 
 });

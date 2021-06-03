@@ -149,34 +149,11 @@
                                             <th scope="col">Precio</th>
                                             <th scope="col">Exentas</th>
                                             <th scope="col">Afectadas</th>
+                                            <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php 
-
-                                            /*$objCli = new Cliente();
-                                            $data= $objCli->getAllClientes();
-                                            if($data!=false)
-                                            {
-                                                foreach ($data as $value) {
-                                                    echo '<tr>
-                                                    <td>'.$value['clasificacion'].'</td>
-                                                    <td>'.$value['nit'].'</td>
-                                                    <td>'.$value['nrc'].'</td>
-                                                    <td>'.$value['nombre'].'</td>
-                                                    <td>'.$value['razon_social'].'</td>
-                                                    <td>'.$value['giro'].'</td>
-                                                    <td>'.$value['direccion'].'</td>
-                                                    <td>'.$value['telefono'].'</td>
-                                                    <td>
-                                                            <button type="button" id="'.$value['id'].'" class="btn btn-danger eliminar"><em class="fas fa-trash"></em> Eliminar</button><br><br> 
-                                                            <a class="btn btn-primary editar" id="'.$value['id'].'"><em class="fa fa-pencil"></em> Editar</a>
-                                                    </td>
-                                                </tr>';
-                                                }
-                                            }*/
-
-                                        ?>
+                                    <tbody id="detalleCompra">
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -286,7 +263,7 @@
                                                   foreach ($data as $value) {
                                                     if($value['existencias']>0)
                                                     {
-                                                      echo "<option value='".$value['id']."' min='".$value['descripcion']."' max='".$value['precio']."' name='".$value['codigo']."'>".$value['nombre']."</option>";
+                                                      echo "<option value='".$value['id']."' min='".$value['descripcion']."' max='".$value['precio']."' name='".$value['codigo']."' class='".$value['existencias']."'>".$value['nombre']."</option>";
                                                     }
                                                   }
 
@@ -343,7 +320,7 @@
                                  </div>
                           </div>
 
-                          <div class="form-column col-md-3 col-sm-3 col-xs-3">
+                          <!--<div class="form-column col-md-3 col-sm-3 col-xs-3">
                             <div class="form-group required">
                                       <button name="btn2" id="btn2" class="btn btn-danger">X</button>
                                  </div>
@@ -359,7 +336,7 @@
                             <div class="form-group required">
                                       <button name="btn4" id="btn4" class="btn btn-info">↓</button>
                                  </div>
-                          </div>
+                          </div>-->
 
                           <div class="form-column col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group required"><br>
