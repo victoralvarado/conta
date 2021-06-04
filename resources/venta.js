@@ -7,6 +7,8 @@ var exentas = [];
 var afectadas = [];
 var cantactprod = [];
 var table = [];
+var retencion=false;
+var percepcion=false;
 
 $("#tipoFac").val(2);
 valChkCli();
@@ -16,6 +18,11 @@ valProds();
 
 $('#nombreCli').on('change', function() {
   valChkCli();
+  totalizar();
+});
+
+$('#tipoFac').on('change', function() {
+  totalizar();
 });
 
 $('#exivay').click(function(){
@@ -36,6 +43,7 @@ $('#prods').on('change', function() {
 
 $('#btn1').click(function(){
     save2table();
+    totalizar();
 });
 
 $(document).on("click",".btn2", function(){
@@ -51,6 +59,7 @@ $(document).on("click",".btn2", function(){
       table.forEach( function(valor, indice, array) {
         $("#detalleCompra").append(valor);
       });
+      totalizar();
 
 });
 
@@ -151,7 +160,7 @@ function save2table()
           cantidad[id] = $("#cantProd").val();
           descripcion[id] = $("#prods").find('option:selected').attr("min");
           cantactprod[id]=parseInt($("#prods").find('option:selected').attr("class"))-parseInt($("#cantProd").val());
-          if($("#exivan").prop("checked") == true)
+          if($("#exivan").prop("checked") == true && $("#tipoFac").val() != "3")
           {
             precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))*1.13).toFixed(2);
             exentas[id] = false;
@@ -193,7 +202,7 @@ function save2table()
           cantidad[id] = parseInt(cantidad[id])+parseInt($("#cantProd").val());
           descripcion[id] = $("#prods").find('option:selected').attr("min");
           cantactprod[id]=cantactprod[id]-parseInt($("#cantProd").val());
-          if($("#exivan").prop("checked") == true)
+          if($("#exivan").prop("checked") == true && $("#tipoFac").val() != "3")
           {
             precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))*1.13).toFixed(2);
             exentas[id] = false;
@@ -202,7 +211,7 @@ function save2table()
           }
           else
           {
-            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))).toFixed(2);
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max")).toFixed(2));
             exentas[id] = (parseInt($("#cantProd").val())*precio[id]).toFixed(2);
             afectadas[id] = false;
             table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th>"+String(exentas[id])+"</th><th></th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
@@ -215,6 +224,124 @@ function save2table()
         }
 
    }
+}
+
+function totalizar()
+{
+  var subtotal=0;
+  var excs = 0;
+  var cantotal = 0;
+  var siniva = 0;
+  var totalabs = 0;
+  retencion=false;
+  percepcion=false;
+
+  exentas.forEach( function(valor, indice, array) {
+    if(valor != false)
+    {
+      subtotal=subtotal+parseFloat(valor);
+      excs=excs+parseFloat(valor);
+    }
+  });
+  afectadas.forEach( function(valor, indice, array) {
+    if(valor != false)
+    {
+      subtotal=subtotal+parseFloat(valor);
+    }
+  });
+
+  /*if($("#classCli").val() != "gran contribuyente" && subtotal >= 100)
+  {
+    retencion=true;
+    percepcion=false;
+  }*/
+  if($("#tipoFac").val() == "1" && $("#classCli").val() != "gran contribuyente" && $("#arn").prop( "checked", true ) && subtotal >= 100)
+  {
+    retencion=false;
+    percepcion=true;
+  }
+
+  var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
+
+  precio.forEach( function(valor, indice, array) {
+    if(valor != false)
+    {
+      siniva=siniva+(parseFloat(valor)*parseInt(cantidad[indice]));
+    }
+  });
+
+  cantidad.forEach( function(valor, indice, array) {
+    if(valor != false)
+    {
+      cantotal=cantotal+valor;
+    }
+  });
+
+  
+
+  $("#sumas1").val(formatter.format(0));
+  switch ($("#tipoFac").val()) {
+    case "1":
+      totalabs=subtotal;
+      $("#sumas2").val(formatter.format(siniva/1.13));
+      $("#iva").val(formatter.format((siniva/113)*13));
+      $("#st").val(formatter.format(subtotal));
+      $("#rmenos").val(formatter.format(0));
+      if(percepcion==true)
+      {
+        totalabs=totalabs+((siniva/113)*cantotal);
+        $("#rmas").val(formatter.format(siniva/113));
+      }
+      else
+      {
+        $("#rmas").val(formatter.format(0));
+      }
+      $("#vext").val(formatter.format(excs));
+      var st = String($("#st").val());
+      var rmas = String($("#rmas").val());
+      var aux1 = parseFloat(st.substring(1));
+      var aux2 = parseFloat(rmas.substring(1));
+      var aux3 = aux1+aux2;
+      $("#vt").val(formatter.format((aux3)));
+      $("#totalPago").val(formatter.format((aux3)));
+      break;
+    case "2":
+      totalabs=subtotal;
+      $("#iva").val(formatter.format(0));
+      $("#st").val(formatter.format(0));
+      $("#sumas2").val(formatter.format(subtotal));
+      $("#rmenos").val(formatter.format(0));
+      if(percepcion==true)
+      {
+        totalabs=totalabs+((siniva/113)*cantotal);
+        $("#rmas").val(formatter.format(siniva/113));
+      }
+      else
+      {
+        $("#rmas").val(formatter.format(0));
+      }
+      $("#vext").val(formatter.format(excs));
+      $("#vt").val(formatter.format(totalabs));
+      $("#totalPago").val(formatter.format(totalabs));
+      break;
+    case "3":
+      totalabs=subtotal*cantotal;
+      $("#sumas2").val(formatter.format(0));
+      $("#iva").val(formatter.format(0));
+      $("#st").val(formatter.format(0));
+      $("#rmenos").val(formatter.format(0));
+      $("#rmas").val(formatter.format(0));
+      $("#vext").val(formatter.format(0));
+      $("#vt").val(formatter.format(totalabs));
+      $("#totalPago").val(formatter.format(totalabs));
+      //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor1
+      break;
+  }
+
 }
 
 });
