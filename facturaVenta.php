@@ -9,9 +9,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Factura</title>
 </head>
-
 <body>
-    <div class="container">
+    <div>
         <table style="border: none;">
             <tbody>
                 <tr>
@@ -56,7 +55,9 @@
             </tbody>
         </table>
         <table class="table">
-            <thead class="thead-dark">
+            <thead class="thead-dark" style="display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;">
                 <tr>
                     <th style="border: black 2px solid;">Cantidad</th>
                     <th style="border: black 2px solid;">Descripcion</th>
