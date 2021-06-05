@@ -15,6 +15,7 @@ valChkCli();
 valRadios();
 valDS();
 valProds();
+valNumFactura();
 
 $('#nombreCli').on('change', function() {
   valChkCli();
@@ -37,6 +38,10 @@ $('#tipoFac').on('change', function() {
   valDS();
 });
 
+$('#numSerie').on('change', function() {
+  valNumFactura();
+});
+
 $('#prods').on('change', function() {
   valProds();
 });
@@ -44,6 +49,10 @@ $('#prods').on('change', function() {
 $('#btn1').click(function(){
     save2table();
     totalizar();
+});
+
+$('#saveVen').click(function(){
+    venta();
 });
 
 $(document).on("click",".btn2", function(){
@@ -60,6 +69,186 @@ $(document).on("click",".btn2", function(){
         $("#detalleCompra").append(valor);
       });
       totalizar();
+
+});
+
+$(document).on("click",".btn3", function(){
+    var id = $(this).attr('id');
+    if(typeof(cantidad[id]) == 'undefined' || cantidad[id] === null)
+   {
+        if(parseInt(cantidad[id]) >= parseInt($("#prods").find('option:selected').attr("class")))
+        {
+          swal({
+              title: "Error",
+              text: "Ha superado la cantidad en existencia del producto.\nCantidad en existencia = "+$("#prods").find('option:selected').attr("class"),
+              timer: 1500,
+              type: 'error',
+              closeOnConfirm: true,
+              closeOnCancel: true,
+              allowOutsideClick: false
+              });
+        }
+        else
+        {
+          cantidad[id] = parseInt(cantidad[id])+1;
+          descripcion[id] = $("#prods").find('option:selected').attr("min");
+          cantactprod[id]=parseInt($("#prods").find('option:selected').attr("class"))-parseInt(cantidad[id]);
+          if($("#exivan").prop("checked") == true && $("#tipoFac").val() != "3")
+          {
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))*1.13).toFixed(2);
+            exentas[id] = false;
+            afectadas[id] = (parseInt($("#cantProd").val())*precio[id]).toFixed(2);
+            table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th></th><th>"+String(afectadas[id])+"</th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
+          }
+          else
+          {
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))).toFixed(2);
+            exentas[id] = (parseInt($("#cantProd").val())*precio[id]).toFixed(2);
+            afectadas[id] = false;
+            table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th>"+String(exentas[id])+"</th><th></th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
+          }
+
+          $("#detalleCompra").empty();
+          table.forEach( function(valor, indice, array) {
+            $("#detalleCompra").append(valor);
+          });
+        }
+      
+   }
+   else
+   {
+
+      if(parseInt(cantidad[id]) >= parseInt($("#prods").find('option:selected').attr("class")))
+        {
+          swal({
+              title: "Error",
+              text: "Ha superado la cantidad en existencia del producto.\nCantidad en existencia = "+String(cantactprod[id]),
+              timer: 1500,
+              type: 'error',
+              closeOnConfirm: true,
+              closeOnCancel: true,
+              allowOutsideClick: false
+              });
+        }
+        else
+        {
+          cantidad[id] = parseInt(cantidad[id])+1;
+          descripcion[id] = $("#prods").find('option:selected').attr("min");
+          cantactprod[id]=parseInt($("#prods").find('option:selected').attr("class"))-parseInt(cantidad[id]);
+          if($("#exivan").prop("checked") == true && $("#tipoFac").val() != "3")
+          {
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))*1.13).toFixed(2);
+            exentas[id] = false;
+            afectadas[id] = (parseInt(cantidad[id])*precio[id]).toFixed(2);
+            table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th></th><th>"+String(afectadas[id])+"</th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
+          }
+          else
+          {
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max")).toFixed(2));
+            exentas[id] = (parseInt($("#cantProd").val())*precio[id]).toFixed(2);
+            afectadas[id] = false;
+            table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th>"+String(exentas[id])+"</th><th></th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
+          }
+
+          $("#detalleCompra").empty();
+          table.forEach( function(valor, indice, array) {
+            $("#detalleCompra").append(valor);
+          });
+        }
+
+   }
+
+    totalizar();
+
+});
+
+$(document).on("click",".btn4", function(){
+    var id = $(this).attr('id');
+    if(typeof(cantidad[id]) == 'undefined' || cantidad[id] === null)
+   {
+        if(parseInt(cantidad[id])<=1)
+        {
+          swal({
+              title: "Error",
+              text: "El producto no puede ser menor a 1",
+              timer: 1500,
+              type: 'error',
+              closeOnConfirm: true,
+              closeOnCancel: true,
+              allowOutsideClick: false
+              });
+        }
+        else
+        {
+          cantidad[id] = parseInt(cantidad[id])-1;
+          descripcion[id] = $("#prods").find('option:selected').attr("min");
+          cantactprod[id]=parseInt($("#prods").find('option:selected').attr("class"))-parseInt(cantidad[id]);
+          if($("#exivan").prop("checked") == true && $("#tipoFac").val() != "3")
+          {
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))*1.13).toFixed(2);
+            exentas[id] = false;
+            afectadas[id] = (parseInt($("#cantProd").val())*precio[id]).toFixed(2);
+            table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th></th><th>"+String(afectadas[id])+"</th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
+          }
+          else
+          {
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))).toFixed(2);
+            exentas[id] = (parseInt($("#cantProd").val())*precio[id]).toFixed(2);
+            afectadas[id] = false;
+            table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th>"+String(exentas[id])+"</th><th></th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
+          }
+
+          $("#detalleCompra").empty();
+          table.forEach( function(valor, indice, array) {
+            $("#detalleCompra").append(valor);
+          });
+        }
+      
+   }
+   else
+   {
+
+      if(parseInt(cantidad[id])<=1)
+        {
+          swal({
+              title: "Error",
+              text: "El producto no puede ser menor a 1",
+              timer: 1500,
+              type: 'error',
+              closeOnConfirm: true,
+              closeOnCancel: true,
+              allowOutsideClick: false
+              });
+        }
+        else
+        {
+          cantidad[id] = parseInt(cantidad[id])-1;
+          descripcion[id] = $("#prods").find('option:selected').attr("min");
+          cantactprod[id]=parseInt($("#prods").find('option:selected').attr("class"))-parseInt(cantidad[id]);
+          if($("#exivan").prop("checked") == true && $("#tipoFac").val() != "3")
+          {
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max"))*1.13).toFixed(2);
+            exentas[id] = false;
+            afectadas[id] = (parseInt(cantidad[id])*precio[id]).toFixed(2);
+            table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th></th><th>"+String(afectadas[id])+"</th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
+          }
+          else
+          {
+            precio[id] = (parseFloat($("#prods").find('option:selected').attr("max")).toFixed(2));
+            exentas[id] = (parseInt($("#cantProd").val())*precio[id]).toFixed(2);
+            afectadas[id] = false;
+            table[id]="<tr><th>"+cantidad[id]+"</th><th>"+descripcion[id]+"</th><th>"+String(precio[id])+"</th><th>"+String(exentas[id])+"</th><th></th><th><button id='"+id+"' class='btn btn-danger btn2'>X</button>&nbsp;<button id='"+id+"' class='btn btn-info btn3'>↑</button>&nbsp;<button id='"+id+"' class='btn btn-info btn4'>↓</button></th></tr>";
+          }
+
+          $("#detalleCompra").empty();
+          table.forEach( function(valor, indice, array) {
+            $("#detalleCompra").append(valor);
+          });
+        }
+
+   }
+
+    totalizar();
 
 });
 
@@ -342,6 +531,66 @@ function totalizar()
       break;
   }
 
+}
+
+function valNumFactura()
+{
+  var serie = $("#numSerie").find('option:selected').attr("name");
+
+  $.ajax({
+        type: 'POST',
+        async: false,
+        dataType: 'json',
+        data: {key: 'numeroFactura', serie:serie},
+        url: 'controller/dsController.php',
+        success: function(res)
+        {
+          if(res.estadoSen!=false)
+          {
+           
+           $("#numfac").val(res.ultimo);
+           $("#maxnum").val(res.maximo);
+           $("#minnum").val(res.primero); 
+
+          }
+          else
+          {
+            $("#numfac").val(res.ultimo);
+            $("#maxnum").val(res.maximo);
+            $("#minnum").val(res.primero);
+          }
+        },
+        error: function(xhr, status)
+        {
+            console.log('error :c');
+        }
+      });
+}
+
+function venta()
+{
+  var nombre = $("#nombreCli").val();
+  var direccion = $("#dirCli").val();
+  var nit = $("#nitCli").val();
+  var nrc = $("#regCli").val();
+  var row = document.getElementById("tableCompra").rows.length;
+
+  if(nombre != "" && direccion != "" && nit != "" && nrc != "" && $('#detalleCompra tr').length > 0)
+  {
+      
+  }
+  else
+  {
+    swal({
+              title: "Error",
+              text: "Llene todos los datos de la factura para realizar la compra.",
+              timer: 3000,
+              type: 'error',
+              closeOnConfirm: true,
+              closeOnCancel: true,
+              allowOutsideClick: false
+              });
+  }
 }
 
 });

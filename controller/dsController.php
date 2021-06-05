@@ -17,6 +17,9 @@ if (isset($_POST['key'])) {
 		case 'elimiDS':
 			eraseDocumentoSerie();
 			break;
+		case 'numeroFactura':
+			ultimaFactura();
+			break;
 	}
 }
 
@@ -58,6 +61,13 @@ function eraseDocumentoSerie()
 	$objDS = new DocumentoSerie();
 	$objDS->setId($_POST['idDS']);
 	$res = $objDS->deleteDS();
+	echo json_encode($res);
+}
+
+function ultimaFactura()
+{
+	$objDS = new DocumentoSerie();
+	$res = $objDS->getNumeroFactura($_POST['serie']);
 	echo json_encode($res);
 }
 

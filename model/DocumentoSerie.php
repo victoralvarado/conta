@@ -208,6 +208,38 @@ class DocumentoSerie
         return $data;
     }
 
+    public function getNumeroFactura($serie)
+    {
+            $sql="SELECT MAX(d.numero) AS ultimo, ds.termina_en as maximo, ds.inicia_desde primero FROM documento AS d INNER JOIN documento_serie AS ds ON d.serie = ds.id WHERE ds.serie='".$serie."';";
+            $info= $this->db->query($sql);
+            $arreglo = array();
+            $data = $info->fetch_assoc();
+            if($info->num_rows>0 && $data['ultimo']!=null)
+            {
+                $arreglo['ultimo']=$data['ultimo']+1;
+                $arreglo['maximo']=$data['maximo'];
+                $arreglo['primero']=$data['primero'];
+                $arreglo['estadoSen']=true;
+                if($arreglo['ultimo']>$arreglo['maximo'])
+                {
+                    $arreglo['ultimo']="Serie completa, elija otra";
+                }
+            }
+            else
+            {
+               $sql2="SELECT * FROM documento_serie WHERE serie='".$serie."';";
+               $info2= $this->db->query($sql2);
+               $data2 = $info2->fetch_assoc();
+               $arreglo['ultimo']=$data2['inicia_desde'];
+               $arreglo['maximo']=$data2['termina_en'];
+               $arreglo['primero']=$data2['inicia_desde'];
+               $arreglo['estadoSen']=false;
+
+            }
+        
+        return $arreglo;
+    }
+
 
 }
 

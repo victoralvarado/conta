@@ -78,7 +78,9 @@
                                 <option value="1" name="ccf">Comprobante de Crédito Fiscal</option>
                                 <option value="2" name="fcf">Factura Consumidor Final</option>
                                 <option value="3" name="fex">Factura de Exportación</option>
-                              </select><br>         
+                              </select><br>  
+                              <input type="hidden" name="maxnum" id="maxnum">
+                              <input type="hidden" name="minnum" id="minnum">        
                               <input type="number" name="numfac" id="numfac" min="1" value="1" class="form-control requerido" style="color: red; text-align: right;"><br>
                               <select id="numSerie" name="numSerie" class="form-control requerido">
                                 <?php 
@@ -87,7 +89,7 @@
                                                $data= $objCli->getAllDS();
                                                 if ($data!=false) {
                                                   foreach ($data as $value) {
-                                                    echo "<option value='".$value['id']."' class='".$value['tipo']."'>".$value['serie']." (".$value['inicia_desde']." - ".$value['termina_en'].")</option>";
+                                                    echo "<option value='".$value['id']."' class='".$value['tipo']."' name='".$value['serie']."'>".$value['serie']." (".$value['inicia_desde']." - ".$value['termina_en'].")</option>";
                                                   }
 
                                                 }
@@ -140,7 +142,7 @@
 
                           <div class="form-column col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group required">
-                              <table class="table table-bordered table-condensed">
+                              <table class="table table-bordered table-condensed" id="tableCompra">
                                     <!--<caption>Proveedores</caption>-->
                                     <thead>
                                         <tr>
