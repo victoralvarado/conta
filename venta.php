@@ -81,7 +81,7 @@
                               </select><br>  
                               <input type="hidden" name="maxnum" id="maxnum">
                               <input type="hidden" name="minnum" id="minnum">        
-                              <input type="number" name="numfac" id="numfac" min="1" value="1" class="form-control requerido" style="color: red; text-align: right;"><br>
+                              <input type="number" name="numfac" id="numfac" min="1" class="form-control requerido" style="color: red; text-align: right;" readonly><br>
                               <select id="numSerie" name="numSerie" class="form-control requerido">
                                 <?php 
 

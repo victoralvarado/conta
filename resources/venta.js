@@ -6,9 +6,13 @@ var precio = [];
 var exentas = [];
 var afectadas = [];
 var cantactprod = [];
+var producto = [];
+var cant = [];
+var prec = [];
 var table = [];
 var retencion=false;
 var percepcion=false;
+var updateProd = "";
 
 $("#tipoFac").val(2);
 valChkCli();
@@ -573,11 +577,174 @@ function venta()
   var direccion = $("#dirCli").val();
   var nit = $("#nitCli").val();
   var nrc = $("#regCli").val();
-  var row = document.getElementById("tableCompra").rows.length;
+  var tipoFac = $("#tipoFac").val();
+  var numFac = $("#numfac").val();
+  var serie = $("#numSerie").val();
+  var cpago = $("#condPag").val();
+  var fecha = $("#fechaCompra").val();
+  var prodDesc = [];
+  var acumex = 0;
+  var acumaf = 0;
+
+  cantidad.forEach( function(valor, indice, array) {
+    if(valor != false)
+    {
+      producto.push(indice);
+      cant.push(valor);
+      prec.push(precio[indice]);
+      prodDesc.push(descripcion[indice]);
+    }
+  });
+
+  exentas.forEach( function(valor, indice, array) {
+    if(valor != false)
+    {
+      acumex=parseFloat(acumex)+parseFloat(valor);
+    }
+  });
+
+  afectadas.forEach( function(valor, indice, array) {
+    if(valor != false)
+    {
+      acumaf=parseFloat(acumaf)+parseFloat(valor);
+    }
+  });
+
+  cantactprod.forEach( function(valor, indice, array) {
+      updateProd=updateProd+"UPDATE producto SET existencias = "+String(valor)+" WHERE id = "+String(indice)+";";
+  });
+  
+  var classi = $("#classCli").val();
+  var prod = producto[0];
+  var canti = cant[0];
+  var precioind = prec[0];
+  var tipoProd = $("#tipoProd").val();
+  var descProd = prodDesc[0];
+
+  var sumas = $("#sumas2").val().substring(1);
+  var iva = $("#iva").val().substring(1);
+  var subtot = $("#st").val().substring(1);
+  var minren = $("#rmenos").val().substring(1);
+  var plusren = $("#rmas").val().substring(1);
+  var extven = $("#vext").val().substring(1);
+  var ventot = $("#vt").val().substring(1);
+
+  if(percepcion==true)
+  {
+    var orig = (parseFloat(iva)*100)/13;
+    var ret = parseFloat(orig)/100;
+  }
+  else
+  {
+    var orig = 0;
+    var ret = 0;
+  }
+
+  if($("#exivan").prop("checked") == true)
+  {
+    var caso = "afectas";
+  }
+  else
+  {
+    var caso = "exentas";
+  }
+
+
+
+  var fd = new FormData();
+
+   fd.append('nombre',nombre);
+   fd.append('direccion',direccion);
+   fd.append('nit',nit);
+   fd.append('nrc',nrc);
+   fd.append('tipoFac',tipoFac);
+   fd.append('numFac',numFac);
+   fd.append('serie',serie);
+   fd.append('cpago',cpago);
+   fd.append('fecha',fecha);
+   fd.append('prodDesc',prodDesc);
+   fd.append('updateProd',updateProd);
+   fd.append('classi',classi);
+   fd.append('prod',prod);
+   fd.append('canti',canti);
+   fd.append('precioind',precioind);
+   fd.append('tipoProd',tipoProd);
+   fd.append('descProd',descProd);
+   fd.append('sumas',sumas);
+   fd.append('iva',iva);
+   fd.append('subtot',subtot);
+   fd.append('minren',minren);
+   fd.append('plusren',plusren);
+   fd.append('extven',extven);
+   fd.append('ventot',ventot);
+   fd.append('acumaf',acumaf);
+   fd.append('acumex',acumex);
+   fd.append('ret',ret);
+   fd.append('caso',caso);
+   fd.append('key','save2Tables');
+
+   for (var value of fd.values()) {
+             console.log(value);
+          }
+      
 
   if(nombre != "" && direccion != "" && nit != "" && nrc != "" && $('#detalleCompra tr').length > 0)
   {
-      
+
+      $.ajax({
+        type: 'POST',
+        async: false,
+        dataType: 'json',
+        data: fd,
+        url: 'controller/ventaController.php',
+        contentType: false,
+        processData: false,
+        success: function(res)
+        {
+          if(res.estado!=false)
+          {
+           
+           swal({
+                  title: "Exito!",
+                  text: "La venta se guardó correctamente",
+                  timer: 1500,
+                  type: 'success',
+                  closeOnConfirm: true,
+                  closeOnCancel: true,
+                  allowOutsideClick: false
+              });
+              setTimeout( function(){ 
+              location.replace("facturaVenta.php?numfac="+res.numfac);
+              }, 1000 );
+
+          }
+          else
+          {
+            swal({
+              title: "Error",
+              text: "Error al guardar venta, "+res.descripcion,
+              timer: 1500,
+              type: 'error',
+              closeOnConfirm: true,
+              closeOnCancel: true,
+              allowOutsideClick: false
+              });
+          }
+        },
+        error: function(xhr, status)
+        {
+            console.log('error :c');
+            swal({
+              title: "Error de AJAX",
+              text: "error :c, \n"+xhr+"\n"+status,
+              timer: 1500,
+              type: 'error',
+              closeOnConfirm: true,
+              closeOnCancel: true,
+              allowOutsideClick: false
+              });
+        }
+      });
   }
   else
   {

@@ -1,5 +1,5 @@
 <?php
-require_once ("./config/conexion.php");
+require_once("Conexion.php");
 class Documento
 {
     private $id;
@@ -406,4 +406,93 @@ class Documento
 
         return $this;
     }
+
+    public function updateCantidadProd($sql)
+    {
+        $sqls = explode(";", $sql);
+
+        for ($i=0; $i < count($sqls) ; $i++) { 
+            $res=$this->db->query($sqls[$i]);
+            $data=array();
+            if($res)
+            {
+                    $data['estado']=true;
+                    $data['descripcion']='Datos ingresado exitosamente';
+            }
+            else
+            {
+                    $data['estado']=false;
+                    $data['descripcion']=$sql."\nOcurrio un error en la inserción: ".$this->db->error;
+            }
+        }
+        
+        return $data;
+    }
+
+    public function saveMovimiento($id,$cantidad,$precio,$descripcion)
+    {
+        $sql="INSERT INTO movimiento values (0,".$id.",".$cantidad.",NULL,".$precio.",NULL,NULL,'".$descripcion."',1);";
+            $res=$this->db->query($sql);
+            $data=array();
+            if($res)
+            {
+                $data['estado']=true;
+                $data['descripcion']='Datos ingresado exitosamente';
+            }
+            else
+            {
+                $data['estado']=false;
+                $data['descripcion']=$sql."\nOcurrio un error en la inserción: ".$this->db->error;
+            }
+
+            return $data;
+    }
+
+    public function saveDocumento($numfac,$serie,$cliente,$fecha,$ant,$af,$ex,$iva,$ret,$cpago,$classi,$caso)
+    {
+        $sql="INSERT INTO documento values (0,".$numfac.",".$serie.",".$cliente.",'".$fecha."',".$ant.",NULL,NULL,NULL,".$af.",".$ex.",".$iva.",".$ret.",".$cpago.",'".$classi."',NULL,NULL,NULL,'".$caso."',1);";
+            $res=$this->db->query($sql);
+            $data=array();
+            if($res)
+            {
+                $data['estado']=true;
+                $data['descripcion']='Datos ingresado exitosamente';
+            }
+            else
+            {
+                $data['estado']=false;
+                $data['descripcion']=$sql."\nOcurrio un error en la inserción: ".$this->db->error;
+            }
+
+            return $data;
+    }
+
+    //Método que devuelve el idUsuario del último INSERT
+    public function ultimoID()
+    {
+        $ultimoId = mysqli_insert_id($this->db);
+        return $ultimoId;
+    }
+
+    public function saveDetalleDocumento($doc,$prod,$cant,$precio,$numfac)
+    {
+        $sql="INSERT INTO detalle_documento values (0,".$doc.",".$prod.",".$cant.",".$precio.",1);";
+            $res=$this->db->query($sql);
+            $data=array();
+            if($res)
+            {
+                $data['estado']=true;
+                $data['descripcion']='Datos ingresado exitosamente';
+                $data['numfac']=$numfac;
+            }
+            else
+            {
+                $data['estado']=false;
+                $data['descripcion']=$sql."\nOcurrio un error en la inserción: ".$this->db->error;
+                $data['numfac']=$numfac;
+            }
+
+            return $data;
+    }
+
 }
