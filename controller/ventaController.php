@@ -47,7 +47,9 @@ function insercionTablas()
    foreach ($updateProd as $key => $value) {
       $objDS->updateCantidadProd($value);
    }
-   $objDS->saveMovimiento($prod[0],$canti[0],$precioind[0],$descProd[0]);
+   foreach ($prod as $key => $value) {
+      $objDS->saveMovimiento($value,$canti[$key],$precioind[$key],$descProd[$key]);
+   }
 	$objDS->saveDocumento($numFac,$serie,$nombre,$fecha,($numFac-1),$acumaf,$acumex,$iva,$ret,$cpago,$classi,$caso);
    $idDoc=$objDS->ultimoID();
    foreach ($prod as $key => $value) {
