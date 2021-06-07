@@ -26,11 +26,11 @@ function insercionTablas()
    $prodDesc = $_POST['prodDesc'];
    $updateProd = $_POST['updateProd'];
    $classi = $_POST['classi'];
-   $prod = $_POST['prod'];
-   $canti = $_POST['canti'];
-   $precioind = $_POST['precioind'];
+   $prod = json_decode($_POST['prod']);
+   $canti = json_decode($_POST['canti']);
+   $precioind = json_decode($_POST['precioind']);
    $tipoProd = $_POST['tipoProd'];
-   $descProd = $_POST['descProd'];
+   $descProd = json_decode($_POST['descProd']);
    $sumas = $_POST['sumas'];
    $iva = $_POST['iva'];
    $subtot = $_POST['subtot'];
@@ -45,10 +45,13 @@ function insercionTablas()
    //////////////////////////////////////////////
 	$objDS = new Documento();
 	$objDS->updateCantidadProd($updateProd);
-	$objDS->saveMovimiento($prod,$canti,$precioind,$descProd);
+   $objDS->saveMovimiento($prod[0],$canti[0],$precioind[0],$descProd[0]);
 	$objDS->saveDocumento($numFac,$serie,$nombre,$fecha,($numFac-1),$acumaf,$acumex,$iva,$ret,$cpago,$classi,$caso);
-	$res = $objDS->saveDetalleDocumento($objDS->ultimoID(),$prod,$canti,$precioind,$numFac);
-   $res['numfac'] = $objDS->ultimoID();
+   $idDoc=$objDS->ultimoID();
+   foreach ($prod as $key => $value) {
+	$res = $objDS->saveDetalleDocumento($idDoc,$value,$canti[$key],$precioind[$key],$numFac);
+   }
+   $res['numfac'] = $idDoc;
 	echo json_encode($res);
 	
 }

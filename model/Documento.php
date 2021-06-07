@@ -410,7 +410,7 @@ class Documento
     public function updateCantidadProd($sql)
     {
             $res=$this->db->query($sql);
-}
+    }
 
     public function saveMovimiento($id,$cantidad,$precio,$descripcion)
     {

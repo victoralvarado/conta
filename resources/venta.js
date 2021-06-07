@@ -533,11 +533,12 @@ $(document).ready(function() {
         });
 
         var classi = $("#classCli").val();
-        var prod = producto[0];
-        var canti = cant[0];
-        var precioind = prec[0];
+
+        var prod = JSON.stringify(producto);
+        var canti = JSON.stringify(cant);
+        var precioind = JSON.stringify(prec);
         var tipoProd = $("#tipoProd").val();
-        var descProd = prodDesc[0];
+        var descProd = JSON.stringify(prodDesc);
 
         var sumas = $("#sumas2").val().substring(1);
         var iva = $("#iva").val().substring(1);
@@ -605,7 +606,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 async: false,
-                dataType: 'json',
+                dataType: 'text',
                 data: fd,
                 url: 'controller/ventaController.php',
                 contentType: false,
@@ -623,7 +624,7 @@ $(document).ready(function() {
                             closeOnCancel: true,
                             allowOutsideClick: false
                         });
-                        setTimeout(function() {
+                        /*setTimeout(function() {
                             location.replace("venta.php");
 
                             var form = document.createElement("form");
@@ -637,7 +638,7 @@ $(document).ready(function() {
                             form.appendChild(hiddenField);
                             document.body.appendChild(form);
                             form.submit();
-                        }, 1000);
+                        }, 1000);*/
 
                     } else {
                         swal({
