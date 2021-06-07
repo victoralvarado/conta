@@ -123,7 +123,7 @@
                                         if ($data) {
                                             foreach ($data as $value) {
                                         ?>
-                                                <option id="<?php echo $value['codigo']; ?>" value="<?php echo strtoupper($value['nombre']); ?>"><?php echo strtoupper($value['nombre']); ?></option>
+                                                <option id="<?php echo $value['codigo']; ?>" value="<?php echo strtoupper($value['nombre']); ?>"><?php echo strtoupper($value['nombre']).' '.$value['descripcion']; ?></option>
 
                                         <?php
 

@@ -89,6 +89,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <center>
+                                                            <input type="hidden" name="user" value="<?php echo $_SESSION['USER']; ?>">
                                                             <button type="submit" id="agregarProducto" name="agregarProducto" class="btn btn-primary"><em class="fa fa-plus"></em> Agregar</button>
                                                             <button type="reset" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Limpiar cajas de texto"><em class="fa fa-eraser"></em> Limpiar</button>
                                                         </center>
