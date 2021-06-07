@@ -24,7 +24,7 @@ function insercionTablas()
    $cpago = $_POST['cpago'];
    $fecha = $_POST['fecha'];
    $prodDesc = $_POST['prodDesc'];
-   $updateProd = $_POST['updateProd'];
+   $updateProd = json_decode($_POST['updateProd']);
    $classi = $_POST['classi'];
    $prod = json_decode($_POST['prod']);
    $canti = json_decode($_POST['canti']);
@@ -44,7 +44,9 @@ function insercionTablas()
    $caso = $_POST['caso'];
    //////////////////////////////////////////////
 	$objDS = new Documento();
-	$objDS->updateCantidadProd($updateProd);
+   foreach ($updateProd as $key => $value) {
+      $objDS->updateCantidadProd($value);
+   }
    $objDS->saveMovimiento($prod[0],$canti[0],$precioind[0],$descProd[0]);
 	$objDS->saveDocumento($numFac,$serie,$nombre,$fecha,($numFac-1),$acumaf,$acumex,$iva,$ret,$cpago,$classi,$caso);
    $idDoc=$objDS->ultimoID();

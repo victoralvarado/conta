@@ -12,7 +12,7 @@ $(document).ready(function() {
     var table = [];
     var retencion = false;
     var percepcion = false;
-    var updateProd = "";
+    var updateProd = [];
 
     $("#tipoFac").val(2);
     valChkCli();
@@ -529,7 +529,7 @@ $(document).ready(function() {
         });
 
         cantactprod.forEach(function(valor, indice, array) {
-            updateProd = updateProd + "UPDATE producto SET existencias = " + String(valor) + " WHERE id = " + String(indice) + ";";
+            updateProd.push("UPDATE producto SET existencias = " + String(valor) + " WHERE id = " + String(indice) + ";");
         });
 
         var classi = $("#classCli").val();
@@ -576,7 +576,7 @@ $(document).ready(function() {
         fd.append('cpago', cpago);
         fd.append('fecha', fecha);
         fd.append('prodDesc', prodDesc);
-        fd.append('updateProd', updateProd);
+        fd.append('updateProd', JSON.stringify(updateProd));
         fd.append('classi', classi);
         fd.append('prod', prod);
         fd.append('canti', canti);
