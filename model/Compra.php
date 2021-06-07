@@ -366,4 +366,20 @@ class Compra
         return $data;
     }
 
+    public function libroCompras($f)
+    {
+        $sql="SELECT c.*, p.nrc, p.nombre FROM compra c INNER JOIN proveedor p ON c.proveedor=p.id WHERE fecha LIKE '%$f%'";
+        $data= $this->db->query($sql);
+        if($data->num_rows>0)
+        {
+            $info=$data;
+        }
+        else
+        {
+            $info=null;
+        }
+    
+        return $info;
+    }
+
 }

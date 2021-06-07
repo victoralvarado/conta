@@ -409,25 +409,8 @@ class Documento
 
     public function updateCantidadProd($sql)
     {
-        $sqls = explode(";", $sql);
-
-        for ($i=0; $i < count($sqls) ; $i++) { 
-            $res=$this->db->query($sqls[$i]);
-            $data=array();
-            if($res)
-            {
-                    $data['estado']=true;
-                    $data['descripcion']='Datos ingresado exitosamente';
-            }
-            else
-            {
-                    $data['estado']=false;
-                    $data['descripcion']=$sql."\nOcurrio un error en la inserción: ".$this->db->error;
-            }
-        }
-        
-        return $data;
-    }
+            $res=$this->db->query($sql);
+}
 
     public function saveMovimiento($id,$cantidad,$precio,$descripcion)
     {
@@ -493,6 +476,34 @@ class Documento
             }
 
             return $data;
+    }
+
+    public function datosCliente($numfac)
+    {
+        $sqlAll = "SELECT c.*, d.condiciones, d.fecha from documento AS d INNER JOIN cliente AS c ON c.id=d.cliente INNER JOIN detalle_documento AS ds ON ds.documento = d.id WHERE  ds.id =".$numfac;
+        $info = $this->db->query($sqlAll);
+        if ($info->num_rows > 0) {
+
+            $dato = $info;
+        } else {
+
+            $dato = false;
+        }
+        return $dato;
+    }
+
+    public function datosSerie($numfac)
+    {
+        $sqlAll = "SELECT  dse.serie, dse.tipo FROM documento AS d INNER JOIN detalle_documento AS ds ON ds.documento = d.id INNER JOIN documento_serie AS dse ON d.serie=dse.id WHERE ds.id =".$numfac;
+        $info = $this->db->query($sqlAll);
+        if ($info->num_rows > 0) {
+
+            $dato = $info;
+        } else {
+
+            $dato = false;
+        }
+        return $dato;
     }
 
 }

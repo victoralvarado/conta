@@ -48,7 +48,6 @@ function insercionTablas()
 	$objDS->saveMovimiento($prod,$canti,$precioind,$descProd);
 	$objDS->saveDocumento($numFac,$serie,$nombre,$fecha,($numFac-1),$acumaf,$acumex,$iva,$ret,$cpago,$classi,$caso);
 	$res = $objDS->saveDetalleDocumento($objDS->ultimoID(),$prod,$canti,$precioind,$numFac);
-   $res['numfac'] = $objDS->ultimoID();
 	echo json_encode($res);
 	
 }

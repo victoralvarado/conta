@@ -207,13 +207,13 @@
                    <i class="fa fa-angle-down text"></i>
                    <i class="fa fa-angle-up text-active"></i>
                  </span>
-                 <span>Libros IVA</span>
+                 <span>Reportes</span>
                </a>
                <ul class="nav lt">
-                 <li id="hoverlc" class="<?php echo $activelc; ?>">
-                   <a href="librocompras.php">
+                 <li id="hoverlc" style="cursor:pointer; cursor: hand" class="<?php echo $activelc; ?>">
+                   <a data-toggle="modal" data-target="#exampleModal">
                      <i id="changelc" class="fas fa-book icon"></i>
-                     <span>Libro de compras</span>
+                     Libro de compras
                    </a>
                  </li>
                  <li id="hoverv" class="<?php echo $activev; ?>">
@@ -228,16 +228,17 @@
                      <span>Ventas consumidor</span>
                    </a>
                  </li>
+                 <li class="<?php echo $activeControl; ?>">
+                   <a href="controlinventario.php">
+                     <i class="fas fa-book icon">
+                       <b class="bg-info"></b>
+                     </i>
+                     <span>Control de inventario</span>
+                   </a>
+                 </li>
                </ul>
              </li>
-             <li class="<?php echo $activeControl; ?>">
-               <a href="controlinventario.php">
-                 <i class="fas fa-clipboard-list">
-                   <b class="bg-info"></b>
-                 </i>
-                 <span>Control de inventario</span>
-               </a>
-             </li>
+
            </ul>
            <br>
            <br>
@@ -245,15 +246,44 @@
            <div class="footer" style="display: flex;
     align-items: flex-end;">
              <p>
-               Copyright © 
+               Copyright ©
                <script>
                  document.write(new Date().getFullYear());
-               </script> All rights reserved <!-- | Created by <a href="https://github.com/victoralvarado" target="_blank">Victor Alvarado</a> & <a href="https://github.com/DiegoRosa98" target="_blank">Diego Rosa</a> -->
+               </script> All rights reserved
+               <!-- | Created by <a href="https://github.com/victoralvarado" target="_blank">Victor Alvarado</a> & <a href="https://github.com/DiegoRosa98" target="_blank">Diego Rosa</a> -->
              </p>
            </div>
          </nav>
          <!-- / nav -->
-       </div>
+
+         <!-- Modal -->
+         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Generar Reporte Libro de Compras</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               <div class="modal-body">
+                 <form method="POST" action="libroCompras.php" target="_blank">
+                   <div class="form-group">
+                     <label>Ingrese el mes y el año: </label>
+                     <?php $anio = date("Y"); $mes = date("m"); ?>
+                     <input type="month" name="fecha" value="<?php echo $anio."-".$mes; ?>" max="<?php echo $anio."-".$mes; ?>" required>
+                   </div>
+                   <div class="form-group">
+                     <button type="submit" class="btn btn-primary" onclick="location.reload()">Generar</button>
+                   </div>
+                 </form>
+                 <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
      </section>
 
    </section>
