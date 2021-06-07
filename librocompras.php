@@ -99,16 +99,16 @@ if (isset($_POST['fecha'])) {
                                 <?php echo $value['nombre'];  ?>
                             </td>
                             <td class="afectas" style="border: black 2px solid;">
-                                <?php echo '$' . number_format($value['afectas'], 2, '.', '');  ?>
+                                <?php echo '$' . number_format($value['afectas'], 2);  ?>
                             </td>
                             <td style="border: black 2px solid;">
-                                <?php echo '$' . number_format($value['iva'], 2, '.', '');  ?>
+                                <?php echo '$' . number_format($value['iva'], 2);  ?>
                             </td>
                             <td style="border: black 2px solid;">
-                                <?php echo '$' . number_format($value['retencion'], 2, '.', '');  ?>
+                                <?php echo '$' . number_format($value['retencion'], 2);  ?>
                             </td>
                             <td style="border: black 2px solid;">
-                                <?php echo '$' . number_format($value['afectas'] + $value['iva'] + $value['retencion'], 2, '.', '');  ?>
+                                <?php echo '$' . number_format($value['afectas'] + $value['iva'] + $value['retencion'], 2);  ?>
                             </td>
                         </tr>
                 <?php
@@ -122,16 +122,16 @@ if (isset($_POST['fecha'])) {
                         <strong>Totales del Mes</strong>
                     </td>
                     <td id="resultado_afectas" style="border: 2px solid black; border-left: 2px solid black;">
-                        <strong><?php echo '$' . number_format($afectas, 2, '.', ''); ?></strong>
+                        <strong><?php echo '$' . number_format($afectas, 2); ?></strong>
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <strong><?php echo '$' . number_format($ivaCF, 2, '.', ''); ?></strong>
+                        <strong><?php echo '$' . number_format($ivaCF, 2); ?></strong>
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <strong><?php echo '$' . number_format($ivaP, 2, '.', ''); ?></strong>
+                        <strong><?php echo '$' . number_format($ivaP, 2); ?></strong>
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <strong><?php echo '$' . number_format($sumas, 2, '.', ''); ?></strong>
+                        <strong><?php echo '$' . number_format($sumas, 2); ?></strong>
                     </td>
                 </tr>
             </tfoot>
