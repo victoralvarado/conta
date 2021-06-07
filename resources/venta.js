@@ -466,7 +466,7 @@ $(document).ready(function() {
     }
 
     function valNumFactura() {
-        var serie = $("#numSerie").find('option:selected').attr("name");
+    var serie = $("#numSerie").find('option:selected').attr("name");
 
         $.ajax({
             type: 'POST',
@@ -501,6 +501,7 @@ $(document).ready(function() {
         var tipoFac = $("#tipoFac").val();
         var numFac = $("#numfac").val();
         var serie = $("#numSerie").val();
+        var nomserie = $("#numSerie").find('option:selected').attr("name");
         var cpago = $("#condPag").val();
         var fecha = $("#fechaCompra").val();
         var prodDesc = [];
@@ -573,6 +574,7 @@ $(document).ready(function() {
         fd.append('tipoFac', tipoFac);
         fd.append('numFac', numFac);
         fd.append('serie', serie);
+        fd.append('nomserie',nomserie);
         fd.append('cpago', cpago);
         fd.append('fecha', fecha);
         fd.append('prodDesc', prodDesc);

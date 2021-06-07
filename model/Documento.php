@@ -412,9 +412,9 @@ class Documento
             $res=$this->db->query($sql);
     }
 
-    public function saveMovimiento($id,$cantidad,$precio,$descripcion)
+    public function saveMovimiento($id,$cantidad,$precio,$descripcion,$tipo,$fecha,$cliente,$doc)
     {
-        $sql="INSERT INTO movimiento values (0,".$id.",".$cantidad.",NULL,".$precio.",NULL,NULL,'".$descripcion."',1);";
+        $sql="INSERT INTO movimiento values (0,".$id.",".$cantidad.",NULL,".$precio.",NULL,NULL,'".$descripcion."',".$tipo.",'".$fecha."',".$cliente.",'".$doc."',1);";
             $res=$this->db->query($sql);
             $data=array();
             if($res)

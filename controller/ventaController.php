@@ -21,6 +21,7 @@ function insercionTablas()
    $numFac = $_POST['numFac'];
    $tipoFac = $_POST['tipoFac'];
    $serie = $_POST['serie'];
+   $nomserie = $_POST['nomserie'];
    $cpago = $_POST['cpago'];
    $fecha = $_POST['fecha'];
    $prodDesc = $_POST['prodDesc'];
@@ -48,7 +49,7 @@ function insercionTablas()
       $objDS->updateCantidadProd($value);
    }
    foreach ($prod as $key => $value) {
-      $objDS->saveMovimiento($value,$canti[$key],$precioind[$key],$descProd[$key]);
+      $objDS->saveMovimiento($value,$canti[$key],$precioind[$key],$descProd[$key],0,$fecha,$nombre,$nomserie." ".$numFac,);
    }
 	$objDS->saveDocumento($numFac,$serie,$nombre,$fecha,($numFac-1),$acumaf,$acumex,$iva,$ret,$cpago,$classi,$caso);
    $idDoc=$objDS->ultimoID();
