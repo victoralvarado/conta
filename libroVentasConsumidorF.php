@@ -20,7 +20,7 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
             <h5 style="text-align: center;"><strong>LIBRO DE VENTAS A CONSUMIDOR</strong></h5>
         </div>
     </div>
-    <table class="table" style="border: none;">
+    <table style="border: none;width: 100%;">
         <tbody>
             <tr>
                 <td rowspan="4" style="vertical-align: middle;">
@@ -38,15 +38,15 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
                     <h5 style="text-align: center;">Desarrolo de Software, Seguridad Informatica y Tecnologias de la Información</h5>
                     <h5 style="text-align: center;">Departamento de San Salvador, El Salvador, Centroamerica</h5>
 
-                    <h5 style="text-align: center;">Registro No:100001-1&nbsp;&nbsp;&nbsp;&nbsp;NIT:0101-010150-101-1</h5>
+                    <h5 style="text-align: center;">Registro No:100001-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NIT:0101-010150-101-1</h5>
 
 
                 </td>
             </tr>
         </tbody>
     </table>
-    <table class="table">
-        <thead class="thead-light">
+    <table class="table" style="width: 100%;">
+        <thead class="thead-light" style="background-color: #E6ECEC;">
             <tr>
                 <th rowspan="3" style="border: black 2px solid; vertical-align: middle;">#</th>
                 <th rowspan="3" style="border: black 2px solid; vertical-align: middle;">Fecha</th>
@@ -115,9 +115,9 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
     </table>
     <div class="row justify-content-center justify-content-md-center">
         <div class="col-md-6">
-            <table class="table" style="width: 60%;margin-left: auto;margin-right: auto;">
+            <table class="" style="width: 60%; margin-left: auto;margin-right: auto; " cellspacing="5" cellpadding="5">
                 <tbody>
-                    <tr>
+                    <tr">
                         <th style="border: black 2px solid;">
                             Ventas Internas Exentas
                         </th>
@@ -167,6 +167,7 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
 <?php
 $HTML = ob_get_contents();
 $dompdf->loadHtml($HTML);
+$dompdf->set_paper ('a4','landscape');
 $dompdf->render();
 ob_get_clean();
 $dompdf->stream("", array("Attachment" => false));
