@@ -480,7 +480,7 @@ class Documento
 
     public function datosCliente($numfac)
     {
-        $sqlAll = "SELECT c.*, d.condiciones, d.fecha from documento AS d INNER JOIN cliente AS c ON c.id=d.cliente INNER JOIN detalle_documento AS ds ON ds.documento = d.id WHERE  ds.id =".$numfac;
+        $sqlAll = "SELECT c.*, d.condiciones, d.fecha from documento AS d INNER JOIN cliente AS c ON c.id=d.cliente INNER JOIN detalle_documento AS ds ON ds.documento = d.id WHERE  ds.documento =".$numfac;
         $info = $this->db->query($sqlAll);
         if ($info->num_rows > 0) {
 
@@ -494,7 +494,7 @@ class Documento
 
     public function datosSerie($numfac)
     {
-        $sqlAll = "SELECT  dse.serie, dse.tipo FROM documento AS d INNER JOIN detalle_documento AS ds ON ds.documento = d.id INNER JOIN documento_serie AS dse ON d.serie=dse.id WHERE ds.id =".$numfac;
+        $sqlAll = "SELECT  dse.serie, dse.tipo FROM documento AS d INNER JOIN detalle_documento AS ds ON ds.documento = d.id INNER JOIN documento_serie AS dse ON d.serie=dse.id WHERE ds.documento =".$numfac;
         $info = $this->db->query($sqlAll);
         if ($info->num_rows > 0) {
 
