@@ -86,7 +86,7 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
             ?>
         </tbody>
     </table>
-    <table class="table">
+    <table class="table" style="width: 100%;" cellspacing="10">
         <thead class="thead-dark" style="display: table-header-group;
     vertical-align: middle;
     border-color: inherit;">
@@ -99,23 +99,39 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
             </tr>
         </thead>
         <tbody>
+        <?php 
+        $exentas =0.00;
+        $afectas = 0.00;
+        $objD = new Documento();
+            $data =$objD->datosfactura($n);
+            if ($data) {
+                foreach ($data as $value) {
+                    if (number_format($value['price'],2)==number_format($value['precio'],2)) {
+                        $exentas = $value['price']*$value['cant'];
+                        $afectas = 0.00;
+                    } else if(number_format($value['price'],2)!=number_format($value['precio'],2)){
+                        $exentas = 0.00;
+                        $afectas = $value['price']*$value['cant'];
+                    }
+                     ?>
             <tr>
                 <td style="border: black 2px solid;">
-                    -
+                    <?php echo $value['cant']; ?>
                 </td>
                 <td style="border: black 2px solid;">
-                    -
+                    <?php echo $value['descripcion']; ?>
                 </td>
                 <td style="border: black 2px solid;">
-                    -
+                    <?php echo '$' . number_format($value['price'],2); ?>
                 </td>
                 <td style="border: black 2px solid;">
-                    -
+                <?php echo '$' . number_format($exentas,2); ?>
                 </td>
                 <td style="border: black 2px solid;">
-                    -
+                <?php echo '$' . number_format($afectas,2); ?>
                 </td>
             </tr>
+            <?php }} ?>
         </tbody>
         <tfoot>
             <tr>
@@ -125,10 +141,10 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
                     <strong>Sumas</strong>
                 </td>
                 <td style="border: 2px solid black; border-left: 2px solid black;">
-                    0
+                <?php echo '$' . number_format($value['exentas'],2); ?>
                 </td>
                 <td style="border: 2px solid black; border-left: 2px solid black;">
-                    0
+                <?php echo '$' . number_format($value['afectas'],2); ?>
                 </td>
             </tr>
             <tr>
@@ -140,7 +156,7 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
                 <td style="border-bottom: 1px solid transparent;">
                 </td>
                 <td style="border: 2px solid black; border-left: 2px solid black;">
-                    0
+                <?php echo '$' . number_format($value['iva'],2); ?>
                 </td>
             </tr>
             <tr>
@@ -152,7 +168,7 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
                 <td style="border-bottom: 1px solid transparent;">
                 </td>
                 <td style="border: 2px solid black; border-left: 2px solid black;">
-                    0
+                <?php echo '$' . number_format($value['exentas']+$value['afectas']+$value['iva'],2); ?>
                 </td>
             </tr>
             <tr>
@@ -164,7 +180,7 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
                 <td style="border-bottom: 1px solid transparent;">
                 </td>
                 <td style="border: 2px solid black; border-left: 2px solid black;">
-                    0
+                <?php echo '$' . number_format($value['retencion'],2); ?>
                 </td>
             </tr>
             <tr>
@@ -176,7 +192,7 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
                 <td style="border-bottom: 1px solid transparent;">
                 </td>
                 <td style="border: 2px solid black; border-left: 2px solid black;">
-                    0
+                
                 </td>
             </tr>
             <tr>
@@ -188,7 +204,7 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
                 <td style="border-bottom: 1px solid transparent;">
                 </td>
                 <td style="border: 2px solid black; border-left: 2px solid black;">
-                    0
+                <?php echo '$' . number_format($value['exentas'],2); ?>
                 </td>
             </tr>
             <tr>
@@ -200,7 +216,7 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
                 <td style="border-bottom: 1px solid transparent;">
                 </td>
                 <td style="border: 2px solid black; border-left: 2px solid black;">
-                    0
+                <?php echo '$' . number_format($value['exentas']+$value['afectas']+$value['iva']+$value['retencion'],2); ?>
                 </td>
 
             </tr>

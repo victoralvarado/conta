@@ -67,27 +67,27 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">NIT:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="nit" name="nit" placeholder="Número de Identificación Tributaria" class="form-control" required="true" value="" type="text">
+                                                            <input id="nit" name="nit" placeholder="Número de Identificación Tributaria" class="form-control" required="true" value="" type="text" autocomplete="off">
                                                             <span id="existeNit" style="color:red"></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">NRC:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="nrc" name="nrc" placeholder="Número de Registro de Contribuyente" class="form-control" value="" type="text">
+                                                            <input id="nrc" name="nrc" placeholder="Número de Registro de Contribuyente" class="form-control" value="" type="text" autocomplete="off">
                                                             <span id="existe" style="color:red"></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Nombre:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="nombre" name="nombre" placeholder="Nombre" class="form-control" value="" type="text">
+                                                            <input id="nombre" name="nombre" placeholder="Nombre" class="form-control" value="" type="text" autocomplete="off">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Razon Social:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="razonsocial" name="razonsocial" placeholder="Razon Social" class="form-control" value="" type="text">
+                                                            <input id="razonsocial" name="razonsocial" placeholder="Razon Social" class="form-control" value="" type="text" autocomplete="off">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -99,7 +99,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Teléfono:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="telefono" name="telefono" placeholder="Teléfono" maxlength="12" class="form-control" required="true" value="" type="text">
+                                                            <input id="telefono" name="telefono" placeholder="Teléfono" maxlength="12" class="form-control" required="true" value="" type="text" autocomplete="off">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -303,7 +303,7 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-md-4 control-label">NIT:</label>
                                                                         <div class="col-md-8 inputGroupContainer">
-                                                                            <input id="nitEdit<?php echo $value['id']; ?>" name="nit" placeholder="Número de Identificación Tributaria" class="form-control edit" required="true" value="<?php echo $value['nit']; ?>" type="text">
+                                                                            <input id="nitEdit<?php echo $value['id']; ?>" name="nit" placeholder="Número de Identificación Tributaria" class="form-control edit" required="true" value="<?php echo $value['nit']; ?>" type="text" autocomplete="off">
                                                                             <input id="nitActual<?php echo $value['id']; ?>" name="nitActual" value="<?php echo substr($value['nit'], 0, 4) . "-" . substr($value['nit'], 4, 6) . "-" . substr($value['nit'], 10, 3) . "-" . substr($value['nit'], 13, 1); ?>" type="hidden">
                                                                             <span id="existeEditNit<?php echo $value['id']; ?>" style="color:red"></span>
                                                                             <span id="existeActualNit<?php echo $value['id']; ?>" style="color:green"></span>
@@ -312,7 +312,7 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-md-4 control-label">NRC:</label>
                                                                         <div class="col-md-8 inputGroupContainer">
-                                                                            <input id="nrcEdit<?php echo $value['id']; ?>" name="nrc" placeholder="Número de Registro de Contribuyente" class="form-control" value="<?php echo $value['nrc']; ?>" type="text">
+                                                                            <input id="nrcEdit<?php echo $value['id']; ?>" name="nrc" placeholder="Número de Registro de Contribuyente" class="form-control" value="<?php echo $value['nrc']; ?>" type="text" autocomplete="off">
                                                                             <input id="nrcActual<?php echo $value['id']; ?>" name="nrcActual" value="<?php echo substr($value['nrc'], 0, 6) . "-" . substr($value['nrc'], 6, 1); ?>" type="hidden">
                                                                             <span id="existeEdit<?php echo $value['id']; ?>" style="color:red"></span>
                                                                             <span id="existeActual<?php echo $value['id']; ?>" style="color:green"></span>
@@ -321,13 +321,13 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-md-4 control-label">Nombre:</label>
                                                                         <div class="col-md-8 inputGroupContainer">
-                                                                            <input id="nombreEdit" name="nombre" placeholder="Nombre" class="form-control edit" value="<?php echo $value['nombre']; ?>" type="text">
+                                                                            <input id="nombreEdit" name="nombre" placeholder="Nombre" class="form-control edit" value="<?php echo $value['nombre']; ?>" type="text" autocomplete="off">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label class="col-md-4 control-label">Razon Social:</label>
                                                                         <div class="col-md-8 inputGroupContainer">
-                                                                            <input id="razonsocialEdit" name="razonsocial" placeholder="Razon Social" class="form-control" value="<?php echo $value['razon_social']; ?>" type="text">
+                                                                            <input id="razonsocialEdit" name="razonsocial" placeholder="Razon Social" class="form-control" value="<?php echo $value['razon_social']; ?>" type="text" autocomplete="off">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
@@ -339,7 +339,7 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-md-4 control-label">Teléfono:</label>
                                                                         <div class="col-md-8 inputGroupContainer">
-                                                                            <input id="telefonoEdit" name="telefono" placeholder="Teléfono" class="form-control edit" maxlength="12" required="true" value="<?php echo $value['telefono']; ?>" type="text">
+                                                                            <input id="telefonoEdit" name="telefono" placeholder="Teléfono" class="form-control edit" maxlength="12" required="true" value="<?php echo $value['telefono']; ?>" type="text" autocomplete="off">
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">

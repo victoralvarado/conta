@@ -466,7 +466,7 @@ $(document).ready(function() {
     }
 
     function valNumFactura() {
-    var serie = $("#numSerie").find('option:selected').attr("name");
+        var serie = $("#numSerie").find('option:selected').attr("name");
 
         $.ajax({
             type: 'POST',
@@ -574,7 +574,7 @@ $(document).ready(function() {
         fd.append('tipoFac', tipoFac);
         fd.append('numFac', numFac);
         fd.append('serie', serie);
-        fd.append('nomserie',nomserie);
+        fd.append('nomserie', nomserie);
         fd.append('cpago', cpago);
         fd.append('fecha', fecha);
         fd.append('prodDesc', prodDesc);
@@ -615,8 +615,8 @@ $(document).ready(function() {
                 processData: false,
                 success: function(res) {
                     console.log(res);
-                    if (res.estado != false) {
 
+                    if (res.estado != false) {
                         swal({
                             title: "Exito!",
                             text: "La venta se guardó correctamente",
@@ -626,9 +626,9 @@ $(document).ready(function() {
                             closeOnCancel: true,
                             allowOutsideClick: false
                         });
-                        /*setTimeout(function() {
+                        setTimeout(function() {
                             location.replace("venta.php");
-
+                            var j = jQuery.parseJSON(res);
                             var form = document.createElement("form");
                             form.setAttribute("method", "post");
                             form.setAttribute("action", "facturaVenta.php");
@@ -636,11 +636,11 @@ $(document).ready(function() {
                             var hiddenField = document.createElement("input");
                             hiddenField.setAttribute("type", "hidden");
                             hiddenField.setAttribute("name", "numfac");
-                            hiddenField.setAttribute("value", res.numfac);
+                            hiddenField.setAttribute("value", j.numfac);
                             form.appendChild(hiddenField);
                             document.body.appendChild(form);
                             form.submit();
-                        }, 1000);*/
+                        }, 1000);
 
                     } else {
                         swal({

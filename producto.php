@@ -47,7 +47,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Nombre:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="nombre" name="nombre" placeholder="Nombre del producto" class="form-control" required="true" value="" type="text">
+                                                            <input id="nombre" name="nombre" placeholder="Nombre del producto" class="form-control" required="true" value="" type="text" autocomplete="off">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -83,7 +83,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Codigo:</label>
                                                         <div class="col-md-7 inputGroupContainer">
-                                                            <input id="codigo" autocomplete="off" name="codigo" max="15" placeholder="Codigo del producto" class="form-control" required="true" value="" type="text">
+                                                            <input id="codigo" autocomplete="off" name="codigo" max="15" placeholder="Codigo del producto" class="form-control" required="true" value="" type="text" autocomplete="off">
                                                             <span id="existecodigo" style="color: red;"></span>
                                                         </div>
                                                     </div>
@@ -157,7 +157,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Nombre:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="nombreEdit" name="nombre" placeholder="Nombre del producto" class="form-control edit" required="true" value="<?php echo $value['nombre']; ?>" type="text">
+                                                                <input id="nombreEdit" name="nombre" placeholder="Nombre del producto" class="form-control edit" required="true" value="<?php echo $value['nombre']; ?>" type="text" autocomplete="off">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -196,7 +196,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-4 control-label">Codigo:</label>
                                                             <div class="col-md-8 inputGroupContainer">
-                                                                <input id="codigoEdit" name="codigo" placeholder="Codigo del producto" class="form-control edit" required="true" value="<?php echo $value['codigo']; ?>" type="text">
+                                                                <input id="codigoEdit" name="codigo" placeholder="Codigo del producto" class="form-control edit" required="true" value="<?php echo $value['codigo']; ?>" type="text" autocomplete="off">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

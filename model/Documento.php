@@ -466,13 +466,13 @@ class Documento
             {
                 $data['estado']=true;
                 $data['descripcion']='Datos ingresado exitosamente';
-                $data['numfac']=$numfac;
+                $data['numfac']=$doc;
             }
             else
             {
                 $data['estado']=false;
                 $data['descripcion']=$sql."\nOcurrio un error en la inserción: ".$this->db->error;
-                $data['numfac']=$numfac;
+                $data['numfac']=$doc;
             }
 
             return $data;
@@ -480,7 +480,7 @@ class Documento
 
     public function datosCliente($numfac)
     {
-        $sqlAll = "SELECT c.*, d.condiciones, d.fecha from documento AS d INNER JOIN cliente AS c ON c.id=d.cliente INNER JOIN detalle_documento AS ds ON ds.documento = d.id WHERE  ds.id =".$numfac;
+        $sqlAll = "SELECT c.*, d.condiciones, d.fecha from documento AS d INNER JOIN cliente AS c ON c.id=d.cliente INNER JOIN detalle_documento AS ds ON ds.documento = d.id WHERE  ds.documento =".$numfac;
         $info = $this->db->query($sqlAll);
         if ($info->num_rows > 0) {
 
@@ -494,8 +494,22 @@ class Documento
 
     public function datosSerie($numfac)
     {
-        $sqlAll = "SELECT  dse.serie, dse.tipo FROM documento AS d INNER JOIN detalle_documento AS ds ON ds.documento = d.id INNER JOIN documento_serie AS dse ON d.serie=dse.id WHERE ds.id =".$numfac;
+        $sqlAll = "SELECT  dse.serie, dse.tipo FROM documento AS d INNER JOIN detalle_documento AS ds ON ds.documento = d.id INNER JOIN documento_serie AS dse ON d.serie=dse.id WHERE ds.documento =".$numfac;
         $info = $this->db->query($sqlAll);
+        if ($info->num_rows > 0) {
+
+            $dato = $info;
+        } else {
+
+            $dato = false;
+        }
+        return $dato;
+    }
+
+    public function datosfactura($numfac)
+    {
+        $sql="SELECT d.* , ds.*, p.descripcion,p.precio FROM documento AS d INNER JOIN detalle_documento AS ds ON ds.documento = d.id INNER JOIN producto p ON p.id=ds.producto  WHERE ds.documento =  ".$numfac;
+        $info = $this->db->query($sql);
         if ($info->num_rows > 0) {
 
             $dato = $info;
