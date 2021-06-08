@@ -615,8 +615,8 @@ $(document).ready(function() {
                 processData: false,
                 success: function(res) {
                     console.log(res);
-                    if (res.estado != false) {
 
+                    if (res.estado != false) {
                         swal({
                             title: "Exito!",
                             text: "La venta se guardó correctamente",
@@ -627,20 +627,19 @@ $(document).ready(function() {
                             allowOutsideClick: false
                         });
                         setTimeout(function() {
-                            location.replace("facturaVenta.php?numfac=" + res.numfac);
-                            /*location.replace("venta.php");
-
+                            location.replace("venta.php");
+                            var j = jQuery.parseJSON(res);
                             var form = document.createElement("form");
-                            form.setAttribute("method", "get");
+                            form.setAttribute("method", "post");
                             form.setAttribute("action", "facturaVenta.php");
                             form.setAttribute("target", "_blank");
                             var hiddenField = document.createElement("input");
                             hiddenField.setAttribute("type", "hidden");
                             hiddenField.setAttribute("name", "numfac");
-                            hiddenField.setAttribute("value", res.numfac);
+                            hiddenField.setAttribute("value", j.numfac);
                             form.appendChild(hiddenField);
                             document.body.appendChild(form);
-                            form.submit();*/
+                            form.submit();
                         }, 1000);
 
                     } else {

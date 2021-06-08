@@ -506,4 +506,18 @@ class Documento
         return $dato;
     }
 
+    public function datosfactura($numfac)
+    {
+        $sql="SELECT d.* , ds.*, p.descripcion,p.precio FROM documento AS d INNER JOIN detalle_documento AS ds ON ds.documento = d.id INNER JOIN producto p ON p.id=ds.producto  WHERE ds.documento =  ".$numfac;
+        $info = $this->db->query($sql);
+        if ($info->num_rows > 0) {
+
+            $dato = $info;
+        } else {
+
+            $dato = false;
+        }
+        return $dato;
+    }
+
 }
