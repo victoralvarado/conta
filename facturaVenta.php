@@ -1,7 +1,7 @@
 <?php
-if (isset($_POST['numfac'])) {
+if (isset($_GET['numfac'])) {
     require_once('model/Documento.php');
-    $n =  $_POST['numfac'];
+    $n =  $_GET['numfac'];
 ob_start();
 require_once 'dompdf/autoload.inc.php';
 $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
@@ -86,7 +86,7 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
             ?>
         </tbody>
     </table>
-    <table class="table">
+    <table class="table" style="width: 100%;" cellspacing="10">
         <thead class="thead-dark" style="display: table-header-group;
     vertical-align: middle;
     border-color: inherit;">

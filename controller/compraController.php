@@ -32,6 +32,8 @@ if (isset($_POST['valores'])) {
     $filas = json_decode($_POST['valores'], true);
     foreach ($filas as $fila) {
         try {
+            
+            $tipo = 1;
             $objDC = new DetalleCompra();
             $objCo = new Compra();
             $objP = new Producto();
@@ -56,6 +58,10 @@ if (isset($_POST['valores'])) {
             $objM->setCosto($fila['precio']);
             $descripcionmov = $objM->desMovimiento($compra);
             $objM->setDescripcion($descripcionmov);
+            $objM->setTipo($tipo);
+            $objM->setFecha(substr($_POST['fecha'],0,10));
+            $objM->setCliente($_POST['contribuyente']);
+            $objM->setDoc($_POST['tipo'].''.$_POST['numfactura']);
             $objM->setEstadoM(1);
             $objM->saveMovimiento();
 

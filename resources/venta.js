@@ -466,7 +466,7 @@ $(document).ready(function() {
     }
 
     function valNumFactura() {
-    var serie = $("#numSerie").find('option:selected').attr("name");
+        var serie = $("#numSerie").find('option:selected').attr("name");
 
         $.ajax({
             type: 'POST',
@@ -574,7 +574,7 @@ $(document).ready(function() {
         fd.append('tipoFac', tipoFac);
         fd.append('numFac', numFac);
         fd.append('serie', serie);
-        fd.append('nomserie',nomserie);
+        fd.append('nomserie', nomserie);
         fd.append('cpago', cpago);
         fd.append('fecha', fecha);
         fd.append('prodDesc', prodDesc);
@@ -626,11 +626,12 @@ $(document).ready(function() {
                             closeOnCancel: true,
                             allowOutsideClick: false
                         });
-                        /*setTimeout(function() {
-                            location.replace("venta.php");
+                        setTimeout(function() {
+                            location.replace("facturaVenta.php?numfac=" + res.numfac);
+                            /*location.replace("venta.php");
 
                             var form = document.createElement("form");
-                            form.setAttribute("method", "post");
+                            form.setAttribute("method", "get");
                             form.setAttribute("action", "facturaVenta.php");
                             form.setAttribute("target", "_blank");
                             var hiddenField = document.createElement("input");
@@ -639,8 +640,8 @@ $(document).ready(function() {
                             hiddenField.setAttribute("value", res.numfac);
                             form.appendChild(hiddenField);
                             document.body.appendChild(form);
-                            form.submit();
-                        }, 1000);*/
+                            form.submit();*/
+                        }, 1000);
 
                     } else {
                         swal({

@@ -466,13 +466,13 @@ class Documento
             {
                 $data['estado']=true;
                 $data['descripcion']='Datos ingresado exitosamente';
-                $data['numfac']=$numfac;
+                $data['numfac']=$doc;
             }
             else
             {
                 $data['estado']=false;
                 $data['descripcion']=$sql."\nOcurrio un error en la inserción: ".$this->db->error;
-                $data['numfac']=$numfac;
+                $data['numfac']=$doc;
             }
 
             return $data;
