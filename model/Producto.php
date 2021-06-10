@@ -198,7 +198,7 @@ class Producto
 
         return $this;
     }
-    
+
     public function getIdProducto($codigo)
     {
         $sql = $this->db->prepare("SELECT id FROM Producto WHERE codigo = ?;");
@@ -263,7 +263,7 @@ class Producto
     public function getUltimoCostoP($codigo)
     {
         $sql = $this->db->prepare("SELECT costo FROM producto WHERE codigo = ?;");
-        mysqli_stmt_bind_param($sql,'s',$codigo);
+        mysqli_stmt_bind_param($sql, 's', $codigo);
         mysqli_stmt_execute($sql);
         mysqli_stmt_bind_result($sql, $res);
         mysqli_stmt_fetch($sql);
@@ -274,7 +274,7 @@ class Producto
     public function getUltimaExistenciaP($codigo)
     {
         $sql = $this->db->prepare("SELECT existencias FROM producto WHERE codigo = ?;");
-        mysqli_stmt_bind_param($sql,'s',$codigo);
+        mysqli_stmt_bind_param($sql, 's', $codigo);
         mysqli_stmt_execute($sql);
         mysqli_stmt_bind_result($sql, $res);
         mysqli_stmt_fetch($sql);
@@ -285,7 +285,7 @@ class Producto
     public function getCodProducto($codigo)
     {
         $sql = $this->db->prepare("SELECT codigo FROM producto WHERE codigo = ?;");
-        mysqli_stmt_bind_param($sql,'s',$codigo);
+        mysqli_stmt_bind_param($sql, 's', $codigo);
         mysqli_stmt_execute($sql);
         mysqli_stmt_bind_result($sql, $res);
         mysqli_stmt_fetch($sql);
@@ -330,17 +330,52 @@ class Producto
     }
     public function updateProductoCE()
     {
-            $sql = $this->db->prepare("UPDATE Producto SET existencias = ?, costo = ? where codigo =?;");
-            $res = $sql->bind_param('idi', $this->existencias, $this->costoP, $this->codigo);
-            $sql->execute();
-            $data = array();
-            if ($res) {
-                $data['estado'] = true;
-                $data['descripcion'] = 'Datos eliminados exitosamente';
-            } else {
-                $data['estado'] = false;
-                $data['descripcion'] = 'Ocurrio un error en la modificacion ' . $this->db->error;
-            }
+        $sql = $this->db->prepare("UPDATE Producto SET existencias = ?, costo = ? where codigo =?;");
+        $res = $sql->bind_param('idi', $this->existencias, $this->costoP, $this->codigo);
+        $sql->execute();
+        $data = array();
+        if ($res) {
+            $data['estado'] = true;
+            $data['descripcion'] = 'Datos eliminados exitosamente';
+        } else {
+            $data['estado'] = false;
+            $data['descripcion'] = 'Ocurrio un error en la modificacion ' . $this->db->error;
+        }
         return $data;
+    }
+
+    public function mostrarClPr($tipo, $cp)
+    {
+        if ($tipo == 1) {
+            $sql = $this->db->prepare("SELECT distinct  p.nombre from proveedor p inner join movimiento m on m.cliente=p.id where m.tipo = ? and p.id = ?;");
+            mysqli_stmt_bind_param($sql, 'ii', $tipo, $cp);
+            mysqli_stmt_execute($sql);
+            mysqli_stmt_bind_result($sql, $res);
+            mysqli_stmt_fetch($sql);
+            mysqli_stmt_close($sql);
+            return $res;
+        } else if ($tipo == 0) {
+            $sql = $this->db->prepare("SELECT distinct  c.nombre from cliente c inner join movimiento m on m.cliente=c.id where m.tipo = ? and c.id = ?;");
+            mysqli_stmt_bind_param($sql, 'ii', $tipo, $cp);
+            mysqli_stmt_execute($sql);
+            mysqli_stmt_bind_result($sql, $res);
+            mysqli_stmt_fetch($sql);
+            mysqli_stmt_close($sql);
+            return $res;
+        }
+    }
+
+    public function movimiento($producto, $desde, $hasta)
+    {
+        $sqlAll = "SELECT * FROM Movimiento WHERE estado = 1 AND producto = " . $producto . " AND fecha  BETWEEN  '" . $desde . "' AND '" . $hasta . "';";
+        $info = $this->db->query($sqlAll);
+        if ($info->num_rows > 0) {
+
+            $dato = $info;
+        } else {
+
+            $dato = false;
+        }
+        return $dato;
     }
 }
