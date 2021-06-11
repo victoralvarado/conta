@@ -1,7 +1,7 @@
 <?php
 if (!isset($_POST['numfac'])) {
     require_once('model/Documento.php');
-    $n =  $_POST['numfac'];
+    $n =  39;
     ob_start();
     require_once 'dompdf/autoload.inc.php';
     $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
@@ -12,6 +12,7 @@ if (!isset($_POST['numfac'])) {
 
     <head>
         <meta charset="UTF-8">
+        <script src="resources/numl.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -66,7 +67,11 @@ if (!isset($_POST['numfac'])) {
                         if ($value['condiciones'] == 0) {
                             $condicion = "Contado";
                         } else {
-                            $condicion = $value['condiciones'];
+                            if ($value['condiciones'] <= 1) {
+                                $condicion = $value['condiciones'] . ' Mes';
+                            } else {
+                                $condicion = $value['condiciones'] . ' Meses';
+                            }
                         }
                 ?>
                         <tr>
@@ -105,18 +110,34 @@ if (!isset($_POST['numfac'])) {
                 $afectas = 0.00;
                 $iva = 0.00;
                 $per = 0.00;
+                $sumasaf = 0.00;
                 $objD = new Documento();
                 $data = $objD->datosfactura($n);
                 if ($data) {
                     foreach ($data as $value) {
-                        if (number_format($value['price'], 2) == number_format($value['precio'], 2)) {
+                        if ($tipoF == 'Comprobante de Crédito Fiscal') {
+                            if (number_format($value['price'], 2) == number_format($value['precio'], 2)) {
+                                $exentas = $value['price'] * $value['cant'];
+                                $afectas = 0.00;
+                            } else if (number_format($value['price'], 2) != number_format($value['precio'], 2)) {
+                                $exentas = 0.00;
+                                $afectas = ($objD->PrecioProd($value['producto'])) * $value['cant'];
+                                $sumasaf += $afectas;
+                            }
+                        } else if ($tipoF == "Factura de Exportación") {
                             $exentas = $value['price'] * $value['cant'];
                             $afectas = 0.00;
-                        } else if (number_format($value['price'], 2) != number_format($value['precio'], 2)) {
-                            $exentas = 0.00;
-                            $afectas = ($objD->PrecioProd($value['producto']))*$value['cant'];
-
+                        } else {
+                            if (number_format($value['price'], 2) == number_format($value['precio'], 2)) {
+                                $exentas = $value['price'] * $value['cant'];
+                                $afectas = 0.00;
+                            } else if (number_format($value['price'], 2) != number_format($value['precio'], 2)) {
+                                $exentas = 0.00;
+                                $afectas = (($objD->PrecioProd($value['producto'])) * $value['cant']) * 0.13 + ((($objD->PrecioProd($value['producto'])) * $value['cant']));
+                                $sumasaf += $afectas;
+                            }
                         }
+
                 ?>
                         <tr>
                             <td style="border: black 2px solid;">
@@ -126,13 +147,20 @@ if (!isset($_POST['numfac'])) {
                                 <?php echo $value['descripcion']; ?>
                             </td>
                             <td style="border: black 2px solid;">
-                                <?php echo '$'.number_format($objD->PrecioProd($value['producto']),2) ?>
+                                <?php
+                                if ($tipoF == 'Comprobante de Crédito Fiscal' || $tipoF == "Factura de Exportación") {
+                                    echo '$' . number_format($objD->PrecioProd($value['producto']), 2);
+                                } else {
+                                    echo '$' . number_format(($objD->PrecioProd($value['producto']) * 0.13) + ($objD->PrecioProd($value['producto'])), 2);
+                                }
+                                ?>
                             </td>
                             <td style="border: black 2px solid;">
                                 <?php echo '$' . number_format($exentas, 2); ?>
                             </td>
                             <td style="border: black 2px solid;">
-                                <?php echo '$' . number_format($afectas, 2);?>
+                                <?php
+                                echo '$' . number_format($afectas, 2); ?>
                             </td>
                         </tr>
                 <?php }
@@ -140,8 +168,10 @@ if (!isset($_POST['numfac'])) {
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="2" style="border-left: none; border-bottom: 1px solid transparent;">
+                    <td colspan="2" style="border-left: 2px solid black; border-bottom: 2px solid transparent;">
+
                     </td>
+
                     <td style="border: 2px solid black; border-left: 2px solid black;">
                         <strong>Sumas</strong>
                     </td>
@@ -149,11 +179,11 @@ if (!isset($_POST['numfac'])) {
                         <?php echo '$' . number_format($value['exentas'], 2); ?>
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <?php echo '$' . number_format(($value['afectas']/1.13), 2); ?>
+                        <?php echo '$' . number_format(($sumasaf), 2); ?>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="border-left: 1px solid transparent; border-bottom: 1px solid transparent;">
+                    <td colspan="2" style="border-left: 2px solid black; border-bottom: 1px solid transparent;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
                         <strong>IVA 13%</strong>
@@ -161,16 +191,16 @@ if (!isset($_POST['numfac'])) {
                     <td style="border-bottom: 1px solid transparent;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <?php 
-                        if ($value['iva']>0 || ($value['afectas']/1.13)>0) {
-                            echo '$' . number_format(($value['afectas']/1.13)*0.13, 2); 
-                            $iva =round ($value['afectas']/1.13)*0.13;
+                        <?php
+                        if ($value['iva'] > 0) {
+                            echo '$' . number_format(($sumasaf) * 0.13, 2);
+                            $iva = round($sumasaf) * 0.13;
                         }
                         ?>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="border-left: 1px solid transparent; border-bottom: 1px solid transparent;">
+                    <td colspan="2" style="border-left: 2px solid black; border-bottom: 1px solid transparent;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
                         <strong>Subtotal</strong>
@@ -178,11 +208,14 @@ if (!isset($_POST['numfac'])) {
                     <td style="border-bottom: 1px solid transparent;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <?php echo '$' . number_format(($value['afectas']/1.13) + $iva, 2); ?>
+                        <?php
+                        if ($value['iva'] > 0) {
+                            echo '$' . number_format(($sumasaf) + $iva, 2);
+                        } ?>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="border-left: 1px solid transparent; border-bottom: 1px solid transparent;">
+                    <td colspan="2" style="border-left: 2px solid black; border-bottom: 1px solid transparent;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
                         <strong>Percepcion</strong>
@@ -190,15 +223,15 @@ if (!isset($_POST['numfac'])) {
                     <td style="border-bottom: 1px solid transparent;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <?php if ($value['retencion']>=1) {
-                           echo '$' . number_format(($value['afectas']/1.13)*0.01, 2); 
-                           $per = round ($value['afectas']/1.13)*0.01;
+                        <?php if ($value['retencion'] >= 1) {
+                            echo '$' . number_format(($sumasaf) * 0.01, 2);
+                            $per = round($sumasaf) * 0.01;
                         }
                         ?>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="border-left: 1px solid transparent; border-bottom: 1px solid transparent;">
+                    <td colspan="2" style="border-left: 2px solid black; border-bottom: 1px solid transparent;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
                         <strong>Retencion</strong>
@@ -210,7 +243,7 @@ if (!isset($_POST['numfac'])) {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="border-left: 1px solid transparent; border-bottom: 1px solid transparent;">
+                    <td colspan="2" style="border-left: 2px solid black; border-bottom: 2px solid black;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
                         <strong>Ventas Exentas</strong>
@@ -222,7 +255,29 @@ if (!isset($_POST['numfac'])) {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="border-left: 1px solid transparent; border-bottom: 1px solid transparent;">
+                    <td colspan="2" style="border-left: 2px solid black; border-bottom: 2px solid black;">
+                        <?php
+                        $c = '';
+                        $d = '';
+                        $datos = number_format($value['exentas'] + ($sumasaf) + $iva + $per, 2, '.', '');
+                        list($n1, $n2) = explode(".", $datos);
+                        $f = new NumberFormatter('es', NumberFormatter::SPELLOUT);
+
+                        if ($n1 > 1 || $n1 == 0) {
+                            $d = 'DOLARES';
+                        } else {
+                            $d = 'UN DOLAR';
+                            $n1 = '';
+                        }
+                        if ($n2 > 1 || $n2 == 0) {
+                            $c = 'CENTAVOS';
+                        } else {
+                            $c = 'UN CENTAVO';
+                            $n2 = '';
+                        }
+                        echo '<strong>SON: </strong>' . mb_strtoupper(str_replace('y uno', 'y un', str_replace('iuno', 'IÚN', $f->format($n1))));
+                        echo mb_strtoupper(' ' . $d . ' CON ' . str_replace('y uno', 'y un', str_replace('iuno', 'IÚN', $f->format($n2)))) . ' ' . $c . ' ';
+                        ?>
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
                         <strong>Total a pagar</strong>
@@ -230,7 +285,7 @@ if (!isset($_POST['numfac'])) {
                     <td style="border-bottom: 1px solid transparent;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <?php echo '$' . number_format($value['exentas'] + ($value['afectas']/1.13) + $iva + $per, 2); ?>
+                        <?php echo '$' . number_format($value['exentas'] + ($sumasaf) + $iva + $per, 2); ?>
                     </td>
 
                 </tr>
@@ -242,6 +297,7 @@ if (!isset($_POST['numfac'])) {
 <?php
     $HTML = ob_get_contents();
     $dompdf->loadHtml($HTML);
+    $dompdf->setPaper('letter', 'portrait');
     $dompdf->render();
     ob_get_clean();
     $dompdf->stream("", array("Attachment" => false));
