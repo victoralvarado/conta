@@ -32,6 +32,7 @@ function insercionTablas()
    $precioind = json_decode($_POST['precioind']);
    $tipoProd = $_POST['tipoProd'];
    $descProd = json_decode($_POST['descProd']);
+   $cantorprod = json_decode($_POST['cantorprod']);
    $sumas = $_POST['sumas'];
    $iva = $_POST['iva'];
    $subtot = $_POST['subtot'];
@@ -49,7 +50,7 @@ function insercionTablas()
       $objDS->updateCantidadProd($value);
    }
    foreach ($prod as $key => $value) {
-      $objDS->saveMovimiento($value,$canti[$key],$precioind[$key],$descProd[$key],0,$fecha,$nombre,$nomserie." ".$numFac,);
+      $objDS->saveMovimiento($value,$canti[$key],$cantorprod[$key],$precioind[$key],$descProd[$key],0,$fecha,$nombre,$nomserie." ".$numFac,);
    }
 	$objDS->saveDocumento($numFac,$serie,$nombre,$fecha,($numFac-1),$acumaf,$acumex,$iva,$ret,$cpago,$classi,$caso);
    $idDoc=$objDS->ultimoID();

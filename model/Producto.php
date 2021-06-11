@@ -367,7 +367,7 @@ class Producto
 
     public function movimiento($producto, $desde, $hasta)
     {
-        $sqlAll = "SELECT * FROM Movimiento WHERE estado = 1 AND producto = " . $producto . " AND fecha  BETWEEN  '" . $desde . "' AND '" . $hasta . "';";
+        $sqlAll = "SELECT 0 as id,'' as producto,'' as cantidad,0 as ultima_existencia,'' as precio,'' as costo,0 as ultimo_costo,'' as descripcion,'' as tipo,'' as fecha,'' as cliente,'Saldo Inicial a la Fecha' as doc,1 as estado union SELECT * FROM Movimiento WHERE estado = 1 AND producto = " . $producto . " AND fecha  BETWEEN  '" . $desde . "' AND '" . $hasta . "';";
         $info = $this->db->query($sqlAll);
         if ($info->num_rows > 0) {
 

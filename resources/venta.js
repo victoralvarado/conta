@@ -7,6 +7,7 @@ $(document).ready(function() {
     var afectadas = [];
     var cantactprod = [];
     var producto = [];
+    var cantprod = [];
     var cant = [];
     var prec = [];
     var table = [];
@@ -303,6 +304,7 @@ $(document).ready(function() {
             } else {
                 cantidad[id] = $("#cantProd").val();
                 descripcion[id] = $("#prods").find('option:selected').attr("min");
+                cantprod[id] = parseInt($("#prods").find('option:selected').attr("class"));
                 cantactprod[id] = parseInt($("#prods").find('option:selected').attr("class")) - parseInt($("#cantProd").val());
                 if ($("#exivan").prop("checked") == true && $("#tipoFac").val() != "3") {
                     precio[id] = (parseFloat($("#prods").find('option:selected').attr("max")) * 1.13).toFixed(2);
@@ -337,6 +339,7 @@ $(document).ready(function() {
             } else {
                 cantidad[id] = parseInt(cantidad[id]) + parseInt($("#cantProd").val());
                 descripcion[id] = $("#prods").find('option:selected').attr("min");
+                cantprod[id] = parseInt($("#prods").find('option:selected').attr("class"));
                 cantactprod[id] = cantactprod[id] - parseInt($("#cantProd").val());
                 if ($("#exivan").prop("checked") == true && $("#tipoFac").val() != "3") {
                     precio[id] = (parseFloat($("#prods").find('option:selected').attr("max")) * 1.13).toFixed(2);
@@ -505,6 +508,7 @@ $(document).ready(function() {
         var cpago = $("#condPag").val();
         var fecha = $("#fechaCompra").val();
         var prodDesc = [];
+        var cantorprod = [];
         var acumex = 0;
         var acumaf = 0;
 
@@ -514,6 +518,7 @@ $(document).ready(function() {
                 cant.push(valor);
                 prec.push(precio[indice]);
                 prodDesc.push(descripcion[indice]);
+                cantorprod.push(cantprod[indice]);
             }
         });
 
@@ -540,6 +545,7 @@ $(document).ready(function() {
         var precioind = JSON.stringify(prec);
         var tipoProd = $("#tipoProd").val();
         var descProd = JSON.stringify(prodDesc);
+        var cantorprod = JSON.stringify(cantorprod);
 
         var sumas = $("#sumas2").val().substring(1);
         var iva = $("#iva").val().substring(1);
@@ -579,6 +585,7 @@ $(document).ready(function() {
         fd.append('fecha', fecha);
         fd.append('prodDesc', prodDesc);
         fd.append('updateProd', JSON.stringify(updateProd));
+        fd.append('cantorprod', cantorprod);
         fd.append('classi', classi);
         fd.append('prod', prod);
         fd.append('canti', canti);
