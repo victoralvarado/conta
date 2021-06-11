@@ -135,7 +135,7 @@
                           <div class="form-column col-md-4 col-sm-4 col-xs-4">
                             <div class="form-group required">
                               <label for="fechaCompra" class="control-label">Fecha</label>            
-                              <input type="date" name="fechaCompra" id="fechaCompra" class="form-control requerido">
+                              <input type="date" name="fechaCompra" id="fechaCompra" class="form-control requerido" required>
                             </div>
 
                           </div> 

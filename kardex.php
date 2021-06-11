@@ -214,7 +214,7 @@ if (isset($_POST['numProd'])) {
 <?php
     $HTML = ob_get_contents();
     $dompdf->loadHtml($HTML);
-    $dompdf->set_paper('a4', 'landscape');
+    $dompdf->set_paper('letter', 'landscape');
     $dompdf->render();
     ob_get_clean();
     $dompdf->stream("", array("Attachment" => false));

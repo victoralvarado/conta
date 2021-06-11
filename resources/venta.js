@@ -453,7 +453,7 @@ $(document).ready(function() {
                 $("#totalPago").val(formatter.format(totalabs));
                 break;
             case "3":
-                totalabs = subtotal * cantotal;
+                totalabs = subtotal;
                 $("#sumas2").val(formatter.format(0));
                 $("#iva").val(formatter.format(0));
                 $("#st").val(formatter.format(0));
