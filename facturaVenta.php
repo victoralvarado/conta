@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['numfac'])) {
+if (!isset($_POST['numfac'])) {
     require_once('model/Documento.php');
     $n =  $_POST['numfac'];
     ob_start();
@@ -103,6 +103,8 @@ if (isset($_POST['numfac'])) {
                 <?php
                 $exentas = 0.00;
                 $afectas = 0.00;
+                $iva = 0.00;
+                $per = 0.00;
                 $objD = new Documento();
                 $data = $objD->datosfactura($n);
                 if ($data) {
@@ -112,7 +114,8 @@ if (isset($_POST['numfac'])) {
                             $afectas = 0.00;
                         } else if (number_format($value['price'], 2) != number_format($value['precio'], 2)) {
                             $exentas = 0.00;
-                            $afectas = $value['price'] * $value['cant'];
+                            $afectas = ($objD->PrecioProd($value['producto']))*$value['cant'];
+
                         }
                 ?>
                         <tr>
@@ -123,13 +126,13 @@ if (isset($_POST['numfac'])) {
                                 <?php echo $value['descripcion']; ?>
                             </td>
                             <td style="border: black 2px solid;">
-                                <?php echo '$' . number_format($value['price'], 2); ?>
+                                <?php echo '$'.number_format($objD->PrecioProd($value['producto']),2) ?>
                             </td>
                             <td style="border: black 2px solid;">
                                 <?php echo '$' . number_format($exentas, 2); ?>
                             </td>
                             <td style="border: black 2px solid;">
-                                <?php echo '$' . number_format($afectas, 2); ?>
+                                <?php echo '$' . number_format($afectas, 2);?>
                             </td>
                         </tr>
                 <?php }
@@ -146,7 +149,7 @@ if (isset($_POST['numfac'])) {
                         <?php echo '$' . number_format($value['exentas'], 2); ?>
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <?php echo '$' . number_format($value['afectas'], 2); ?>
+                        <?php echo '$' . number_format(($value['afectas']/1.13), 2); ?>
                     </td>
                 </tr>
                 <tr>
@@ -158,7 +161,12 @@ if (isset($_POST['numfac'])) {
                     <td style="border-bottom: 1px solid transparent;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <?php echo '$' . number_format($value['iva'], 2); ?>
+                        <?php 
+                        if ($value['iva']>0 || ($value['afectas']/1.13)>0) {
+                            echo '$' . number_format(($value['afectas']/1.13)*0.13, 2); 
+                            $iva =round ($value['afectas']/1.13)*0.13;
+                        }
+                        ?>
                     </td>
                 </tr>
                 <tr>
@@ -170,7 +178,7 @@ if (isset($_POST['numfac'])) {
                     <td style="border-bottom: 1px solid transparent;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <?php echo '$' . number_format($value['exentas'] + $value['afectas'] + $value['iva'], 2); ?>
+                        <?php echo '$' . number_format(($value['afectas']/1.13) + $iva, 2); ?>
                     </td>
                 </tr>
                 <tr>
@@ -182,7 +190,11 @@ if (isset($_POST['numfac'])) {
                     <td style="border-bottom: 1px solid transparent;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <?php echo '$' . number_format($value['retencion'], 2); ?>
+                        <?php if ($value['retencion']>=1) {
+                           echo '$' . number_format(($value['afectas']/1.13)*0.01, 2); 
+                           $per = round ($value['afectas']/1.13)*0.01;
+                        }
+                        ?>
                     </td>
                 </tr>
                 <tr>
@@ -218,7 +230,7 @@ if (isset($_POST['numfac'])) {
                     <td style="border-bottom: 1px solid transparent;">
                     </td>
                     <td style="border: 2px solid black; border-left: 2px solid black;">
-                        <?php echo '$' . number_format($value['exentas'] + $value['afectas'] + $value['iva'] + $value['retencion'], 2); ?>
+                        <?php echo '$' . number_format($value['exentas'] + ($value['afectas']/1.13) + $iva + $per, 2); ?>
                     </td>
 
                 </tr>

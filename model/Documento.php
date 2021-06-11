@@ -412,9 +412,9 @@ class Documento
             $res=$this->db->query($sql);
     }
 
-    public function saveMovimiento($id,$cantidad,$precio,$descripcion,$tipo,$fecha,$cliente,$doc)
+    public function saveMovimiento($id,$cantidad,$uexist,$precio,$descripcion,$tipo,$fecha,$cliente,$doc)
     {
-        $sql="INSERT INTO movimiento values (0,".$id.",".$cantidad.",NULL,".$precio.",NULL,NULL,'".$descripcion."',".$tipo.",'".$fecha."',".$cliente.",'".$doc."',1);";
+        $sql="INSERT INTO movimiento values (0,".$id.",".$cantidad.",".$uexist.",NULL,".$precio.",".$precio.",'".$descripcion."',".$tipo.",'".$fecha."',".$cliente.",'".$doc."',1);";
             $res=$this->db->query($sql);
             $data=array();
             if($res)
@@ -480,7 +480,7 @@ class Documento
 
     public function datosCliente($numfac)
     {
-        $sqlAll = "SELECT c.*, d.condiciones, d.fecha from documento AS d INNER JOIN cliente AS c ON c.id=d.cliente INNER JOIN detalle_documento AS ds ON ds.documento = d.id WHERE  ds.documento =".$numfac;
+        $sqlAll = "SELECT distinct c.*, d.condiciones, d.fecha from documento AS d INNER JOIN cliente AS c ON c.id=d.cliente INNER JOIN detalle_documento AS ds ON ds.documento = d.id WHERE  ds.documento =".$numfac;
         $info = $this->db->query($sqlAll);
         if ($info->num_rows > 0) {
 
@@ -494,7 +494,7 @@ class Documento
 
     public function datosSerie($numfac)
     {
-        $sqlAll = "SELECT  dse.serie, dse.tipo FROM documento AS d INNER JOIN detalle_documento AS ds ON ds.documento = d.id INNER JOIN documento_serie AS dse ON d.serie=dse.id WHERE ds.documento =".$numfac;
+        $sqlAll = "SELECT distinct dse.serie, dse.tipo FROM documento AS d INNER JOIN detalle_documento AS ds ON ds.documento = d.id INNER JOIN documento_serie AS dse ON d.serie=dse.id WHERE ds.documento =".$numfac;
         $info = $this->db->query($sqlAll);
         if ($info->num_rows > 0) {
 
@@ -508,7 +508,7 @@ class Documento
 
     public function datosfactura($numfac)
     {
-        $sql="SELECT d.* , ds.*, p.descripcion,p.precio FROM documento AS d INNER JOIN detalle_documento AS ds ON ds.documento = d.id INNER JOIN producto p ON p.id=ds.producto  WHERE ds.documento =  ".$numfac;
+        $sql="SELECT d.* , ds.*, p.descripcion,p.precio,ds.producto FROM documento AS d INNER JOIN detalle_documento AS ds ON ds.documento = d.id INNER JOIN producto p ON p.id=ds.producto  WHERE ds.documento =  ".$numfac;
         $info = $this->db->query($sql);
         if ($info->num_rows > 0) {
 
@@ -518,6 +518,17 @@ class Documento
             $dato = false;
         }
         return $dato;
+    }
+
+    public function PrecioProd($id)
+    {
+        $sql = $this->db->prepare("SELECT precio from producto where id = ?;");
+        mysqli_stmt_bind_param($sql, 'i', $id);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $res);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
+        return $res;
     }
 
 }
