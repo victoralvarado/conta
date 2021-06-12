@@ -211,29 +211,21 @@
                </a>
                <ul class="nav lt">
                  <li id="hoverlc" style="cursor:pointer; cursor: hand" class="<?php echo $activelc; ?>">
-                   <a data-toggle="modal" data-target="#exampleModal">
+                   <a data-toggle="modal" data-target="#compras">
                      <i id="changelc" class="fas fa-book icon"></i>
                      Libro de compras
                    </a>
                  </li>
-                 <li id="hoverv" class="<?php echo $activev; ?>">
-                   <a href="ventascontribuyente.php">
+                 <li id="hoverv" style="cursor:pointer; cursor: hand" class="<?php echo $activev; ?>">
+                   <a data-toggle="modal" data-target="#ventasContribuyente">
                      <i id="changev" class="fas fa-book icon"></i>
                      <span>Ventas a contribuyentes</span>
                    </a>
                  </li>
-                 <li id="hovervc" class="<?php echo $activevc; ?>">
-                   <a href="ventasconsumidor.php">
+                 <li id="hovervc" style="cursor:pointer; cursor: hand" class="<?php echo $activevc; ?>">
+                   <a data-toggle="modal" data-target="#ventasConsumidor">
                      <i id="changevc" class="fas fa-book icon"></i>
                      <span>Ventas consumidor</span>
-                   </a>
-                 </li>
-                 <li class="<?php echo $activeControl; ?>">
-                   <a href="controlinventario.php">
-                     <i class="fas fa-book icon">
-                       <b class="bg-info"></b>
-                     </i>
-                     <span>Control de inventario</span>
                    </a>
                  </li>
                </ul>
@@ -243,8 +235,7 @@
            <br>
            <br>
            <br>
-           <div class="footer" style="display: flex;
-    align-items: flex-end;">
+           <div class="footer" style="display: flex; align-items: flex-end;">
              <p>
                Copyright ©
                <script>
@@ -257,7 +248,7 @@
          <!-- / nav -->
 
          <!-- Modal -->
-         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal fade" id="compras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
            <div class="modal-dialog" role="document">
              <div class="modal-content">
                <div class="modal-header">
@@ -272,6 +263,63 @@
                      <label>Ingrese el mes y el año: </label>
                      <?php $anio = date("Y"); $mes = date("m"); ?>
                      <input type="month" name="fecha" value="<?php echo $anio."-".$mes; ?>" max="<?php echo $anio."-".$mes; ?>" required>
+                   </div>
+                   <div class="form-group">
+                     <button type="submit" class="btn btn-primary" onclick="location.reload()">Generar</button>
+                   </div>
+                 </form>
+                 <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+
+         <!-- Modal -->
+         <div class="modal fade" id="ventasConsumidor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Generar Reporte Libro de Ventas a Consumidor</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               <div class="modal-body">
+                 <form method="POST" action="libroVentasConsumidor.php" target="_blank">
+                   <div class="form-group">
+                     <label>Ingrese el mes y el año: </label>
+                     <?php $anio = date("Y"); $mes = date("m"); ?>
+                     <input type="month" name="fechaC" value="<?php echo $anio."-".$mes; ?>" max="<?php echo $anio."-".$mes; ?>" required>
+                   </div>
+                   <div class="form-group">
+                     <button type="submit" class="btn btn-primary" onclick="location.reload()">Generar</button>
+                   </div>
+                 </form>
+                 <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         <!-- Modal -->
+         <div class="modal fade" id="ventasContribuyente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Generar Reporte Libro de Ventas a Contribuyentes</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               <div class="modal-body">
+                 <form method="POST" action="libroVentasContribuyente.php" target="_blank">
+                   <div class="form-group">
+                     <label>Ingrese el mes y el año: </label>
+                     <?php $anio = date("Y"); $mes = date("m"); ?>
+                     <input type="month" name="fechaC" value="<?php echo $anio."-".$mes; ?>" max="<?php echo $anio."-".$mes; ?>" required>
                    </div>
                    <div class="form-group">
                      <button type="submit" class="btn btn-primary" onclick="location.reload()">Generar</button>

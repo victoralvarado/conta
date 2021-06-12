@@ -1,5 +1,8 @@
 <?php 
-ob_start(); 
+if (isset($_POST['fechaC'])) {
+    $f = $_POST['fechaC'];
+    require_once('model/Documento.php');
+    ob_start();
 require_once 'dompdf/autoload.inc.php';
 $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
 ?>
@@ -25,7 +28,7 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
             <tr>
                 <td rowspan="4" style="vertical-align: middle;">
                     <div>
-                        <h5 style="text-align: center;">Mes: 05/21</h5>
+                        <h6 style="text-align: center;"><strong>Mes: <?php echo $f; ?></strong></h6>
                     </div>
                 </td>
                 <td rowspan="4" style="vertical-align: middle;">
@@ -35,10 +38,10 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
                 </td>
                 <td scope="col" colspan="2" rowspan="4" style="text-align: end;">
                     <h5 style="text-align: center;"><strong>Empresa de Ejemplo S.A de C.V</strong></h5>
-                    <h5 style="text-align: center;">Desarrolo de Software, Seguridad Informatica y Tecnologias de la Información</h5>
-                    <h5 style="text-align: center;">Departamento de San Salvador, El Salvador, Centroamerica</h5>
+                    <h6 style="text-align: center;"><strong>Desarrolo de Software, Seguridad Informatica y Tecnologias de la Información</strong></h6>
+                    <h6 style="text-align: center;"><strong>Departamento de San Salvador, El Salvador, Centroamerica</strong></h6>
 
-                    <h5 style="text-align: center;">Registro No:100001-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NIT:0101-010150-101-1</h5>
+                    <h6 style="text-align: center;"><strong>Registro No:100001-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NIT:0101-010150-101-1</strong></h6>
 
 
                 </td>
@@ -66,95 +69,125 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
             </tr>
         </thead>
         <tbody>
+        <?php
+                $n = 0;
+                $objV = new Documento();
+                $afectas = 0;
+                $exentas = 0;
+                $exentasE = 0;
+                $sumas = 0;
+                $data = $objV->libroVentasCF($f);
+                if ($data) {
+                    foreach ($data as $value) {
+                        $n++;
+                        $afectas += $value['afectas'];
+                        if ($value['exentas']>0&& $value['tipo']=='fcf') {
+                        $exentas += $value['exentas'];
+                    }
+                    if ($value['exentas']>0&& $value['tipo']=='fex') {
+                        $exentasE += $value['exentas'];
+                    }
+                        $sumas += ($value['afectas']+$value['exentas']);
+                ?>
             <tr>
+                <th style="border: black 2px solid;">
+                    <?php echo $n; ?>
+                </th>
                 <td style="border: black 2px solid;">
-                    -
+                    <?php echo substr($value['fecha'],0,10); ?>
                 </td>
                 <td style="border: black 2px solid;">
-                    -
+                <?php echo $value['numero']; ?>
                 </td>
                 <td style="border: black 2px solid;">
-                    -
+                <?php echo $value['numero']; ?>
                 </td>
                 <td style="border: black 2px solid;">
-                    -
+                    <?php if ($value['afectas']>0) {
+                        echo '$' . number_format($value['afectas'],2); 
+                        }
+                        ?>
                 </td>
                 <td style="border: black 2px solid;">
-                    -
+                <?php if ($value['exentas']>0 && $value['tipo']=='fex') {
+                    echo '$' . number_format($value['exentas'],2); 
+                }?>
                 </td>
                 <td style="border: black 2px solid;">
-                    -
+                <?php if ($value['exentas']>0&& $value['tipo']=='fcf') {
+                    echo '$' . number_format($value['exentas'],2); 
+                }
+                ?>
                 </td>
                 <td style="border: black 2px solid;">
-                    -
-                </td>
-                <td style="border: black 2px solid;">
-                    -
+                <?php echo '$' . number_format($value['afectas']+$value['exentas'],2); ?>
                 </td>
             </tr>
+            <?php }} ?>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="4" style="border-left: 2px solid black; border-bottom: 2px solid black; text-align: center;">
+                <th colspan="4" style="border-left: 2px solid black; border-bottom: 2px solid black; text-align: center;">
                     <strong>Totales del Mes</strong>
-                </td>
-                <td style="border: 2px solid black; border-left: 2px solid black;">
-                    0
-                </td>
-                <td style="border: 2px solid black; border-left: 2px solid black;">
-                    0
-                </td>
-                <td style="border: 2px solid black; border-left: 2px solid black;">
-                    0
-                </td>
-                <td style="border: 2px solid black; border-left: 2px solid black;">
-                    0
-                </td>
+                </th>
+                <th style="border: 2px solid black; border-left: 2px solid black;">
+                    <?php echo '$' . number_format($afectas,2); ?>
+                </th>
+                <th style="border: 2px solid black; border-left: 2px solid black;">
+                <?php echo '$' . number_format($exentasE,2); ?>
+                </th>
+                <th style="border: 2px solid black; border-left: 2px solid black;">
+                <?php echo '$' . number_format($exentas,2); ?>
+                </th>
+                <th style="border: 2px solid black; border-left: 2px solid black;">
+                <?php echo '$' . number_format($sumas,2); ?>
+                </th>
             </tr>
         </tfoot>
     </table>
+    <br><br>
     <div class="row justify-content-center justify-content-md-center">
         <div class="col-md-6">
             <table class="" style="width: 60%; margin-left: auto;margin-right: auto; " cellspacing="5" cellpadding="5">
+            <thead>
+                <tr>
+                    <th style="border: black 2px solid;">Resumen de operaciones</th>
+                    <th style="border: black 2px solid;">Valor Neto</th>
+                    <th style="border: black 2px solid;">Debito Fiscal</th>
+                </tr>
+            </thead>
                 <tbody>
-                    <tr">
-                        <th style="border: black 2px solid;">
-                            Ventas Internas Exentas
-                        </th>
-                        <td style="border: black 2px solid;">
-                            $0
-                        </td>
-                    </tr>
                     <tr>
-                        <th style="border: black 2px solid;">
+                        <td style="border: black 2px solid;">
                             Ventas Internas Gravadas
-                        </th>
+                        </td>
                         <td style="border: black 2px solid;">
-                            $0
+                        <?php echo '$' . number_format(($afectas/1.13),2); ?>
+                        </td>
+                        <td style="border: black 2px solid;">
+                        <?php echo '$' . number_format(($afectas/1.13)*0.13,2); ?>
                         </td>
                     </tr>
                     <tr>
-                        <th style="border: black 2px solid;">
-                            Debito Fiscal
-                        </th>
                         <td style="border: black 2px solid;">
-                            $0
-                        </td>
-                    </tr>
-                    <tr>
-                        <th style="border: black 2px solid;">
                             Exportacion
-                        </th>
+                        </td>
                         <td style="border: black 2px solid;">
-                            $0
+                        <?php echo '$' . number_format(($exentasE/1.13),2); ?>
+                        </td>
+                        <td style="border: black 2px solid;">
+                        <?php echo '$' . number_format(($exentasE/1.13)*0.13,2); ?>
                         </td>
                     </tr>
                     <tr>
-                        <th style="border: black 2px solid;">
-                            TOTAL
-                        </th>
                         <td style="border: black 2px solid;">
-                            $0
+                            Ventas Internas Exentas
+                        </td>
+                        <td style="border: black 2px solid;">
+                        <?php echo '$' . number_format(($exentas/1.13),2); ?>
+                        </td>
+                        <td style="border: black 2px solid;">
+                        <?php echo '$' . number_format(($exentas/1.13)*0.13,2); ?>
                         </td>
                     </tr>
                 </tbody>
@@ -167,8 +200,11 @@ $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);
 <?php
 $HTML = ob_get_contents();
 $dompdf->loadHtml($HTML);
-$dompdf->set_paper ('a4','landscape');
+$dompdf->set_paper ('letter','landscape');
 $dompdf->render();
 ob_get_clean();
 $dompdf->stream("", array("Attachment" => false));
+} else {
+    echo 'NADA QUE MOSTRAR';
+}
 ?>
