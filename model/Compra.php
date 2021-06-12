@@ -368,7 +368,7 @@ class Compra
 
     public function libroCompras($f)
     {
-        $sql="SELECT c.*, p.nrc, p.nombre FROM compra c INNER JOIN proveedor p ON c.proveedor=p.id WHERE fecha LIKE '%$f%'";
+        $sql="SELECT c.*, p.nrc, p.nombre FROM compra c INNER JOIN proveedor p ON c.proveedor=p.id WHERE c.fecha LIKE '%$f%'";
         $data= $this->db->query($sql);
         if($data->num_rows>0)
         {

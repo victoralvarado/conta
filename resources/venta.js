@@ -388,7 +388,7 @@ $(document).ready(function() {
           retencion=true;
           percepcion=false;
         }*/
-        if ($("#tipoFac").val() == "1" && $("#classCli").val() != "gran contribuyente" && $("#arn").prop("checked", true) && subtotal >= 100) {
+        if ($("#tipoFac").val() == "1" && $("#classCli").val() != "gran contribuyente" && $("#arn").prop("checked", true) && subtotal / 1.13 >= 100) {
             retencion = false;
             percepcion = true;
         }

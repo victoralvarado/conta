@@ -1,7 +1,7 @@
 <?php
-if (!isset($_POST['numfac'])) {
+if (isset($_POST['numfac'])) {
     require_once('model/Documento.php');
-    $n =  39;
+    $n =  $_POST['numfac'];
     ob_start();
     require_once 'dompdf/autoload.inc.php';
     $dompdf = new Dompdf\Dompdf(['isRemoteEnabled' => true]);

@@ -531,4 +531,36 @@ class Documento
         return $res;
     }
 
+    public function libroVentasCF($f)
+    {
+        $sql="SELECT d.*, ds.tipo from documento d inner join documento_serie ds on ds.id=d.serie where ds.tipo='fcf' or ds.tipo='fex' and d.fecha LIKE '%$f%' order by d.id";
+        $data= $this->db->query($sql);
+        if($data->num_rows>0)
+        {
+            $info=$data;
+        }
+        else
+        {
+            $info=null;
+        }
+    
+        return $info;
+    }
+
+    public function libroVentasC($f)
+    {
+        $sql="SELECT d.*, ds.tipo, c.nombre, c.nrc from documento d inner join documento_serie ds on ds.id=d.serie inner join cliente c on c.id=d.cliente where ds.tipo='ccf' and d.fecha LIKE '%$f%' order by d.id";
+        $data= $this->db->query($sql);
+        if($data->num_rows>0)
+        {
+            $info=$data;
+        }
+        else
+        {
+            $info=null;
+        }
+    
+        return $info;
+    }
+
 }
