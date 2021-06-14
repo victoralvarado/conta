@@ -1,5 +1,5 @@
 <?php
-require_once ("Conexion.php");
+require_once("Conexion.php");
 class Proveedor
 {
     private $id;
@@ -13,13 +13,14 @@ class Proveedor
     private $telefono;
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = conectar();
     }
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -29,7 +30,7 @@ class Proveedor
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -39,7 +40,7 @@ class Proveedor
 
     /**
      * Get the value of tipo
-     */ 
+     */
     public function getTipo()
     {
         return $this->tipo;
@@ -49,7 +50,7 @@ class Proveedor
      * Set the value of tipo
      *
      * @return  self
-     */ 
+     */
     public function setTipo($tipo)
     {
         $this->tipo = $tipo;
@@ -59,7 +60,7 @@ class Proveedor
 
     /**
      * Get the value of clasificacion
-     */ 
+     */
     public function getClasificacion()
     {
         return $this->clasificacion;
@@ -69,7 +70,7 @@ class Proveedor
      * Set the value of clasificacion
      *
      * @return  self
-     */ 
+     */
     public function setClasificacion($clasificacion)
     {
         $this->clasificacion = $clasificacion;
@@ -79,7 +80,7 @@ class Proveedor
 
     /**
      * Get the value of nit
-     */ 
+     */
     public function getNit()
     {
         return $this->nit;
@@ -89,7 +90,7 @@ class Proveedor
      * Set the value of nit
      *
      * @return  self
-     */ 
+     */
     public function setNit($nit)
     {
         $this->nit = $nit;
@@ -99,7 +100,7 @@ class Proveedor
 
     /**
      * Get the value of nrc
-     */ 
+     */
     public function getNrc()
     {
         return $this->nrc;
@@ -109,7 +110,7 @@ class Proveedor
      * Set the value of nrc
      *
      * @return  self
-     */ 
+     */
     public function setNrc($nrc)
     {
         $this->nrc = $nrc;
@@ -119,7 +120,7 @@ class Proveedor
 
     /**
      * Get the value of nombre
-     */ 
+     */
     public function getNombre()
     {
         return $this->nombre;
@@ -129,7 +130,7 @@ class Proveedor
      * Set the value of nombre
      *
      * @return  self
-     */ 
+     */
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
@@ -139,7 +140,7 @@ class Proveedor
 
     /**
      * Get the value of razon_social
-     */ 
+     */
     public function getRazon_social()
     {
         return $this->razon_social;
@@ -149,7 +150,7 @@ class Proveedor
      * Set the value of razon_social
      *
      * @return  self
-     */ 
+     */
     public function setRazon_social($razon_social)
     {
         $this->razon_social = $razon_social;
@@ -159,7 +160,7 @@ class Proveedor
 
     /**
      * Get the value of direccion
-     */ 
+     */
     public function getDireccion()
     {
         return $this->direccion;
@@ -169,7 +170,7 @@ class Proveedor
      * Set the value of direccion
      *
      * @return  self
-     */ 
+     */
     public function setDireccion($direccion)
     {
         $this->direccion = $direccion;
@@ -179,7 +180,7 @@ class Proveedor
 
     /**
      * Get the value of telefono
-     */ 
+     */
     public function getTelefono()
     {
         return $this->telefono;
@@ -189,7 +190,7 @@ class Proveedor
      * Set the value of telefono
      *
      * @return  self
-     */ 
+     */
     public function setTelefono($telefono)
     {
         $this->telefono = $telefono;
@@ -199,7 +200,7 @@ class Proveedor
 
     /**
      * Get the value of db
-     */ 
+     */
     public function getDb()
     {
         return $this->db;
@@ -209,7 +210,7 @@ class Proveedor
      * Set the value of db
      *
      * @return  self
-     */ 
+     */
     public function setDb($db)
     {
         $this->db = $db;
@@ -220,7 +221,7 @@ class Proveedor
     public function getCProveedor($nrc)
     {
         $sql = $this->db->prepare("SELECT clasificacion FROM Proveedor WHERE nrc = ?;");
-        mysqli_stmt_bind_param($sql,'s',$nrc);
+        mysqli_stmt_bind_param($sql, 's', $nrc);
         mysqli_stmt_execute($sql);
         mysqli_stmt_bind_result($sql, $cl);
         mysqli_stmt_fetch($sql);
@@ -231,7 +232,7 @@ class Proveedor
     public function getNrcProveedor($nrc)
     {
         $sql = $this->db->prepare("SELECT nrc FROM Proveedor WHERE nrc = ?;");
-        mysqli_stmt_bind_param($sql,'s',$nrc);
+        mysqli_stmt_bind_param($sql, 's', $nrc);
         mysqli_stmt_execute($sql);
         mysqli_stmt_bind_result($sql, $res);
         mysqli_stmt_fetch($sql);
@@ -241,7 +242,7 @@ class Proveedor
     public function getNitProveedor($nit)
     {
         $sql = $this->db->prepare("SELECT nit FROM Proveedor WHERE nit = ?;");
-        mysqli_stmt_bind_param($sql,'s',$nit);
+        mysqli_stmt_bind_param($sql, 's', $nit);
         mysqli_stmt_execute($sql);
         mysqli_stmt_bind_result($sql, $res);
         mysqli_stmt_fetch($sql);
@@ -251,7 +252,7 @@ class Proveedor
     public function getNitP($nrc)
     {
         $sql = $this->db->prepare("SELECT nit FROM Proveedor WHERE nrc = ?;");
-        mysqli_stmt_bind_param($sql,'s',$nrc);
+        mysqli_stmt_bind_param($sql, 's', $nrc);
         mysqli_stmt_execute($sql);
         mysqli_stmt_bind_result($sql, $res);
         mysqli_stmt_fetch($sql);
@@ -278,7 +279,7 @@ class Proveedor
         $estado = 1;
         $sql = $this->db->prepare("INSERT INTO Proveedor(tipo,clasificacion,nit,nrc,nombre,razon_social,direccion,telefono,estado) values (?,?,?,?,?,?,?,?,?);");
         # s = string; i = int; d = decimal
-        $res = $sql->bind_param('iissssssi',$this->tipo,$this->clasificacion,$this->nit,$this->nrc,$this->nombre,$this->razon_social,$this->direccion,$this->telefono,$estado);
+        $res = $sql->bind_param('iissssssi', $this->tipo, $this->clasificacion, $this->nit, $this->nrc, $this->nombre, $this->razon_social, $this->direccion, $this->telefono, $estado);
         $sql->execute();
         $data = array();
         if ($res) {
@@ -294,30 +295,27 @@ class Proveedor
     }
 
     public function deleteProveedor()
-	{
-            $sql = $this->db->prepare("UPDATE Proveedor SET estado = 0 where id =?;");
-	        $res = $sql->bind_param('i',$this->id);
-            $sql->execute();
-	        $data=array();
-	        if($res)
-	        {
-	            $data['estado']=true;
-	            $data['descripcion']='Datos eliminados exitosamente';
-	        }
-	        else
-	        {
-	            $data['estado']=false;
-	            $data['descripcion']='Ocurrio un error en la eliminación '.$this->db->error;
-	        }
-            $sql->close();
-            $this->db->close();
-	        return $data;
-	}
+    {
+        $sql = $this->db->prepare("UPDATE Proveedor SET estado = 0 where id =?;");
+        $res = $sql->bind_param('i', $this->id);
+        $sql->execute();
+        $data = array();
+        if ($res) {
+            $data['estado'] = true;
+            $data['descripcion'] = 'Datos eliminados exitosamente';
+        } else {
+            $data['estado'] = false;
+            $data['descripcion'] = 'Ocurrio un error en la eliminación ' . $this->db->error;
+        }
+        $sql->close();
+        $this->db->close();
+        return $data;
+    }
 
     public function updateProveedor()
     {
         $sql = $this->db->prepare("UPDATE Proveedor SET tipo = ?, clasificacion = ?, nit = ?, nrc = ?, nombre = ?, razon_social = ?, direccion = ?, telefono = ? WHERE id = ?;");
-        $res = $sql->bind_param('iissssssi',$this->tipo, $this->clasificacion, $this->nit, $this->nrc, $this->nombre, $this->razon_social, $this->direccion, $this->telefono, $this->id);
+        $res = $sql->bind_param('iissssssi', $this->tipo, $this->clasificacion, $this->nit, $this->nrc, $this->nombre, $this->razon_social, $this->direccion, $this->telefono, $this->id);
         $sql->execute();
         $data = array();
         if ($res) {
@@ -334,7 +332,7 @@ class Proveedor
 
     public function getOneProveedor($id)
     {
-        $sqlOne = "SELECT * FROM Proveedor WHERE id=".$id.";";
+        $sqlOne = "SELECT * FROM Proveedor WHERE id=" . $id . ";";
         $info = $this->db->query($sqlOne);
         if ($info->num_rows > 0) {
 

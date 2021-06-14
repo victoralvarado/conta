@@ -38,7 +38,7 @@
                 <div class="ex1">
                     <section id="content" class="container-fluid">
                         <div class="row">
-                            <form id="compras" class="well form" method="post" >
+                            <form id="compras" class="well form" method="post">
                                 <fieldset class="form-group">
                                     <legend class="w-auto">Proveedor/Compra</legend>
                                     <div class="col-md-5">
@@ -123,7 +123,7 @@
                                         if ($data) {
                                             foreach ($data as $value) {
                                         ?>
-                                                <option id="<?php echo $value['codigo']; ?>" value="<?php echo strtoupper($value['nombre']); ?>"><?php echo strtoupper($value['nombre']).' '.$value['descripcion']; ?></option>
+                                                <option id="<?php echo $value['codigo']; ?>" value="<?php echo strtoupper($value['nombre']); ?>"><?php echo strtoupper($value['nombre']) . ' ' . $value['descripcion']; ?></option>
 
                                         <?php
 

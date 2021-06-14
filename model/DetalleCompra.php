@@ -209,7 +209,7 @@ class DetalleCompra
     public function ultmimoIdP($codigo)
     {
         $sql = $this->db->prepare("SELECT id FROM producto where codigo = ?");
-        mysqli_stmt_bind_param($sql,'s',$codigo);
+        mysqli_stmt_bind_param($sql, 's', $codigo);
         mysqli_stmt_execute($sql);
         mysqli_stmt_bind_result($sql, $res);
         mysqli_stmt_fetch($sql);

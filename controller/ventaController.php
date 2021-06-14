@@ -61,7 +61,3 @@ function insercionTablas()
 	echo json_encode($res);
 	
 }
-
-
-
-?>

@@ -99,5 +99,3 @@ function eraseCliente()
 	$res = $objCli->deleteCliente();
 	echo json_encode($res);
 }
-
-?>

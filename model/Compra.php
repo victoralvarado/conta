@@ -22,7 +22,7 @@ class Compra
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -32,7 +32,7 @@ class Compra
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -42,7 +42,7 @@ class Compra
 
     /**
      * Get the value of afectas
-     */ 
+     */
     public function getAfectas()
     {
         return $this->afectas;
@@ -52,7 +52,7 @@ class Compra
      * Set the value of afectas
      *
      * @return  self
-     */ 
+     */
     public function setAfectas($afectas)
     {
         $this->afectas = $afectas;
@@ -62,7 +62,7 @@ class Compra
 
     /**
      * Get the value of iva
-     */ 
+     */
     public function getIva()
     {
         return $this->iva;
@@ -72,7 +72,7 @@ class Compra
      * Set the value of iva
      *
      * @return  self
-     */ 
+     */
     public function setIva($iva)
     {
         $this->iva = $iva;
@@ -82,7 +82,7 @@ class Compra
 
     /**
      * Get the value of retencion
-     */ 
+     */
     public function getRetencion()
     {
         return $this->retencion;
@@ -92,7 +92,7 @@ class Compra
      * Set the value of retencion
      *
      * @return  self
-     */ 
+     */
     public function setRetencion($retencion)
     {
         $this->retencion = $retencion;
@@ -102,7 +102,7 @@ class Compra
 
     /**
      * Get the value of proveedor
-     */ 
+     */
     public function getProveedor()
     {
         return $this->proveedor;
@@ -112,7 +112,7 @@ class Compra
      * Set the value of proveedor
      *
      * @return  self
-     */ 
+     */
     public function setProveedor($proveedor)
     {
         $this->proveedor = $proveedor;
@@ -122,7 +122,7 @@ class Compra
 
     /**
      * Get the value of fecha
-     */ 
+     */
     public function getFecha()
     {
         return $this->fecha;
@@ -132,7 +132,7 @@ class Compra
      * Set the value of fecha
      *
      * @return  self
-     */ 
+     */
     public function setFecha($fecha)
     {
         $this->fecha = $fecha;
@@ -142,7 +142,7 @@ class Compra
 
     /**
      * Get the value of registrado_por
-     */ 
+     */
     public function getRegistrado_por()
     {
         return $this->registrado_por;
@@ -152,7 +152,7 @@ class Compra
      * Set the value of registrado_por
      *
      * @return  self
-     */ 
+     */
     public function setRegistrado_por($registrado_por)
     {
         $this->registrado_por = $registrado_por;
@@ -162,7 +162,7 @@ class Compra
 
     /**
      * Get the value of condiciones
-     */ 
+     */
     public function getCondiciones()
     {
         return $this->condiciones;
@@ -172,7 +172,7 @@ class Compra
      * Set the value of condiciones
      *
      * @return  self
-     */ 
+     */
     public function setCondiciones($condiciones)
     {
         $this->condiciones = $condiciones;
@@ -182,7 +182,7 @@ class Compra
 
     /**
      * Get the value of estadoC
-     */ 
+     */
     public function getEstadoC()
     {
         return $this->estadoC;
@@ -192,7 +192,7 @@ class Compra
      * Set the value of estadoC
      *
      * @return  self
-     */ 
+     */
     public function setEstadoC($estadoC)
     {
         $this->estadoC = $estadoC;
@@ -202,7 +202,7 @@ class Compra
 
     /**
      * Get the value of document_type
-     */ 
+     */
     public function getDocument_type()
     {
         return $this->document_type;
@@ -212,7 +212,7 @@ class Compra
      * Set the value of document_type
      *
      * @return  self
-     */ 
+     */
     public function setDocument_type($document_type)
     {
         $this->document_type = $document_type;
@@ -222,7 +222,7 @@ class Compra
 
     /**
      * Get the value of document_number
-     */ 
+     */
     public function getDocument_number()
     {
         return $this->document_number;
@@ -232,7 +232,7 @@ class Compra
      * Set the value of document_number
      *
      * @return  self
-     */ 
+     */
     public function setDocument_number($document_number)
     {
         $this->document_number = $document_number;
@@ -242,7 +242,7 @@ class Compra
 
     /**
      * Get the value of db
-     */ 
+     */
     public function getDb()
     {
         return $this->db;
@@ -252,7 +252,7 @@ class Compra
      * Set the value of db
      *
      * @return  self
-     */ 
+     */
     public function setDb($db)
     {
         $this->db = $db;
@@ -274,7 +274,7 @@ class Compra
     public function saveCompra()
     {
         $sql = $this->db->prepare("INSERT INTO compra(afectas, iva, retencion, proveedor, fecha, registrado_por, condiciones, estado, document_type, document_number) VALUES(?,?,?,?,?,?,?,?,?,?);");
-            $sql->bind_param('dddissiiss',$this->afectas,$this->iva,$this->retencion,$this->proveedor,$this->fecha,$this->registrado_por,$this->condiciones,$this->estadoC,$this->document_type,$this->document_number);
+        $sql->bind_param('dddissiiss', $this->afectas, $this->iva, $this->retencion, $this->proveedor, $this->fecha, $this->registrado_por, $this->condiciones, $this->estadoC, $this->document_type, $this->document_number);
         $sql->execute();
     }
 
@@ -368,18 +368,14 @@ class Compra
 
     public function libroCompras($f)
     {
-        $sql="SELECT c.*, p.nrc, p.nombre FROM compra c INNER JOIN proveedor p ON c.proveedor=p.id WHERE c.fecha LIKE '%$f%'";
-        $data= $this->db->query($sql);
-        if($data->num_rows>0)
-        {
-            $info=$data;
+        $sql = "SELECT c.*, p.nrc, p.nombre FROM compra c INNER JOIN proveedor p ON c.proveedor=p.id WHERE c.fecha LIKE '%$f%'";
+        $data = $this->db->query($sql);
+        if ($data->num_rows > 0) {
+            $info = $data;
+        } else {
+            $info = null;
         }
-        else
-        {
-            $info=null;
-        }
-    
+
         return $info;
     }
-
 }

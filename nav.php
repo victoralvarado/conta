@@ -230,7 +230,14 @@
                  </li>
                </ul>
              </li>
-
+             <li class="" style="cursor:pointer; cursor: hand">
+               <a data-toggle="modal" data-target="#factura">
+                 <i class="fas fa-file-invoice">
+                   <b class="bg-info"></b>
+                 </i>
+                 <span>Buscar Factura</span>
+               </a>
+             </li>
            </ul>
            <br>
            <br>
@@ -261,8 +268,9 @@
                  <form method="POST" action="libroCompras.php" target="_blank">
                    <div class="form-group">
                      <label>Ingrese el mes y el año: </label>
-                     <?php $anio = date("Y"); $mes = date("m"); ?>
-                     <input type="month" name="fecha" value="<?php echo $anio."-".$mes; ?>" max="<?php echo $anio."-".$mes; ?>" required>
+                     <?php $anio = date("Y");
+                      $mes = date("m"); ?>
+                     <input type="month" name="fecha" value="<?php echo $anio . "-" . $mes; ?>" max="<?php echo $anio . "-" . $mes; ?>" required>
                    </div>
                    <div class="form-group">
                      <button type="submit" class="btn btn-primary" onclick="location.reload()">Generar</button>
@@ -290,8 +298,9 @@
                  <form method="POST" action="libroVentasConsumidor.php" target="_blank">
                    <div class="form-group">
                      <label>Ingrese el mes y el año: </label>
-                     <?php $anio = date("Y"); $mes = date("m"); ?>
-                     <input type="month" name="fechaC" value="<?php echo $anio."-".$mes; ?>" max="<?php echo $anio."-".$mes; ?>" required>
+                     <?php $anio = date("Y");
+                      $mes = date("m"); ?>
+                     <input type="month" name="fechaC" value="<?php echo $anio . "-" . $mes; ?>" max="<?php echo $anio . "-" . $mes; ?>" required>
                    </div>
                    <div class="form-group">
                      <button type="submit" class="btn btn-primary" onclick="location.reload()">Generar</button>
@@ -318,11 +327,42 @@
                  <form method="POST" action="libroVentasContribuyente.php" target="_blank">
                    <div class="form-group">
                      <label>Ingrese el mes y el año: </label>
-                     <?php $anio = date("Y"); $mes = date("m"); ?>
-                     <input type="month" name="fechaC" value="<?php echo $anio."-".$mes; ?>" max="<?php echo $anio."-".$mes; ?>" required>
+                     <?php $anio = date("Y");
+                      $mes = date("m"); ?>
+                     <input type="month" name="fechaC" value="<?php echo $anio . "-" . $mes; ?>" max="<?php echo $anio . "-" . $mes; ?>" required>
                    </div>
                    <div class="form-group">
                      <button type="submit" class="btn btn-primary" onclick="location.reload()">Generar</button>
+                   </div>
+                 </form>
+                 <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         <!-- Modal -->
+         <div class="modal fade" id="factura" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-sm" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Buscar factura</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               <div class="modal-body">
+                 <form method="POST" action="facturaVenta.php" target="_blank">
+                   <div class="form-group">
+                     <?php require_once('model/Documento.php');
+                      $objD = new Documento();
+                      ?>
+                      <label>Numero de Factura: </label>
+                     <input type="number" name="numfac" value="1" max="<?php echo $objD->numFactura(); ?>" min="1" required>
+                   </div>
+                   <div class="form-group">
+                     <button type="submit" class="btn btn-primary" onclick="location.reload()">Buscar</button>
                    </div>
                  </form>
                  <div class="modal-footer">

@@ -158,10 +158,10 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form method="POST" action="kardex.php" target="_blank">
-                                                    <span class="val" style="color: red;" ></span>
+                                                        <span class="val" style="color: red;"></span>
                                                         <div class="row">
                                                             <div class="form-group">
-                                                            <?php $fechaActual = date('Y-m-d'); ?>
+                                                                <?php $fechaActual = date('Y-m-d'); ?>
                                                                 <label class="col-md-3 control-label">Desde:</label>
                                                                 <div class="col-md-7 inputGroupContainer">
                                                                     <input type="date" class="date" id="desde" name="desde" value="<?php echo $fechaActual; ?>" required>
@@ -174,23 +174,23 @@
                                                                 </div>
                                                             </div>
                                                             <script>
-                                                            $(document).ready(function() {
-                                                                $(document).on("change", ".date", function() {
-                                                              if ($('#desde').val()<=$('#hasta').val()) {
-                                                                $("#generar").attr("disabled", false);
-                                                                $(".val").text("");
-                                                              } else if($('#desde').val()>$('#hasta').val()) {
-                                                                $("#generar").attr("disabled", true);
-                                                                $(".val").text("'Hasta' no puede ser menor que 'Desde'");
-                                                              }
-                                                            });
-                                                            });
+                                                                $(document).ready(function() {
+                                                                    $(document).on("change", ".date", function() {
+                                                                        if ($('#desde').val() <= $('#hasta').val()) {
+                                                                            $("#generar").attr("disabled", false);
+                                                                            $(".val").text("");
+                                                                        } else if ($('#desde').val() > $('#hasta').val()) {
+                                                                            $("#generar").attr("disabled", true);
+                                                                            $(".val").text("'Hasta' no puede ser menor que 'Desde'");
+                                                                        }
+                                                                    });
+                                                                });
                                                             </script>
                                                             <div class="form-group">
                                                                 <input type="hidden" name="numProd" value="<?php echo $value['id']; ?>">
                                                                 <input type="hidden" name="des" value="<?php echo $value['descripcion']; ?>">
                                                                 <button type="submit" id="generar" class="btn btn-primary" onclick="location.reload()">Generar</button>
-                                                                
+
                                                             </div>
                                                     </form>
                                                 </div>

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
     $("#internasG").val(0.00);
     $("#importacionE").val(0.00);
     $("#internasE").val(0.00);
@@ -12,7 +12,7 @@ $(document).ready(function () {
             url: './controller/proveedorController.php',
             type: 'post',
             data: { text: $("#contribuyente").children(":selected").attr("id") },
-            success: function (response) {
+            success: function(response) {
                 if (response == 'Ninguno') {
                     $('#excluido').val($('#cp').val());
                     $('#tCompra').attr('disabled', true);
@@ -51,7 +51,7 @@ $(document).ready(function () {
             url: './controller/proveedorController.php',
             type: 'post',
             data: { nitP: $("#contribuyente").children(":selected").attr("id") },
-            success: function (response) {
+            success: function(response) {
                 $('#nitProveedor').val(response);
             }
         });
@@ -91,18 +91,18 @@ $(document).ready(function () {
     $('#ivaCF').val($('#ivaCFTemp').val());
     $('#totalCom').val($('#totalComTemp').val());
 
-    $(document).on("click", "#modificarCompra", function () {
+    $(document).on("click", "#modificarCompra", function() {
         swal({
-            title: "Modificar",
-            text: "¿Estás seguro que deseas modificar la compra?",
-            type: "warning",
-            showCancelButton: true,
-            cancelButtonText: "Cancelar",
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Continuar",
-            closeOnConfirm: false
-        },
-            function (isConfirm) {
+                title: "Modificar",
+                text: "¿Estás seguro que deseas modificar la compra?",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Continuar",
+                closeOnConfirm: false
+            },
+            function(isConfirm) {
                 if (isConfirm) {
                     swal({
                         title: "Modificado",
@@ -111,7 +111,7 @@ $(document).ready(function () {
                         showCancelButton: false,
                         showConfirmButton: false
                     });
-                    setTimeout(function () {
+                    setTimeout(function() {
                         $("#modificar").submit();
                     }, 1100);
                 }
