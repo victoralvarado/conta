@@ -24,7 +24,7 @@ class Movimiento
 
     /**
      * Get the value of db
-     */ 
+     */
     public function getDb()
     {
         return $this->db;
@@ -34,7 +34,7 @@ class Movimiento
      * Set the value of db
      *
      * @return  self
-     */ 
+     */
     public function setDb($db)
     {
         $this->db = $db;
@@ -44,7 +44,7 @@ class Movimiento
 
     /**
      * Get the value of estadoM
-     */ 
+     */
     public function getEstadoM()
     {
         return $this->estadoM;
@@ -54,7 +54,7 @@ class Movimiento
      * Set the value of estadoM
      *
      * @return  self
-     */ 
+     */
     public function setEstadoM($estadoM)
     {
         $this->estadoM = $estadoM;
@@ -64,7 +64,7 @@ class Movimiento
 
     /**
      * Get the value of doc
-     */ 
+     */
     public function getDoc()
     {
         return $this->doc;
@@ -74,7 +74,7 @@ class Movimiento
      * Set the value of doc
      *
      * @return  self
-     */ 
+     */
     public function setDoc($doc)
     {
         $this->doc = $doc;
@@ -84,7 +84,7 @@ class Movimiento
 
     /**
      * Get the value of cliente
-     */ 
+     */
     public function getCliente()
     {
         return $this->cliente;
@@ -94,7 +94,7 @@ class Movimiento
      * Set the value of cliente
      *
      * @return  self
-     */ 
+     */
     public function setCliente($cliente)
     {
         $this->cliente = $cliente;
@@ -104,7 +104,7 @@ class Movimiento
 
     /**
      * Get the value of fecha
-     */ 
+     */
     public function getFecha()
     {
         return $this->fecha;
@@ -114,7 +114,7 @@ class Movimiento
      * Set the value of fecha
      *
      * @return  self
-     */ 
+     */
     public function setFecha($fecha)
     {
         $this->fecha = $fecha;
@@ -124,7 +124,7 @@ class Movimiento
 
     /**
      * Get the value of tipo
-     */ 
+     */
     public function getTipo()
     {
         return $this->tipo;
@@ -134,7 +134,7 @@ class Movimiento
      * Set the value of tipo
      *
      * @return  self
-     */ 
+     */
     public function setTipo($tipo)
     {
         $this->tipo = $tipo;
@@ -144,7 +144,7 @@ class Movimiento
 
     /**
      * Get the value of descripcion
-     */ 
+     */
     public function getDescripcion()
     {
         return $this->descripcion;
@@ -154,7 +154,7 @@ class Movimiento
      * Set the value of descripcion
      *
      * @return  self
-     */ 
+     */
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
@@ -164,7 +164,7 @@ class Movimiento
 
     /**
      * Get the value of ultimo_costo
-     */ 
+     */
     public function getUltimo_costo()
     {
         return $this->ultimo_costo;
@@ -174,7 +174,7 @@ class Movimiento
      * Set the value of ultimo_costo
      *
      * @return  self
-     */ 
+     */
     public function setUltimo_costo($ultimo_costo)
     {
         $this->ultimo_costo = $ultimo_costo;
@@ -184,7 +184,7 @@ class Movimiento
 
     /**
      * Get the value of costo
-     */ 
+     */
     public function getCosto()
     {
         return $this->costo;
@@ -194,7 +194,7 @@ class Movimiento
      * Set the value of costo
      *
      * @return  self
-     */ 
+     */
     public function setCosto($costo)
     {
         $this->costo = $costo;
@@ -204,7 +204,7 @@ class Movimiento
 
     /**
      * Get the value of precio
-     */ 
+     */
     public function getPrecio()
     {
         return $this->precio;
@@ -214,7 +214,7 @@ class Movimiento
      * Set the value of precio
      *
      * @return  self
-     */ 
+     */
     public function setPrecio($precio)
     {
         $this->precio = $precio;
@@ -224,7 +224,7 @@ class Movimiento
 
     /**
      * Get the value of ultima_existencia
-     */ 
+     */
     public function getUltima_existencia()
     {
         return $this->ultima_existencia;
@@ -234,7 +234,7 @@ class Movimiento
      * Set the value of ultima_existencia
      *
      * @return  self
-     */ 
+     */
     public function setUltima_existencia($ultima_existencia)
     {
         $this->ultima_existencia = $ultima_existencia;
@@ -244,7 +244,7 @@ class Movimiento
 
     /**
      * Get the value of cantidad
-     */ 
+     */
     public function getCantidad()
     {
         return $this->cantidad;
@@ -254,7 +254,7 @@ class Movimiento
      * Set the value of cantidad
      *
      * @return  self
-     */ 
+     */
     public function setCantidad($cantidad)
     {
         $this->cantidad = $cantidad;
@@ -264,7 +264,7 @@ class Movimiento
 
     /**
      * Get the value of productoM
-     */ 
+     */
     public function getProductoM()
     {
         return $this->productoM;
@@ -274,7 +274,7 @@ class Movimiento
      * Set the value of productoM
      *
      * @return  self
-     */ 
+     */
     public function setProductoM($productoM)
     {
         $this->productoM = $productoM;
@@ -284,7 +284,7 @@ class Movimiento
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -294,7 +294,7 @@ class Movimiento
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -302,7 +302,7 @@ class Movimiento
         return $this;
     }
 
-    
+
 
     public function saveMovimiento()
     {

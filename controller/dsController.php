@@ -70,5 +70,3 @@ function ultimaFactura()
 	$res = $objDS->getNumeroFactura($_POST['serie']);
 	echo json_encode($res);
 }
-
-?>

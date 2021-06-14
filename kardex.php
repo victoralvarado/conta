@@ -169,9 +169,9 @@ if (isset($_POST['numProd'])) {
                                     echo $value['ultima_existencia'];
                                 } else {
                                     if ($tipo == 'Compra') {
-                                        echo $value['ultima_existencia']+$value['cantidad'];
+                                        echo $value['ultima_existencia'] + $value['cantidad'];
                                     } else {
-                                        echo $value['ultima_existencia']-$value['cantidad'];
+                                        echo $value['ultima_existencia'] - $value['cantidad'];
                                     }
                                 }
                                 ?>
@@ -182,9 +182,9 @@ if (isset($_POST['numProd'])) {
                                     echo '$' . number_format($value['ultimo_costo'], 2);
                                 } else {
                                     if ($tipo == 'Compra') {
-                                        echo '$' . number_format((($value['ultimo_costo'])+($value['cantidad']* $value['costo']))/($value['ultima_existencia']+$value['cantidad']), 2);
+                                        echo '$' . number_format((($value['ultimo_costo']) + ($value['cantidad'] * $value['costo'])) / ($value['ultima_existencia'] + $value['cantidad']), 2);
                                     } else {
-                                        echo '$' . number_format((($value['ultimo_costo'])-($value['cantidad']* $value['costo']))/($value['ultima_existencia']-$value['cantidad']), 2);
+                                        echo '$' . number_format((($value['ultimo_costo']) - ($value['cantidad'] * $value['costo'])) / ($value['ultima_existencia'] - $value['cantidad']), 2);
                                     }
                                 }
                                 ?>
@@ -195,10 +195,10 @@ if (isset($_POST['numProd'])) {
                                     echo '$' . number_format($value['ultima_existencia'] * $value['ultimo_costo'], 2);
                                 } else {
                                     if ($tipo == 'Compra') {
-                                        
-                                        echo '$' . number_format(($value['ultimo_costo'])+($value['cantidad']* $value['costo']), 2);
+
+                                        echo '$' . number_format(($value['ultimo_costo']) + ($value['cantidad'] * $value['costo']), 2);
                                     } else {
-                                        echo '$' . number_format(($value['ultimo_costo'])-($value['cantidad']* $value['costo']), 2);
+                                        echo '$' . number_format(($value['ultimo_costo']) - ($value['cantidad'] * $value['costo']), 2);
                                     }
                                 }
                                 ?>

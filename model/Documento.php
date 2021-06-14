@@ -563,4 +563,13 @@ class Documento
         return $info;
     }
 
+    public function numFactura()
+    {
+        $sql = $this->db->prepare("SELECT count(id) FROM documento;");
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $res);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
+        return $res;
+    }
 }

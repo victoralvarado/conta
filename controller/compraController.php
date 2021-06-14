@@ -75,5 +75,3 @@ if (isset($_POST['valores'])) {
         }
     }
 }
-
-?>

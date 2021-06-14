@@ -1,14 +1,15 @@
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="app">
+
 <head>
   <meta charset="utf-8" />
   <title>Registro</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-  <?php include("referencias.php"); ?> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <?php include("referencias.php"); ?>
   <script type="text/javascript" src="resources/usuario.js"></script>
 </head>
+
 <body>
   <section class="vbox">
     <header class="bg-dark dk header navbar navbar-fixed-top-xs">
@@ -21,11 +22,10 @@
           <i class="fa fa-cog"></i>
         </a>
       </div>
-                 
+
     </header>
     <style>
-      .wall
-      {
+      .wall {
         background: url(images/wallpapertip_accounting-wallpaper_2451419.jpg) top left no-repeat;
         -webkit-background-size: cover;
         -moz-background-size: cover;
@@ -37,16 +37,17 @@
     <section>
       <section class="hbox stretch">
 
-       <link rel="stylesheet" type="text/css" href="css/css.css">
+        <link rel="stylesheet" type="text/css" href="css/css.css">
 
 
         <section id="content" class="wall">
           <section class="vbox">
 
-          <!-------------------------------------------------FORMULARIO------------------------------------------------------------------->
+            <!-------------------------------------------------FORMULARIO------------------------------------------------------------------->
 
-          <br><br>
-          <center><section class="panel panel-default" style="width: 800px;">
+            <br><br>
+            <center>
+              <section class="panel panel-default" style="width: 800px;">
                 <header class="panel-heading font-bold">
                   Formulario de registro
                 </header>
@@ -55,7 +56,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Nombre completo</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control rounded" id="nombre" name="nombre" required>                        
+                        <input type="text" class="form-control rounded" id="nombre" name="nombre" required>
                       </div>
                     </div>
 
@@ -63,7 +64,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Nombre de usuario (Username)</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control rounded" id="user" name="user" required>                        
+                        <input type="text" class="form-control rounded" id="user" name="user" required>
                       </div>
                     </div>
 
@@ -171,7 +172,7 @@
 
                       </div>
                     </div>-->
-                                      
+
                     <!--<div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Drag and Drop</label>
@@ -181,7 +182,7 @@
                         </div>
                       </div>
                     </div>-->
-                    
+
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                       <div class="col-sm-4 col-sm-offset-4">
@@ -194,11 +195,12 @@
                     <div class="line line-dashed line-lg pull-in"></div>
                   </form>
                 </div>
-              </section></center>
+              </section>
+            </center>
 
 
-          <!----------------------------------------------FIN FORMULARIO----------------------------------------------------------------->       
-              
+            <!----------------------------------------------FIN FORMULARIO----------------------------------------------------------------->
+
           </section>
           <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
         </section>
@@ -208,7 +210,8 @@
       </section>
     </section>
   </section>
-  
+
 
 </body>
+
 </html>

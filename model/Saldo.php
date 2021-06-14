@@ -1,5 +1,5 @@
 <?php
-require_once ("./config/conexion.php");
+require_once("./config/conexion.php");
 class Saldo
 {
     private $id;
@@ -8,13 +8,14 @@ class Saldo
     private $haber;
     private $hasta;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = conectar();
     }
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -24,7 +25,7 @@ class Saldo
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -34,7 +35,7 @@ class Saldo
 
     /**
      * Get the value of cuentaId
-     */ 
+     */
     public function getCuentaId()
     {
         return $this->cuentaId;
@@ -44,7 +45,7 @@ class Saldo
      * Set the value of cuentaId
      *
      * @return  self
-     */ 
+     */
     public function setCuentaId($cuentaId)
     {
         $this->cuentaId = $cuentaId;
@@ -54,7 +55,7 @@ class Saldo
 
     /**
      * Get the value of debe
-     */ 
+     */
     public function getDebe()
     {
         return $this->debe;
@@ -64,7 +65,7 @@ class Saldo
      * Set the value of debe
      *
      * @return  self
-     */ 
+     */
     public function setDebe($debe)
     {
         $this->debe = $debe;
@@ -74,7 +75,7 @@ class Saldo
 
     /**
      * Get the value of haber
-     */ 
+     */
     public function getHaber()
     {
         return $this->haber;
@@ -84,7 +85,7 @@ class Saldo
      * Set the value of haber
      *
      * @return  self
-     */ 
+     */
     public function setHaber($haber)
     {
         $this->haber = $haber;
@@ -94,7 +95,7 @@ class Saldo
 
     /**
      * Get the value of hasta
-     */ 
+     */
     public function getHasta()
     {
         return $this->hasta;
@@ -104,7 +105,7 @@ class Saldo
      * Set the value of hasta
      *
      * @return  self
-     */ 
+     */
     public function setHasta($hasta)
     {
         $this->hasta = $hasta;

@@ -17,19 +17,19 @@
       <section class="hbox stretch">
 
         <?php
-          $activeProducto = "";
-          $activeIva = "active";
-          $activeProveedor = "";
-          $activeCompra = "";
-          $activeVenta = "";
-          $activeCliente = "";
-          $activelc = "";
-          $activev = "";
-          $activevc = "";
-          $activeiva = "";
-          $activeControl = "";
-          include("nav.php");
-          ?>
+        $activeProducto = "";
+        $activeIva = "active";
+        $activeProveedor = "";
+        $activeCompra = "";
+        $activeVenta = "";
+        $activeCliente = "";
+        $activelc = "";
+        $activev = "";
+        $activevc = "";
+        $activeiva = "";
+        $activeControl = "";
+        include("nav.php");
+        ?>
         <div class="ex1">
           <section id="content" class="container-fluid">
             <section class="vbox">
