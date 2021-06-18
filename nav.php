@@ -198,6 +198,28 @@
                  <span>Venta</span>
                </a>
              </li>
+             <?php if (!(isset($activePartida))) {
+                $activePartida = "";
+              } ?>
+              <li class="<?php echo $activePartida; ?>">
+               <a href="partidasm.php">
+               <i class="fas fa-th-list">
+                   <b class="bg-info"></b>
+                 </i>
+                 <span>Partidas Manuales</span>
+               </a>
+             </li>
+             <?php if (!(isset($activeLibro))) {
+                $activeLibro = "";
+              } ?>
+              <li class="<?php echo $activeLibro; ?>">
+               <a href="librodiario.php">
+               <i class="fas fa-th-list">
+                   <b class="bg-info"></b>
+                 </i>
+                 <span>Libro Diario</span>
+               </a>
+             </li>
              <li class="<?php echo $activeiva; ?>">
                <a href="#">
                  <i class="fas fa-books">
@@ -232,7 +254,7 @@
              </li>
              <li class="" style="cursor:pointer; cursor: hand">
                <a data-toggle="modal" data-target="#factura">
-                 <i class="fas fa-file-invoice">
+               <i class="fas fa-file-search">
                    <b class="bg-info"></b>
                  </i>
                  <span>Buscar Factura</span>
@@ -244,10 +266,7 @@
            <br>
            <div class="footer" style="display: flex; align-items: flex-end;">
              <p>
-               Copyright ©
-               <script>
-                 document.write(new Date().getFullYear());
-               </script> All rights reserved
+               Copyright © <?php $a = date("Y");echo$a; ?> All rights reserved
                <!-- | Created by <a href="https://github.com/victoralvarado" target="_blank">Victor Alvarado</a> & <a href="https://github.com/DiegoRosa98" target="_blank">Diego Rosa</a> -->
              </p>
            </div>

@@ -1,5 +1,5 @@
 <?php
-require_once("./config/conexion.php");
+require_once("Conexion.php");
 class Partida
 {
     private $id;
@@ -12,11 +12,14 @@ class Partida
     private $plantilla_predeterminada;
     private $partida_reversion;
     private $partida_revertida;
+    private $db;
 
     public function __construct()
     {
         $this->db = conectar();
     }
+
+
 
     /**
      * Get the value of id
@@ -217,4 +220,95 @@ class Partida
 
         return $this;
     }
+
+    /**
+     * Get the value of db
+     */
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    /**
+     * Set the value of db
+     *
+     * @return  self
+     */
+    public function setDb($db)
+    {
+        $this->db = $db;
+
+        return $this;
+    }
+
+    public function savePartida()
+    {
+        $estado = 1;
+        $sql = $this->db->prepare("INSERT INTO c_Partida(fecha,debe,haber,descripcion,compra_relacionada,estado) values (?,?,?,?,?,?);");
+        # s = string; i = int; d = decimal
+        $res = $sql->bind_param('sddsii', $this->fecha, $this->debe, $this->haber, $this->descripcion, $this->compra_relacionada, $estado);
+        $sql->execute();
+        $data = array();
+        if ($res) {
+            $data['estado'] = true;
+            $data['descripcion'] = 'Datos ingresado exitosamente';
+        } else {
+            $data['estado'] = false;
+            $data['descripcion'] = 'Ocurrio un error en la inserción ' . $this->db->error;
+        }
+        return $data;
+    }
+
+    public function ultmimoId()
+    {
+        $info = $this->db->prepare("SELECT MAX(id) FROM c_Partida;");
+        $info->execute();
+        $resultado = $info->get_result();
+        $fila = $resultado->fetch_assoc();
+        return $fila['MAX(id)'];
+    }
+
+    public function libroDiario($fecha)
+    {
+        $sqlAll = "SELECT c_cuentas.codigo , c_cuentas.nombre , c_partida.fecha, c_partida.descripcion, c_partida.id as numero
+        , c_detallePartida.debe, c_detallePartida.haber,c_detallePartida.cuentaId as id_cuentas 
+        from c_partida inner join c_detallePartida on c_detallePartida.partidaId = c_partida.id 
+        inner join c_cuentas on c_detallePartida.cuentaId=c_cuentas.id where c_partida.fecha = '".$fecha."' ORDER by c_partida.id;";
+        $info = $this->db->query($sqlAll);
+        if ($info->num_rows > 0) {
+            $dato = $info;
+        } else {
+            $dato = false;
+        }
+        return $dato;
+    }
+
+    public function libroDiarioR($id,$fecha)
+    {
+        $sqlAll = "SELECT c_cuentas.codigo , c_cuentas.nombre , c_partida.fecha, c_partida.descripcion, c_partida.id as numero
+        , c_detallePartida.debe, c_detallePartida.haber,c_detallePartida.cuentaId as id_cuentas 
+        from c_partida inner join c_detallePartida on c_detallePartida.partidaId = c_partida.id 
+        inner join c_cuentas on c_detallePartida.cuentaId=c_cuentas.id where  c_partida.id = ".$id." and c_partida.fecha = '".$fecha."';";
+        $info = $this->db->query($sqlAll);
+        if ($info->num_rows > 0) {
+            $dato = $info;
+        } else {
+            $dato = false;
+        }
+        return $dato;
+    }
+
+    public function partidas($fecha)
+    {
+        $sqlAll = "SELECT id as numpartida, fecha AS fepartida FROM c_partida where c_partida.fecha = '".$fecha."';";
+        $info = $this->db->query($sqlAll);
+        if ($info->num_rows > 0) {
+            $dato = $info;
+        } else {
+            $dato = false;
+        }
+        return $dato;
+    }
+
+    
 }
