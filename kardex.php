@@ -74,8 +74,13 @@ if (isset($_POST['numProd'])) {
                 <?php
                 $n = 0;
                 $tipo = '';
-                $vt_anterior=0;
-                $costouniP=0;
+                $vt_anterior = 0;
+                $costouniP = 0;
+                $nvt = 0;
+                $ncosto = 0;
+                $nmul = 0;
+                $valorcompra1 = 0;
+                $valorcompra2 = 0;
                 $objP = new Producto();
                 $data = $objP->movimiento($idProducto, $desde, $hasta);
                 if ($data) {
@@ -131,7 +136,7 @@ if (isset($_POST['numProd'])) {
                                 <?php if ($n > 1) {
                                     if ($tipo == 'Compra') {
                                         echo '$' . number_format($value['costo'], 2);
-                                        $costouniP =$value['costo'];
+                                        $costouniP = $value['costo']; //costo unitario de las compras
                                     }
                                 } ?>
                             </td>
@@ -152,14 +157,23 @@ if (isset($_POST['numProd'])) {
                             <td style="border: black 2px solid;">
                                 <?php if ($n > 1) {
                                     if ($tipo == 'Venta') {
-                                        echo '$' . number_format($costouniP, 2);
+                                        if ($ncosto > 0) {
+                                            echo '$' . number_format($ncosto, 2);
+                                        } else {
+                                            echo '$' . number_format($costouniP, 2);
+                                        }
                                     }
                                 } ?>
                             </td>
                             <td style="border: black 2px solid;">
                                 <?php if ($n > 1) {
                                     if ($tipo == 'Venta') {
-                                        echo '$' . number_format($value['cantidad'] * $costouniP, 2);
+                                        if ($ncosto > 0) {
+                                            echo '$' . number_format($value['cantidad'] * $ncosto, 2);
+                                            $nmul = $value['cantidad'] * $ncosto;
+                                        } else {
+                                            echo '$' . number_format($value['cantidad'] * $costouniP, 2);
+                                        }
                                     }
                                 } ?>
                             </td>
@@ -182,11 +196,27 @@ if (isset($_POST['numProd'])) {
                                     echo '$' . number_format($value['ultimo_costo'], 2);
                                 } else {
                                     if ($tipo == 'Compra') {
-                                        echo '$' . number_format((($value['ultimo_costo']) + ($value['cantidad'] * $value['costo'])) / ($value['ultima_existencia'] + $value['cantidad']), 2);
-                                        $vt_anterior =($value['cantidad'] * $value['costo'])+$value['ultimo_costo'];
+
+                                        if ($nvt > 0) {
+                                            echo '$' . number_format(($nvt + ($value['cantidad'] * $value['costo'])) / ($value['ultima_existencia'] + $value['cantidad']), 2);
+                                            $valorcompra2 = ($nvt + ($value['cantidad'] * $value['costo'])) / ($value['ultima_existencia'] + $value['cantidad']);
+                                            $vt_anterior = ($nvt + ($value['cantidad'] * $value['costo'])) / ($value['ultima_existencia'] + $value['cantidad']);
+                                            $ncosto = ($nvt + ($value['cantidad'] * $value['costo'])) / ($value['ultima_existencia'] + $value['cantidad']);
+                                        } else {
+                                            echo '$' . number_format((($value['ultimo_costo']) + ($value['cantidad'] * $value['costo'])) / ($value['ultima_existencia'] + $value['cantidad']), 2);
+                                            $valorcompra1 = (($value['ultimo_costo']) + ($value['cantidad'] * $value['costo'])) / ($value['ultima_existencia'] + $value['cantidad']);
+                                            $vt_anterior = (($value['ultimo_costo']) + ($value['cantidad'] * $value['costo'])) / ($value['ultima_existencia'] + $value['cantidad']);
+                                        }
                                     } else {
-                                        echo '$' . number_format(($vt_anterior-($value['cantidad'] * $costouniP))/($value['ultima_existencia'] - $value['cantidad']), 2);
-                                        
+                                        if ($nvt > 0) {
+                                            if ($valorcompra2 <= 0) {
+                                                echo '$' . number_format($valorcompra1, 2);
+                                            } else {
+                                                echo '$' . number_format($valorcompra2, 2);
+                                            }
+                                        } else {
+                                            echo '$' . number_format($valorcompra1, 2);
+                                        }
                                     }
                                 }
                                 ?>
@@ -197,11 +227,28 @@ if (isset($_POST['numProd'])) {
                                     echo '$' . number_format($value['ultima_existencia'] * $value['ultimo_costo'], 2);
                                 } else {
                                     if ($tipo == 'Compra') {
-
-                                        echo '$' . number_format(($value['cantidad'] * $value['costo'])+$value['ultimo_costo'], 2);
-                                        $vt_anterior =($value['cantidad'] * $value['costo'])+$value['ultimo_costo'];
+                                        if ($nvt > 0) {
+                                            echo '$' . number_format(($value['cantidad'] * $value['costo']) + $nvt, 2);
+                                            $vt_anterior = ($value['cantidad'] * $value['costo']) + $nvt;
+                                        } else {
+                                            echo '$' . number_format(($value['cantidad'] * $value['costo']) + $value['ultimo_costo'], 2);
+                                            $vt_anterior = ($value['cantidad'] * $value['costo']) + $value['ultimo_costo'];
+                                        }
                                     } else {
-                                        echo '$' . number_format($vt_anterior-($value['cantidad'] * $costouniP), 2);
+                                        if ($nvt > 0) {
+                                            if ($nmul > 0) {
+
+                                                echo '$' . number_format($vt_anterior - ($nmul), 2);
+                                                $nvt = $vt_anterior - ($nmul);
+                                                $vt_anterior = $vt_anterior - ($nmul);
+                                            } else {
+                                                echo '$' . number_format($nvt - ($value['cantidad'] * $costouniP), 2);
+                                                $nvt = $nvt - ($value['cantidad'] * $costouniP);
+                                            }
+                                        } else {
+                                            echo '$' . number_format($vt_anterior - ($value['cantidad'] * $costouniP), 2);
+                                            $nvt = $vt_anterior - ($value['cantidad'] * $costouniP);
+                                        }
                                     }
                                 }
                                 ?>
