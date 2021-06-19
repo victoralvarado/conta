@@ -378,4 +378,15 @@ class Producto
         }
         return $dato;
     }
+
+    public function costoP($producto)
+    {
+        $sql = $this->db->prepare("SELECT costo from producto where id = ?;");
+        mysqli_stmt_bind_param($sql, 's', $producto);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_bind_result($sql, $res);
+        mysqli_stmt_fetch($sql);
+        mysqli_stmt_close($sql);
+        return $res;
+    }
 }
