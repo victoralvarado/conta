@@ -147,7 +147,7 @@ if (isset($_POST['fechaC'])) {
                 </tr>
             </tfoot>
         </table>
-        <br><br>
+        <br>
         <div class="row justify-content-center justify-content-md-center">
             <div class="col-md-6">
                 <table class="" style="width: 60%; margin-left: auto;margin-right: auto; " cellspacing="5" cellpadding="5">
